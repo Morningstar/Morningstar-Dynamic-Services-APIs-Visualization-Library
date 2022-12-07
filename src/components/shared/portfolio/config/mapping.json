@@ -1,0 +1,62 @@
+{
+    "componentMapping": {
+        "assetAllocation": {
+            "type": "asset-allocation"
+        },
+        "feesExpenses": {
+            "type": "fees-expenses"
+        },
+        "fixedIncomeSectors": {
+            "type": "fixed-income-sectors"
+        },
+        "fixedIncomeCountry": {
+            "type": "fixed-income-country"
+        },
+        "portfolioHoldings": {
+            "type": "portfolio-holdings",
+            "cols": 12
+        },
+        "portfolioSrri": {
+            "type": "portfolio-srri"
+        },
+        "performanceGraph": {
+            "type": "performance-graph",
+            "cols": 12
+        },
+        "productInvolvement": {
+            "type": "product-involvement"
+        },
+        "riskScore": {
+            "type": "risk-score"
+        },
+        "riskStatistics": {
+            "type": "risk-statistics"
+        },
+        "stockRegions": {
+            "type": "stock-regions"
+        },
+        "stockSectors": {
+            "type": "stock-sectors"
+        },
+        "stockStats": {
+            "type": "stock-stats"
+        },
+        "stockType": {
+            "type": "stock-type"
+        },
+        "sustainability": {
+            "type": "sustainability",
+            "cols": 12
+        },
+        "trailingReturns": {
+            "type": "trailing-returns"
+        }
+    },
+    "sectionMapping": {
+        "overview": "Overview",
+        "assetClass": "Asset Class",
+        "sustainability": "Sustainability",
+        "performance": "Performance",
+        "holdings": "Holdings"
+    }
+}

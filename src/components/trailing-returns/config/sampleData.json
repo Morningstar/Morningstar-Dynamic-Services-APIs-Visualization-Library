@@ -1,0 +1,139 @@
+{
+    "emea": {
+        "portfolio": [
+            {
+                "timePeriod": "M0",
+                "value": -8.60358
+            },
+            {
+                "timePeriod": "M1",
+                "value": -2.75861
+            },
+            {
+                "timePeriod": "M2",
+                "value": -3.94606
+            },
+            {
+                "timePeriod": "M3",
+                "value": -5.03136
+            },
+            {
+                "timePeriod": "M6",
+                "value": -8.60358
+            },
+            {
+                "timePeriod": "M12",
+                "value": -7.70734
+            },
+            {
+                "timePeriod": "M36",
+                "value": 1.12603
+            },
+            {
+                "timePeriod": "M60",
+                "value": 1.35404
+            },
+            {
+                "timePeriod": "M120",
+                "value": 5.79128
+            }
+        ],
+        "benchmark": [
+            {
+                "timePeriod": "M0",
+                "value": -11.34153
+            },
+            {
+                "timePeriod": "M1",
+                "value": -5.2134
+            },
+            {
+                "timePeriod": "M2",
+                "value": -5.50366
+            },
+            {
+                "timePeriod": "M3",
+                "value": -9.13271
+            },
+            {
+                "timePeriod": "M6",
+                "value": -11.34153
+            },
+            {
+                "timePeriod": "M12",
+                "value": -2.55886
+            },
+            {
+                "timePeriod": "M36",
+                "value": 8.68141
+            },
+            {
+                "timePeriod": "M60",
+                "value": 9.12674
+            },
+            {
+                "timePeriod": "M120",
+                "value": 12.34814
+            }
+        ]
+    },
+    "america": {
+        "portfolio": [
+            {
+                "timePeriod": "YearToDate",
+                "value": -15.06
+            },
+            {
+                "timePeriod": "Month3",
+                "value": -8.28
+            },
+            {
+                "timePeriod": "Month6",
+                "value": -11.4
+            },
+            {
+                "timePeriod": "Year1",
+                "value": -13.88
+            },
+            {
+                "timePeriod": "Year3",
+                "value": 4.86
+            },
+            {
+                "timePeriod": "Year5",
+                "value": 3.42
+            },
+            {
+                "timePeriod": "Year10"
+            }
+        ],
+        "benchmark": [
+            {
+                "timePeriod": "YearToDate",
+                "value": -17.19
+            },
+            {
+                "timePeriod": "Month3",
+                "value": -3.65
+            },
+            {
+                "timePeriod": "Month6"
+            },
+            {
+                "timePeriod": "Year1",
+                "value": -13.52
+            },
+            {
+                "timePeriod": "Year3",
+                "value": 11.77
+            },
+            {
+                "timePeriod": "Year5",
+                "value": 11.31
+            },
+            {
+                "timePeriod": "Year10"
+            }
+        ]
+    }
+}

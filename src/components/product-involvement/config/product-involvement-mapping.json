@@ -1,0 +1,102 @@
+{
+    "dataPointMapping": {
+        "abortiveContraceptivesStemcell": "Abortive Contraceptives Stemcell",
+        "adultEntertainment": "Adult Entertainment",
+        "alcohol": "Alcohol",
+        "animalTesting": "Animal Testing",
+        "businessPractices": "Business Practices",
+        "catholicValues": "Catholic Values",
+        "controversialWeapons": "Controversial Weapons",
+        "defenseAndMilitary": "Defense And Military",
+        "energy": "Energy",
+        "environment": "Environment",
+        "furAndSpecialtyLeather": "Fur & Specialty Leather",
+        "gambling": "Gambling",
+        "gmo": "GMOs",
+        "healthAndLife": "Health And Life",
+        "lifeEthics": "Life Ethics",
+        "militaryContracting": "Military Contracting",
+        "nuclear": "Nuclear",
+        "palmOil": "Palm Oil",
+        "pesticides": "Pesticides",
+        "smallArms": "Small Arms",
+        "thermalCoal": "Thermal Coal",
+        "tobacco": "Tobacco",
+        "valuesBased": "Values Based"
+    },
+    "valueMapping": {
+        "dataPointsObject": {
+            "businessPractices": {
+                "chartColors": {
+                    "fund": "#4daf4a",
+                    "benchmark": "rgba(77, 175, 74, 0.2)"
+                },
+                "category": [
+                    "animalTesting",
+                    "furAndSpecialtyLeather"
+                ]
+            },
+            "defenseAndMilitary": {
+                "chartColors": {
+                    "fund": "#377eb8",
+                    "benchmark": "rgba(55, 126, 184, 0.2)"
+                },
+                "category": [
+                    "controversialWeapons",
+                    "militaryContracting",
+                    "smallArms"
+                ]
+            },
+            "energy": {
+                "chartColors": {
+                    "fund": "#ff7f00",
+                    "benchmark": "rgba(255, 127, 0, 0.2)"
+                },
+                "category": [
+                    "nuclear",
+                    "thermalCoal"
+                ]
+            },
+            "environment": {
+                "chartColors": {
+                    "fund": "#984ea3",
+                    "benchmark": "rgba(152, 78, 163, 0.2)"
+                },
+                "category": [
+                    "gmo",
+                    "palmOil",
+                    "pesticides"
+                ]
+            },
+            "healthAndLife": {
+                "chartColors": {
+                    "fund": "#e41a1c",
+                    "benchmark": "rgba(228, 26, 28, 0.2)"
+                },
+                "category": [
+                    "alcohol",
+                    "lifeEthics",
+                    "tobacco"
+                ]
+            },
+            "valuesBased": {
+                "chartColors": {
+                    "fund": "#a41b1c",
+                    "benchmark": "rgba(164, 27, 28, 0.2)"
+                },
+                "category": [
+                    "adultEntertainment",
+                    "gambling"
+                ]
+            }
+        },
+        "dataPoints": [
+            "businessPractices",
+            "defenseAndMilitary",
+            "energy",
+            "environment",
+            "healthAndLife",
+            "valuesBased"
+        ]
+    }
+}

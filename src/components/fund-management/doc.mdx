@@ -1,0 +1,192 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import FundManagement from "@/components/fund-management/FundManagement.vue";
+import { SECURITY_DETAILS_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="FundManagement" component={ FundManagement }/>
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+  
+</style>
+
+# Fund Management
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+
+## Description
+The Fund Management component displays information about a fund manager such as company name and head office, launch date of associated fund, and date the fund manager began managing the fund.
+
+<Canvas withSource="open" withToolbar>
+  <Story id="components-fundmanagement--story-details"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={ FundManagement } />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={SECURITY_DETAILS_URL} target="_blank">Security Details API</a>.
+
+<!--
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request)
+- [Request Payload Example](#request-payload)
+-->
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.securityDetails.getSecurityDetails(securityId);
+```
+<details>
+  <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+const securityId = "F0GBR050DD";
+window.mstarApisSdk.securityDetails.getSecurityDetails(securityId);
+```
+</details>
+
+### Request Example
+
+```javascript dark
+https://www.emea-api.morningstar.com/ecint/v1/securities/{{securityId}}?viewId={{viewId}}&idtype={{idType}}&languageId={{languageId}}&currencyId={{currencyId}}&responseViewFormat={{responseViewFormat}}
+
+```
+
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- | 
+| securityId | Security ID for which data needs to be fetched | securityId=F0GBR050DD |
+| viewId | View ID or snapshot ID | viewId=snapshot |
+| idtype | ID type |idtype=msid |
+| languageId | Language in which data needs to fetched | languageId=en-GB |
+| currencyId | Currency in which data needs to fetched | currencyId=GBP |
+| responseViewFormat | Format of the data to be received | responseViewFormat=json |
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Component Data Format](#component-data-format)
+- [Transformation Operation](#transformation-operation)
+-->
+### API Response Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+[
+    {
+        "InceptionDate": "1998-11-13T00:00:00",
+        "FundAttributes": {
+            "UCITS": "true"
+        },
+        "Domicile": "GBR",
+        "ProviderCompany": {
+            "Name": "Aviva Investors UK Fund Services Limited",
+            "AddressLine1": "St Helens, 1 Undershaft",
+            "Phone": "+44 8000512003",
+            "City": "London",
+            "Country": "United Kingdom",
+            "PostalCode": "EC3P 3DQ",
+            "Homepage": "http://www.avivainvestors.co.uk"
+        },
+        "ManagerList": [
+            {
+                "ManagerId": 81506,
+                "DisplayPreference": 1,
+                "GivenName": "Chris",
+                "FamilyName": "Murphy",
+                "StartDate": "2022-05-09T00:00:00",
+                "ManagerProvidedBiography": "Chris manages the Aviva Investors UK Equity Income and Aviva Investors UK Equity strategies. Chris joined Aviva Investors in 2006 from Framlington Investment Management where he was responsible for managing the firms UK income and growth retail portfolios. Chris began his investment career in 1988 as a graduate UK equity analyst for Lehman Bros before joining James Capel in UK equity analyst role. Chris holds a BSc (Hons) in Physics from University College, Cardiff and holds the IIMR (Institute of Investment Management Research) qualification."
+            }
+        ]
+    }
+]
+```
+</details>
+
+### Component Transformed Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "companyName": "Aviva Investors UK Fund Services Limited",
+    "fundLaunchDate": "Nov 13, 1998",
+    "headOffice": [
+        "St Helens, 1 Undershaft",
+        null,
+        "London",
+        null,
+        "EC3P 3DQ"
+    ],
+    "contact": {
+        "phone": "+44 8000512003",
+        "email": "http://www.avivainvestors.co.uk"
+    },
+    "domicile": "GBR",
+    "ucits": "Yes",
+    "fundManager": "Chris Murphy",
+    "managerStartDate": "May 9, 2022",
+    "managerBiography": "Chris manages the Aviva Investors UK Equity Income and Aviva Investors UK Equity strategies. Chris joined Aviva Investors in 2006 from Framlington Investment Management where he was responsible for managing the firm’s UK income and growth retail portfolios. Chris began his investment career in 1988 as a graduate UK equity analyst for Lehman Bros before joining James Capel in UK equity analyst role. Chris holds a BSc (Hons) in Physics from University College, Cardiff and holds the IIMR (Institute of Investment Management Research) qualification."
+}
+```
+</details>
+
+### Component Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+  parsedModelData() {
+    const parsedData = {};
+    const data = this.modelData[0];
+    parsedData.companyName = data.ProviderCompany?.Name || '-';
+    parsedData.fundLaunchDate = new Date(data.InceptionDate).toLocaleDateString('en', { year: 'numeric', month: 'short', day: 'numeric' }) || '-';
+    parsedData.headOffice = [
+        data.ProviderCompany?.AddressLine1,
+        data.ProviderCompany?.AddressLine2,
+        data.ProviderCompany?.City,
+        data.ProviderCompany?.Conuntry,
+        data.ProviderCompany?.PostalCode,
+    ];
+    parsedData.contact = {
+        phone: data.ProviderCompany?.Phone,
+        email: data.ProviderCompany?.Homepage,
+    };
+    parsedData.domicile = data?.Domicile || '-';
+    parsedData.ucits = data.FundAttributes.UCITS ? 'Yes' : 'No';
+    parsedData.fundManager = `${data.ManagerList[0].GivenName} ${data.ManagerList[0].FamilyName}` || '-';
+    parsedData.managerStartDate = new Date(data.ManagerList[0].StartDate).toLocaleDateString('en', { year: 'numeric', month: 'short', day: 'numeric' }) || '-';
+    parsedData.managerBiography = data.ManagerList[0].ManagerProvidedBiography || '-';
+    return parsedData;
+    },
+```
+</details>

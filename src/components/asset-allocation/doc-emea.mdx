@@ -1,0 +1,632 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import AssetAllocation from "@/components/asset-allocation/AssetAllocation.vue";
+import { PORTFOLIO_ANALYSIS_EMEA_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta
+  title="AssetAllocation"
+  component={AssetAllocation}
+/>
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .hide {
+      opacity: 0;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+
+</style>
+
+# Asset Allocation (APAC/EMEA)
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+- [Data Models](#data-models)
+
+
+## Description
+
+The Asset Allocation component displays the breakdown of stocks, bonds, and cash in a portfolio.
+
+
+<Canvas withSource="open" withToolbar>
+  <Story id="components-asset-allocation--story-details"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={AssetAllocation} />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={PORTFOLIO_ANALYSIS_EMEA_URL} target="_blank">Portfolio Analysis API (APAC/EMEA)</a>.
+
+<!--
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request-example)
+- [Request Payload Example](#request-payload-example)
+-->
+
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.xray.getAssetAllocationBreakdown({ portfolios: samplePortfolio });
+```
+
+<details>
+  <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+const samplePortfolio = {
+    type: 3,
+    benchmark: {
+        type: 'Standard',
+        holdings: [{
+            identifier: 'XIUSA0010V',
+            identifierType: 'MSID',
+            weight: 100,
+        }],
+    },
+    holdings: [
+        {
+            identifier: 'F0GBR052QA',
+            identifierType: 'MSID',
+            amount: 5000,
+        },
+        {
+            identifier: 'F000000EY1',
+            identifierType: 'MSID',
+            amount: 2500,
+        },
+        {
+            identifier: 'F00000OXG7',
+            identifierType: 'MSID',
+            amount: 2000,
+        },
+        {
+            identifier: 'F00000TWNO',
+            identifierType: 'MSID',
+            amount: 10000,
+        },
+    ],
+    name: 'UK demo portfolio - amount',
+};
+
+window.mstarApisSdk.xray.getAssetAllocationBreakdown({ portfolios: samplePortfolio });
+
+```
+
+</details>
+
+### Request Example
+
+Requests to the API have the following format:
+
+```javascript dark
+https://www.emea-api.morningstar.com/ecint/v1/xray/json?languageId={{languageId}}&portfolioDataPoints={{portfolioDataPoints}}&holdingDataPoints={{holdingDataPoints}}&benchmarkDataPoints={{benchmarkDataPoints}}
+
+```
+
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- |
+| `languageId` |	ISO culture codes. If not provided, defaults to language defined in settings. |`languageId=en-GB` |
+| `portfolioDataPoints` |Comma-separated list of portfolio data points.|`portfolioDataPoints=AssetAllocationMorningstarEUR3` |
+| `holdingDataPoints` |Comma-separated list of holding data points.|`HoldingDataPoints=` |
+| `benchmarkDataPoints` | Comma-separated list of benchmark data points.|`benchmarkDataPoints=ShowBreakdown` |
+
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Integration Data Format](#integration-data-format)
+- [Integration Transformation Operation](#integration-transformation-operation)
+- [Component Transformed Data Format](#component-transformed-data-format)
+- [Component Transformation Operation](#component-transformation-operation)
+-->
+
+### API Response Data Format
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+  "status": {
+    "detailedStatusMessage": "",
+    "statusCode": 200,
+    "statusDescription": ""
+  },
+  "breakdowns": {
+    "assetAllocation": [
+      {
+        "type": "MorningstarEUR3",
+        "salePosition": "N",
+        "values": {
+          "1": 44.49892,
+          "2": 36.35144,
+          "3": 4.96041,
+          "4": 14.1892,
+          "99": 0.00002
+        }
+      },
+      {
+        "type": "MorningstarEUR3",
+        "salePosition": "L",
+        "values": {
+          "1": 44.49892,
+          "2": 36.36983,
+          "3": 5.4687,
+          "4": 14.1892,
+          "99": 0
+        }
+      },
+      {
+        "type": "MorningstarEUR3",
+        "salePosition": "S",
+        "values": {
+          "1": 0,
+          "2": 0.01838,
+          "3": 0.50829,
+          "4": 0,
+          "99": 0
+        }
+      }
+    ]
+  },
+  "benchmark": [
+    {
+      "breakdowns": {
+        "assetAllocation": [
+          {
+            "type": "MorningstarEUR3",
+            "salePosition": "N",
+            "values": {
+              "4": 100
+            }
+          },
+          {
+            "type": "MorningstarEUR3",
+            "salePosition": "L",
+            "values": {
+              "4": 100
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+</details>
+
+### Integration Data Format
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "portfolio": [
+        {
+            "key": "1",
+            "long": 42.84271,
+            "net": 42.84271,
+            "short": 0
+        },
+        {
+            "key": "2",
+            "long": 38.27963,
+            "net": 35.92852,
+            "short": 2.35111
+        },
+        {
+            "key": "3",
+            "long": 8.03683,
+            "net": 6.94764,
+            "short": 1.08919
+        },
+        {
+            "key": "4",
+            "long": 14.72662,
+            "net": 14.2811,
+            "short": 0.44552
+        },
+        {
+            "key": "99",
+            "long": 0,
+            "net": 0.00002,
+            "short": 0
+        }
+    ],
+    "benchmark": [
+        {
+            "key": "1",
+            "long": 95.8847,
+            "net": 95.73916,
+            "short": 0.14554
+        },
+        {
+            "key": "2",
+            "long": 0.03294,
+            "net": 0.00807,
+            "short": 0.02487
+        },
+        {
+            "key": "3",
+            "long": 2.71587,
+            "net": -3.51042,
+            "short": 6.22629
+        },
+        {
+            "key": "4",
+            "long": 7.89677,
+            "net": 7.76319,
+            "short": 0.13358
+        },
+        {
+            "key": "99",
+            "long": 0,
+            "net": 0,
+            "short": 0
+        }
+    ]
+}
+```
+
+</details>
+
+### Integration Transformation Operation
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+function getAssetAllocationData(xrayData) {
+    const assetData = getComponentData(
+        xrayData,
+        "breakdowns.assetAllocation",
+        "benchmark[0].breakdowns.assetAllocation"
+    );
+    const { portfolio, benchmark } = assetData;
+    const assetObject =
+        assetAllocationMapping.assetAllocation[assetAllocationMapping.default];
+    const getParsedData = (data = []) => {
+        const long = getValues(data, "L");
+        const net = getValues(data, "N");
+        const short = getValues(data, "S");
+        const results = [];
+        Object.keys(assetObject).forEach((item) => {
+        results.push({
+            key: item,
+            long: long[item],
+            net: net[item],
+            short: short[item],
+        });
+        });
+        return results;
+    };
+
+    return {
+        portfolio: getParsedData(portfolio),
+        benchmark: getParsedData(benchmark),
+    };
+}
+```
+
+</details>
+&nbsp;
+
+### Component Transformed Data Format
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+[
+    {
+        "key": "Stocks",
+        "assetClass": "Stocks",
+        "bmark": 95.73916,
+        "long": 80.52004,
+        "short": 0,
+        "net": 80.52004
+    },
+    {
+        "key": "Bonds",
+        "assetClass": "Bonds",
+        "bmark": 0.00807,
+        "long": 7.42643,
+        "short": 4.54256,
+        "net": 2.88387
+    },
+    {
+        "key": "Cash",
+        "assetClass": "Cash",
+        "bmark": -3.51042,
+        "long": 11.20451,
+        "short": 0.60889,
+        "net": 10.59562
+    },
+    {
+        "key": "Other",
+        "assetClass": "Other",
+        "bmark": 7.76319,
+        "long": 6.86923,
+        "short": 0.86877,
+        "net": 6.00046
+    },
+    {
+        "key": "Not Classified",
+        "assetClass": "Not Classified",
+        "bmark": 0,
+        "long": 0,
+        "short": 0,
+        "net": 0.00001
+    }
+]
+```
+
+</details>
+
+### Component Transformation Operation
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+  parsedModelData() {
+      if (this.modelData && Object.keys(this.assetAllocationMapping).length !== 0) {
+          const assetAllocationRawData = this.modelData;
+          const assetObject = this.assetAllocationMapping
+              .assetAllocation[this.assetAllocationMapping.default];
+          return Object.entries(assetObject)
+              .map((itemArr) => {
+                  const number = itemArr[0];
+                  const { portfolio, benchmark } = assetAllocationRawData;
+                  return {
+                      key: itemArr[1],
+                      assetClass: itemArr[1],
+                      bmark: this.getAssetAllocationValue(number, benchmark).net,
+                      long: this.getAssetAllocationValue(number, portfolio).long,
+                      short: this.getAssetAllocationValue(number, portfolio).short,
+                      net: this.getAssetAllocationValue(number, portfolio).net,
+                  };
+              });
+      }
+      return [];
+  },
+  computedPieChartData() {
+      const labels = [];
+      const data = [];
+      this.parsedModelData.forEach((item) => {
+          labels.push(item.assetClass);
+          data.push(item.net.toFixed(2));
+      });
+      return {
+          labels,
+          datasets: [
+              {
+                  backgroundColor: this.pieChartColors,
+                  data,
+              },
+          ],
+      };
+  },
+  computedStackChartData() {
+      const labels = [];
+      const data = [
+          {
+              data: [],
+              label: 'Long',
+              borderColor: this.pieChartColors,
+              backgroundColor: this.StackChartColors,
+          },
+          {
+              data: [],
+              label: 'Net',
+              borderColor: this.pieChartColors,
+              backgroundColor: this.pieChartColors,
+          },
+          {
+              data: [],
+              label: 'Short',
+              borderColor: this.pieChartColors,
+              backgroundColor: this.StackChartColors,
+          },
+      ];
+      this.parsedModelData.forEach((item) => {
+          labels.push(item.assetClass);
+          data[0].data.push(item.long.toFixed(2));
+          data[1].data.push(item.net.toFixed(2));
+          data[2].data.push((item.short * -1).toFixed(2));
+      });
+      return {
+          labels,
+          datasets: data,
+      };
+  },
+```
+
+</details>
+&nbsp;
+
+
+## Data Models
+The component uses the following data models:
+<details>
+  <summary><span class="summary-text">Table</span></summary>
+
+```json dark
+[
+    {
+        "key": "Stocks",
+        "assetClass": "Stocks",
+        "long": 44.49892,
+        "short": 0,
+        "net": 20.0005
+    },
+    {
+        "key": "Bonds",
+        "assetClass": "Bonds",
+        "long": 36.79631,
+        "short": 0,
+        "net": 56.79631
+    },
+    {
+        "key": "Cash",
+        "assetClass": "Cash",
+        "long": 4.59144,
+        "short": 0.51925,
+        "net": 4.07219
+    },
+    {
+        "key": "Other",
+        "assetClass": "Other",
+        "bmark": 100,
+        "long": 14.63254,
+        "short": 0,
+        "net": 14.63254
+    },
+    {
+        "key": "Not Classified",
+        "assetClass": "Not Classified",
+        "long": 0,
+        "short": 0,
+        "net": 0.00004
+    }
+]
+```
+</details>
+&nbsp;
+
+<details>
+  <summary><span class="summary-text">Pie Chart</span></summary>
+
+```json dark
+{
+    "labels": [
+        "Stocks",
+        "Bonds",
+        "Cash",
+        "Other",
+        "Not Classified"
+    ],
+    "datasets": [
+        {
+            "backgroundColor": [
+                "#4daf4a",
+                "#377eb8",
+                "#ff7f00",
+                "#984ea3",
+                "#e41a1c",
+                "#a41b1c"
+            ],
+            "data": [
+                20.0005,
+                56.79631,
+                4.07219,
+                14.63254,
+                0.00004
+            ]
+        }
+    ]
+}
+```
+</details>
+&nbsp;
+
+<details>
+  <summary><span class="summary-text">Stack Bar Chart</span></summary>
+
+```json dark
+{
+  "labels": ["Stocks", "Bonds", "Cash", "Other", "Not Classified"],
+  "datasets": [
+    {
+      "data": [44.49892, 36.79631, 4.59144, 14.63254, 0],
+      "label": "Long",
+      "borderColor": [
+        "#4daf4a",
+        "#377eb8",
+        "#ff7f00",
+        "#984ea3",
+        "#e41a1c",
+        "#a41b1c"
+      ],
+      "backgroundColor": [
+        "rgba(77, 175, 74, 0.2)",
+        "rgba(55, 126, 184, 0.2)",
+        "rgba(255, 127, 0, 0.2)",
+        "rgba(152, 78, 163, 0.2)",
+        "rgba(228, 26, 28, 0.2)",
+        "rgba(164, 27, 28, 0.2)"
+      ]
+    },
+    {
+      "data": [20.0005, 56.79631, 4.07219, 14.63254, 0.00004],
+      "label": "Net",
+      "borderColor": [
+        "#4daf4a",
+        "#377eb8",
+        "#ff7f00",
+        "#984ea3",
+        "#e41a1c",
+        "#a41b1c"
+      ],
+      "backgroundColor": [
+        "#4daf4a",
+        "#377eb8",
+        "#ff7f00",
+        "#984ea3",
+        "#e41a1c",
+        "#a41b1c"
+      ]
+    },
+    {
+      "data": [0, 0, -0.51925, 0, 0],
+      "label": "Short",
+      "borderColor": [
+        "#4daf4a",
+        "#377eb8",
+        "#ff7f00",
+        "#984ea3",
+        "#e41a1c",
+        "#a41b1c"
+      ],
+      "backgroundColor": [
+        "rgba(77, 175, 74, 0.2)",
+        "rgba(55, 126, 184, 0.2)",
+        "rgba(255, 127, 0, 0.2)",
+        "rgba(152, 78, 163, 0.2)",
+        "rgba(228, 26, 28, 0.2)",
+        "rgba(164, 27, 28, 0.2)"
+      ]
+    }
+  ]
+}
+```
+</details>

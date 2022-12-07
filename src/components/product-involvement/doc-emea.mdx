@@ -1,0 +1,392 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import ProductInvolvement from "@/components/product-involvement/ProductInvolvement.vue";
+import { PORTFOLIO_ANALYSIS_EMEA_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="ProductInvolvement" component={ProductInvolvement} />
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+  
+</style>
+
+# Product Involvement (APAC/EMEA)
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+
+
+## Description
+The Product Involvement component displays metrics that illustrate a portfolio’s exposure to various products, services, and business activities on a percentage involvement basis.
+
+<Canvas withSource="open" withToolbar>
+  <Story id="components-product-involvement--story-details"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={ ProductInvolvement } />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={PORTFOLIO_ANALYSIS_EMEA_URL} target="_blank">Portfolio Analysis API (APAC/EMEA)</a>.
+<!--
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request)
+- [Request Payload Example](#request-payload)
+-->
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.portfolioAnalysis.getEsgPerformanceIntlData({ portfolios: samplePortfolio });
+```
+<details>
+  <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+const samplePortfolio = [
+    {
+        Name: 'TestPortfolio1',
+        TotalValue: 10000,
+        Holdings: [
+            {
+                SecurityId: 'F00000VCTT',
+                Weight: 20,
+            },
+            {
+                SecurityId: '0P00002NW8',
+                Weight: 10,
+            },
+            { 
+                TradingSymbol: 'AAPL',
+                Weight: 15,
+            },
+            { 
+                ISIN: 'US09251T1034',
+                Weight: 35,
+            },
+            { 
+                CUSIP: '256219106',
+                Weight: 20,
+            },
+        ],
+        Benchmark: {
+            Type: 'Standard',
+            Holdings: [
+                { 
+                    SecurityId: 'XIUSA04G92',
+                    Type: 'XI',
+                    Weight: 100,
+                }
+            ],
+        },
+    },
+];
+
+window.mstarApisSdk.portfolioAnalysis.getEsgPerformanceIntlData({ portfolios: samplePortfolio });
+
+```
+</details>
+&nbsp;
+
+### Request Example
+
+```javascript dark
+"https://www.emea-api.morningstar.com.morningstar.com/portfolioanalysis/v1/esg?langcult={{languageId}}"
+
+```
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- | 
+| `languageId` |	ISO culture codes. If not provided, defaults to language defined in settings. |`languageId=en-GB` |
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Integration Data Format](#integration-data-format) 
+- [Integration Transformation Operation](#integration-transformation-operation) 
+- [Component Transformed Data Format](#component-transformed-data-format) 
+- [Component Transformation Operation](#component-transformation-operation)
+-->
+
+### API Response Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+    ESG: [
+        {
+            sustainability: {
+                portfolio: {
+                    name: 'TestPortfolio1',
+                    portfolioDate: '2022-06-30',
+                    productInvolvement: {
+                        abortiveContraceptivesStemcell: 6.761579,
+                        animalTesting: 11.989877,
+                        controversialWeapons: 0.86481756,
+                        adultEntertainment: 0,
+                        alcohol: 0.9516951,
+                        furAndSpecialtyLeather: 0,
+                        gambling: 0.25010982,
+                        militaryContracting: 1.551768,
+                        nuclear: 0.4307824,
+                        palmOil: 0.013283994,
+                        pesticides: 0.041315086,
+                        smallArms: 0.9543978,
+                        thermalCoal: 0.10282665,
+                        tobacco: 0.14134915,
+                        gmo: 0.014228459
+                    },
+
+                },
+                benchmark: {
+                    name: 'S&P 500 TR USD',
+                    portfolioDate: '2022-06-30',
+                    identifier: 'XIUSA04G92',
+                    identifierType: 'SecurityId',
+                    securityType: 'XI',
+                    productInvolvement: {
+                        abortiveContraceptivesStemcell: 9.76653,
+                        animalTesting: 20.19085,
+                        controversialWeapons: 1.88323,
+                        adultEntertainment: 0,
+                        alcohol: 0.15723,
+                        furAndSpecialtyLeather: 0,
+                        gambling: 0.15979,
+                        militaryContracting: 3.08397,
+                        nuclear: 1.94728,
+                        palmOil: 0,
+                        pesticides: 0.15281,
+                        smallArms: 0.98947,
+                        thermalCoal: 1.36642,
+                        tobacco: 0.62949,
+                        gmo: 0.10922
+                    },
+                },
+            }
+        }
+    ]
+```
+</details>
+&nbsp;
+
+### Integration Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "portfolio": {
+        "abortiveContraceptivesStemcell": 6.6914544,
+        "animalTesting": 12.180668,
+        "controversialWeapons": 1.2591741,
+        "adultEntertainment": 0,
+        "alcohol": 1.1270572,
+        "furAndSpecialtyLeather": 0,
+        "gambling": 0.28550306,
+        "militaryContracting": 2.0566392,
+        "nuclear": 0.43815938,
+        "palmOil": 0.008738188,
+        "pesticides": 0.06944976,
+        "smallArms": 1.3401275,
+        "thermalCoal": 0.12252558,
+        "tobacco": 0.16017261,
+        "gmo": 0.017991528
+    },
+    "benchmark": {
+        "abortiveContraceptivesStemcell": 9.76653,
+        "animalTesting": 20.19085,
+        "controversialWeapons": 1.88323,
+        "adultEntertainment": 0,
+        "alcohol": 0.15723,
+        "furAndSpecialtyLeather": 0,
+        "gambling": 0.15979,
+        "militaryContracting": 3.08397,
+        "nuclear": 1.94728,
+        "palmOil": 0,
+        "pesticides": 0.15281,
+        "smallArms": 0.98947,
+        "thermalCoal": 1.36642,
+        "tobacco": 0.62949,
+        "gmo": 0.10922
+    }
+}
+```
+</details>
+&nbsp;
+
+### Integration Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+function getproductInvolvementData(esgData) {
+    return getComponentData(
+        esgData,
+        'ESG[0].sustainability.portfolio.productInvolvement',
+        'ESG[0].sustainability.benchmark.productInvolvement',
+    );
+}
+```
+</details>
+&nbsp;
+
+### Component Transformed Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+        [
+        {
+            "name": "businessPractices"
+        },
+        {
+            "name": "animalTesting",
+            "portfolio": "11.99",
+            "benchmark": "20.19"
+        },
+        {
+            "name": "furAndSpecialtyLeather",
+            "portfolio": "0.00",
+            "benchmark": "0.00"
+        },
+        {
+            "name": "defenseAndMilitary"
+        },
+        {
+            "name": "controversialWeapons",
+            "portfolio": "0.86",
+            "benchmark": "1.88"
+        },
+        {
+            "name": "militaryContracting",
+            "portfolio": "1.55",
+            "benchmark": "3.08"
+        },
+        {
+            "name": "smallArms",
+            "portfolio": "0.95",
+            "benchmark": "0.99"
+        },
+        {
+            "name": "energy"
+        },
+        {
+            "name": "nuclear",
+            "portfolio": "0.43",
+            "benchmark": "1.95"
+        },
+        {
+            "name": "thermalCoal",
+            "portfolio": "0.10",
+            "benchmark": "1.37"
+        },
+        {
+            "name": "environment"
+        },
+        {
+            "name": "gmo",
+            "portfolio": "0.01",
+            "benchmark": "0.11"
+        },
+        {
+            "name": "palmOil",
+            "portfolio": "0.01",
+            "benchmark": "0.00"
+        },
+        {
+            "name": "pesticides",
+            "portfolio": "0.04",
+            "benchmark": "0.15"
+        },
+        {
+            "name": "healthAndLife"
+        },
+        {
+            "name": "alcohol",
+            "portfolio": "0.95",
+            "benchmark": "0.16"
+        },
+        {
+            "name": "lifeEthics"
+        },
+        {
+            "name": "tobacco",
+            "portfolio": "0.14",
+            "benchmark": "0.63"
+        },
+        {
+            "name": "valuesBased"
+        },
+        {
+            "name": "adultEntertainment",
+            "portfolio": "0.00",
+            "benchmark": "0.00"
+        },
+        {
+            "name": "gambling",
+            "portfolio": "0.25",
+            "benchmark": "0.16"
+        }
+    ]
+```
+</details>
+&nbsp;
+
+### Component Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+    parsedModelData() {
+        if (this.modelData) {
+            const parseProductInvolvementData = [];
+            const { valueMapping } = productInvolvementMapping;
+            const productInvolvementData = this.modelData;
+
+            if (productInvolvementData.portfolio || productInvolvementData.benchmark) {
+                valueMapping.dataPoints.forEach((key) => {
+                    parseProductInvolvementData.push({
+                        name: key,
+                    });
+                    valueMapping.dataPointsObject[key].forEach((item) => {
+                        if (item) {
+                            parseProductInvolvementData.push({
+                                name: item,
+                                portfolio: productInvolvementData?.portfolio[item]?.toFixed(2) ?? '-',
+                                benchmark: productInvolvementData?.benchmark[item]?.toFixed(2) ?? '-',
+                            });
+                        }
+                    });
+                });
+                return parseProductInvolvementData;
+            }
+        }
+        return [];
+    }
+```
+</details>

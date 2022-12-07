@@ -1,0 +1,16 @@
+FROM node:16.13.2-alpine
+
+RUN mkdir -p /data/jenkins
+RUN mkdir -p /data/jenkins_tmp
+RUN adduser -SD -h /data/jenkins -s /bin/bash -u 6055 jenkins
+RUN chown jenkins /data/jenkins
+RUN chown jenkins /data/jenkins_tmp
+
+# Update Alpine repo and install chrome
+RUN \
+  echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
+  && echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
+  && apk --no-cache  update && apk --no-cache  upgrade \
+  && rm -rf /var/cache/apk/* \
+  && apk add --no-cache git && apk add --no-cache bash && apk add --no-cache curl
+

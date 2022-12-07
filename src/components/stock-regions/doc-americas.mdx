@@ -1,0 +1,739 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import StockRegions from "@/components/stock-regions/StockRegions.vue";
+import { PORTFOLIO_ANALYSIS_AMERICAS_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="StockRegions" component={ StockRegions }/>
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .hide {
+      opacity: 0;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+  
+</style>
+
+# Stock Regions (Americas)
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+- [Data Models](#data-models)
+
+## Description
+
+The Stock Regions component illustrates the geographical distribution of portfolio holdings.
+
+<Canvas withSource="open" withToolbar>
+  <Story id="components-stock-regions--story-details-us"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={ StockRegions } />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={PORTFOLIO_ANALYSIS_AMERICAS_URL} target="_blank">Portfolio Analysis API (Americas)</a>.
+
+<!-- 
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request-example)
+- [Request Payload Example](#request-payload-example)
+-->
+
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.xray.getStockRegionsUsData({ portfolios: sampleUsPortfolio, languageId: 'en-US' });
+```
+
+<details>
+  <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+const sampleUsPortfolio = [
+    {
+        name: 'US demo portfolio - weight',
+        totalValue: 10000,
+        currency: 'USD',
+        holdings: [
+            {
+                securityId: 'FOUSA06OEZ',
+                weight: 30,
+            },
+            {
+                securityId: 'FOUSA06IVV',
+                weight: 50,
+            },
+            {
+                securityId: 'F00000T770',
+                weight: 20,
+            },
+        ],
+        benchmark: {
+            type: 'Standard',
+            holdings: [
+                {
+                    securityId: 'XIUSA0010V',
+                    weight: 100,
+                },
+            ],
+        },
+    },
+];
+
+window.mstarApisSdk.xray.getStockRegionsUsData({ portfolios: samplePortfolio, languageId: 'en-US' });
+
+```
+
+</details>
+
+### Request Example
+
+Requests to the API have the following format:
+
+```javascript dark
+"https://www.us-api.morningstar.com/portfolioanalysis/v1/xray?langcult={{languageId}}"
+
+```
+
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- | 
+| `languageId` |	ISO culture codes. If not provided, defaults to language defined in settings. |`languageId=en-US` |
+
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format) 
+- [Integration Data Format](#integration-data-format) 
+- [Integration Transformation Operation](#integration-transformation-operation) 
+- [Component Transformed Data Format](#component-transformed-data-format) 
+- [Component Transformation Operation](#component-transformation-operation) 
+-->
+
+### API Response Data Format
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "Portfolio": [
+        {
+            "Id": "Americas",
+            "Value": 31.68,
+            "ExposureItem": [
+                {
+                    "Id": "NorthAmerica",
+                    "Value": 31.11
+                },
+                {
+                    "Id": "LatinAmerica",
+                    "Value": 0.57
+                }
+            ]
+        },
+        {
+            "Id": "GreaterEurope",
+            "Value": 42.27,
+            "ExposureItem": [
+                {
+                    "Id": "UnitedKingdom",
+                    "Value": 11.31
+                },
+                {
+                    "Id": "EuropeDeveloped",
+                    "Value": 30.02
+                },
+                {
+                    "Id": "EuropeEmerging",
+                    "Value": 0.14
+                },
+                {
+                    "Id": "AfricaMiddleEast",
+                    "Value": 0.8
+                }
+            ]
+        },
+        {
+            "Id": "GreaterAsia",
+            "Value": 26.05,
+            "ExposureItem": [
+                {
+                    "Id": "Japan",
+                    "Value": 14.76
+                },
+                {
+                    "Id": "Australia",
+                    "Value": 3.9
+                },
+                {
+                    "Id": "AsiaDeveloped",
+                    "Value": 5.11
+                },
+                {
+                    "Id": "AsiaEmerging",
+                    "Value": 2.28
+                }
+            ]
+        },
+        {
+            "Id": "NotClassified",
+            "Value": 0
+        }
+    ],
+    "Benchmark": [
+        {
+            "Id": "Americas",
+            "Value": 98.99,
+            "ExposureItem": [
+                {
+                    "Id": "NorthAmerica",
+                    "Value": 98.85
+                },
+                {
+                    "Id": "LatinAmerica",
+                    "Value": 0.14
+                }
+            ]
+        },
+        {
+            "Id": "GreaterEurope",
+            "Value": 0.92,
+            "ExposureItem": [
+                {
+                    "Id": "UnitedKingdom",
+                    "Value": 0.48
+                },
+                {
+                    "Id": "EuropeDeveloped",
+                    "Value": 0.44
+                },
+                {
+                    "Id": "EuropeEmerging",
+                    "Value": 0
+                },
+                {
+                    "Id": "AfricaMiddleEast",
+                    "Value": 0
+                }
+            ]
+        },
+        {
+            "Id": "GreaterAsia",
+            "Value": 0.09,
+            "ExposureItem": [
+                {
+                    "Id": "Japan",
+                    "Value": 0
+                },
+                {
+                    "Id": "Australia",
+                    "Value": 0
+                },
+                {
+                    "Id": "AsiaDeveloped",
+                    "Value": 0.06
+                },
+                {
+                    "Id": "AsiaEmerging",
+                    "Value": 0.03
+                }
+            ]
+        },
+        {
+            "Id": "NotClassified",
+            "Value": 0
+        }
+    ]
+}
+```
+</details>
+&nbsp;
+
+### Integration Data Format
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "portfolio": [
+        {
+            "Id": "Americas",
+            "Value": 31.68,
+            "ExposureItem": [
+                {
+                    "Id": "NorthAmerica",
+                    "Value": 31.11
+                },
+                {
+                    "Id": "LatinAmerica",
+                    "Value": 0.57
+                }
+            ]
+        },
+        {
+            "Id": "GreaterEurope",
+            "Value": 42.27,
+            "ExposureItem": [
+                {
+                    "Id": "UnitedKingdom",
+                    "Value": 11.31
+                },
+                {
+                    "Id": "EuropeDeveloped",
+                    "Value": 30.02
+                },
+                {
+                    "Id": "EuropeEmerging",
+                    "Value": 0.14
+                },
+                {
+                    "Id": "AfricaMiddleEast",
+                    "Value": 0.8
+                }
+            ]
+        },
+        {
+            "Id": "GreaterAsia",
+            "Value": 26.05,
+            "ExposureItem": [
+                {
+                    "Id": "Japan",
+                    "Value": 14.76
+                },
+                {
+                    "Id": "Australia",
+                    "Value": 3.9
+                },
+                {
+                    "Id": "AsiaDeveloped",
+                    "Value": 5.11
+                },
+                {
+                    "Id": "AsiaEmerging",
+                    "Value": 2.28
+                }
+            ]
+        },
+        {
+            "Id": "NotClassified",
+            "Value": 0
+        }
+    ],
+    "benchmark": [
+        {
+            "Id": "Americas",
+            "Value": 98.99,
+            "ExposureItem": [
+                {
+                    "Id": "NorthAmerica",
+                    "Value": 98.85
+                },
+                {
+                    "Id": "LatinAmerica",
+                    "Value": 0.14
+                }
+            ]
+        },
+        {
+            "Id": "GreaterEurope",
+            "Value": 0.92,
+            "ExposureItem": [
+                {
+                    "Id": "UnitedKingdom",
+                    "Value": 0.48
+                },
+                {
+                    "Id": "EuropeDeveloped",
+                    "Value": 0.44
+                },
+                {
+                    "Id": "EuropeEmerging",
+                    "Value": 0
+                },
+                {
+                    "Id": "AfricaMiddleEast",
+                    "Value": 0
+                }
+            ]
+        },
+        {
+            "Id": "GreaterAsia",
+            "Value": 0.09,
+            "ExposureItem": [
+                {
+                    "Id": "Japan",
+                    "Value": 0
+                },
+                {
+                    "Id": "Australia",
+                    "Value": 0
+                },
+                {
+                    "Id": "AsiaDeveloped",
+                    "Value": 0.06
+                },
+                {
+                    "Id": "AsiaEmerging",
+                    "Value": 0.03
+                }
+            ]
+        },
+        {
+            "Id": "NotClassified",
+            "Value": 0
+        }
+    ],
+    "breakdownData": {}
+}
+```
+</details>
+&nbsp;
+
+### Integration Transformation Operation
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+import { get } from 'lodash';
+
+function getStockRegionsUsData(xrayData, breakdown = {}) {
+    const breakdownData = {};
+    if (breakdown?.showBreakdown) {
+        breakdownData.securityBreakdownData = getSecurityBreakdownDetails(
+            xrayData,
+            breakdown.portfolioSecurityReference,
+            breakdown.portfolioHoldings,
+        );
+    }
+    return {
+        ...getComponentData(xrayData, 'Portfolio', 'Benchmark'),
+        breakdownData,
+    };
+}
+
+function getComponentData(data, portfolioPath, benchmarkPath) {
+    if (!data) {
+        return false;
+    }
+    return {
+        portfolio: get(data, portfolioPath, []),
+        benchmark: get(data, benchmarkPath, []),
+    };
+}
+```
+</details>
+&nbsp;
+
+### Component Transformed Data Format
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+[
+    {
+        "portfolio": "31.68",
+        "benchmark": "98.99",
+        "name": "americas"
+    },
+    {
+        "name": "northAmerica",
+        "portfolio": "31.11",
+        "benchmark": "98.85",
+        "color": "#8695AC"
+    },
+    {
+        "name": "latinAmerica",
+        "portfolio": "0.57",
+        "benchmark": "0.14",
+        "color": "#C1C6D6"
+    },
+    {
+        "portfolio": "0.00",
+        "benchmark": "0.00",
+        "name": "notClassified",
+        "color": "null"
+    }
+]
+```
+</details>
+&nbsp;
+
+### Component Transformation Operation
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+parsedModelData() {
+    if (this.modelData) {
+        const selectedTab = this.tabs[this.selectedTab];
+        this.$emit('tab-change', { tabId: selectedTab });
+        const stockRegionsModel = [];
+        const rawData = this.modelData;
+        const portfolioValues = get(rawData, 'portfolio', []);
+        const benchmarkValues = get(rawData, 'benchmark', []);
+        const mapping = stockRegionsMapping.regions;
+        Object.keys(mapping).forEach((region) => {
+            const data = mapping[region];
+            const regionModel = {};
+            const mappedPortfolioData = portfolioValues.find(item => data.name === item.Id) || {};
+            const mappedBenchmarkData = benchmarkValues.find(item => data.name === item.Id) || {};
+            if (selectedTab === region || region === 'notClassified') {
+                regionModel.portfolio = mappedPortfolioData.Value.toFixed(2);
+                regionModel.benchmark = mappedBenchmarkData.Value.toFixed(2);
+                regionModel.name = lowerFirst(region);
+                if (region === 'notClassified') {
+                    regionModel.color = 'null'; // only for alignment purpose
+                }
+                stockRegionsModel.push(regionModel);
+                if (mappedPortfolioData.ExposureItem && selectedTab === region) {
+                    mappedPortfolioData.ExposureItem.forEach((subRegion) => {
+                        const regionData = {};
+                        regionData.name = lowerFirst(data.subRegions[subRegion.Id]?.region || subRegion.Id);
+                        regionData.portfolio = subRegion?.Value.toFixed(2) || '-';
+                        const subRegionBenchmarkObj = mappedBenchmarkData.ExposureItem.find(item => subRegion.Id === item.Id) || {};
+                        regionData.benchmark = subRegionBenchmarkObj?.Value.toFixed(2) || '-';
+                        regionData.color = this.getRegionIconColor(
+                            regionData.portfolio,
+                        );
+                        stockRegionsModel.push(regionData);
+                    });
+                }
+            }
+        });
+        return stockRegionsModel;
+    }
+    return [];
+},
+```
+</details>
+&nbsp;
+
+### Security Breakdown Data Format
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+  "breakdownData": {
+    "securityBreakdownData": [
+      {
+        "SecurityId": "FOUSA06OEZ",
+        "Analyzed": 99.54196,
+        "NotAnalyzed": 0.45804,
+        "Region": [
+          {
+            "Id": "Americas",
+            "Value": 66.91,
+            "ExposureItem": [
+              {
+                "Id": "NorthAmerica",
+                "Value": 65.79
+              },
+              {
+                "Id": "LatinAmerica",
+                "Value": 1.12
+              }
+            ]
+          },
+          {
+            "Id": "GreaterEurope",
+            "Value": 17.33,
+            "ExposureItem": [
+              {
+                "Id": "UnitedKingdom",
+                "Value": 3.87
+              },
+              {
+                "Id": "EuropeDeveloped",
+                "Value": 11.83
+              },
+              {
+                "Id": "EuropeEmerging",
+                "Value": 0.15
+              },
+              {
+                "Id": "AfricaMiddleEast",
+                "Value": 1.48
+              }
+            ]
+          },
+          {
+            "Id": "GreaterAsia",
+            "Value": 15.76,
+            "ExposureItem": [
+              {
+                "Id": "Japan",
+                "Value": 5.23
+              },
+              {
+                "Id": "Australia",
+                "Value": 1.92
+              },
+              {
+                "Id": "AsiaDeveloped",
+                "Value": 3.55
+              },
+              {
+                "Id": "AsiaEmerging",
+                "Value": 5.06
+              }
+            ]
+          },
+          {
+            "Id": "NotClassified",
+            "Value": 0
+          }
+        ],
+        "Name": "iShares MSCI ACWI ETF",
+        "Weight": 100
+      }
+    ]
+  },
+  "securityBreakdown": [
+    {
+      "securityName": "iShares MSCI ACWI ETF",
+      "americas": "66.91",
+      "northAmerica": "65.79",
+      "latinAmerica": "1.12",
+      "greaterEurope": "17.33",
+      "unitedKingdom": "3.87",
+      "europeDeveloped": "11.83",
+      "europeEmerging": "0.15",
+      "africaMiddleEast": "1.48",
+      "greaterAsia": "15.76",
+      "japan": "5.23",
+      "australia": "1.92",
+      "asiaDeveloped": "3.55",
+      "asiaEmerging": "5.06",
+      "notClassified": "0.00",
+      "weight": 100
+    }
+  ],
+  "portfolioAnalyzed": [
+    {
+      "securityName": "iShares MSCI ACWI ETF",
+      "analyzedPercent": 99.54,
+      "notAnalyzedPercent": 0.46,
+      "weight": 100
+    }
+  ]
+}
+```
+</details>
+&nbsp;
+
+### Security Breakdown Transformation Operation
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+function getSecurityBreakdownDetails(componentData, securityReference, portfolioHoldings) {
+    const breakdown = get(componentData, 'SecurityBreakdown', []);
+    return breakdown.map((security) => {
+        const currSecurity = security;
+        currSecurity.Name = getSecurityDetail(securityReference, currSecurity.SecurityId)?.Name;
+        currSecurity.Weight = portfolioHoldings ? getSecurityDetail(
+            portfolioHoldings,
+            currSecurity.SecurityId,
+        )?.PercentAssets : null;
+        return currSecurity;
+    });
+}
+
+function getStockSectorsUsData(xrayData, breakdown) {
+    const portfolio = xrayData.Portfolio?.reduce((data, currentValue) => {
+        const portfolioData = data;
+        portfolioData[currentValue.Id] = currentValue.Value;
+        return portfolioData;
+    }, {});
+    const benchmark = xrayData.Benchmark?.reduce((data, currentValue) => {
+        const benchmarkData = data;
+        benchmarkData[currentValue.Id] = currentValue.Value;
+        return benchmarkData;
+    }, {});
+
+    const breakdownData = {};
+    if (breakdown?.showBreakdown) { // Security Breakdown Data
+        breakdownData.securityBreakdownData = getSecurityBreakdownDetails(
+            xrayData,
+            breakdown.portfolioSecurityReference,
+            breakdown.portfolioHoldings,
+        );
+    }
+
+    return {
+        portfolio,
+        benchmark,
+        breakdownData, // Security Breakdown Data
+    };
+}
+```
+</details>
+&nbsp;
+
+## Data Models
+The component uses the following data models:
+<details>
+    <summary><span class="summary-text">Table Data</span></summary>
+
+```json dark
+[
+    {
+        "portfolio": "31.68",
+        "benchmark": "98.99",
+        "name": "americas"
+    },
+    {
+        "name": "northAmerica",
+        "portfolio": "31.11",
+        "benchmark": "98.85",
+        "color": "#8695AC"
+    },
+    {
+        "name": "latinAmerica",
+        "portfolio": "0.57",
+        "benchmark": "0.14",
+        "color": "#C1C6D6"
+    },
+    {
+        "portfolio": "0.00",
+        "benchmark": "0.00",
+        "name": "notClassified",
+        "color": "null"
+    }
+]
+```
+</details>

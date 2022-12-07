@@ -1,0 +1,9 @@
+$body-font-family: 'Quicksand', sans-serif !important;
+$heading-font-family: 'Quicksand', sans-serif !important;
+
+body,
+.sb-wrapper,
+body #root .v-application,
+body #root .v-application * {
+    font-family: $body-font-family;
+}

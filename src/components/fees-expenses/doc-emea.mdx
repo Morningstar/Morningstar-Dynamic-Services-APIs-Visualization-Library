@@ -1,0 +1,286 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import FeesExpenses from '@/components/fees-expenses/FeesExpenses.vue';
+import { COST_CALCULATOR_EMEA_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="FeesExpenses" component={FeesExpenses} />
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+  
+</style>
+
+# Fees Expenses (APAC/EMEA)
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+
+
+## Description
+The Fees Expenses component evaluates how the ongoing costs an investor incurs to own mutual funds compares to those incurrred by investors across the globe.
+
+
+<Canvas withSource="open" withToolbar>
+  <Story id="components-fees-expenses--story-details"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={ FeesExpenses } />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={COST_CALCULATOR_EMEA_URL} target="_blank">Cost Calculator API (APAC/EMEA)</a>.
+<!--
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request)
+- [Request Payload Example](#request-payload)
+-->
+
+### API Data Access Library
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.xray.getFeesExpensesData({ portfolios: samplePortfolio })
+```
+<details>
+  <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+const samplePortfolio = [
+    {
+        id: 'default',
+        amount: 10000,
+        holdings: [
+            {
+                identifier: 'F0GBR052QA',
+                identifierType: 'MSID',
+                weight: 25.64102564102564,
+                initial: {},
+                ongoing: [
+                    {
+                        name: 'Ongoing',
+                    },
+                    {
+                        name: 'Transaction',
+                    },
+                    {
+                        name: 'Performance',
+                    },
+                ],
+            },
+            {
+                identifier: 'F000000EY1',
+                identifierType: 'MSID',
+                weight: 12.82051282051282,
+                initial: {},
+                ongoing: [
+                    {
+                        name: 'Ongoing',
+                    },
+                    {
+                        name: 'Transaction',
+                    },
+                    {
+                        name: 'Performance',
+                    },
+                ],
+            },
+            {
+                identifier: 'F00000OXG7',
+                identifierType: 'MSID',
+                weight: 10.256410256410255,
+                initial: {},
+                ongoing: [
+                    {
+                        name: 'Ongoing',
+                    },
+                    {
+                        name: 'Transaction',
+                    },
+                    {
+                        name: 'Performance',
+                    },
+                ],
+            },
+            {
+                identifier: 'F00000TWNO',
+                identifierType: 'MSID',
+                weight: 51.28205128205128,
+                initial: {},
+                ongoing: [
+                    {
+                        name: 'Ongoing',
+                    },
+                    {
+                        name: 'Transaction',
+                    },
+                    {
+                        name: 'Performance',
+                    },
+                ],
+            },
+        ],
+    },
+];
+
+window.mstarApisSdk.costCalculator.getCostCalculation({ portfolios: sampleCostCalculationPortfolio });
+```
+</details>
+&nbsp;
+
+### Request Example
+
+```javascript dark
+https://www.emea-api.morningstar.com/ecint/v1/investment-fees/calculate
+```
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- | 
+| `growthRatePercent` |	 Growth rate percent |`growthRatePercent=5.0` |
+| `yearsToCalculate` | Years of data to calculate |`yearsToCalculate=5` | 
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Component Transformed Data Format](#component-transformed-data-format) 
+- [Component Transformation Operation](#component-transformation-operation) 
+-->
+
+### API Response Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+[
+    {
+        portfolioId: "default",
+        summary: {
+            initialAdviserCostAmount: 0,
+            returnIncludingFeesAmount: 11698.19414,
+        },
+        initialCosts: {
+            startValue: 10000,
+            totalFees: 0
+        },
+        totalCosts: {
+            grandTotal: 944.89851
+        },
+        maximumExitFee: {
+            portfolio: 1.03432
+        }
+    }
+    
+]
+```
+</details>
+&nbsp;
+
+### Component Transformed Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+[
+    {
+        "feesExpensesKey":"Amount invested after initial costs",
+        "expenses":10000,
+        "type":"currency"
+    },
+    {
+        "feesExpensesKey":"What you might get back after charges",
+        "expenses":11698.19414,
+        "type":"currency"
+    },
+    {
+        "feesExpensesKey":"What you might get back if there were no charges at all",
+        "expenses":12762.81563,
+        "type":"currency"
+    },
+    {
+        "feesExpensesKey":"A reduction in return of",
+        "expenses":1064.62149,
+        "type":"currency"
+    },
+    {
+        "feesExpensesKey":"or",
+        "expenses":10.64621,
+        "type":"percent"
+    },
+    {
+        "feesExpensesKey":"Total costs",
+        "expenses":944.89851,
+        "type":"currency"
+    }
+]
+```
+</details>
+&nbsp;
+
+### Component Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+    parsedModelData() {
+        const feesExpensesData = this.modelData?.feesExpensesData;
+        const feesData = Array.isArray(feesExpensesData)
+            ? feesExpensesData[0] : feesExpensesData;
+        const isNotMifid = Boolean(feesData.fees);
+        let result = [];
+        if (this.fieldDefinitions.type === 'us' || isNotMifid) { // Either used for Xray API Global OR US data
+            const feesExpensesFields = this.fieldDefinitions.fields;
+            result = feesExpensesFields.map((field) => {
+                const expensesValue = feesData[field.value]
+                    ? feesData[field.value].toFixed(2)
+                    : feesData.fees[field.value].value.toFixed(2);
+                return {
+                    feesExpensesKey: field.key,
+                    expenses: expensesValue,
+                };
+            });
+        } else {
+            result = this.getMifidData(feesData);
+        }
+        return result;
+    },
+    getMifidData(model) { // Used for Cost calulator API Data
+        const summary = get(model, 'summary', {});
+        const totalCosts = get(model, 'totalCosts', {});
+        const initialCosts = get(model, 'initialCosts', {});
+        const feesExpensesFields = this.fieldDefinitions.fields;
+
+        return feesExpensesFields.map((field) => ({
+            feesExpensesKey: field.key,
+            expenses: (summary[field.value]
+                || totalCosts[field.value]
+                || initialCosts[field.value]
+                || null),
+            type: field.format,
+        }));
+    },
+```
+</details>
+

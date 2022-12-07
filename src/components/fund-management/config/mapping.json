@@ -1,0 +1,45 @@
+{
+    "titleMapping": {
+        "companyName": {
+            "title": "Company Name",
+            "type": "string"
+        },
+        "contact": {
+            "title": "",
+            "type": "object"
+        },
+        "domicile": {
+            "title": "Domicile",
+            "type": "string"
+        },
+        "fundManager": {
+            "title": "Fund Manager",
+            "type": "string"
+        },
+        "fundLaunchDate": {
+            "title": "Fund Launch Date",
+            "type": "string"
+        },
+        "headOffice": {
+            "title": "Head Office",
+            "type": "array"
+        },
+        "managerBiography": {
+            "title": "Manager Biography",
+            "type": "string",
+            "col": 12
+        },
+        "managerStartDate": {
+            "title": "Manager Start Date",
+            "type": "string"
+        },
+        "ucits": {
+            "title": "UCITS",
+            "type": "string"
+        }
+    },
+    "iconMapping": {
+        "phone": "mdi-phone-classic",
+        "email": "mdi-email"
+    }
+}

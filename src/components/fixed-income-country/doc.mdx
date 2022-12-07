@@ -1,0 +1,376 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import FixedIncomeCountry from "@/components/fixed-income-country/FixedIncomeCountry.vue";
+import { PORTFOLIO_ANALYSIS_EMEA_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="FixedIncomeCountry" component={ FixedIncomeCountry }/>
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+
+</style>
+
+# Fixed Income Country (APAC/EMEA)
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+- [Data Models](#data-models)
+
+
+## Description
+Fixed Income country represents the percent of fixed income invest country wise.
+
+<Canvas withSource="open" withToolbar>
+  <Story id="components-fixed-income-country--story-details"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={ FixedIncomeCountry } />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={PORTFOLIO_ANALYSIS_EMEA_URL} target="_blank">Portfolio Analysis API (APAC/EMEA)</a>.
+<!--
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request)
+- [Request Payload Example](#request-payload)
+-->
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.xray.getFixedIncomeCountryData({ portfolios: samplePortfolio });
+```
+<details>
+  <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+const samplePortfolio = {
+    type: 3,
+    benchmark: {
+        type: 'Standard',
+        holdings: [
+            {
+                identifier: 'EUCA000555',
+                identifierType: 'MSID',
+                weight: 100,
+            },
+        ],
+    },
+    holdings: [
+        {
+            identifier: 'F0GBR052QA',
+            identifierType: 'MSID',
+            amount: 5000,
+        },
+        {
+            identifier: 'F000000EY1',
+            identifierType: 'MSID',
+            amount: 2500,
+        },
+        {
+            identifier: 'F00000OXG7',
+            identifierType: 'MSID',
+            amount: 2000,
+        },
+        {
+            identifier: 'F00000TWNO',
+            identifierType: 'MSID',
+            amount: 10000,
+        },
+    ],
+    name: 'UK demo portfolio - amount',
+};
+
+window.mstarApisSdk.getFixedIncomeCountryData({ portfolios: samplePortfolio });
+```
+</details>
+&nbsp;
+
+### Request Example
+
+```javascript dark
+https://www.emea-api.morningstar.com/ecint/v1/xray/json?languageId={{languageId}}&portfolioDataPoints={{portfolioDataPoints}}&holdingDataPoints={{holdingDataPoints}}&benchmarkDataPoints={{benchmarkDataPoints}}
+
+```
+
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- |
+| `languageId` |	ISO culture codes. If not provided, defaults to language defined in settings. |`languageId=en-GB` |
+| `portfolioDataPoints` |Comma-separated list of portfolio data points.|`portfolioDataPoints=CountryExposure` |
+| `holdingDataPoints` |Comma-separated list of holding data points.|`HoldingDataPoints=""` |
+| `benchmarkDataPoints` | Comma-separated list of benchmark data points.|`benchmarkDataPoints=ShowBreakdown` |
+
+
+## Data Transformation
+
+Data returned by the API must be transformed to the format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Integration Data Format](#integration-data-format) 
+- [Integration Transformation Operation](#integration-transformation-operation)
+- [Component Transformed Data Format](#component-transformed-data-format) 
+- [Component Transformation Operation](#component-transformation-operation)
+-->
+### API Response Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "breakdowns": {
+        "countryExposure": [
+            {
+                "type": "2",
+                "salePosition": "N",
+                "values": {
+                    "99": 0.73444,
+                    "aUS": 0.11701,
+                    "cAN": 0.66102,
+                    "nZL": 0.03649,
+                    "bEL": 1.59525,
+                    "dEU": 7.52098,
+                    "eSP": 2.82316,
+                    "fRA": 6.6025,
+                    "gBR": 14.17222,
+                    "iND": 6.87921,
+                    "iTA": 1.64372,
+                    "jPN": 2.95445,
+                    "nLD": 2.53015,
+                    "uSA": 51.7293
+                }
+            }
+        ]
+    },
+    "benchmark": [
+        {
+            "breakdowns": {
+                "countryExposure": [
+                    {
+                        "type": "2",
+                        "salePosition": "N",
+                        "values": {
+                            "99": 0.94111,
+                            "aUS": 0.03036,
+                            "fRA": 9.65392,
+                            "gBR": 3.18761,
+                            "iND": 0,
+                            "iRL": 0.85003,
+                            "nLD": 4.55373,
+                            "nOR": 6.34487,
+                            "uSA": 74.43837
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
+```
+</details>
+&nbsp;
+
+### Integration Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "portfolio": {
+        "type": "2",
+        "salePosition": "N",
+        "values": {
+            "99": 0.73444,
+            "aUS": 0.11701,
+            "cAN": 0.66102,
+            "nZL": 0.03649,
+            "bEL": 1.59525,
+            "dEU": 7.52098,
+            "eSP": 2.82316,
+            "fRA": 6.6025,
+            "gBR": 14.17222,
+            "iND": 6.87921,
+            "iTA": 1.64372,
+            "jPN": 2.95445,
+            "nLD": 2.53015,
+            "uSA": 51.7293
+        }
+    },
+    "benchmark": {
+        "type": "2",
+        "salePosition": "N",
+        "values": {
+            "99": 0.94111,
+            "aUS": 0.03036,
+            "fRA": 9.65392,
+            "gBR": 3.18761,
+            "iND": 0,
+            "iRL": 0.85003,
+            "nLD": 4.55373,
+            "nOR": 6.34487,
+            "uSA": 74.43837
+        }
+    }
+}
+```
+</details>
+&nbsp;
+
+### Integration Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+function getFixedIncomeCountryData(xrayData) {
+    const portfolio = get(xrayData, 'breakdowns.countryExposure', [])
+        .find((data) => data.type === '2');
+    const benchmark = get(xrayData, 'benchmark[0].breakdowns.countryExposure', [])
+        .find((data) => data.type === '2');
+    return {
+        portfolio,
+        benchmark,
+    };
+}
+```
+</details>
+&nbsp;
+
+### Component Transformed Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+[
+    {
+        "name": "99",
+        "portfolio": 0.73444,
+        "benchmark": 0.94111
+    },
+    {
+        "name": "aUS",
+        "portfolio": 0.11701,
+        "benchmark": 0.03036
+    },
+    {
+        "name": "cAN",
+        "portfolio": 0.66102,
+        "benchmark": "-"
+    },
+    {
+        "name": "nZL",
+        "portfolio": 0.03649,
+        "benchmark": "-"
+    },
+    {
+        "name": "bEL",
+        "portfolio": 1.59525,
+        "benchmark": "-"
+    },
+    {
+        "name": "dEU",
+        "portfolio": 7.52098,
+        "benchmark": "-"
+    },
+    {
+        "name": "eSP",
+        "portfolio": 2.82316,
+        "benchmark": "-"
+    },
+    {
+        "name": "fRA",
+        "portfolio": 6.6025,
+        "benchmark": 9.65392
+    },
+    {
+        "name": "gBR",
+        "portfolio": 14.17222,
+        "benchmark": 3.18761
+    },
+    {
+        "name": "iND",
+        "portfolio": 6.87921,
+        "benchmark": 0
+    },
+    {
+        "name": "iTA",
+        "portfolio": 1.64372,
+        "benchmark": "-"
+    },
+    {
+        "name": "jPN",
+        "portfolio": 2.95445,
+        "benchmark": "-"
+    },
+    {
+        "name": "nLD",
+        "portfolio": 2.53015,
+        "benchmark": 4.55373
+    },
+    {
+        "name": "uSA",
+        "portfolio": 51.7293,
+        "benchmark": 74.43837
+    },
+    {
+        "name": "iRL",
+        "portfolio": "-",
+        "benchmark": 0.85003
+    },
+    {
+        "name": "nOR",
+        "portfolio": "-",
+        "benchmark": 6.34487
+    }
+]
+```
+</details>
+&nbsp;
+
+### Component Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+parsedModelData() {
+    if (Object.keys(this.modelData || {}).length) {
+        const portfolioCountryDataKeys = Object.keys(this.modelData.portfolio.values || {});
+        const benchmarkCountryDataKeys = Object.keys(this.modelData.benchmark.values || {});
+        benchmarkCountryDataKeys.forEach((key) => {
+        if (portfolioCountryDataKeys.indexOf(key) < 0) {
+            portfolioCountryDataKeys.push(key);
+        }
+    });
+    return portfolioCountryDataKeys.map((country) => ({
+        name: country,
+        portfolio: this.modelData.portfolio.values[country] ?? '-',
+        benchmark: this.modelData.benchmark.values[country] ?? '-',
+    }));
+    }
+    return [];
+}
+```
+</details>
+&nbsp;

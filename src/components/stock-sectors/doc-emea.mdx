@@ -1,0 +1,403 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import StockSectors from '@/components/stock-sectors/StockSectors.vue'
+import { PORTFOLIO_ANALYSIS_EMEA_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="StockSectors" component={StockSectors} />
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+
+</style>
+
+# Stock Sectors (APAC/EMEA)
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+
+
+## Description
+The Stock Sectors component displays a portfolio breakdown based on Morningstar's proprietary sector classification which divides the stock universe into three major economic spheres or Super Sectors: Cyclical, Defensive and Sensitive. Within each of these Super Sectors, three groups for Defensive and four groups for Cyclical and Sensitive are defined for a total of 11 sectors.
+
+<Canvas withSource="open" withToolbar>
+  <Story id="components-stock-sectors--story-details"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={ StockSectors } />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={PORTFOLIO_ANALYSIS_EMEA_URL} target="_blank">Portfolio Analysis API (APAC/EMEA)</a>.
+<!--
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request)
+- [Request Payload Example](#request-payload)
+-->
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.xray.getStockSectorsData({ portfolios: samplePortfolio });
+```
+<details>
+  <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+
+const samplePortfolio = {
+    type: 3,
+    benchmark: {
+        "type": "Standard",
+        "holdings": [
+            {
+                "identifier": "EUCA000555",
+                "identifierType": "MSID",
+                "weight": 100
+            }
+        ]
+    },
+    holdings: [
+        {
+            identifier: 'F0GBR052QA',
+            identifierType: 'MSID',
+            amount: 5000,
+        },
+        {
+            identifier: 'F000000EY1',
+            identifierType: 'MSID',
+            amount: 2500,
+        },
+        {
+            identifier: 'F00000OXG7',
+            identifierType: 'MSID',
+            amount: 2000,
+        },
+        {
+            identifier: 'F00000TWNO',
+            identifierType: 'MSID',
+            amount: 10000,
+        },
+    ],
+    name: 'UK demo portfolio - amount',
+};
+
+window.mstarApisSdk.xray.getStockSectorsData({ portfolios: samplePortfolio});
+```
+</details>
+&nbsp;
+
+### Request Example
+
+```javascript dark
+https://www.emea-api.morningstar.com/ecint/v1/xray/json?languageId={{languageId}}&portfolioDataPoints={{portfolioDataPoints}}&holdingDataPoints={{holdingDataPoints}}&benchmarkDataPoints={{benchmarkDataPoints}}
+
+```
+
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- |
+| `languageId` |	ISO culture codes. If not provided, defaults to language defined in settings. | `languageId=en-GB` |
+| `portfolioDataPoints` | Comma-separated list of portfolio data points.| `portfolioDataPoints=GlobalStockSector` |
+| `benchmarkDataPoints` | Comma-separated list of benchmark data points.| `benchmarkDataPoints=ShowBreakdown` |
+
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Integration Data Format](#integration-data-format) 
+- [Integration Transformation Operation](#integration-transformation-operation) 
+- [Component Transformed Data Format](#component-transformed-data-format) 
+- [Component Transformation Operation](#component-transformation-operation) 
+-->
+### API Response Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "status": {
+        "detailedStatusMessage": "",
+        "statusCode": 200,
+        "statusDescription": "",
+    },
+    "breakdowns": {
+        "globalStockSector": [
+            {
+                "salePosition": "N",
+                "values": {
+                    "99": 4.22914,
+                    "101": 5.92901,
+                    "102": 5.5638,
+                    "103": 15.88212,
+                    "104": 1.08254,
+                    "205": 10.13091,
+                    "206": 11.37925,
+                    "207": 0.81383,
+                    "308": 8.75619,
+                    "309": 4.48632,
+                    "310": 16.84596,
+                    "311": 14.90093,
+                },
+            },
+        ],
+    },
+    "benchmark": [
+        {
+            "breakdowns": {
+                "globalStockSector": [
+                    {
+                        "salePosition": "N",
+                        "values": {
+                            "99": 0,
+                            "101": 2.50603,
+                            "102": 10.47011,
+                            "103": 13.10258,
+                            "104": 3.75471,
+                            "205": 6.83606,
+                            "206": 14.76033,
+                            "207": 3.05778,
+                            "308": 8.22896,
+                            "309": 4.40115,
+                            "310": 8.87266,
+                            "311": 24.00964,
+                        },
+                    },
+                ],
+            },
+        },
+    ],
+}
+```
+</details>
+&nbsp;
+
+### Integration Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "stockSectors": {
+        "portfolio": {
+            "BasicMaterials": 7.07,
+            "CommunicationServices": 6.33,
+            "ConsumerCyclical": 10.47,
+            "ConsumerDefensive": 7.97,
+            "Cyclical": 41.17,
+            "Defensive": 21.2,
+            "Energy": 9.04,
+            "FinancialServices": 21.14,
+            "Healthcare": 9.15,
+            "Industrials": 11.48,
+            "RealEstate": 2.49,
+            "Sensitive": 37.63,
+            "Technology": 10.78,
+            "Utilities": 4.08,
+            "NotClassified": 0
+        },
+        "benchmark": {
+            "BasicMaterials": 2.49,
+            "CommunicationServices": 7.78,
+            "ConsumerCyclical": 11.32,
+            "ConsumerDefensive": 6.61,
+            "Cyclical": 30.57,
+            "Defensive": 23.48,
+            "Energy": 4.75,
+            "FinancialServices": 13.13,
+            "Healthcare": 13.79,
+            "Industrials": 9.03,
+            "RealEstate": 3.63,
+            "Sensitive": 45.95,
+            "Technology": 24.39,
+            "Utilities": 3.08,
+            "NotClassified": 0
+        }
+    }
+}
+```
+</details>
+&nbsp;
+
+### Integration Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+function getStockSectorsData(xrayData) {
+    const sectorTypes = ['cyclical', 'sensitive', 'defensive'];
+    const modelData = getComponentData(
+        xrayData,
+        'breakdowns.globalStockSector[0].values',
+        'benchmark[0].breakdowns.globalStockSector[0].values',
+    );
+    const portfolioData = get(modelData, 'portfolio', null);
+    const benchmarkData = get(modelData, 'benchmark', null);
+
+    const portfolio = {};
+    const benchmark = {};
+    sectorTypes.forEach((sectorType) => {
+        const mappingKey = stockSectorsMapping.stockSectors[sectorType];
+        Object.keys(mappingKey).forEach((dataKey) => {
+            portfolio[mappingKey[dataKey]] = portfolioData[dataKey];
+            benchmark[mappingKey[dataKey]] = benchmarkData[dataKey];
+        });
+    });
+    return {
+        portfolio,
+        benchmark,
+    };
+}
+```
+</details>
+&nbsp;
+
+### Component Transformed Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+[
+    {
+        "name": "cyclical",
+        "portfolio": "40.50",
+        "benchmark": "30.76",
+        "highlight": true
+    },
+    {
+        "name": "basicMaterials",
+        "portfolio": "7.30",
+        "benchmark": "2.45"
+    },
+    {
+        "name": "consumerCyclical",
+        "portfolio": "10.21",
+        "benchmark": "11.57"
+    },
+    {
+        "name": "financialServices",
+        "portfolio": "20.63",
+        "benchmark": "13.25"
+    },
+    {
+        "name": "realEstate",
+        "portfolio": "2.36",
+        "benchmark": "3.49"
+    },
+    {
+        "name": "sensitive",
+        "portfolio": "38.16",
+        "benchmark": "44.74",
+        "highlight": true
+    },
+    {
+        "name": "communicationServices",
+        "portfolio": "6.32",
+        "benchmark": "7.47"
+    },
+    {
+        "name": "energy",
+        "portfolio": "9.43",
+        "benchmark": "4.65"
+    },
+    {
+        "name": "industrials",
+        "portfolio": "11.67",
+        "benchmark": "8.93"
+    },
+    {
+        "name": "technology",
+        "portfolio": "10.74",
+        "benchmark": "23.69"
+    },
+    {
+        "name": "defensive",
+        "portfolio": "21.34",
+        "benchmark": "24.50",
+        "highlight": true
+    },
+    {
+        "name": "consumerDefensive",
+        "portfolio": "8.06",
+        "benchmark": "6.72"
+    },
+    {
+        "name": "healthcare",
+        "portfolio": "9.53",
+        "benchmark": "14.76"
+    },
+    {
+        "name": "utilities",
+        "portfolio": "3.75",
+        "benchmark": "3.02"
+    }
+]
+```
+</details>
+&nbsp;
+
+### Component Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+parsedModelData() {
+    if (this.modelData) {
+        let stockSectorsData = [];
+        const portfolioData = get(this.modelData, 'stockSectors.portfolio', null);
+        const benchmarkData = get(this.modelData, 'stockSectors.benchmark', null);
+        const mapping = outputMapping.stockSectors;
+        this.sectorTypes.forEach((key) => {
+            const breakdown = [];
+            const mappingKey = mapping[key];
+            let netPortfolio = 0;
+            let netBenchmark = 0;
+
+            Object.values(mappingKey).forEach((dataKey) => {
+                netPortfolio += portfolioData[dataKey] || 0;
+                netBenchmark += benchmarkData[dataKey] || 0;
+                breakdown.push({
+                    name: lowerFirst(dataKey.toString()),
+                    portfolio: portfolioData ? this.formatNumber(portfolioData[dataKey]) : '-',
+                    benchmark: benchmarkData ? this.formatNumber(benchmarkData[dataKey]) : '-',
+                });
+            });
+            breakdown.unshift({
+                name: key,
+                portfolio: this.formatNumber(netPortfolio) || '-',
+                benchmark: this.formatNumber(netBenchmark) || '-',
+                highlight: true,
+            });
+            stockSectorsData = [...stockSectorsData, ...breakdown];
+        });
+        return stockSectorsData;
+    }
+    return [];
+},
+```
+</details>
+&nbsp;

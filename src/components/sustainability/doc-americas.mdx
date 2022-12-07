@@ -1,0 +1,421 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import Sustainability from "@/components/sustainability/Sustainability.vue";
+import { PORTFOLIO_ANALYSIS_AMERICAS_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="Sustainability" component={ Sustainability }/>
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+
+</style>
+
+# Sustainability (Americas)
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+- [Data Models](#data-models)
+
+
+## Description
+
+The Morningstar Portfolio Corporate and Sovereign Sustainability Scores are the asset-weighted averages of Sustainalytics' company-level and country ESG Risk Scores. 
+
+The Portfolio Corporate and Sovereign Sustainability Scores are rendered on a 0-100 scale, where lower scores are better, using an asset-weighted average of all covered securities. Morningstar determines whether each eligible portfolio holding can be classified under the corporate or sovereign framework. Each holding can only contribute an ESG Risk Score or a Country Risk score, not both. 
+
+To receive a Corporate Sustainability Score, at least 67% of a portfolio's corporate assets under management (long positions only) must have a company ESG Risk Rating. 
+
+To receive a Sovereign Sustainability Score, at least 67% of a portfolio's sovereign assets under management (long positions only) must have a country ESG Risk Rating.
+
+
+<Canvas withSource="open" withToolbar>
+    <Story id="components-sustainability--story-details-us"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={Sustainability}/>
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={PORTFOLIO_ANALYSIS_AMERICAS_URL} target="_blank">Portfolio Analysis API (Americas)</a>.
+
+<!--
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request-example)
+- [Request Payload Example](#request-payload-example)
+-->
+
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.xray.getEsgPerformance({ portfolios: samplePortfolio, languageId: 'en-US' });
+```
+
+<details>
+    <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+const samplePortfolio = [
+    {
+        Name: 'Test Portfolio1',
+        TotalValue: 10000,
+        Holdings: [
+            {
+                SecurityId: 'F00000VCTT',
+                Weight: 20,
+            },
+            {
+                SecurityId: '0P00002NW8',
+                Weight: 10,
+            },
+            {
+                TradingSymbol: 'AAPL',
+                Weight: 15,
+            },
+            {
+                ISIN: 'US09251T1034',
+                Weight: 35,
+            },
+            {
+                CUSIP: '256219106',
+                Weight: 20,
+            },
+        ],
+        Benchmark: {
+            Type: 'Standard',
+            Holdings: [
+                {
+                    SecurityId: 'XIUSA04G92',
+                    Type: 'XI',
+                    Weight: 100,
+                }
+            ],
+        },
+    },
+];
+
+window.mstarApisSdk.portfolioAnalysis.getEsgPerformance({ portfolios: samplePortfolio, languageId: 'en-US'  });
+
+```
+
+</details>
+
+### Request Example
+
+Requests to the API have the following format:
+
+```javascript dark
+https://www.us-api.morningstar.com/portfolioanalysis/v1/esg?langcult={{languageId}}
+```
+
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- |
+| `languageId` | ISO culture codes. If not provided, defaults to language defined in settings. |`languageId=en-US` |
+
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Component Transformed Data Format](#component-transformed-data-format) 
+- [Component Transformation Operation](#component-transformation-operation) 
+-->
+
+### API Response Data Format
+
+<details>
+    <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "ESG": [
+        {
+            "sustainability": {
+                "portfolio": {
+                    "name": "US demo portfolio",
+                    "portfolioDate": "2022-06-30",
+                    "esgRisk": {
+                        "portfolioCorporateSustainabilityScore": 17.8868094397351,
+                        "portfolioEnvironmentalRiskScore": 2.5035045514515986,
+                        "portfolioSocialRiskScore": 7.679829843280144,
+                        "portfolioGovernanceRiskScore": 7.402942593978423,
+                        "portfolioCorporateESGRiskExposureScore": 36.837701010843766,
+                        "portfolioCorporateESGManagedRiskScore": 18.95372682839552,
+                        "historicalCorporateSustainabilityScore": 17.8868094397351,
+                        "historicalSovereignSustainabilityScore": 15.516782193136264,
+                        "percentOfAumCoveredControversy": 91.56584855149653,
+                        "percentOfAumWithHighAndSevereControversies": 3.8699285632848763,
+                        "percentOfAumWithHighControversies": 3.691139482238714,
+                        "percentOfAumWithLowControversies": 6.215587294354431,
+                        "percentOfAumWithModerateControversies": 71.69843014002569,
+                        "percentOfAumWithNoControversies": 4.0283776479959865,
+                        "percentOfAumWithSevereControversies": 0.17878908104616262,
+                        "percentOfAumWithSignificantControversies": 14.187676354339018,
+                        "portfolioDateSustainabilityRating": "2022-06-30",
+                        "portfolioSovereignSustainabilityScore": 15.516782193136264,
+                    }
+                },
+                "benchmark": {
+                    "name": "Morningstar US Market TR USD",
+                    "portfolioDate": "2022-06-30",
+                    "identifier": "XIUSA0010V",
+                    "identifierType": "SecurityId",
+                    "securityType": "XI",
+                    "esgRisk": {
+                        "portfolioCorporateSustainabilityScore": 21.93,
+                        "historicalSovereignSustainabilityScore": 22.86,
+                        "portfolioEnvironmentalRiskScore": 4.17,
+                        "portfolioSocialRiskScore": 9.45,
+                        "portfolioGovernanceRiskScore": 7.24,
+                        "historicalCorporateSustainabilityScore": 21.79807,
+                        "percentOfCorporateSustainabilityScoreContributionEScore": 19.01017,
+                        "percentOfCorporateSustainabilityScoreContributionGScore": 33.03342,
+                        "percentOfCorporateSustainabilityScoreContributionSScore": 43.10381,
+                        "percentOfCorporateSustainabilityScoreContributionUnallocatedScore": 4.8556,
+                        "sovereignSustainabilityRatingNumberOfSecuritiesScored": 0,
+                        "portfolioUnallocatedESGScore": 1.06
+                    }
+                }
+            }
+        }
+    ]
+}
+```
+</details>
+
+### Component Transformed Data Format
+
+<details>
+    <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+    {
+        "ESG": [
+            {
+                "sustainability": {
+                    "portfolio": {
+                        "name": "US demo portfolio",
+                        "portfolioDate": "2022-06-30",
+                        "esgRisk": {
+                            "portfolioCorporateSustainabilityScore": 17.8868094397351,
+                            "portfolioEnvironmentalRiskScore": 2.5035045514515986,
+                            "portfolioSocialRiskScore": 7.679829843280144,
+                            "portfolioGovernanceRiskScore": 7.402942593978423,
+                            "portfolioCorporateESGRiskExposureScore": 36.837701010843766,
+                            "portfolioCorporateESGManagedRiskScore": 18.95372682839552,
+                            "historicalCorporateSustainabilityScore": 17.8868094397351,
+                            "historicalSovereignSustainabilityScore": 15.516782193136264,
+                            "percentOfAumCoveredControversy": 91.56584855149653,
+                            "percentOfAumWithHighAndSevereControversies": 3.8699285632848763,
+                            "percentOfAumWithHighControversies": 3.691139482238714,
+                            "percentOfAumWithLowControversies": 6.215587294354431,
+                            "percentOfAumWithModerateControversies": 71.69843014002569,
+                            "percentOfAumWithNoControversies": 4.0283776479959865,
+                            "percentOfAumWithSevereControversies": 0.17878908104616262,
+                            "percentOfAumWithSignificantControversies": 14.187676354339018,
+                            "portfolioDateSustainabilityRating": "2022-06-30",
+                            "portfolioSovereignSustainabilityScore": 15.516782193136264,
+                        }
+                    },
+                    "benchmark": {
+                        "name": "Morningstar US Market TR USD",
+                        "portfolioDate": "2022-06-30",
+                        "identifier": "XIUSA0010V",
+                        "identifierType": "SecurityId",
+                        "securityType": "XI",
+                        "esgRisk": {
+                            "portfolioCorporateSustainabilityScore": 21.93,
+                            "historicalSovereignSustainabilityScore": 22.86,
+                            "portfolioEnvironmentalRiskScore": 4.17,
+                            "portfolioSocialRiskScore": 9.45,
+                            "portfolioGovernanceRiskScore": 7.24,
+                            "historicalCorporateSustainabilityScore": 21.79807,
+                            "percentOfCorporateSustainabilityScoreContributionEScore": 19.01017,
+                            "percentOfCorporateSustainabilityScoreContributionGScore": 33.03342,
+                            "percentOfCorporateSustainabilityScoreContributionSScore": 43.10381,
+                            "percentOfCorporateSustainabilityScoreContributionUnallocatedScore": 4.8556,
+                            "sovereignSustainabilityRatingNumberOfSecuritiesScored": 0,
+                            "portfolioUnallocatedESGScore": 1.06
+                        }
+                    }
+                }
+            }
+        ]
+    }
+```
+
+</details>
+
+### Component Transformation Operation
+
+<details>
+    <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+generateSustainabilityData(data = {}) {
+    const esgBreakdownData = {};
+    const portfolio = get(data, 'sustainability.portfolio', {});
+    const benchmark = get(data, 'sustainability.benchmark', {});
+    const portfolioCorporateSustainabilityScore = this.formatNumber(
+        get(portfolio, 'esgRisk.portfolioCorporateSustainabilityScore'),
+        2,
+    );
+    const portfolioSovereignSustainabilityScore = this.formatNumber(
+        get(portfolio, 'esgRisk.portfolioSovereignSustainabilityScore'),
+        2,
+    );
+    const benchmarkCorporateSustainabilityScore = this.formatNumber(
+        get(benchmark, 'esgRisk.historicalCorporateSustainabilityScore'),
+        2,
+    );
+    const benchmarkSovereignSustainabilityScore = this.formatNumber(
+        get(benchmark, 'esgRisk.historicalSovereignSustainabilityScore'),
+        2,
+    );
+    if (portfolioCorporateSustainabilityScore) {
+        this.corporate = {
+            type: 'corporate',
+            label: mappings.dataPoints.corporate,
+            portfolioName: portfolio.name,
+            benchmarkName: benchmark.name,
+            portfolioAum: this.formatNumber(
+            get(portfolio, 'esgRisk.corporateSustainabilityRatingPercentOfEligiblePortfolioCovered'),
+                2,
+            ),
+            portfolioCorporateSustainabilityScore,
+            benchmarkCorporateSustainabilityScore,
+        };
+    }
+
+    if (portfolioSovereignSustainabilityScore) {
+        this.sovereign = {
+            type: 'sovereign',
+            label: mappings.dataPoints.sovereign,
+            portfolioName: portfolio.name,
+            benchmarkName: benchmark.name,
+            portfolioAum: this.formatNumber(
+            get(portfolio, 'esgRisk.sovereignSustainabilityRatingPercentOfEligiblePortfolioCovered'),
+                2,
+            ),
+            portfolioSovereignSustainabilityScore,
+            benchmarkSovereignSustainabilityScore,
+        };
+    }
+
+    esgBreakdownData.environmentalScore = this.formatNumber(
+        get(portfolio, 'esgRisk.portfolioEnvironmentalRiskScore'),
+        2,
+    );
+    esgBreakdownData.socialScore = this.formatNumber(
+        get(portfolio, 'esgRisk.portfolioSocialRiskScore'),
+        2,
+    );
+    esgBreakdownData.governanceScore = this.formatNumber(
+        get(portfolio, 'esgRisk.portfolioGovernanceRiskScore'),
+        2,
+    );
+    esgBreakdownData.unallocatedScore = this.formatNumber(
+        get(portfolio, 'esgRisk.portfolioUnallocatedESGRiskScore'),
+        2,
+    );
+
+    this.pillarData = [];
+
+    Object.entries(esgBreakdownData).forEach((pillar) => {
+        const obj = {
+            scoreType: mappings.dataPoints[pillar[0]],
+            score: this.formatNumber(pillar[1], 2),
+        };
+        this.pillarData.push(obj);
+    });
+},
+```
+</details>
+&nbsp;
+
+
+## Data Models
+The component uses the following data models:
+<details>
+    <summary><span class="summary-text">Corporate Data</span></summary>
+
+```json dark
+{
+    "type": "corporate",
+    "label": "Corporate Sustainability Score",
+    "portfolioName": "TestPortfolio1",
+    "benchmarkName": "S&P 500 TR USD",
+    "portfolioAum": "91.08",
+    "portfolioCorporateSustainabilityScore": "21.98",
+    "benchmarkCorporateSustainabilityScore": "21.39"
+}
+```
+</details>
+&nbsp;
+
+<details>
+    <summary><span class="summary-text">Sovereign Data</span></summary>
+
+```json dark
+{
+    "type": "sovereign",
+    "label": "Sovereign Sustainability Score",
+    "portfolioName": "TestPortfolio1",
+    "benchmarkName": "S&P 500 TR USD",
+    "portfolioAum": "100.00",
+    "portfolioSovereignSustainabilityScore": "15.52",
+    "benchmarkSovereignSustainabilityScore": "20.63"
+}
+```
+</details>
+&nbsp;
+
+<details>
+    <summary><span class="summary-text">Corporate Pillars Data</span></summary>
+
+```json dark
+[
+    {
+        "scoreType": "Environmental",
+        "score": "3.39"
+    },
+    {
+        "scoreType": "Social",
+        "score": "8.04"
+    },
+    {
+        "scoreType": "Governance",
+        "score": "6.95"
+    },
+    {
+        "scoreType": "Unallocated",
+        "score": "3.59"
+    }
+]
+```
+</details>

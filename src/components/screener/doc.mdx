@@ -1,0 +1,536 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import Screener from "@/components/screener/Screener.vue";
+import { SCREENER_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="Screener" component={ Screener }/>
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+  
+</style>
+
+# Screener
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+- [Data Models](#data-models)
+
+
+## Description
+
+The Screener tool searches and filters investments to find those that best match the criteria specified in the request.
+
+<Canvas withSource="open" withToolbar>
+  <Story id="tools-screener--story-details"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={ Screener } />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={SCREENER_URL} target="_blank">Screener API</a>.
+
+<!--
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request)
+- [Request Payload Example](#request-payload)
+-->
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.screener.getIntlFiltersData(); // Fetch Filters Data
+window.mstarApisSdk.screener.getIntlScreenerData(JSON.stringify(defaultParams, null, 2)) // Fetch SecurityList Data
+```
+<details>
+  <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+const filterParams = {
+    universeIds: [],
+    filterDataPoints: 'brandingCompanyId',
+    filterValues: '',
+}; // This is optional in case you need specific filter datapoints.
+window.mstarApisSdk.screener.getIntlFiltersData(JSON.stringify(filterParams, null, 2))
+const defaultParams = {
+    page: 1,
+    pageSize: 10,
+    sortField: 'name',
+    sortOrder: 'asc',
+    universeIds: 'FOGBR$$ALL|E0EXG$XLON',
+    securityDataPoints: 'secId,tenforeId,name,closePrice,yield_M12,ongoingCharge,starRatingM255,gbrReturnD1,gbrReturnW1,gbrReturnM1,gbrReturnM3,gbrReturnM6,investmentType,holdingTypeId,universe',
+    filterValues: '',
+    term: '',
+};
+window.mstarApisSdk.screener.getIntlScreenerData(JSON.stringify(defaultParams, null, 2))
+
+```
+</details>
+&nbsp;
+
+### Request Example
+
+```javascript dark
+https://www.emea-api.morningstar.com/ecint/v1/screener?languageId={{languageId}}&currencyId={{currencyId}}&universeIds={{universeIds}}&outputType=json&filterDataPoints={{filterDataPoints}}&filters={{filterValues}}
+https://www.emea-api.morningstar.com/ecint/v1/screener?page={{page}}&pageSize={{pageSize}}&sortOrder={{sortField}}%20{{sortOrder}}&outputType=json&version=1&languageId={{languageId}}&currencyId={{currencyId}}&universeIds={{universeIds}}&securityDataPoints={{securityDataPoints}}&filters={{filterValues}}&term={{term}}
+
+```
+
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- | 
+| `languageId` |	ISO culture codes. If not provided, defaults to language defined in settings. | `languageId=en-GB` |
+| `currencyId` | ISO culture code. If not provided, defaults to language defined in settings. | `currencyId=GBP` | 
+| `universeIds` | A pipe-delimited string of unique identifers of a universe. | `universeIds=FOGBR$$ALL|E0EXG$XLON` |
+| `filterDataPoints` | Comma-separated list of filter definitions to be returned. | `filterDataPoints=CustomCategoryId,CustomCategoryId2,CustomCategoryId3,ReturnM0` |
+| `filters` | A list of filter constraints separated by a pipe-delimited string. | `filters=BrandingCompanyId:EQ:BN00000JKZ|Yield_M12:BTW:2:4` |
+| `page` | Defines the number of output pages. | `page=2` |
+| `pageSize` | Defines the number of rows per page. | `pageSize=20` |
+| `sortOrder` | Defines the data point on which to order the results and the order direction. | `sortOrder=name desc` |
+| `securityDataPoints` | Comma or pipe separated list of data points to return. | `securityDataPoints=SecId,Name,HoldingTypeId,Universe,PriceCurrency,ISIN` |
+| `term` | String to use to search for securities such as names, identifiers or symbols. | `term=LINXEA` |
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Component Data Format](#component-data-format)
+- [Transformation Operation](#transformation-operation)
+-->
+### API Response Data Format
+<details>
+  <summary><span class="summary-text">Filters Data</span></summary>
+
+```json dark
+{
+  "filters": [
+    [
+      {
+        "brandingCompanyId": [
+          {
+            "id": "BN00000JKZ",
+            "name": "1167 Capital"
+          },
+          {
+            "id": "BN00000M1Q",
+            "name": "24 Capital"
+          },
+          {
+            "id": "BN00000N3L",
+            "name": "2Xideas"
+          },
+          {
+            "id": "BN00000BPZ",
+            "name": "7IM"
+          },
+          {
+            "id": "BN000007SU",
+            "name": "Aberforth Partners"
+          }
+        ]
+      },
+      {
+        "categoryId": [
+          {
+            "id": "EUCA000698",
+            "name": "Africa & Middle East Equity"
+          },
+          {
+            "id": "EUCA000697",
+            "name": "Africa Equity"
+          },
+          {
+            "id": "EUCA000881",
+            "name": "Alternative Other"
+          },
+          {
+            "id": "EUCA000669",
+            "name": "ASEAN Equity"
+          },
+          {
+            "id": "EUCA000559",
+            "name": "Asia Allocation"
+          }
+        ]
+      }
+    ]
+  ]
+}
+```
+</details>
+&nbsp;
+
+<details>
+  <summary><span class="summary-text">Quick Filters Data</span></summary>
+
+```json dark
+{
+  "quickFilters": {
+        "highlyRated": {
+            "label": "Highly Rated",
+            "placeholderLabelId": "",
+            "filterLabel": "Morningstar Rating™ - 5, Morningstar Analyst Rating™ - Gold",
+            "apiParam": "StarRatingM255:IN:5|AnalystRatingScale:IN:5"
+        },
+        "topPerformerFunds": {
+            "label": "Top Performer funds",
+            "placeholderLabelId": "",
+            "filterLabel": "Total Return Time Frame - YTD, Total Return - 40-60(%)",
+            "apiParam": "GBRReturnM0:BTW:40:60"
+        },
+        "highlySustainable": {
+            "label": "Highly Sustainable",
+            "placeholderLabelId": "",
+            "filterLabel": "Low Carbon Designation™, Carbon Risk Score - 0, Morningstar Sustainability Rating™ - 5",
+            "apiParam": "LowCarbonDesignation:IN:TRUE|CarbonRiskScore:EQ:0|SustainabilityRank:IN:5"
+        },
+        "lowExpenses": {
+            "label": "Low Expenses",
+            "placeholderLabelId": "",
+            "filterLabel": "Ongoing Charge - <0.5%, Minimum Initial Purchase - <500M, Initial Charge - <=5% , Deferred Fee - <5%",
+            "apiParam": "OngoingCharge:LT:0.5|initialPurchase:LT:500000000|maxFrontEndLoad:LT:5|maxDeferredLoad:LT:5"
+        }
+    }
+}
+```
+</details>
+&nbsp;
+
+<details>
+  <summary><span class="summary-text">Security List Data</span></summary>
+
+```json dark
+{
+  "total": 68652,
+  "page": 1,
+  "pageSize": 5,
+  "rows": [
+    {
+      "secId": "F00000ZTL9",
+      "name": "1167 Act Fds ICAV Glb H IncBd D2 NOK Acc",
+      "closePrice": 76.4392,
+      "yield_M12": 0,
+      "ongoingCharge": 1.45,
+      "gbrReturnD1": 0,
+      "gbrReturnW1": -0.05,
+      "gbrReturnM1": -3.13,
+      "gbrReturnM3": -17.13,
+      "gbrReturnM6": -19.39,
+      "investmentType": "FO",
+      "holdingTypeId": 2,
+      "universe": "FOGBR$$ALL"
+    },
+    {
+      "secId": "F000015O6T",
+      "tenforeId": "52.8.IE00BMW4T172",
+      "name": "1OAK Multi Asset 80 UCITS A GBP Acc",
+      "closePrice": 90.2853,
+      "yield_M12": 0,
+      "ongoingCharge": 0.95,
+      "gbrReturnD1": -0.25,
+      "gbrReturnW1": -3.37,
+      "gbrReturnM1": -5.21,
+      "gbrReturnM3": -5.99,
+      "gbrReturnM6": -9.75,
+      "investmentType": "FO",
+      "holdingTypeId": 2,
+      "universe": "FOGBR$$ALL"
+    },
+    {
+      "secId": "F000015O6W",
+      "tenforeId": "52.8.IE00BMW4T404",
+      "name": "1OAK Multi Asset 80 UCITS B GBP Acc",
+      "closePrice": 91.6771,
+      "yield_M12": 0,
+      "ongoingCharge": 1.7,
+      "gbrReturnD1": -0.26,
+      "gbrReturnW1": -3.39,
+      "gbrReturnM1": -5.27,
+      "gbrReturnM3": -6.18,
+      "gbrReturnM6": -10.09,
+      "investmentType": "FO",
+      "holdingTypeId": 2,
+      "universe": "FOGBR$$ALL"
+    },
+    {
+      "secId": "F000015O6X",
+      "tenforeId": "52.8.IE00BMW4T511",
+      "name": "1OAK Multi Asset 80 UCITS B USD H Acc",
+      "closePrice": 90.2167,
+      "yield_M12": 0,
+      "ongoingCharge": 1.7,
+      "gbrReturnD1": -0.21,
+      "gbrReturnW1": -3.21,
+      "gbrReturnM1": -4.98,
+      "gbrReturnM3": -5.63,
+      "gbrReturnM6": -9.16,
+      "investmentType": "FO",
+      "holdingTypeId": 2,
+      "universe": "FOGBR$$ALL"
+    },
+    {
+      "secId": "F000015O6Z",
+      "tenforeId": "52.8.IE00BMW4T735",
+      "name": "1OAK Multi Asset 80 UCITS D2 GBP Inc",
+      "closePrice": 84.0031,
+      "yield_M12": 0,
+      "ongoingCharge": 1.7,
+      "gbrReturnD1": -0.26,
+      "gbrReturnW1": -3.39,
+      "gbrReturnM1": -5.27,
+      "gbrReturnM3": -7.17,
+      "gbrReturnM6": -11.91,
+      "investmentType": "FO",
+      "holdingTypeId": 2,
+      "universe": "FOGBR$$ALL"
+    }
+  ]
+}
+```
+</details>
+&nbsp;
+
+## Field Definitions
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+{
+  "filters": {
+    // Field Definition for filter
+    "fundProvider": {
+      "type": "select", // Type of Filter
+      "label": "Fund Provider", // Label to be shown on Filter
+      "dynamic": "true", // Denotes that list items to be fetched from API
+      "placeholderLabelId": "", // Default Value
+      "listItems": [], // Would be set based on the Filter data received from API
+      "apiParam": "BrandingCompanyId:EQ:", // Utilised to Prepend with the selected value and send as an API Param
+      "fetchFromApiData": "brandingCompanyId" // Fetch the filter list items from the API data
+    },
+    "yieldPercent": {
+      "type": "select",
+      "placeholderLabelId": "",
+      "label": "Yield (%)",
+      "listItems": [
+        // Default list items for a Static Filter
+        {
+          "id": "Yield_M12:BTW:0:2", // Selected Value which is used as an API Param
+          "name": "0% - 2%" // Option Value on UI
+        },
+        {
+          "id": "Yield_M12:BTW:2:4",
+          "name": "2% - 4%"
+        },
+        {
+          "id": "Yield_M12:BTW:4:6",
+          "name": "4% - 6%"
+        },
+        {
+          "id": "Yield_M12:BTW:6:8",
+          "name": "6% - 8%"
+        },
+        {
+          "id": "Yield_M12:GT:8",
+          "name": "> 8%"
+        }
+      ]
+    },
+
+    "ongoingCharge": {
+      "type": "select",
+      "placeholderLabelId": "",
+      "label": "Ongoing Charge (%)",
+      "listItems": [
+        {
+          "id": "OngoingCharge:LT:0.5",
+          "name": "< 0.5"
+        },
+        {
+          "id": "OngoingCharge:BTW:0.5:1",
+          "name": "0.5 - 1"
+        },
+        {
+          "id": "OngoingCharge:BTW:1:1.5",
+          "name": "1 - 1.5"
+        },
+        {
+          "id": "OngoingCharge:BTW:1.5:2",
+          "name": "1.5 - 2"
+        },
+        {
+          "id": "OngoingCharge::GT:2",
+          "name": "> 2"
+        }
+      ]
+    },
+    "starRating": {
+      "type": "combobox",
+      "placeholderLabelId": "",
+      "label": "Star Rating",
+      "listItems": ["5", "4", "3", "2", "1"],
+      "apiParam": "StarRatingM255:IN:" // Utilised to Prepend with the selected value and send as an API Param
+    },
+    "totalReturnTimeFrame": {
+      "type": "select",
+      "placeholderLabelId": "",
+      "childFiltersId": ["totalReturn"], // Defines all the child filter name
+      "label": "Total Return Time Frame",
+      "listItems": [
+        {
+          "id": "GBRReturnM0",
+          "name": "YTD"
+        },
+        {
+          "id": "GBRReturnM12",
+          "name": "1 Year"
+        },
+        {
+          "id": "GBRReturnM36",
+          "name": "3 Years"
+        },
+        {
+          "id": "GBRReturnM60",
+          "name": "5 Years"
+        },
+        {
+          "id": "GBRReturnM120",
+          "name": "10 Years"
+        }
+      ]
+    },
+    "totalReturn": {
+      "type": "select",
+      "label": "Total Return (%)",
+      "placeholderLabelId": "",
+      "disableState": true, // Sets disabled by default. Used only on Child Filters.
+      "listItems": [
+        {
+          "id": ":LT:0",
+          "name": "< 0"
+        },
+        {
+          "id": ":BTW:0:20",
+          "name": "0 - 20"
+        },
+        {
+          "id": ":BTW:20:40",
+          "name": "20 - 40"
+        },
+        {
+          "id": ":BTW:40:60",
+          "name": "40 - 60"
+        },
+        {
+          "id": ":BTW:60:80",
+          "name": "60 - 80"
+        },
+        {
+          "id": ":BTW:80:100",
+          "name": "80 - 100"
+        },
+        {
+          "id": ":GT:100",
+          "name": "> 100"
+        }
+      ],
+      "parentValue": ""
+    }
+  },
+  "securityList": {
+    // Field Definition for Security List
+    "headers": [
+      {
+        "text": "Name", // name of the column
+        "align": "start", // Alignment of the value inside the column
+        "value": "name", // Utilised for sorting of the column
+        "width": "20%", // Sets the width of the column
+        "fixed": true // Sets the column as fixed.
+      },
+      {
+        "text": "Last Close Price",
+        "value": "closePrice",
+        "width": "8%",
+        "align": "end"
+      },
+      {
+        "text": "Yield (%)",
+        "value": "yield_M12",
+        "width": "7%",
+        "align": "end"
+      },
+      {
+        "text": "Ongoing Charge (%)",
+        "value": "ongoingCharge",
+        "width": "9%",
+        "align": "end"
+      },
+      {
+        "text": "Morningstar Rating™",
+        "value": "starRatingM255",
+        "width": "16%",
+        "align": "center"
+      },
+      {
+        "text": "1 Day Return (%)",
+        "value": "gbrReturnD1",
+        "width": "8%",
+        "align": "end"
+      },
+      {
+        "text": "1 Week Return (%)",
+        "value": "gbrReturnW1",
+        "width": "8%",
+        "align": "end"
+      },
+      {
+        "text": "1 Month Return (%)",
+        "value": "gbrReturnM1",
+        "width": "8%",
+        "align": "end"
+      },
+      {
+        "text": "3 Months Return (%)",
+        "value": "gbrReturnM3",
+        "width": "8%",
+        "align": "end"
+      },
+      {
+        "text": "6 Months Return (%)",
+        "value": "gbrReturnM6",
+        "width": "8%",
+        "align": "end"
+      }
+    ],
+    "itemsPerPage": 10 // Initial list of securities to be displayed in data table
+    "itemsPerPageOptions": [10, 25, 50] // Rows Per page options to be displayed in data table
+  }
+}
+
+```
+</details>
+&nbsp;

@@ -1,0 +1,23 @@
+{
+    "fields": [
+        {
+            "key": "Management Fee",
+            "value": "managementFee",
+            "format": "number"
+        },
+        {
+            "key": "Portfolio Weighted Average Fee",
+            "value": "ongoingCharge",
+            "format": "number"
+        }
+    ],
+    "breakdownFields": {
+        "fields": [
+            "securityName",
+            "averageGrossExpenseRatio",
+            "averageNetExpenseRatio",
+            "potentialCapGainsExposure",
+            "weight"
+        ]
+    }
+}

@@ -1,0 +1,360 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import PerformanceGraph from "@/components/performance-graph/PerformanceGraph.vue";
+import { TIME_SERIES_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="PerformanceGraph" component={PerformanceGraph} />
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+  
+</style>
+
+# Performance Graph - Time Series
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+- [Subcomponent Configuration](#subcomponent-configuration)
+
+## Description
+
+The Performance Graph - Time Series component charts time series data such as price, cumulative return, growth, and dividends.
+
+<Canvas withSource="open" withToolbar>
+  <Story id="components-performance-graph-time-series--story-details"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={PerformanceGraph} />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={TIME_SERIES_URL} target="_blank">Time Series API</a>.
+<!--
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request)
+- [Request Payload Example](#request-payload)
+-->
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.timeSeries.getIntlTimeseriesData('F0GBR052QA')
+```
+<details>
+  <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+const samplePortfolio = {
+    type: 3,
+    benchmark: {
+        type: "Standard",
+        holdings: [
+            {
+                identifier: "EUCA000555",
+                identifierType: "MSID",
+                weight: 100
+            }
+        ]
+    },
+    holdings: [
+        {
+            identifier: 'F0GBR052QA',
+            identifierType: 'MSID',
+            amount: 5000,
+        },
+        {
+            identifier: 'F000000EY1',
+            identifierType: 'MSID',
+            amount: 2500,
+        },
+        {
+            identifier: 'F00000OXG7',
+            identifierType: 'MSID',
+            amount: 2000,
+        },
+        {
+            identifier: 'F00000TWNO',
+            identifierType: 'MSID',
+            amount: 10000,
+        }
+    ],
+    name: 'UK demo portfolio - amount',
+};
+
+window.mstarApisSdk.timeSeries.getIntlTimeseriesData('F0GBR052QA');
+```
+</details>
+&nbsp;
+
+### Request Example
+
+```javascript dark
+https://www.emea-api.morningstar.com/ecint/v1/timeseries/{endpoint}?id={{securityId}}&idtype={{idType}}&frequency={{frequency}}&startDate={{startDate}}&languageId={{languageId}}&currencyId={{currencyId}}&outputType=json
+
+```
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- | 
+| `languageId` |	ISO culture codes. If not provided, defaults to language defined in settings. |`languageId=en-GB` |
+| `endpoint` | A number of endpoints can be queried by the API: `price`, `cumulativereturn`, `growth`, and `dividend`.|`growth` |
+| `id` | Unique identifier of a security. Multiple values must be pipe-delimited. |`securityId='F0GBR052QA'` |
+| `idType` | The type of identifier passed as securityId. |`idType=msid` |
+| `frequency` |	Time series frequency of data. |`frequency=monthly` |
+| `startDate` |	Start date of the series in `yyyy-mm-dd` format. |`startDate='2011-01-31'` |
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Component Transformed Data Format](#component-transformed-data-format) 
+- [Component Transformation Operation](#component-transformation-operation)
+-->
+### API Response Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "TimeSeries": {
+        "Security": [
+            {
+                "GrowthSeries": [
+                    {
+                        "HistoryDetail": [
+                            {
+                                "EndDate": "2011-01-31",
+                                "Value": "10000"
+                            },
+                            {
+                                "EndDate": "2011-02-28",
+                                "Value": "9932.20338983051"
+                            },
+                        ]
+                    }
+                ],
+                "Id": "F0GBR052QA"
+            }
+        ]
+    }
+}
+```
+</details>
+&nbsp;
+
+
+### Component Transformed Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+    [{
+        "name": "UK demo portfolio - amount",
+        "type": "portfolio",
+        "useLabel": false,
+        "data": [
+            {
+                "endDate": "2012-01-31T00:00:00.000",
+                "value": 0.4466
+            },
+            {
+                "endDate": "2012-02-29T00:00:00.000",
+                "value": 7.94494
+            },
+            {
+                "endDate": "2012-03-31T00:00:00.000",
+                "value": -2.62418
+            }
+        ]
+    },
+    {
+        "name": "Global Large-Cap Blend Equity",
+        "type": "benchmark",
+        "useLabel": false,
+        "data": [
+            {
+                "endDate": "1972-01-31T00:00:00.000",
+                "value": 4.22415
+            },
+            {
+                "endDate": "1972-02-29T00:00:00.000",
+                "value": 3.85105
+            },
+            {
+                "endDate": "1972-03-31T00:00:00.000",
+                "value": 0.66122
+            },
+        ]
+    }]
+
+```
+</details>
+&nbsp;
+
+### Component Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+parsedModelData() {
+    const data = this.modelData;
+    const portfolioName = this.portfolio?.name;
+
+    return [{
+        name: portfolioName || 'Portfolio',
+        type: 'portfolio',
+        data: data.portfolio
+            ? this.transformPerformanceChartData(data.portfolio) : [],
+    }, {
+        name: data.benchmarkName ? data.benchmarkName : 'Benchmark',
+        type: 'benchmark',
+        data: data.benchmark
+            ? this.transformPerformanceChartData(data.benchmark) : [],
+    }];
+},
+transformPerformanceChartData(data, overrideValue) {
+    return data.map((item) => {
+        const value = item[1];
+        const endDate = toUTCLocalISOString(new Date(item[0]));
+        return {
+            endDate,
+            value: overrideValue ?? value,
+        };
+    });
+},
+drawGraphByFrequency(seriesData, months) {
+    let monthCount = months;
+    if (monthCount === 'YTD') {
+        monthCount = Service.getYTDMonthCount(seriesData);
+    }
+    return Service.getFrequencySeriesData(this.graphBaseValue, seriesData, monthCount);
+},
+getChartData(monthCount) {
+    const frequencySeriesData = this.drawGraphByFrequency(this.parsedModelData, monthCount);
+    const lineChartData = Service.getLineChartData(frequencySeriesData);
+    return lineChartData;
+},
+parseChartData(tab) {
+    const selectedTab = this.getTabs.find((item) => item.key === tab);
+    const portfolioData = this.getChartData(selectedTab?.value)[0];
+    const benchmarkData = this.getChartData(selectedTab?.value)[1];
+    const portfolioLegendLabel = this.getFormattedLegendValue(portfolioData);
+    const benchmarkLegendLabel = this.getFormattedLegendValue(benchmarkData);
+    return {
+        datasets: [
+            {
+                label: portfolioLegendLabel,
+                borderColor: this.chartColors[0],
+                backgroundColor: this.chartColors[0],
+                data: portfolioData,
+            },
+            {
+                label: benchmarkLegendLabel,
+                borderColor: this.chartColors[1],
+                backgroundColor: this.chartColors[1],
+                data: benchmarkData,
+            },
+        ],
+    };
+},
+getFormattedLegendValue(value) {
+    const getLatestDate = value.reduce((m, current, index) => (
+        (current.date > m.date) && index ? current : m));
+    let newValue = getLatestDate?.value;
+    const name = getLatestDate?.name;
+
+    const { graphBaseValue } = this;
+    newValue = ((newValue - graphBaseValue) / graphBaseValue) * 100.0;
+
+    return `${name} : ${newValue.toFixed(2)}`;
+},
+```
+</details>
+&nbsp;
+
+## Subcomponent Configuration
+
+<details>
+  <summary><span class="summary-text">Chart config</span></summary>
+
+``` javascript dark
+    chartOptions: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+            mode: 'index',
+            intersect: false,
+        },
+        parsing: {
+            xAxisKey: 'formattedDate',
+            yAxisKey: 'value',
+        },
+        pointStyle: 'circle',
+        pointRadius: 1,
+        pointHoverRadius: 6,
+        plugins: {
+            tooltip: {
+                backgroundColor: '#000000',
+                titleColor: '#ffffff',
+                bodyColor: '#ffffff',
+                bodySpacing: 10,
+                borderWidth: 2,
+                borderColor: '#000000',
+                callbacks: {
+                    label(context) {
+                        const label = context.raw.name || '';
+                        const value = context.raw.value || '';
+                        return `${label} : ${value}`;
+                    },
+                },
+            },
+            legend: {
+                position: 'top',
+                align: 'start',
+                labels: {
+                    color: '#6e7383',
+                    boxWidth: 25,
+                    boxHeight: 2,
+                },
+            },
+        },
+        scales: {
+            x: {
+                grid: {
+                    color: '#eef5ff',
+                },
+            },
+            y: {
+                grid: {
+                    color: '#eef5ff',
+                },
+            },
+        },
+    },
+```
+</details>
+
+See [line Chart](https://www.chartjs.org/docs/3.4.1/samples/line/line.html) from [chart JS](https://www.chartjs.org/docs/3.4.1/) for more info.

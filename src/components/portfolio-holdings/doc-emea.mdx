@@ -1,0 +1,442 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import PortfolioHoldings from "@/components/portfolio-holdings/PortfolioHoldings.vue";
+import { PORTFOLIO_ANALYSIS_EMEA_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="PortfolioHoldings" component={ PortfolioHoldings }/>
+
+<style> {
+    `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .hide {
+      opacity: 0;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+
+</style>
+
+# Portfolio Holdings (APAC/EMEA)
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+
+
+## Description
+
+The Portfolio Holdings component displays a list of the securities in a portfolio including information such as symbol, exchange code, and so on. Each security's weight percentage in the portfolio is also displayed.
+
+<Canvas withSource="open" withToolbar>
+    <Story id="components-portfolio-holdings--story-details"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={PortfolioHoldings} />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={PORTFOLIO_ANALYSIS_EMEA_URL} target="_blank">Portfolio Analysis API (APAC/EMEA)</a>.
+
+<!--
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request-example)
+- [Request Payload Example](#request-payload-example)
+-->
+
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.xray.getPortfolioHoldingsData({ portfolios: samplePortfolio });
+```
+
+<details>
+    <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+const samplePortfolio = {
+    type: 3,
+    benchmark: {
+        type: 'Standard',
+        holdings: [{
+            identifier: 'XIUSA0010V',
+            identifierType: 'MSID',
+            weight: 100,
+        }],
+    },
+    holdings: [
+        {
+            identifier: 'F0GBR052QA',
+            identifierType: 'MSID',
+            amount: 5000,
+        },
+        {
+            identifier: 'F000000EY1',
+            identifierType: 'MSID',
+            amount: 2500,
+        },
+        {
+            identifier: 'F00000OXG7',
+            identifierType: 'MSID',
+            amount: 2000,
+        },
+        {
+            identifier: 'F00000TWNO',
+            identifierType: 'MSID',
+            amount: 10000,
+        },
+    ],
+    name: 'UK demo portfolio - amount',
+};
+
+window.mstarApisSdk.xray.getPortfolioHoldingsData({ portfolios: samplePortfolio });
+
+```
+
+</details>
+
+### Request Example
+
+Requests to the API have the following format:
+
+```javascript dark
+https://www.emea-api.morningstar.com/ecint/v1/xray/json?languageId={{languageId}}&portfolioDataPoints={{portfolioDataPoints}}&holdingDataPoints={{holdingDataPoints}}&benchmarkDataPoints={{benchmarkDataPoints}}
+
+```
+
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- |
+| `languageId` |	ISO culture codes. If not provided, defaults to language defined in settings. |`languageId=en-GB` |
+| `portfolioDataPoints` |Comma-separated list of portfolio data points.|`portfolioDataPoints=UnderlyingHolding,HoldingOverlap` |
+| `holdingDataPoints` |Comma-separated list of holding data points.|`HoldingDataPoints=HoldingId,SecurityId,Symbol,SectorName` |
+
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Integration Data Format](#integration-data-format) 
+- [Integration Transformation Operation](#integration-transformation-operation) 
+- [Component Transformed Data Format](#component-transformed-data-format) 
+- [Component Transformation Operation](#component-transformation-operation)
+-->
+
+### API Response Data Format
+
+<details>
+    <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "status": {
+        "detailedStatusMessage": "",
+        "statusCode": 200,
+        "statusDescription": ""
+    },
+    "holdings": [
+        {
+            "holdingId": 0,
+            "securityId": "F0GBR052QA",
+            "symbol": "BRIG",
+            "securityType": "FO",
+            "contributionReturn": 46.27169,
+            "exchangeCode": "LSE"
+        }
+    ],
+    "underlyHoldings": [
+        {
+            "holdingId": "G4527HHD6",
+            "name": "United Kingdom of Great Britain and Northern Ireland 1.25%",
+            "securityId": "B000367UR0",
+            "securityType": "BT",
+            "weight": 3.99596,
+            "marketValue": 4735482,
+            "iSIN": "GB00BDRHNP05",
+            "currencyName": "British Pound Sterling"
+        }
+    ],
+    "holdingOverlap": [
+        {
+            "holdingId": "GB0009895292",
+            "name": "AstraZeneca PLC",
+            "securityId": "E0GBR00FA0",
+            "securityType": "E",
+            "weight": 2.33658,
+            "marketValue": 10184180,
+            "iSIN": "GB0009895292",
+            "currencyName": "British Pound Sterling",
+            "parentHoldings": [
+                {
+                    "holdingId": "0",
+                    "name": "BlackRock Income and Growth Ord",
+                    "portfolioDate": "2022-03-31",
+                    "symbol": "BRIG",
+                    "weight": 1.97901,
+                    "weightInParent": 7.71815
+                },
+                {
+                    "holdingId": "2",
+                    "name": "BlackRock Dev Mkts Sust Eq Fund UK D Inc",
+                    "portfolioDate": "2022-03-31",
+                    "weight": 0.35757,
+                    "weightInParent": 3.48631
+                }
+            ]
+        }
+    ]
+},
+```
+</details>
+
+### Integration Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "topHoldings": [
+        {
+            "holdingId": 0,
+            "securityId": "F0GBR052QA",
+            "symbol": "BRIG"
+        }
+    ],
+    "topUnderlyingHoldings": [
+        { 
+            "holdingId": "G4527HHD6",
+            "name": "United Kingdom of Great Britain and Northern Ireland 1.25%",
+            "securityId": "B000367UR0",
+            "securityType": "BT"
+        }
+    ],
+    "stockOverlap": [
+        {
+            "holdingId": "GB0009895292",
+            "name": "AstraZeneca PLC",
+            "securityId": "E0GBR00FA0",
+            "securityType": "E",
+        }
+    ]
+}
+```
+</details>
+&nbsp;
+
+### Integration Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+function getPortfolioHoldingsData(xrayData) {
+    const stockOverlap = get(xrayData, 'holdingOverlap', []);
+    const underlyingHoldings = get(xrayData, 'underlyHoldings', []);
+    const portfolioHoldings = get(xrayData, 'holdings', []);
+    const sectorMapping = portfolioHoldingsMapping.topNetUnderlyingHoldings.sector;
+    const holdingOverlap = stockOverlap.map((stockHolding) => {
+        const currStockHolding = stockHolding;
+        const { globalSectorId, holdingId } = currStockHolding;
+        currStockHolding.sectorKey = globalSectorId ? sectorMapping[globalSectorId] : null;
+        currStockHolding.symbol = underlyingHoldings
+            .find((holding) => holding.holdingId === holdingId)?.symbol || null;
+        currStockHolding.parentHoldings = currStockHolding.parentHoldings.map((parentHolding) => {
+            const matchHolding = portfolioHoldings.find((holding) => `${holding.holdingId}` === parentHolding.holdingId);
+            return { ...matchHolding, ...parentHolding };
+        });
+        return currStockHolding;
+    });
+    return {
+        topHoldings: portfolioHoldings,
+        topUnderlyingHoldings: underlyingHoldings,
+        stockOverlap: holdingOverlap,
+    };
+}
+```
+</details>
+&nbsp;
+
+### Component Transformed Data Format
+
+<details>
+    <summary><span class="summary-text">Top Holdings</span></summary>
+
+```json dark
+[
+    {
+        "holdingId": 0,
+        "securityId": "F0GBR052QA",
+        "symbol": "BRIG",
+        "securityType": "FO",
+        "contributionReturn": 46.27169,
+        "exchangeCode": "LSE"
+    }
+]
+```
+</details>
+&nbsp;
+
+<details>
+    <summary><span class="summary-text">Top Underlying Holdings</span></summary>
+
+```json dark
+[
+    {
+        "name": "United Kingdom of Great Britain and Northern Ireland 1.25%",
+        "sector": "-",
+        "weight": "4.00",
+        "securityType": "Bond - Gov't/Treasury"
+    },
+    {
+        "name": "United States Treasury Notes 2.25%",
+        "sector": "-",
+        "weight": "2.79",
+        "securityType": "Bond - Gov't/Treasury"
+    }
+]
+```
+</details>
+&nbsp;
+
+<details>
+    <summary><span class="summary-text">Stock Overlap</span></summary>
+
+```json dark
+[
+    {
+        "name": "AstraZeneca PLC",
+        "symbol": "AZN",
+        "percentOfInvestments": "2.34",
+        "sectorKey": "Healthcare",
+        "portfolioDate": "-",
+        "securityId": "E0GBR00FA0",
+        "childRows": [
+            {
+                "name": "BlackRock Income and Growth Ord",
+                "symbol": "BRIG",
+                "percentOfInvestments": "1.98",
+                "portfolioDate": "2022-03-31",
+                "sectorKey": "-",
+                "securityId": "F0GBR052QA"
+            },
+            {
+                "name": "BlackRock Dev Mkts Sust Eq Fund UK D Inc",
+                "symbol": "-",
+                "percentOfInvestments": "0.36",
+                "portfolioDate": "2022-03-31",
+                "sectorKey": "-",
+                "securityId": "F00000OXG7"
+            }
+        ]
+    }
+]
+```
+</details>
+
+
+### Component Transformation Operation
+
+<details>
+    <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+    parsedModelData(){
+        if (this.modelData) {
+            const selectedTab = this.tabs[this.selectedTab];
+            if (selectedTab === 'topHoldings') {
+                return this.getTopHoldingsModelData();
+            }
+            if (selectedTab === 'topUnderlyingHoldings') {
+                return this.getTopNetUnderlyingHoldings();
+            }
+            if (selectedTab === 'stockOverlap') {
+                return this.getStockOverlapModelData();
+            }
+        }
+        return [];
+    },
+    getRows(holding, currentField) {
+        return this.fieldDefinitions[currentField].reduce((preValue, currValue) => {
+            let field;
+            if (typeof holding[currValue.value] === 'number') {
+                field = this.formatNumber(holding[currValue.value]);
+            } else {
+                field = holding[currValue.value] || '-';
+            }
+            return {
+                ...preValue,
+                [currValue.value]: field,
+            };
+        }, {});
+    },
+    getStockOverlapModelData() {
+        const newStockOverlap = [];
+        const stockHoldings = get(this.modelData, 'stockOverlap', []);
+        this.numberOfStockHoldings = stockHoldings.length;
+        stockHoldings.forEach((stockHolding) => {
+            const stockOverlapObject = this.getStockOverlapObject(stockHolding);
+            newStockOverlap.push(stockOverlapObject);
+        });
+        return newStockOverlap;
+    },
+    getStockOverlapObject(stockHolding) {
+        const stockOverlapObject = this.getRows(stockHolding, 'stockOverlap');
+        stockOverlapObject.childRows = [];
+        stockHolding.parentHoldings.forEach((parentHolding) => {
+            const currParentHolding = parentHolding;
+            currParentHolding.sectorKey = currParentHolding?.sectorName;
+            const stockOverlapParentObject = this.getRows(currParentHolding, 'stockOverlap');
+            stockOverlapObject.childRows.push(stockOverlapParentObject);
+        });
+        return stockOverlapObject;
+    },
+    getTopHoldingsModelData() {
+        const holdings = get(this.modelData, 'topHoldings', []);
+        return holdings.map((holding) => this.getRows(holding, 'topHoldings'));
+    },
+    getTopNetUnderlyingHoldings() {
+        const sectorMapping = outputMapping.topNetUnderlyingHoldings.sector;
+        const securityTypeMapping = outputMapping.topNetUnderlyingHoldings.securityType;
+        const underlyingHoldings = get(this.modelData, 'topUnderlyingHoldings', []);
+        underlyingHoldings.sort((v1, v2) => {
+            const w1 = v1.weight;
+            const w2 = v2.weight;
+            if (w1 > w2) {
+                return -1;
+            }
+            if (w1 < w2) {
+                return 1;
+            }
+            return 0;
+        });
+        const newUnderlyingHoldings = underlyingHoldings
+            .slice(0, this.maxTopNetUnderlyingHoldingsNumber);
+        const newUnderlyingHoldingsData = newUnderlyingHoldings.map((holding) => {
+            const holdingData = holding;
+            holdingData.sector = sectorMapping[holdingData.globalSectorId];
+            holdingData.securityType = securityTypeMapping[holdingData.securityType];
+            return holdingData;
+        });
+        return newUnderlyingHoldingsData.map((holding) => this.getRows(holding, 'topUnderlyingHoldings'));
+    },
+```
+</details>

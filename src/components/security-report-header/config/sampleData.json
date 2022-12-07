@@ -1,0 +1,40 @@
+[
+    {
+        "dbgtime": "142",
+        "Id": "FOUSA00B4J",
+        "HasPriceEntitlement": false,
+        "PerformanceId": "0P00002OBU",
+        "InceptionDate": "1975-07-25T00:00:00",
+        "Isin": "US0240711020",
+        "ISINMIC": "US0240711020XNASUSD",
+        "InvestmentType": "FD",
+        "HoldingType": "2",
+        "Exchange": "EX$$$$XNAS",
+        "Type": "Fund",
+        "Name": "American Funds American Balanced A",
+        "LegalName": "American Funds American Balanced Fund® Class A",
+        "Domicile": "USA",
+        "RealtimeId": "52.8.ABALX",
+        "AnalystRatingScale": "4",
+        "TradingCurrency": {
+            "Id": "USD"
+        },
+        "Currency": {
+            "Id": "USD"
+        },
+        "LegalStructure": "Open Ended Investment Company",
+        "InvestmentStrategy": "The investment seeks conservation of capital, current income and long-term growth of capital and income.\r\n The fund uses a balanced approach to invest in a broad range of securities, including common stocks and investment-grade bonds. It also invests in securities issued and guaranteed by the U.S. government and by federal agencies and instrumentalities. In addition, the fund may invest a portion of its assets in common stocks, most of which have a history of paying dividends, bonds and other securities of issuers domiciled outside the United States.",
+        "Symbol": "ABALX",
+        "RiskAndRating": [
+            {
+                "Date": "2022-06-30T00:00:00",
+                "TimePeriod": "M255",
+                "RatingValue": 5,
+                "RiskAdjustedReturn": 5.81,
+                "RiskRatingValue": 2,
+                "RiskScore": 1,
+                "PerformanceRatingValue": 5
+            }
+        ]
+    }
+]

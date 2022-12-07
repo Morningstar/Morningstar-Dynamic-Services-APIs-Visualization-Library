@@ -1,0 +1,17 @@
+{
+    "breakdownFields": [
+        "securityName",
+        "priceEarnings",
+        "priceBook",
+        "roa",
+        "roe",
+        "averageMarketCap",
+        "weight"
+    ],
+    "dataPoints": {
+        "prospectiveEarningsYield": "Price/Prospective Earnings",
+        "prospectiveBookValueYield": "Price/Book Ratio",
+        "prospectiveRevenueYield": "Price/Sales Ratio",
+        "prospectiveCashFlowYield": "Price/Cash Flow Ratio"
+    }
+}

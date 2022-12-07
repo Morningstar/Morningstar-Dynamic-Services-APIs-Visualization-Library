@@ -1,0 +1,42 @@
+<template>
+    <div>
+        <v-row v-if="showHeader">
+            <v-col cols="12" class="title">
+                <h2>{{titleCase name}}</h2>
+            </v-col>
+        </v-row>
+        <v-row>
+            <v-col cols="12">
+                <v-card elevation="2" shaped>
+                    <v-card-title>Morningstar Visualization Library</v-card-title>
+                    <v-card-text>
+                        \{{ modelData.message }}
+                    </v-card-text>
+                </v-card>
+            </v-col>
+        </v-row>
+    </div>
+</template>
+
+<script>
+export default {
+    props: {
+        /** Accepts the response object returned from API Data Access Library. */
+        modelData: {
+            type: Object,
+            default: () => ({}),
+        },
+        /** Show or hide component title. */
+        showHeader: {
+            type: Boolean,
+            default: true,
+        },
+    },
+};
+</script>
+<style lang="scss" scoped>
+@use "sass:map";
+@use '~@/components/shared/scss/mixin.scss' as mixin;
+
+@include mixin.wal-component-title;
+</style>

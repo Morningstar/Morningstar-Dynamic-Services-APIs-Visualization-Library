@@ -1,0 +1,42 @@
+{
+    "componentMapping": {
+        "securityReportHeader": {
+            "type": "security-report-header",
+            "modelPath": "securityDetails"
+        },
+        "performanceGraph": {
+            "type": "performance-graph",
+            "modelPath": "performance.performanceGraph",
+            "showHeader": true,
+            "cols": 12
+        },
+        "annualPerformance": {
+            "type": "chart-table-panel",
+            "modelPath": "performance.annualPerformance",
+            "showHeader": true
+        },
+        "calendarYearReturns": {
+            "type": "chart-table-panel",
+            "modelPath": "performance.calendarYearReturns",
+            "showHeader": true
+        },
+        "trailingReturns": {
+            "type": "chart-table-panel",
+            "modelPath": "performance.trailingReturns",
+            "showHeader": true
+        },
+        "portfolio": {
+            "type": "portfolio",
+            "modelPath": "portfolio",
+            "showHeader": true
+        },
+        "riskRating": {
+            "type": "risk-rating",
+            "modelPath": "securityDetails"
+        },
+        "fundManagement": {
+            "type": "fund-management",
+            "modelPath": "securityDetails"
+        }
+    }
+}

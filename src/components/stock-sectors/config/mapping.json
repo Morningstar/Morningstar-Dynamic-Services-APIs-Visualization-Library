@@ -1,0 +1,70 @@
+{
+    "stockSectors": {
+        "cyclical": {
+            "101": "BasicMaterials",
+            "102": "ConsumerCyclical",
+            "103": "FinancialServices",
+            "104": "RealEstate"
+        },
+        "defensive": {
+            "205": "ConsumerDefensive",
+            "206": "Healthcare",
+            "207": "Utilities"
+        },
+        "sensitive": {
+            "308": "CommunicationServices",
+            "309": "Energy",
+            "310": "Industrials",
+            "311": "Technology"
+        }
+    },
+    "nameMapping": {
+        "basicMaterials": "Basic Materials",
+        "communicationServices": "Communication Services",
+        "consumerCyclical": "Consumer Cyclical",
+        "consumerDefensive": "Consumer Defensive",
+        "cyclical": "Cyclical",
+        "defensive": "Defensive",
+        "energy": "Energy",
+        "financialServices": "Financial Services",
+        "healthcare": "Healthcare",
+        "industrials": "Industrials",
+        "realEstate": "Real Estate",
+        "sensitive": "Sensitive",
+        "technology": "Technology",
+        "utilities": "Utilities"
+    },
+    "breakdownFields": {
+            "tabs": ["superSectors", "cyclical", "defensive", "sensitive"],
+            "superSectors": [
+                "securityName",
+                "cyclical",
+                "defensive",
+                "sensitive",
+                "weight"
+            ],
+            "cyclical": [
+                "securityName",
+                "basicMaterials",
+                "consumerCyclical",
+                "financialServices",
+                "realEstate",
+                "weight"
+            ],
+            "defensive": [
+                "securityName",
+                "consumerDefensive",
+                "healthcare",
+                "utilities",
+                "weight"
+            ],
+            "sensitive": [
+                "securityName",
+                "communicationServices",
+                "energy",
+                "industrials",
+                "technology",
+                "weight"
+            ]
+    }
+}

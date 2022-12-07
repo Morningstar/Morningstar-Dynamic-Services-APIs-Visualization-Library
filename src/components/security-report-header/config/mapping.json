@@ -1,0 +1,10 @@
+{
+    "dataPoints": {
+        "id": "Security ID",
+        "legalStructure": "Legal Structure",
+        "isin": "ISIN",
+        "currency": "Currency",
+        "exchange": "Exchange",
+        "fundBenchmark": "Fund Benchmark"
+    }
+}

@@ -1,0 +1,241 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import InvestmentCompare from "@/components/investment-compare/InvestmentCompare.vue";
+import { SECURITY_DETAILS_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="InvestmentCompare" component={ InvestmentCompare }/>
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+  
+</style>
+
+# Investment Compare
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+
+## Description
+The Investment Compare tool allows you to quickly compare, side-by-side, the key metrics of multiple investments.
+
+<Canvas withSource="open" withToolbar>
+  <Story id="tools-investmentcompare--story-details"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={ InvestmentCompare } />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={SECURITY_DETAILS_URL} target="_blank">Security Details API</a>.
+<!--
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request)
+- [Request Payload Example](#request-payload)
+-->
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.investmentCompare.getIntlCompareSecurities('F0GBR050DD|F00000Q5PZ');
+```
+### Request Example
+
+```javascript dark
+https://www.emea-api.morningstar.com/ecint/v1/multi-securities?ids={{securityIds}}&idType={{idType}}&viewIds={{viewId}}&currencyId={{currencyId}}&languageId={{languageId}}&responseViewFormat=json
+
+```
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :--------------- | 
+| `languageId` |	ISO culture codes. If not provided, defaults to language defined in settings. |`languageId=en-GB` |
+| `securityId` | Pipe-separated list of security identifiers such as MSIDs or ISINs.| securityIds=F0GBR050DD|F00000Q5PZ |
+| `viewId` |Unique identifier of a view.| `viewId=CompareAdditional` |
+| `idtype` | Type of security identifier used.|`idtype=msid` |
+| `currencyId` | ISO alpha-3 currency code.| `currencyId=GBP` |
+| `responseViewFormat` | Defines the output format. |  `responseViewFormat=json` |
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Component Data Format](#component-data-format)
+- [Transformation Operation](#transformation-operation)
+-->
+### API Response Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+    [
+        {
+            "dbgtime": "598",
+            "Id": "F0GBR050DD",
+            "HasPriceEntitlement": false,
+            "InceptionDate": "1998-11-13T00:00:00",
+            "Isin": "GB0004460357",
+            "Cusip": "G6670Y393",
+            "ISINMIC": "GB0004460357XXXXGBP",
+            "InvestmentType": "FD",
+            "HoldingType": "2",
+            "Type": "Fund",
+            "Name": "Aviva Investors UK Lstd Eq Uncons2GBPAcc",
+        },
+        {
+            "Id": "F00000Q5PZ",
+            "HasPriceEntitlement": false,
+            "InceptionDate": "2013-02-05T00:00:00",
+            "Isin": "LU0593848723",
+            "ISINMIC": "LU0593848723XXXXEUR",
+            "InvestmentType": "FD",
+            "HoldingType": "2",
+            "Type": "Fund",
+            "Name": "Mirae Asset Asia Great Consumer Eq A EUR",
+        }
+    ]
+```
+</details>
+&nbsp;
+
+### Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+parsedModelData() {
+    let currentSecurityObj;
+    const transformedSecurityObj = [];
+    if (this.modelData) {
+        each(this.modelData, (item) => {
+            currentSecurityObj = item;
+            Object.entries(mappings).forEach(([key, value]) => {
+                currentSecurityObj[key] = get(currentSecurityObj, value, '-');
+            });
+            currentSecurityObj.Category = this.getBenchmarkName(currentSecurityObj, 'Category');
+            currentSecurityObj.BestFitIndex = this.getBenchmarkName(currentSecurityObj, 'CategoryPrimaryIndex');
+            currentSecurityObj.Style = this.getStyleBoxValue(currentSecurityObj);
+            currentSecurityObj.BondStyle = this.getStyleBoxValue(currentSecurityObj, 'BondStyleBoxBreakdown');
+            this.getCalendarYearReturns(currentSecurityObj);
+            this.getTrailingPerformance(currentSecurityObj);
+
+            transformedSecurityObj.push(currentSecurityObj);
+        });
+    }
+
+    return transformedSecurityObj;
+},
+getBenchmarkName(securityDetails, benchmarkType) {
+  // Function to get benchmark name
+    const categoryBenchmark = find(
+        securityDetails.Benchmark,
+        { Type: benchmarkType },
+    );
+    return get(categoryBenchmark, 'Name', '-');
+},
+getStyleBoxValue(securityDetails, styleBoxBreakdownDataPoint = 'StyleBoxBreakdown') {
+  // Function to get style box breakdown value
+    const styleBoxBreakdowns = securityDetails.Portfolios ? securityDetails.Portfolios[0][`${styleBoxBreakdownDataPoint}`] : [];
+    const styleBoxBreakdown = find(styleBoxBreakdowns, { SalePosition: 'N' }) || {};
+    const maxValue = maxBy(
+        styleBoxBreakdown.BreakdownValues,
+        (breakdownValue) => breakdownValue.Value,
+    ) || {};
+    return maxValue.Type;
+},
+getCalendarYearReturns(data) {
+  // Function to get calendar year return values under performance section
+    const dataObj = data;
+    const currentYear = new Date().getFullYear();
+    const fieldNamePrefix = 'CalendarYearReturnsYear';
+    const fieldNameSuffix = 'FullYear';
+
+    const transformData = (historicalPerformance, trailingPerformance) => {
+        let returnValues = historicalPerformance.Return || [];
+
+        returnValues.forEach((returnValue) => {
+            const returnYear = returnValue.Date ? new Date(returnValue.Date).getFullYear()
+                : null;
+            const name = fieldNamePrefix + (currentYear - returnYear);
+            dataObj[name] = get(returnValue, 'Value', '-');
+        });
+
+        returnValues = trailingPerformance.Return || [];
+        const ytdReturn = find(returnValues, {
+            TimePeriod: this.calendarYearReturns.trailingPerformanceTimePeriod,
+        }) || {};
+        dataObj.CalendarYearReturnsYearToDate = ytdReturn.Value.toFixed(2) || '-';
+
+        dataObj.AsOfDate = (trailingPerformance.Date && new Date(trailingPerformance.Date)) || '-';
+        return dataObj;
+    };
+
+    this.calendarYearReturns.fields.forEach((field) => {
+        const fieldNumber = field.replace(/[^\d]/g, '');
+        if (fieldNumber) {
+            dataObj[fieldNamePrefix + fieldNumber + fieldNameSuffix] = `${currentYear - fieldNumber}`;
+        }
+    });
+
+    this.calendarYearReturns.historicalPerformanceFilters.ReturnType = this.returnType;
+    this.calendarYearReturns.trailingPerformanceFilters.ReturnType = this.returnType;
+
+    const historicalPerformance = find(
+        dataObj.HistoricalPerformanceSeries,
+        this.calendarYearReturns.historicalPerformanceFilters,
+    ) || {};
+
+    const trailingPerformance = find(
+        dataObj.TrailingPerformance,
+        this.calendarYearReturns.trailingPerformanceFilters,
+    ) || {};
+
+    return transformData(historicalPerformance, trailingPerformance);
+},
+getTrailingPerformance(data) {
+  // Function to get trailing performance values under performance section
+    const dataObj = data;
+    const ANNUAL_SUFFIX = 'ann';
+
+    const transformData = (securityDetails, criteria) => {
+        const trailingReturn = find(securityDetails.TrailingPerformance, criteria) || {};
+        const returnItem = trailingReturn.Return || [];
+        const securityData = securityDetails;
+
+        each(returnItem, (item) => {
+            if (item.Annualized) {
+                securityData[item.TimePeriod + ANNUAL_SUFFIX] = get(item, 'Value', '-');
+            } else {
+                securityData[item.TimePeriod] = get(item, 'Value', '-');
+            }
+        });
+        return securityDetails;
+    };
+    return transformData(dataObj, this.trailingPerformance.criteria);
+},
+```
+</details>
+&nbsp;
+

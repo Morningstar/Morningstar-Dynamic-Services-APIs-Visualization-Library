@@ -1,0 +1,119 @@
+{
+    "emea": {
+        "topHoldings": [
+            {
+                "text": "Security Name",
+                "value": "name"
+            },
+            {
+                "text": "Symbol",
+                "value": "symbol"
+            },
+            {
+                "text": "Exchange Code",
+                "value": "exchangeCode"
+            },
+            {
+                "text": "Sector",
+                "value": "sector"
+            },
+            {
+                "text": "Weight %",
+                "value": "weight",
+                "align": "end"
+            },
+            {
+                "text": "Contribution %(Since Inception)",
+                "value": "contributionReturn",
+                "align": "end"
+            }
+        ],
+        "topUnderlyingHoldings": [
+            {
+                "text": "Security Name",
+                "value": "name"
+            },
+            {
+                "text": "Security Type",
+                "value": "securityType"
+            },
+            {
+                "text": "Sector",
+                "value": "sector"
+            },
+            {
+                "text": "Weight %",
+                "value": "weight",
+                "align": "end"
+            }
+        ],
+        "stockOverlap": [
+            {
+                "text": "Security Name",
+                "value": "name"
+            },
+            {
+                "text": "Symbol",
+                "value": "symbol"
+            },
+            {
+                "text": "Holdings Portfolio Date",
+                "value": "portfolioDate"
+            },
+            {
+                "text": "Sector",
+                "value": "sectorKey"
+            },
+            {
+                "text": "% of Investments",
+                "value": "weight",
+                "align": "end"
+            }
+        ]
+    },
+    "america": {
+        "topHoldings": [
+            {
+                "text": "Security Name",
+                "value": "Name"
+            },
+            {
+                "text": "Symbol",
+                "value": "TradingSymbol"
+            },
+            {
+                "text": "3 Year Return",
+                "value": "Year3",
+                "align": "end"
+            },
+            {
+                "text": "Weight %",
+                "value": "PercentAssets",
+                "align": "end"
+            }
+        ],
+        "stockOverlap": [
+            {
+                "text": "Security Name",
+                "value": "SecurityName"
+            },
+            {
+                "text": "Symbol",
+                "value": "TradingSymbol"
+            },
+            {
+                "text": "Holdings Portfolio Date",
+                "value": "FundPortfolioDate"
+            },
+            {
+                "text": "Sector",
+                "value": "EquitySector"
+            },
+            {
+                "text": "% of Investments",
+                "value": "PercentOfInvestments",
+                "align": "end"
+            }
+        ]
+    }
+}

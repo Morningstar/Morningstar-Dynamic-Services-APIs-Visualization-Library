@@ -1,0 +1,473 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import RiskStatistics from "@/components/risk-statistics/RiskStatistics.vue";
+import { PORTFOLIO_ANALYSIS_AMERICAS_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="RiskStatistics" component={RiskStatistics} />
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+
+</style>
+
+
+# Risk Statistics
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+
+## Description
+
+The Risk Statistics component illustrates variations in a portfolio's returns for 1, 3, and 5 years based on a number of different ratios including Sharep Ration, Information Ration, Upside and Downside Capture Ratios.
+
+<Canvas withSource="open" withToolbar>
+  <Story id="components-riskstatistics--story-details"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={RiskStatistics} />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={PORTFOLIO_ANALYSIS_AMERICAS_URL} target="_blank">Portfolio Analysis API (Americas)</a>.
+
+<!--
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request-example)
+- [Request Payload Example](#request-payload-example)
+-->
+
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.xray.getRiskStatisticsData({ portfolios: helper.sampleUsPortfolio, languageId: 'en-US' });
+```
+<details>
+  <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+const sampleUsPortfolio = [
+    {
+        name: 'US demo portfolio - weight',
+        totalValue: 10000,
+        currency: 'USD',
+        holdings: [
+            {
+                securityId: 'FOUSA06OEZ',
+                weight: 30,
+            },
+            {
+                securityId: 'FOUSA06IVV',
+                weight: 50,
+            },
+            {
+                securityId: 'F00000T770',
+                weight: 20,
+            },
+        ],
+        benchmark: {
+            type: 'Standard',
+            holdings: [
+                {
+                    securityId: 'XIUSA0010V',
+                    weight: 100,
+                },
+            ],
+        },
+    },
+];
+
+window.mstarApisSdk.xray.getAssetAllocationBreakdown({ portfolios: sampleUsPortfolio, languageId: 'en-US' });
+
+```
+</details>
+
+### Request Example
+
+Requests to the API have the following format:
+
+```javascript dark
+https://www.us-api.morningstar.com/portfolioanalysis/v1/xray?langcult={{languageId}}
+
+```
+
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- | 
+| `languageId` | ISO culture codes. If not provided, defaults to language defined in settings. | `languageId=en-US` |
+
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Component Transformed Data Format](#component-transformed-data-format) 
+- [Component Transformation Operation](#component-transformation-operation) 
+-->
+
+### API Response Data Format
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "RiskStatistics": [
+        {
+            "AsOfDate": "2022-09-30T00:00:00",
+            "TrailingTimePeriod": "Year1",
+            "DataFrequency": "Monthly",
+            "Portfolio": {
+                "Mean": -19.25,
+                "SharpeRatio": -1.16,
+                "StandardDeviation": 16.4,
+                "InformationRatio": -0.16,
+                "TrackingError": 9.31,
+                "SortinoRatio": -1.2,
+                "ExcessReturn": -0.78
+            },
+            "Benchmark": {
+                "Mean": -17.78,
+                "SharpeRatio": -0.77,
+                "StandardDeviation": 21.72,
+                "SortinoRatio": -0.92
+            },
+            "Security": [
+                {
+                    "SecurityId": "FOUSA06OEZ",
+                    "Weight": 30,
+                    "RiskStatisticsItem": {
+                        "Mean": -20.61132,
+                        "SharpeRatio": -1.159,
+                        "StandardDeviation": 19.073
+                    }
+                },
+            ]
+        },
+        {
+            "AsOfDate": "2022-09-30T00:00:00",
+            "TrailingTimePeriod": "Year3",
+            "DataFrequency": "Monthly",
+            "Portfolio": {
+                "Mean": 0.87,
+                "SharpeRatio": 0.1,
+                "StandardDeviation": 17.73,
+                "InformationRatio": -0.83,
+                "TrackingError": 8.04,
+                "SortinoRatio": 0.13,
+                "ExcessReturn": -2.03
+            },
+            "Benchmark": {
+                "Mean": 7.58,
+                "SharpeRatio": 0.44,
+                "StandardDeviation": 20.9,
+                "SortinoRatio": 0.64
+            },
+            "Security": [
+                {
+                    "SecurityId": "F00000T770",
+                    "Weight": 20,
+                    "RiskStatisticsItem": {
+                        "Mean": -0.47966,
+                        "SharpeRatio": -0.07,
+                        "StandardDeviation": 9.494
+                    }
+                }
+            ]
+        },
+    ],
+    "MPTStatistics": [
+        {
+            "AsOfDate": "2022-09-30T00:00:00",
+            "TrailingTimePeriod": "Year1",
+            "DataFrequency": "Monthly",
+            "Portfolio": {
+                "Alpha": -8.24,
+                "Beta": 0.7,
+                "RSquared": 84.51
+            }
+        },
+        {
+            "AsOfDate": "2022-09-30T00:00:00",
+            "TrailingTimePeriod": "Year3",
+            "DataFrequency": "Monthly",
+            "Portfolio": {
+                "Alpha": -5.2,
+                "Beta": 0.79,
+                "RSquared": 86.97
+            }
+        },
+    ],
+    "Drawdown": {
+        "AsOfDate": "2022-09-30T00:00:00",
+        "Portfolio": {
+            "PortfolioDrawdownItem": {
+                "MaxDrawdown": -22.4446,
+                "NoOfPeriods": 94,
+                "PeakDate": "2020-02-01T00:00:00",
+                "ValleyDate": "2020-04-30T00:00:00",
+                "UpPercent": 0.585,
+                "DownPercent": 0.415
+            },
+            "TimePeriods": [
+                {
+                    "id": "Month3",
+                    "DrawdownItem": {
+                        "MaxDrawdown": -4.0755,
+                        "NoOfPeriods": 3,
+                        "PeakDate": "2022-09-01T00:00:00",
+                        "ValleyDate": "2022-09-30T00:00:00",
+                        "UpPercent": 0.333,
+                        "DownPercent": 0.667
+                    }
+                },
+                {
+                    "id": "Month6",
+                    "DrawdownItem": {
+                        "MaxDrawdown": -12.5895,
+                        "NoOfPeriods": 6,
+                        "PeakDate": "2022-05-01T00:00:00",
+                        "ValleyDate": "2022-07-31T00:00:00",
+                        "UpPercent": 0.333,
+                        "DownPercent": 0.667
+                    }
+                },
+                {
+                    "id": "Year1",
+                    "DrawdownItem": {
+                        "MaxDrawdown": -15.5323,
+                        "NoOfPeriods": 12,
+                        "PeakDate": "2022-02-01T00:00:00",
+                        "ValleyDate": "2022-07-31T00:00:00",
+                        "UpPercent": 0.417,
+                        "DownPercent": 0.583
+                    }
+                },
+                {
+                    "id": "Year2",
+                    "DrawdownItem": {
+                        "MaxDrawdown": -15.5323,
+                        "NoOfPeriods": 24,
+                        "PeakDate": "2022-02-01T00:00:00",
+                        "ValleyDate": "2022-07-31T00:00:00",
+                        "UpPercent": 0.542,
+                        "DownPercent": 0.458
+                    }
+                },
+                {
+                    "id": "Year3",
+                    "DrawdownItem": {
+                        "MaxDrawdown": -22.4446,
+                        "NoOfPeriods": 36,
+                        "PeakDate": "2020-02-01T00:00:00",
+                        "ValleyDate": "2020-04-30T00:00:00",
+                        "UpPercent": 0.583,
+                        "DownPercent": 0.417
+                    }
+                },
+            ],
+            "CalendarYear": [
+                {
+                    "id": "2020",
+                    "CalenderYearDrawdownItem": {
+                        "MaxDrawdown": -22.4446,
+                        "NoOfPeriods": 12,
+                        "PeakDate": "2020-02-01T00:00:00",
+                        "ValleyDate": "2020-04-30T00:00:00",
+                        "UpPercent": 0.583,
+                        "DownPercent": 0.415
+                    }
+                },
+                {
+                    "id": "2021",
+                    "CalenderYearDrawdownItem": {
+                        "MaxDrawdown": -3.6251,
+                        "NoOfPeriods": 12,
+                        "PeakDate": "2021-12-01T00:00:00",
+                        "ValleyDate": "2021-12-31T00:00:00",
+                        "UpPercent": 0.667,
+                        "DownPercent": 0.415
+                    }
+                },
+                {
+                    "id": "2022",
+                    "CalenderYearDrawdownItem": {
+                        "MaxDrawdown": -15.5323,
+                        "NoOfPeriods": 9,
+                        "PeakDate": "2022-02-01T00:00:00",
+                        "ValleyDate": "2022-07-31T00:00:00",
+                        "UpPercent": 0.333,
+                        "DownPercent": 0.415
+                    }
+                }
+            ]
+        }
+    },
+    "CaptureRatio": {
+        "AsOfDate": "2022-09-30T00:00:00",
+        "Portfolio": {
+            "Downside": {
+                "TimePeriod": [
+                    {
+                        "Id": "Year1",
+                        "Value": 81.53
+                    },
+                    {
+                        "Id": "Year3",
+                        "Value": 84.76
+                    },
+                    {
+                        "Id": "Year5",
+                        "Value": 83.02
+                    }
+                ]
+            },
+            "Upside": {
+                "TimePeriod": [
+                    {
+                        "Id": "Year1",
+                        "Value": 56.13
+                    },
+                    {
+                        "Id": "Year3",
+                        "Value": 67.76
+                    },
+                    {
+                        "Id": "Year5",
+                        "Value": 63.26
+                    }
+                ]
+            }
+        }
+    }
+}
+```
+</details>
+
+### Component Transformed Data Format
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+[
+    {
+        "name": "Sharpe Ratio",
+        "year1": -1.16,
+        "year3": 0.1,
+        "year5": 0.08,
+        "year10": null
+    },
+    {
+        "name": "Information Ratio",
+        "year1": -0.16,
+        "year3": -0.83,
+        "year5": -0.99,
+        "year10": null
+    },
+    {
+        "name": "Max Drawdown %",
+        "month3": "-4.08",
+        "month6": "-12.59",
+        "year1": "-15.53",
+        "year2": "-15.53",
+        "year3": "-22.44",
+        "year5": "-22.44",
+        "year10": null
+    },
+    {
+        "name": "Upside Capture Ratio",
+        "year1": "56.13",
+        "year3": "67.76",
+        "year5": "63.26"
+    },
+    {
+        "name": "Downside Capture Ratio",
+        "year1": "81.53",
+        "year3": "84.76",
+        "year5": "83.02"
+    }
+]
+```
+</details>
+
+### Component Transformation Operation
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+  parsedModelData() {
+    const xray = this.modelData;
+    const riskStatistics = get(xray, 'RiskStatistics', []);
+    const captureRatio = get(xray, 'CaptureRatio.Portfolio', []);
+    const drawdown = get(xray, 'Drawdown.Portfolio', []);
+    const statsDataPoints = [
+        'SharpeRatio',
+        'InformationRatio',
+        'MaxDrawdown',
+        'Upside',
+        'Downside',
+    ];
+    const results = [];
+
+    statsDataPoints.forEach((data) => {
+        const result = {
+            name: data,
+        };
+        const name = data.split(/(?=[A-Z])/);
+
+        switch (true) {
+        case Object.keys(riskStatistics[0].Portfolio).indexOf(data) > -1:
+            riskStatistics.forEach((statsData) => {
+                result[statsData.TrailingTimePeriod.toLowerCase()] = statsData.Portfolio[result.name] || null;
+            });
+            result.name = `${name[0]} ${name[1]}`;
+            break;
+        case Object.keys(captureRatio).indexOf(data) > -1:
+            result.name = `${data} Capture Ratio`;
+            captureRatio[data].TimePeriod.forEach((statsData) => {
+                result[statsData.Id.toLowerCase()] = statsData.Value.toFixed(2);
+            });
+            break;
+        case Object.keys(drawdown.PortfolioDrawdownItem).indexOf(data) > -1:
+            result.name = `${name[0]} ${name[1]} %`;
+            drawdown.TimePeriods.forEach((statsData) => {
+                result[statsData.id.toLowerCase()] = statsData.DrawdownItem
+                    ? statsData.DrawdownItem[data].toFixed(2) : null;
+            });
+            break;
+        default:
+            break;
+        }
+        results.push(result);
+    });
+    return results;
+}
+```
+</details>

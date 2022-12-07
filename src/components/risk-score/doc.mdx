@@ -1,0 +1,242 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import RiskScore from "@/components/risk-score/RiskScore.vue";
+import { PORTFOLIO_ANALYSIS_AMERICAS_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="RiskScore" component={RiskScore} />
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .hide {
+      opacity: 0;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+  
+</style>
+
+# Risk Score
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+- [Subcomponent Configuration](#subcomponent-configuration)
+
+## Description
+
+The Risk Score component illustrates a portfolio's risk score.
+
+
+
+<Canvas withSource="open" withToolbar>
+  <Story id="components-riskscore--story-details"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={RiskScore} />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={PORTFOLIO_ANALYSIS_AMERICAS_URL} target="_blank">Portfolio Analysis API (Americas)</a>.
+
+<!-- 
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request-example)
+- [Request Payload Example](#request-payload-example)
+-->
+
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.portfolioAnalysis.getRiskScore({ portfolios: samplePortfolio });
+```
+
+<details>
+  <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+const samplePortfolio = [
+    {
+        name: 'US demo portfolio - weight',
+        totalValue: 10000,
+        currency: 'USD',
+        holdings: [
+            {
+                securityId: 'FOUSA06OEZ',
+                weight: 30,
+            },
+            {
+                securityId: 'FOUSA06IVV',
+                weight: 50,
+            },
+            {
+                securityId: 'F00000T770',
+                weight: 20,
+            },
+        ],
+        benchmark: {
+            type: 'Standard',
+            holdings: [
+                {
+                    securityId: 'XIUSA0010V',
+                    weight: 100,
+                },
+            ],
+        },
+    },
+];
+
+window.mstarApisSdk.portfolioAnalysis.getRiskScore({ portfolios: samplePortfolio });
+
+```
+</details>
+
+### Request Example
+
+Requests to the API have the following format:
+
+```javascript dark
+https://www.us-api.morningstar.com/portfolioanalysis/v1/riskScore?langcult={{languageId}}
+
+```
+
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- | 
+| `languageId` |	ISO culture codes. If not provided, defaults to language defined in settings. |`languageId=en-GB` |
+
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format) 
+- [Component Transformed Data Format](#component-transformed-data-format) 
+- [Component Transformation Operation](#component-transformation-operation) 
+-->
+
+### API Response Data Format
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "riskScore": [
+        {
+            "portfolioName": "US demo portfolio - weight",
+            "portfolioRiskScore": 122.52514387989147,
+            "portfolioAlignmentScore": 24.535489481591917,
+            "portfolioRsquared": 0.840970300308755,
+            "isProxyUsedInRiskScore": false
+        }
+    ]
+}
+```
+</details>
+
+### Component Transformed Data Format
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+123
+```
+</details>
+
+### Component Transformation Operation
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+    parsedModelData() {
+        const portfolioRiskScore = this.modelData?.riskScore[0]?.portfolioRiskScore;
+        return (portfolioRiskScore === null || portfolioRiskScore === undefined)
+            ? null : Math.round(portfolioRiskScore);
+    },
+```
+</details>
+
+## Subcomponent Configuration
+
+<details>
+  <summary><span class="summary-text">Chart config</span></summary>
+
+``` javascript dark
+chartSettings: {
+    arrowPoints: [-31, 31, -17, 28, -28, 17],
+    baseColor: '#000000',
+    benchmarkHoverArcWidth: 16,
+    defaultModColors: {
+        0: '#d2ddee',
+        100: '#4975B9',
+    },
+    enableHoverAnimation: true,
+    gaugeAnimation: {
+        arrowEaseNormal: 'in-out',
+        arrowEaseOutOfRange: 'bounce',
+        comfortEase: 'in-out',
+        enableComfortFadeIn: true,
+    },
+    gaugeStartAngle: -135,
+    gaugeEndAngle: 135,
+    innerCircleOuterRadius: 33,
+    innerRadius: 52,
+    markerColor: 'rgba(0, 0, 0, 0.62)',
+    markerTextLetterWidth: 6,
+    maxValue: 150,
+    minValue: 0,
+    modColors: {
+        comfort: '#4975B9',
+        nearComfort: '#C6D2E4',
+        baseColor: '#E5E5E5',
+    },
+    offScaleColor: '#f5c400',
+    offScaleMarkerWidth: 6,
+    onLightGray: {
+        modColors: {
+            comfort: '#3062AE',
+            nearComfort: '#A3B9DD',
+            baseColor: '#CCCCCC',
+        },
+        markerColor: 'rgba(0, 0, 0, 0.76)',
+    },
+    outerRadius: 68,
+    size: 160,
+    transitionMs: {
+        default: 500,
+        comfortAnimationDelay: 0,
+        comfortArc: 500,
+        nearComfortArc: 500,
+        markerText: 400,
+        markerTextAppearsIn: 500,
+        markerTextDisappearsIn: 200,
+        warningIconAnimationOffsetDelay: 1.2,
+    },
+},
+```
+</details>
+
+See [D3 chart](https://d3js.org/) V3.5.17

@@ -1,0 +1,57 @@
+<template>
+    <div>
+        <v-row v-if="showHeader">
+            <v-col cols="12" class="title">
+                <h2>Table Component</h2>
+            </v-col>
+        </v-row>
+        <v-row>
+            <v-col cols="12">
+                <v-simple-table>
+                    <template v-slot:default>
+                        <thead class="header">
+                            <tr>
+                                {{#each headers}}
+                                  <th class="text-{{align}}">
+                                    <span class="header__text">{{{titleCase title}}}</span>
+                                  </th>
+                                {{/each}}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(item, index) in modelData" :key="index">
+                                {{#each headers}}
+                                  <td class="text-{{align}}">{{wrapCurly title 'item'}}</td>
+                                {{/each}}
+                            </tr>
+                        </tbody>
+                    </template>
+                </v-simple-table>
+            </v-col>
+        </v-row>
+    </div>
+</template>
+
+<script>
+export default {
+    props: {
+        /** Accepts the response object returned from API Data Access Library. */
+        modelData: {
+            type: Object,
+            default: () => ({}),
+        },
+        /** Show or hide component title. */
+        showHeader: {
+            type: Boolean,
+            default: true,
+        },
+    },
+};
+</script>
+<style lang="scss" scoped>
+@use "sass:map";
+@use '~@/components/shared/scss/mixin.scss' as mixin;
+
+@include mixin.wal-component-title;
+@include mixin.wal-table;
+</style>

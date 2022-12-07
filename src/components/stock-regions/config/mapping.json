@@ -1,0 +1,143 @@
+{
+    "regions": {
+        "americas": {
+            "name": "Americas",
+            "keys": [
+                "1",
+                "3"
+            ],
+            "subRegions": {
+                "NorthAmerica": {
+                    "type": "americas",
+                    "name": "1",
+                    "key": "1"
+                },
+                "LatinAmerica": {
+                    "type": "americas",
+                    "name": "3",
+                    "key": "3"
+                }
+            }
+        },
+        "asia": {
+            "name": "GreaterAsia",
+            "keys": [
+                "10",
+                "11",
+                "12",
+                "13"
+            ],
+            "subRegions": {
+                "Japan": {
+                    "type": "asia",
+                    "name": "10",
+                    "key": "10"
+                },
+                "Australia": {
+                    "type": "asia",
+                    "name": "11",
+                    "key": "11",
+                    "region": "australasia"
+                },
+                "AsiaDeveloped": {
+                    "type": "asia",
+                    "name": "12",
+                    "key": "12"
+                },
+                "AsiaEmerging": {
+                    "type": "asia",
+                    "name": "13",
+                    "key": "13"
+                }
+            }
+        },
+        "europe": {
+            "name": "GreaterEurope",
+            "keys": [
+                "4",
+                "6",
+                "7",
+                "8"
+            ],
+            "subRegions": {
+                "UnitedKingdom": {
+                    "type": "europe",
+                    "name": "4",
+                    "key": "4"
+                },
+                "EuropeDeveloped": {
+                    "type": "europe",
+                    "name": "6",
+                    "key": "6"
+                },
+                "EuropeEmerging": {
+                    "type": "europe",
+                    "name": "7",
+                    "key": "7"
+                },
+                "AfricaMiddleEast": {
+                    "type": "europe",
+                    "name": "8",
+                    "key": "8"
+                }
+            }
+        },
+        "notClassified": {
+            "name": "NotClassified",
+            "keys": [
+                "99"
+            ]
+        }
+    },
+    "nameMapping": {
+        "americas": "Americas",
+        "northAmerica": "North America",
+        "latinAmerica": "Latin America",
+        "asia": "Greater Asia",
+        "europe": "Greater Europe",
+        "notClassified": "Not Classified",
+        "unitedKingdom": "United Kingdom",
+        "europeDeveloped": "Europe Developed",
+        "europeEmerging": "Europe Emerging",
+        "africaMiddleEast": "Africa/Middle East",
+        "japan": "Japan",
+        "australasia": "Australasia",
+        "asiaDeveloped": "Asia Developed",
+        "asiaEmerging": "Asia Emerging"
+    },
+    "breakdownFields": {
+        "fields" : {
+            "tabs": ["superRegions","americas","greaterEurope", "greaterAsia"],
+            "superRegions": [
+                "securityName",
+                "americas",
+                "greaterEurope",
+                "greaterAsia",
+                "notClassified",
+                "weight"
+            ],
+            "americas" : [
+                "securityName",
+                "northAmerica",
+                "latinAmerica",
+                "weight"
+            ],
+            "greaterEurope" : [
+                "securityName",
+                "unitedKingdom",
+                "europeDeveloped",
+                "europeEmerging",
+                "africaMiddleEast",
+                "weight"
+            ],
+            "greaterAsia": [
+                "securityName",
+                "japan",
+                "australia",
+                "asiaDeveloped",
+                "asiaEmerging",
+                "weight"
+            ]
+        }
+    }
+}

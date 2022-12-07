@@ -1,0 +1,41 @@
+import {{name}} from '@/components/{{dashCase name}}/{{name}}.vue';
+import docPage from '@/components/{{dashCase name}}/doc.mdx';
+import { action } from '@storybook/addon-actions';
+
+export default {
+    title: 'Components/{{name}}',
+    component: {{name}},
+    argTypes: {
+        modelData: Object,
+        showHeader: Boolean,
+    },
+    parameters: {
+        docs: {
+            page: docPage,
+        },
+    },
+};
+
+const Template = (args, { argTypes, loaded }) => {
+    let response = {};
+    if (loaded && Object.keys(loaded).length) {
+        response = loaded;
+        action('Component loaded')('API Data');
+    } else {
+        response.modelData = args.modelData;
+        action('Component loaded')('Static Data');
+    }
+    return {
+        props: Object.keys(argTypes),
+        components: { {{name}} },
+        template: `<{{dashCase name}} :model-data='${JSON.stringify(response.modelData)}'
+                                      :showHeader='showHeader'/>`,
+    };
+};
+
+export const StoryDetails = Template.bind({});
+StoryDetails.storyName = '{{titleCase name}}';
+StoryDetails.args = {
+    modelData: {{{templateData}}},
+    showHeader: true,
+};

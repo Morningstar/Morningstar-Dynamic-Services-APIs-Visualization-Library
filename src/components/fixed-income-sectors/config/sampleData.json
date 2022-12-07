@@ -1,0 +1,14 @@
+{
+    "portfolio": {
+        "Government": 8.97421,
+        "Corporate": 81.08461,
+        "Cash & Equivalents": 69.11821,
+        "Derivative": -1.81452
+    },
+    "benchmark": {
+        "Government": 0,
+        "Corporate": 0,
+        "Cash & Equivalents": 0,
+        "Derivative": 0
+    }
+}

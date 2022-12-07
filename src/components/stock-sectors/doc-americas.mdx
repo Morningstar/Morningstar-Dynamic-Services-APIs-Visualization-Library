@@ -1,0 +1,844 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import StockSectors from '@/components/stock-sectors/StockSectors.vue'
+import { PORTFOLIO_ANALYSIS_AMERICAS_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="StockSectors" component={StockSectors} />
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+
+</style>
+
+# Stock Sectors (Americas)
+
+- [Description US](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+
+
+## Description
+The Stock Sectors component displays a portfolio breakdown based on Morningstar's proprietary sector classification which divides the stock universe into three major economic spheres or Super Sectors: Cyclical, Defensive and Sensitive. Within each of these Super Sectors, three groups for Defensive and four groups for Cyclical and Sensitive are defined for a total of 11 sectors.
+
+<Canvas withSource="open" withToolbar>
+  <Story id="components-stock-sectors--story-details-us"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={ StockSectors } />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={PORTFOLIO_ANALYSIS_AMERICAS_URL} target="_blank">Portfolio Analysis API (Americas)</a>.
+<!--
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request)
+- [Request Payload Example](#request-payload)
+-->
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.xray.getStockSectorsUsData({ portfolios: samplePortfolio, languageId: 'en-US' });
+```
+<details>
+  <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+
+const samplePortfolio = {
+    name: 'US demo portfolio - weight',
+    totalValue: 10000,
+    currency: 'USD',
+    holdings: [
+        {
+            securityId: 'FOUSA06OEZ',
+            weight: 30,
+        },
+        {
+            securityId: 'FOUSA06IVV',
+            weight: 50,
+        },
+        {
+            securityId: 'F00000T770',
+            weight: 20,
+        },
+    ],
+    benchmark: {
+        type: 'Standard',
+        holdings: [
+            {
+                securityId: 'XIUSA0010V',
+                weight: 100,
+            },
+        ],
+    },
+};
+
+window.mstarApisSdk.xray.getStockSectorsUsData({ portfolios: samplePortfolio, languageId: 'en-US' });
+```
+</details>
+&nbsp;
+
+### Request Example
+
+```javascript dark
+https://www.us-api.morningstar.com/portfolioanalysis/v1/esg?langcult={{languageId}}
+
+```
+
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- |
+| `languageId` | ISO culture codes. If not provided, defaults to language defined in settings. | `languageId=en-US` |
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Integration Data Format](#integration-data-format) 
+- [Integration Transformation Operation](#integration-transformation-operation) 
+- [Component Transformed Data Format](#component-transformed-data-format) 
+- [Component Transformation Operation](#component-transformation-operation) 
+-->
+### API Response Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "Id": "Morningstar",
+    "PortfolioAnalyzed": 79.8,
+    "Portfolio": [
+        {
+            "Id": "BasicMaterials",
+            "Value": 7.07
+        },
+        {
+            "Id": "CommunicationServices",
+            "Value": 6.33
+        },
+        {
+            "Id": "ConsumerCyclical",
+            "Value": 10.47
+        },
+        {
+            "Id": "ConsumerDefensive",
+            "Value": 7.97
+        },
+        {
+            "Id": "Cyclical",
+            "Value": 41.17
+        },
+        {
+            "Id": "Defensive",
+            "Value": 21.2
+        },
+        {
+            "Id": "Energy",
+            "Value": 9.04
+        },
+        {
+            "Id": "FinancialServices",
+            "Value": 21.14
+        },
+        {
+            "Id": "Healthcare",
+            "Value": 9.15
+        },
+        {
+            "Id": "Industrials",
+            "Value": 11.48
+        },
+        {
+            "Id": "RealEstate",
+            "Value": 2.49
+        },
+        {
+            "Id": "Sensitive",
+            "Value": 37.63
+        },
+        {
+            "Id": "Technology",
+            "Value": 10.78
+        },
+        {
+            "Id": "Utilities",
+            "Value": 4.08
+        },
+        {
+            "Id": "NotClassified",
+            "Value": 0
+        }
+    ],
+    "Benchmark": [
+        {
+            "Id": "BasicMaterials",
+            "Value": 2.49
+        },
+        {
+            "Id": "CommunicationServices",
+            "Value": 7.78
+        },
+        {
+            "Id": "ConsumerCyclical",
+            "Value": 11.32
+        },
+        {
+            "Id": "ConsumerDefensive",
+            "Value": 6.61
+        },
+        {
+            "Id": "Cyclical",
+            "Value": 30.57
+        },
+        {
+            "Id": "Defensive",
+            "Value": 23.48
+        },
+        {
+            "Id": "Energy",
+            "Value": 4.75
+        },
+        {
+            "Id": "FinancialServices",
+            "Value": 13.13
+        },
+        {
+            "Id": "Healthcare",
+            "Value": 13.79
+        },
+        {
+            "Id": "Industrials",
+            "Value": 9.03
+        },
+        {
+            "Id": "RealEstate",
+            "Value": 3.63
+        },
+        {
+            "Id": "Sensitive",
+            "Value": 45.95
+        },
+        {
+            "Id": "Technology",
+            "Value": 24.39
+        },
+        {
+            "Id": "Utilities",
+            "Value": 3.08
+        },
+        {
+            "Id": "NotClassified",
+            "Value": 0
+        }
+    ],
+    "SecurityBreakdown": [
+        {
+            "SecurityId": "FOUSA06OEZ",
+            "Analyzed": 99.58686,
+            "NotAnalyzed": 0.41314,
+            "Sector": [
+                {
+                    "Id": "Cyclical",
+                    "Value": 34.69041,
+                    "ExposureItem": [
+                        {
+                            "Id": "BasicMaterials",
+                            "Value": 4.44009
+                        },
+                        {
+                            "Id": "ConsumerCyclical",
+                            "Value": 11.44868
+                        },
+                        {
+                            "Id": "FinancialServices",
+                            "Value": 15.89016
+                        },
+                        {
+                            "Id": "RealEstate",
+                            "Value": 2.91148
+                        }
+                    ]
+                },
+                {
+                    "Id": "Defensive",
+                    "Value": 23.50291,
+                    "ExposureItem": [
+                        {
+                            "Id": "ConsumerDefensive",
+                            "Value": 7.66138
+                        },
+                        {
+                            "Id": "Healthcare",
+                            "Value": 12.57036
+                        },
+                        {
+                            "Id": "Utilities",
+                            "Value": 3.27117
+                        }
+                    ]
+                },
+                {
+                    "Id": "Sensitive",
+                    "Value": 41.8067,
+                    "ExposureItem": [
+                        {
+                            "Id": "CommunicationServices",
+                            "Value": 7.51156
+                        },
+                        {
+                            "Id": "Energy",
+                            "Value": 5.21515
+                        },
+                        {
+                            "Id": "Industrials",
+                            "Value": 9.55923
+                        },
+                        {
+                            "Id": "Technology",
+                            "Value": 19.52076
+                        }
+                    ]
+                },
+                {
+                    "Id": "NotClassified",
+                    "Value": 0
+                }
+            ]
+        },
+        {
+            "SecurityId": "FOUSA06IVV",
+            "Analyzed": 99.84198,
+            "NotAnalyzed": 0.15802,
+            "Sector": [
+                {
+                    "Id": "Cyclical",
+                    "Value": 45.08123,
+                    "ExposureItem": [
+                        {
+                            "Id": "BasicMaterials",
+                            "Value": 8.64747
+                        },
+                        {
+                            "Id": "ConsumerCyclical",
+                            "Value": 9.88139
+                        },
+                        {
+                            "Id": "FinancialServices",
+                            "Value": 24.31063
+                        },
+                        {
+                            "Id": "RealEstate",
+                            "Value": 2.24174
+                        }
+                    ]
+                },
+                {
+                    "Id": "Defensive",
+                    "Value": 19.80799,
+                    "ExposureItem": [
+                        {
+                            "Id": "ConsumerDefensive",
+                            "Value": 8.15059
+                        },
+                        {
+                            "Id": "Healthcare",
+                            "Value": 7.09764
+                        },
+                        {
+                            "Id": "Utilities",
+                            "Value": 4.55976
+                        }
+                    ]
+                },
+                {
+                    "Id": "Sensitive",
+                    "Value": 35.11076,
+                    "ExposureItem": [
+                        {
+                            "Id": "CommunicationServices",
+                            "Value": 5.61272
+                        },
+                        {
+                            "Id": "Energy",
+                            "Value": 11.33909
+                        },
+                        {
+                            "Id": "Industrials",
+                            "Value": 12.64082
+                        },
+                        {
+                            "Id": "Technology",
+                            "Value": 5.51813
+                        }
+                    ]
+                },
+                {
+                    "Id": "NotClassified",
+                    "Value": 0
+                }
+            ]
+        },
+        {
+            "SecurityId": "F00000T770",
+            "Analyzed": 0,
+            "NotAnalyzed": 100,
+            "Sector": [
+                {
+                    "Id": "Cyclical",
+                    "ExposureItem": [
+                        {
+                            "Id": "BasicMaterials"
+                        },
+                        {
+                            "Id": "ConsumerCyclical"
+                        },
+                        {
+                            "Id": "FinancialServices"
+                        },
+                        {
+                            "Id": "RealEstate"
+                        }
+                    ]
+                },
+                {
+                    "Id": "Defensive",
+                    "ExposureItem": [
+                        {
+                            "Id": "ConsumerDefensive"
+                        },
+                        {
+                            "Id": "Healthcare"
+                        },
+                        {
+                            "Id": "Utilities"
+                        }
+                    ]
+                },
+                {
+                    "Id": "Sensitive",
+                    "ExposureItem": [
+                        {
+                            "Id": "CommunicationServices"
+                        },
+                        {
+                            "Id": "Energy"
+                        },
+                        {
+                            "Id": "Industrials"
+                        },
+                        {
+                            "Id": "Technology"
+                        }
+                    ]
+                },
+                {
+                    "Id": "NotClassified",
+                    "Value": 100
+                }
+            ]
+        }
+    ]
+}
+```
+</details>
+&nbsp;
+
+### Integration Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "portfolio": {
+        "BasicMaterials": 7.07,
+        "CommunicationServices": 6.33,
+        "ConsumerCyclical": 10.47,
+        "ConsumerDefensive": 7.97,
+        "Cyclical": 41.17,
+        "Defensive": 21.2,
+        "Energy": 9.04,
+        "FinancialServices": 21.14,
+        "Healthcare": 9.15,
+        "Industrials": 11.48,
+        "RealEstate": 2.49,
+        "Sensitive": 37.63,
+        "Technology": 10.78,
+        "Utilities": 4.08,
+        "NotClassified": 0
+    },
+    "benchmark": {
+        "BasicMaterials": 2.49,
+        "CommunicationServices": 7.78,
+        "ConsumerCyclical": 11.32,
+        "ConsumerDefensive": 6.61,
+        "Cyclical": 30.57,
+        "Defensive": 23.48,
+        "Energy": 4.75,
+        "FinancialServices": 13.13,
+        "Healthcare": 13.79,
+        "Industrials": 9.03,
+        "RealEstate": 3.63,
+        "Sensitive": 45.95,
+        "Technology": 24.39,
+        "Utilities": 3.08,
+        "NotClassified": 0
+    }
+}
+```
+</details>
+&nbsp;
+
+### Integration Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+function getStockSectorsUsData(xrayData, breakdown) {
+    const portfolio = xrayData.Portfolio.reduce((data, currentValue) => {
+        const portfolioData = data;
+        portfolioData[currentValue.Id] = currentValue.Value;
+        return portfolioData;
+    }, {});
+    const benchmark = xrayData.Benchmark.reduce((data, currentValue) => {
+        const benchmarkData = data;
+        benchmarkData[currentValue.Id] = currentValue.Value;
+        return benchmarkData;
+    }, {});
+
+    const breakdownData = {};
+    if (breakdown?.showBreakdown) {
+        breakdownData.securityBreakdownData = getSecurityBreakdownDetails(
+            xrayData,
+            breakdown.portfolioSecurityReference,
+            breakdown.portfolioHoldings,
+        );
+    }
+
+    return {
+        portfolio,
+        benchmark,
+        breakdownData,
+    };
+}
+```
+</details>
+&nbsp;
+
+### Component Transformed Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+[
+    {
+        "name": "cyclical",
+        "portfolio": "40.50",
+        "benchmark": "30.76",
+        "highlight": true
+    },
+    {
+        "name": "basicMaterials",
+        "portfolio": "7.30",
+        "benchmark": "2.45"
+    },
+    {
+        "name": "consumerCyclical",
+        "portfolio": "10.21",
+        "benchmark": "11.57"
+    },
+    {
+        "name": "financialServices",
+        "portfolio": "20.63",
+        "benchmark": "13.25"
+    },
+    {
+        "name": "realEstate",
+        "portfolio": "2.36",
+        "benchmark": "3.49"
+    },
+    {
+        "name": "sensitive",
+        "portfolio": "38.16",
+        "benchmark": "44.74",
+        "highlight": true
+    },
+    {
+        "name": "communicationServices",
+        "portfolio": "6.32",
+        "benchmark": "7.47"
+    },
+    {
+        "name": "energy",
+        "portfolio": "9.43",
+        "benchmark": "4.65"
+    },
+    {
+        "name": "industrials",
+        "portfolio": "11.67",
+        "benchmark": "8.93"
+    },
+    {
+        "name": "technology",
+        "portfolio": "10.74",
+        "benchmark": "23.69"
+    },
+    {
+        "name": "defensive",
+        "portfolio": "21.34",
+        "benchmark": "24.50",
+        "highlight": true
+    },
+    {
+        "name": "consumerDefensive",
+        "portfolio": "8.06",
+        "benchmark": "6.72"
+    },
+    {
+        "name": "healthcare",
+        "portfolio": "9.53",
+        "benchmark": "14.76"
+    },
+    {
+        "name": "utilities",
+        "portfolio": "3.75",
+        "benchmark": "3.02"
+    }
+]
+```
+</details>
+&nbsp;
+
+### Component Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+parsedModelData() {
+    if (this.modelData) {
+        let stockSectorsData = [];
+        const portfolioData = get(this.modelData, 'portfolio', null);
+        const benchmarkData = get(this.modelData, 'benchmark', null);
+        const mapping = outputMapping.stockSectors;
+        this.sectorTypes.forEach((key) => {
+            const breakdown = [];
+            const mappingKey = mapping[key];
+            let netPortfolio = 0;
+            let netBenchmark = 0;
+
+            Object.values(mappingKey).forEach((dataKey) => {
+                netPortfolio += portfolioData[dataKey] || 0;
+                netBenchmark += benchmarkData[dataKey] || 0;
+                breakdown.push({
+                    name: lowerFirst(dataKey.toString()),
+                    portfolio: portfolioData ? this.formatNumber(portfolioData[dataKey]) : '-',
+                    benchmark: benchmarkData ? this.formatNumber(benchmarkData[dataKey]) : '-',
+                });
+            });
+            breakdown.unshift({
+                name: key,
+                portfolio: this.formatNumber(netPortfolio) || '-',
+                benchmark: this.formatNumber(netBenchmark) || '-',
+                highlight: true,
+            });
+            stockSectorsData = [...stockSectorsData, ...breakdown];
+        });
+        return stockSectorsData;
+    }
+    return [];
+},
+```
+</details>
+&nbsp;
+
+### Security Breakdown Data Format
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+  "breakdownData": {
+    "securityBreakdownData": [
+      {
+        "SecurityId": "FOUSA06OEZ",
+        "Analyzed": 99.54196,
+        "NotAnalyzed": 0.45804,
+        "Sector": [
+          {
+            "Id": "Cyclical",
+            "Value": 33.74093,
+            "ExposureItem": [
+              {
+                "Id": "BasicMaterials",
+                "Value": 4.47927
+              },
+              {
+                "Id": "ConsumerCyclical",
+                "Value": 10.51219
+              },
+              {
+                "Id": "FinancialServices",
+                "Value": 16.06928
+              },
+              {
+                "Id": "RealEstate",
+                "Value": 2.68019
+              }
+            ]
+          },
+          {
+            "Id": "Defensive",
+            "Value": 24.11749,
+            "ExposureItem": [
+              {
+                "Id": "ConsumerDefensive",
+                "Value": 7.76393
+              },
+              {
+                "Id": "Healthcare",
+                "Value": 13.33975
+              },
+              {
+                "Id": "Utilities",
+                "Value": 3.01381
+              }
+            ]
+          },
+          {
+            "Id": "Sensitive",
+            "Value": 42.14158,
+            "ExposureItem": [
+              {
+                "Id": "CommunicationServices",
+                "Value": 6.95043
+              },
+              {
+                "Id": "Energy",
+                "Value": 5.84558
+              },
+              {
+                "Id": "Industrials",
+                "Value": 9.93677
+              },
+              {
+                "Id": "Technology",
+                "Value": 19.4088
+              }
+            ]
+          },
+          {
+            "Id": "NotClassified",
+            "Value": 0
+          }
+        ],
+        "Name": "iShares MSCI ACWI ETF",
+        "Weight": 100
+      }
+    ]
+  },
+  "securityBreakdown": [
+    {
+      "securityName": "iShares MSCI ACWI ETF",
+      "weight": 100,
+      "notClassified": "-",
+      "sensitive": "42.14",
+      "communicationServices": "6.95",
+      "energy": "5.85",
+      "industrials": "9.94",
+      "technology": "19.41",
+      "defensive": "24.12",
+      "consumerDefensive": "7.76",
+      "healthcare": "13.34",
+      "utilities": "3.01",
+      "cyclical": "33.74",
+      "basicMaterials": "4.48",
+      "consumerCyclical": "10.51",
+      "financialServices": "16.07",
+      "realEstate": "2.68"
+    }
+  ],
+  "portfolioAnalyzed": [
+    {
+      "securityName": "iShares MSCI ACWI ETF",
+      "analyzedPercent": 99.54,
+      "notAnalyzedPercent": 0.46,
+      "weight": 100
+    }
+  ]
+}
+```
+</details>
+&nbsp;
+
+### Security Breakdown Transformation Operation
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+function getSecurityBreakdownDetails(componentData, securityReference, portfolioHoldings) {
+    const breakdown = get(componentData, 'SecurityBreakdown', []);
+    return breakdown.map((security) => {
+        const currSecurity = security;
+        currSecurity.Name = getSecurityDetail(securityReference, currSecurity.SecurityId)?.Name;
+        currSecurity.Weight = portfolioHoldings ? getSecurityDetail(
+            portfolioHoldings,
+            currSecurity.SecurityId,
+        )?.PercentAssets : null;
+        return currSecurity;
+    });
+}
+
+function getStockSectorsUsData(xrayData, breakdown) {
+    const portfolio = xrayData.Portfolio.reduce((data, currentValue) => {
+        const portfolioData = data;
+        portfolioData[currentValue.Id] = currentValue.Value;
+        return portfolioData;
+    }, {});
+    const benchmark = xrayData.Benchmark.reduce((data, currentValue) => {
+        const benchmarkData = data;
+        benchmarkData[currentValue.Id] = currentValue.Value;
+        return benchmarkData;
+    }, {});
+
+    const breakdownData = {};
+    if (breakdown?.showBreakdown) { // Security Breakdown Data
+        breakdownData.securityBreakdownData = getSecurityBreakdownDetails(
+            xrayData,
+            breakdown.portfolioSecurityReference,
+            breakdown.portfolioHoldings,
+        );
+    }
+
+    return {
+        portfolio,
+        benchmark,
+        breakdownData, // Security Breakdown Data
+    };
+}
+```
+</details>

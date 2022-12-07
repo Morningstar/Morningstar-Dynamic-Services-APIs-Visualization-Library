@@ -1,0 +1,1573 @@
+[
+    {
+        "dbgtime": "110",
+        "Id": "F0GBR050DD",
+        "HasPriceEntitlement": false,
+        "InceptionDate": "1998-11-13T00:00:00",
+        "Isin": "GB0004460357",
+        "Cusip": "G6670Y393",
+        "ISINMIC": "GB0004460357XXXXGBP",
+        "InvestmentType": "FD",
+        "HoldingType": "2",
+        "Type": "Fund",
+        "Name": "Aviva Investors UK Lstd Eq Uncons2GBPAcc",
+        "FundNetAssetValues": [
+            {
+                "CurrencyId": "GBP",
+                "DayEndDate": "2022-08-02T00:00:00",
+                "DayEndValue": 223257927,
+                "MonthEndDate": "2022-07-29T00:00:00",
+                "MonthEndValue": 224780366
+            }
+        ],
+        "Mifid": {
+            "OngoingCostActual": 0.82
+        },
+        "RealtimeId": "52.8.GB0004460357",
+        "OngoingCharge": "0.82",
+        "CollectedSRRI": {
+            "Date": "2022-07-25T00:00:00",
+            "Rank": 6
+        },
+        "DividendDistributionFrequency": "a$",
+        "YieldHistory": {
+            "Type": "52",
+            "Value": 3.4119,
+            "EndDate": "2022-07-31T00:00:00"
+        },
+        "Currency": {
+            "Id": "GBP"
+        },
+        "IMASector": {
+            "Id": "LC00000007",
+            "Name": "UK All Companies"
+        },
+        "Cef": {},
+        "RiskAndRating": [
+            {
+                "Date": "2022-06-30T00:00:00",
+                "TimePeriod": "M255",
+                "RatingValue": 4,
+                "RiskRatingValue": 5,
+                "PerformanceRatingValue": 5
+            }
+        ],
+        "LegalStructure": "Open Ended Investment Company",
+        "InvestmentStrategy": "The Fund aims to grow your investment over the long term (5 years or more) by investing in shares of UK companies. At least 80% of the Fund will be invested in shares of UK companies (incorporated or domiciled in the UK), or non-UK companies which are listed in the UK or which have significant trading activities in the UK.",
+        "ManagerList": [
+            {
+                "ManagerId": 81506,
+                "DisplayPreference": 1,
+                "GivenName": "Chris",
+                "FamilyName": "Murphy",
+                "StartDate": "2022-05-09T00:00:00",
+                "ManagerProvidedBiography": "Chris manages the Aviva Investors UK Equity Income and Aviva Investors UK Equity strategies. Chris joined Aviva Investors in 2006 from Framlington Investment Management where he was responsible for managing the firm’s UK income and growth retail portfolios. Chris began his investment career in 1988 as a graduate UK equity analyst for Lehman Bros before joining James Capel in UK equity analyst role. Chris holds a BSc (Hons) in Physics from University College, Cardiff and holds the IIMR (Institute of Investment Management Research) qualification."
+            }
+        ],
+        "TrailingPerformance": [
+            {
+                "CurrencyId": "GBP",
+                "Date": "2022-08-02T00:00:00",
+                "Type": "DayEnd",
+                "ReturnType": "ItPostTax",
+                "Return": [
+                    {
+                        "Value": 4.0187,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "ClosePrice"
+                    },
+                    {
+                        "Value": -0.588745,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "D0"
+                    },
+                    {
+                        "Value": -1.12683,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "D1"
+                    },
+                    {
+                        "Value": -1.752885,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M0"
+                    },
+                    {
+                        "Value": 0.565551,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "W1"
+                    },
+                    {
+                        "Value": 4.479513,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M1"
+                    },
+                    {
+                        "Value": 1.64403,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M3"
+                    },
+                    {
+                        "Value": -5.26626,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M6"
+                    },
+                    {
+                        "Value": 0.189474,
+                        "Annualized": true,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": 11.56527,
+                        "Annualized": true,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M36"
+                    },
+                    {
+                        "Value": 6.349394,
+                        "Annualized": true,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M60"
+                    },
+                    {
+                        "Value": 9.182371,
+                        "Annualized": true,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M120"
+                    },
+                    {
+                        "Value": 7.450974,
+                        "Annualized": true,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M255"
+                    }
+                ]
+            },
+            {
+                "CurrencyId": "GBP",
+                "Date": "2022-08-02T00:00:00",
+                "Type": "DayEnd",
+                "ReturnType": "GbPostTax",
+                "Return": [
+                    {
+                        "Value": 4.0187,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "ClosePrice"
+                    },
+                    {
+                        "Value": -0.588745,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "D0"
+                    },
+                    {
+                        "Value": -1.12683,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "D1"
+                    },
+                    {
+                        "Value": -1.752885,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M0"
+                    },
+                    {
+                        "Value": 0.565551,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "W1"
+                    },
+                    {
+                        "Value": 4.479513,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M1"
+                    },
+                    {
+                        "Value": 1.64403,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M3"
+                    },
+                    {
+                        "Value": -5.26626,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M6"
+                    },
+                    {
+                        "Value": 0.189474,
+                        "Annualized": true,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": 11.56527,
+                        "Annualized": true,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M36"
+                    },
+                    {
+                        "Value": 6.349394,
+                        "Annualized": true,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M60"
+                    },
+                    {
+                        "Value": 9.069865,
+                        "Annualized": true,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M120"
+                    },
+                    {
+                        "Value": 7.333966,
+                        "Annualized": true,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M255"
+                    }
+                ]
+            }
+        ],
+        "RiskStatistics": [
+            {
+                "CurrencyId": "GBP",
+                "CurrencyOption": "DISPLAYCURRENCY",
+                "Date": "2022-07-31T00:00:00",
+                "Type": "MonthEnd",
+                "ReturnType": "ItPostTax",
+                "benchmarkType": "CategoryPrimaryIndexId",
+                "Alphas": [
+                    {
+                        "Value": 6.95719,
+                        "Frequency": "M",
+                        "TimePeriod": "M36"
+                    }
+                ],
+                "Betas": [
+                    {
+                        "Value": 1.50904,
+                        "Frequency": "M",
+                        "TimePeriod": "M36"
+                    }
+                ],
+                "RSquareds": [
+                    {
+                        "Value": 89.74,
+                        "Frequency": "M",
+                        "TimePeriod": "M36"
+                    }
+                ],
+                "InformationRatios": [
+                    {
+                        "Value": 0.66298,
+                        "Frequency": "M",
+                        "TimePeriod": "M36"
+                    }
+                ],
+                "TrackingErrors": [
+                    {
+                        "Value": 11.49745,
+                        "Frequency": "M",
+                        "TimePeriod": "M36"
+                    }
+                ],
+                "StandardDeviations": [
+                    {
+                        "Value": 25.38,
+                        "Frequency": "M",
+                        "TimePeriod": "M36"
+                    }
+                ],
+                "SharpeRatios": [
+                    {
+                        "Frequency": "M",
+                        "TimePeriod": "M36",
+                        "Value": 0.51608
+                    }
+                ]
+            }
+        ],
+        "HistoricalPerformanceSeries": [
+            {
+                "CurrencyId": "GBP",
+                "StartDate": "2012-01-01T00:00:00",
+                "Frequency": "Y",
+                "TimePeriod": "M12",
+                "ReturnType": "GbPostTax",
+                "Return": [
+                    {
+                        "Value": 22.32789,
+                        "Date": "2021-12-31T00:00:00",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": 1.12808,
+                        "Date": "2020-12-31T00:00:00",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": 22.4675,
+                        "Date": "2019-12-31T00:00:00",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": -11.96648,
+                        "Date": "2018-12-31T00:00:00",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": 14.08751,
+                        "Date": "2017-12-31T00:00:00",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": 10.83988,
+                        "Date": "2016-12-31T00:00:00",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": 9.69245,
+                        "Date": "2015-12-31T00:00:00",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": 0.66931,
+                        "Date": "2014-12-31T00:00:00",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": 24.81813,
+                        "Date": "2013-12-31T00:00:00",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": 13.56655,
+                        "Date": "2012-12-31T00:00:00",
+                        "TimePeriod": "M12"
+                    }
+                ]
+            }
+        ],
+        "Benchmark": [
+            {
+                "Id": "EUCA000550",
+                "GlobalAssetClassId": "$BCG$EQUTY",
+                "Type": "Category",
+                "Name": "UK Large-Cap Equity"
+            },
+            {
+                "Id": "XIUSA04CGI",
+                "Type": "CategoryPrimaryIndex",
+                "Name": "FTSE AllSh TR GBP"
+            },
+            {
+                "Id": "XIUSA04CGI",
+                "Type": "PrimaryBenchmark",
+                "Name": "FTSE AllSh TR GBP"
+            }
+        ],
+        "FundBenchmark": [
+            {
+                "Id": "XIUSA04CGI",
+                "Name": "FTSE AllSh TR GBP",
+                "Weighting": 100
+            }
+        ],
+        "Portfolios": [
+            {
+                "Date": "2022-06-30T00:00:00",
+                "SuppressionExpiration": "2022-07-30T00:00:00",
+                "ReleaseTopHoldingDate": "2022-07-10T00:00:00",
+                "TopNcount": 10,
+                "CurrencyId": "GBP",
+                "Id": 52676,
+                "TotalMarketValues": [
+                    {
+                        "Value": 216018523,
+                        "CurrencyId": "GBP",
+                        "SalePosition": "N"
+                    }
+                ],
+                "AssetAllocations": [
+                    {
+                        "Type": "MorningstarEUR3",
+                        "SalePosition": "N",
+                        "BreakdownValues": [
+                            {
+                                "Value": 94.0896,
+                                "Type": "1"
+                            },
+                            {
+                                "Value": 0.06679,
+                                "Type": "2"
+                            },
+                            {
+                                "Value": 4.24461,
+                                "Type": "3"
+                            },
+                            {
+                                "Value": 1.59898,
+                                "Type": "4"
+                            },
+                            {
+                                "Value": 0.00002,
+                                "Type": "99"
+                            }
+                        ]
+                    },
+                    {
+                        "Type": "MorningstarEUR3",
+                        "SalePosition": "L",
+                        "BreakdownValues": [
+                            {
+                                "Value": 94.0896,
+                                "Type": "1"
+                            },
+                            {
+                                "Value": 0.06679,
+                                "Type": "2"
+                            },
+                            {
+                                "Value": 4.58003,
+                                "Type": "3"
+                            },
+                            {
+                                "Value": 1.59898,
+                                "Type": "4"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "99"
+                            }
+                        ]
+                    },
+                    {
+                        "Type": "MorningstarEUR3",
+                        "SalePosition": "S",
+                        "BreakdownValues": [
+                            {
+                                "Value": 0,
+                                "Type": "1"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "2"
+                            },
+                            {
+                                "Value": 0.33542,
+                                "Type": "3"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "4"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "99"
+                            }
+                        ]
+                    }
+                ],
+                "RegionalExposure": [
+                    {
+                        "NotClassified": 5.9104,
+                        "SalePosition": "N",
+                        "BreakdownValues": [
+                            {
+                                "Value": 0,
+                                "Type": "1"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "2"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "3"
+                            },
+                            {
+                                "Value": 99.07265,
+                                "Type": "4"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "5"
+                            },
+                            {
+                                "Value": 0.92735,
+                                "Type": "6"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "7"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "8"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "9"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "10"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "11"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "12"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "13"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "14"
+                            },
+                            {
+                                "Value": 100,
+                                "Type": "15"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "16"
+                            }
+                        ]
+                    }
+                ],
+                "StyleBoxBreakdown": [
+                    {
+                        "NotClassified": 7.1164,
+                        "SalePosition": "N",
+                        "BreakdownValues": [
+                            {
+                                "Value": 18.923039,
+                                "Type": "1"
+                            },
+                            {
+                                "Value": 27.787317,
+                                "Type": "2"
+                            },
+                            {
+                                "Value": 2.741786,
+                                "Type": "3"
+                            },
+                            {
+                                "Value": 16.116505,
+                                "Type": "4"
+                            },
+                            {
+                                "Value": 10.630553,
+                                "Type": "5"
+                            },
+                            {
+                                "Value": 5.293303,
+                                "Type": "6"
+                            },
+                            {
+                                "Value": 13.655403,
+                                "Type": "7"
+                            },
+                            {
+                                "Value": 4.177939,
+                                "Type": "8"
+                            },
+                            {
+                                "Value": 0.674156,
+                                "Type": "9"
+                            }
+                        ]
+                    }
+                ],
+                "GlobalStockSectorBreakdown": [
+                    {
+                        "NotClassified": 5.91039,
+                        "SalePosition": "N",
+                        "BreakdownValues": [
+                            {
+                                "Value": 6.859695,
+                                "Type": "101"
+                            },
+                            {
+                                "Value": 8.060422,
+                                "Type": "102"
+                            },
+                            {
+                                "Value": 22.862407,
+                                "Type": "103"
+                            },
+                            {
+                                "Value": 13.918423,
+                                "Type": "205"
+                            },
+                            {
+                                "Value": 3.900611,
+                                "Type": "206"
+                            },
+                            {
+                                "Value": 2.138674,
+                                "Type": "207"
+                            },
+                            {
+                                "Value": 5.843259,
+                                "Type": "308"
+                            },
+                            {
+                                "Value": 10.039344,
+                                "Type": "309"
+                            },
+                            {
+                                "Value": 24.166356,
+                                "Type": "310"
+                            },
+                            {
+                                "Value": 2.210807,
+                                "Type": "311"
+                            }
+                        ]
+                    },
+                    {
+                        "NotClassified": 5.91039,
+                        "SalePosition": "L",
+                        "BreakdownValues": [
+                            {
+                                "Value": 6.859695,
+                                "Type": "101"
+                            },
+                            {
+                                "Value": 8.060422,
+                                "Type": "102"
+                            },
+                            {
+                                "Value": 22.862407,
+                                "Type": "103"
+                            },
+                            {
+                                "Value": 13.918423,
+                                "Type": "205"
+                            },
+                            {
+                                "Value": 3.900611,
+                                "Type": "206"
+                            },
+                            {
+                                "Value": 2.138674,
+                                "Type": "207"
+                            },
+                            {
+                                "Value": 5.843259,
+                                "Type": "308"
+                            },
+                            {
+                                "Value": 10.039344,
+                                "Type": "309"
+                            },
+                            {
+                                "Value": 24.166356,
+                                "Type": "310"
+                            },
+                            {
+                                "Value": 2.210807,
+                                "Type": "311"
+                            }
+                        ]
+                    },
+                    {
+                        "NotClassified": 100,
+                        "SalePosition": "S",
+                        "BreakdownValues": [
+                            {
+                                "Value": 0,
+                                "Type": "101"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "102"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "103"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "205"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "206"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "207"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "308"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "309"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "310"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "311"
+                            }
+                        ]
+                    }
+                ],
+                "MaturityRange": [
+                    {
+                        "NotClassified": 99.9332,
+                        "SalePosition": "N",
+                        "BreakdownValues": [
+                            {
+                                "Value": 0,
+                                "Type": "1"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "2"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "3"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "4"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "5"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "6"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "7"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "8"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "9"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "10"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "11"
+                            },
+                            {
+                                "Value": 6.422156,
+                                "Type": "12"
+                            },
+                            {
+                                "Value": 93.577844,
+                                "Type": "13"
+                            }
+                        ]
+                    }
+                ],
+                "EquityStatistics": {
+                    "ProspectiveEarningsYield": 8.82185,
+                    "Forecasted5YearEarningsGrowth": 8.81913,
+                    "MarketCapital": 9042.59403
+                }
+            }
+        ],
+        "ValuationRatios": [
+            {
+                "AsOf": "DayEnd"
+            }
+        ],
+        "PriceMultiples": []
+    },
+    {
+        "Id": "F00000Q5PZ",
+        "HasPriceEntitlement": false,
+        "InceptionDate": "2013-02-05T00:00:00",
+        "Isin": "LU0593848723",
+        "ISINMIC": "LU0593848723XXXXEUR",
+        "InvestmentType": "FD",
+        "HoldingType": "2",
+        "Type": "Fund",
+        "Name": "Mirae Asset Asia Great Consumer Eq A EUR",
+        "FundNetAssetValues": [
+            {
+                "CurrencyId": "GBP",
+                "DayEndDate": "2020-03-31T00:00:00",
+                "DayEndValue": 453768354.34192,
+                "MonthEndDate": "2020-03-31T00:00:00",
+                "MonthEndValue": 453768354.34192
+            }
+        ],
+        "Mifid": {
+            "OngoingCostActual": 1.7
+        },
+        "RealtimeId": "52.8.LU0593848723",
+        "OngoingCharge": "1.7",
+        "CollectedSRRI": {
+            "Date": "2022-02-18T00:00:00",
+            "Rank": 6
+        },
+        "FeeLevel": "avg",
+        "YieldHistory": {
+            "Type": "52",
+            "EndDate": "2022-07-31T00:00:00"
+        },
+        "Currency": {
+            "Id": "EUR"
+        },
+        "Cef": {},
+        "RiskAndRating": [
+            {
+                "Date": "2022-06-30T00:00:00",
+                "TimePeriod": "M255",
+                "RatingValue": 3,
+                "RiskRatingValue": 4,
+                "PerformanceRatingValue": 3
+            }
+        ],
+        "LegalStructure": "SICAV",
+        "InvestmentStrategy": "The primary objective of the Sub-Fund is to achieve long term growth in the Share price through capital appreciation, measured in US Dollars, of the underlying equity portfolio. The Principal Investment Manager will seek to achieve the objective of the Sub-Fund by investing mainly in equities and equity related securities of Asian companies which are expected to benefit from growing consumption activities of Asian region, excluding Japan.",
+        "ManagerList": [
+            {
+                "ManagerId": 152739,
+                "DisplayPreference": 1,
+                "GivenName": "Joohee",
+                "FamilyName": "An",
+                "StartDate": "2011-06-07T00:00:00",
+                "ManagerProvidedBiography": "Joohee An is a portfolio manager on the Emerging Markets Great Consumer Fund, which she has co-managed since the fund’s inception. \r\nJoohee started her career in financial services in 2004 in her native Korea, working as an equity analyst with LG Investment & Securities, which merged with Woori Securities in 2005 to form Woori Investment & Securities. Ms. An joined Mirae Asset Global Investments in Seoul in 2006 as an investment analyst covering the consumer, healthcare, telecoms and energy sectors within the Asia-Pacific region and later became a portfolio manager. She moved to Mirae Asset Global Investments (Hong Kong) in 2009.\r\nMs. An holds a BA in Business Administration from Yonsei University, Seoul. She is based in Hong Kong and is fluent in Korean and English."
+            },
+            {
+                "ManagerId": 193687,
+                "DisplayPreference": 2,
+                "GivenName": "Sol",
+                "FamilyName": "Ahn",
+                "StartDate": "2019-03-01T00:00:00",
+                "ManagerProvidedBiography": ""
+            }
+        ],
+        "TrailingPerformance": [
+            {
+                "CurrencyId": "GBP",
+                "Date": "2022-08-02T00:00:00",
+                "Type": "DayEnd",
+                "ReturnType": "ItPostTax",
+                "Return": [
+                    {
+                        "Value": 12.245449,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "ClosePrice"
+                    },
+                    {
+                        "Value": 0.029699,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "D0"
+                    },
+                    {
+                        "Value": -0.878504,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "D1"
+                    },
+                    {
+                        "Value": -15.499955,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M0"
+                    },
+                    {
+                        "Value": -2.361868,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "W1"
+                    },
+                    {
+                        "Value": -5.178577,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M1"
+                    },
+                    {
+                        "Value": -2.416917,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M3"
+                    },
+                    {
+                        "Value": -6.336707,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M6"
+                    },
+                    {
+                        "Value": -19.755744,
+                        "Annualized": true,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": -1.128067,
+                        "Annualized": true,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M36"
+                    },
+                    {
+                        "Value": 2.706679,
+                        "Annualized": true,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M60"
+                    },
+                    {
+                        "Value": 7.128137,
+                        "Annualized": true,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M255"
+                    }
+                ]
+            },
+            {
+                "CurrencyId": "GBP",
+                "Date": "2022-08-02T00:00:00",
+                "Type": "DayEnd",
+                "ReturnType": "GbPostTax",
+                "Return": [
+                    {
+                        "Value": 12.245449,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "ClosePrice"
+                    },
+                    {
+                        "Value": 0.029699,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "D0"
+                    },
+                    {
+                        "Value": -0.878504,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "D1"
+                    },
+                    {
+                        "Value": -15.499955,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M0"
+                    },
+                    {
+                        "Value": -2.361868,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "W1"
+                    },
+                    {
+                        "Value": -5.178577,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M1"
+                    },
+                    {
+                        "Value": -2.416917,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M3"
+                    },
+                    {
+                        "Value": -6.336707,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M6"
+                    },
+                    {
+                        "Value": -19.755744,
+                        "Annualized": true,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": -1.128067,
+                        "Annualized": true,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M36"
+                    },
+                    {
+                        "Value": 2.706679,
+                        "Annualized": true,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M60"
+                    },
+                    {
+                        "Value": 7.128137,
+                        "Annualized": true,
+                        "Date": "2022-08-02T00:00:00",
+                        "TimePeriod": "M255"
+                    }
+                ]
+            }
+        ],
+        "RiskStatistics": [
+            {
+                "CurrencyId": "GBP",
+                "CurrencyOption": "DISPLAYCURRENCY",
+                "Date": "2022-07-31T00:00:00",
+                "Type": "MonthEnd",
+                "ReturnType": "ItPostTax",
+                "benchmarkType": "CategoryPrimaryIndexId",
+                "Alphas": [
+                    {
+                        "Value": -3.4233,
+                        "Frequency": "M",
+                        "TimePeriod": "M36"
+                    }
+                ],
+                "Betas": [
+                    {
+                        "Value": 0.96521,
+                        "Frequency": "M",
+                        "TimePeriod": "M36"
+                    }
+                ],
+                "RSquareds": [
+                    {
+                        "Value": 55.155,
+                        "Frequency": "M",
+                        "TimePeriod": "M36"
+                    }
+                ],
+                "InformationRatios": [
+                    {
+                        "Value": -0.37854,
+                        "Frequency": "M",
+                        "TimePeriod": "M36"
+                    }
+                ],
+                "TrackingErrors": [
+                    {
+                        "Value": 10.73854,
+                        "Frequency": "M",
+                        "TimePeriod": "M36"
+                    }
+                ],
+                "StandardDeviations": [
+                    {
+                        "Value": 16.02,
+                        "Frequency": "M",
+                        "TimePeriod": "M36"
+                    }
+                ],
+                "SharpeRatios": [
+                    {
+                        "Frequency": "M",
+                        "TimePeriod": "M36",
+                        "Value": -0.03941
+                    }
+                ]
+            }
+        ],
+        "HistoricalPerformanceSeries": [
+            {
+                "CurrencyId": "GBP",
+                "StartDate": "2012-01-01T00:00:00",
+                "Frequency": "Y",
+                "TimePeriod": "M12",
+                "ReturnType": "GbPostTax",
+                "Return": [
+                    {
+                        "Value": -16.24472,
+                        "Date": "2021-12-31T00:00:00",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": 34.07682,
+                        "Date": "2020-12-31T00:00:00",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": 24.69594,
+                        "Date": "2019-12-31T00:00:00",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": -12.47216,
+                        "Date": "2018-12-31T00:00:00",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": 39.35178,
+                        "Date": "2017-12-31T00:00:00",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": 5.52071,
+                        "Date": "2016-12-31T00:00:00",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": 2.38511,
+                        "Date": "2015-12-31T00:00:00",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": 24.86545,
+                        "Date": "2014-12-31T00:00:00",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Date": "2013-12-31T00:00:00"
+                    },
+                    {
+                        "Date": "2012-12-31T00:00:00"
+                    }
+                ]
+            }
+        ],
+        "Benchmark": [
+            {
+                "Id": "EUCA000779",
+                "GlobalAssetClassId": "$BCG$EQUTY",
+                "Type": "Category",
+                "Name": "Asia ex-Japan Equity"
+            },
+            {
+                "Id": "XIUSA04EVS",
+                "Type": "CategoryPrimaryIndex",
+                "Name": "MSCI AC Asia Ex Japan NR USD"
+            },
+            {
+                "Id": "F00000UND8",
+                "Type": "PrimaryBenchmark",
+                "Name": "MSCI AC Asia Ex Japan NR EUR"
+            }
+        ],
+        "FundBenchmark": [
+            {
+                "Id": "F00000UND8",
+                "Name": "MSCI AC Asia Ex Japan NR EUR",
+                "Weighting": 100
+            }
+        ],
+        "Portfolios": [
+            {
+                "Date": "2022-04-30T00:00:00",
+                "SuppressionExpiration": "2022-07-29T00:00:00",
+                "ReleaseTopHoldingDate": "2022-07-29T00:00:00",
+                "TopNcount": 0,
+                "CurrencyId": "USD",
+                "Id": 626966,
+                "TotalMarketValues": [
+                    {
+                        "Value": 1083567270,
+                        "CurrencyId": "USD",
+                        "SalePosition": "N"
+                    }
+                ],
+                "AssetAllocations": [
+                    {
+                        "Type": "MorningstarEUR3",
+                        "SalePosition": "N",
+                        "BreakdownValues": [
+                            {
+                                "Value": 99.48473,
+                                "Type": "1"
+                            },
+                            {
+                                "Value": 0.01746,
+                                "Type": "2"
+                            },
+                            {
+                                "Value": 0.4978,
+                                "Type": "3"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "4"
+                            },
+                            {
+                                "Value": 0.00001,
+                                "Type": "99"
+                            }
+                        ]
+                    },
+                    {
+                        "Type": "MorningstarEUR3",
+                        "SalePosition": "L",
+                        "BreakdownValues": [
+                            {
+                                "Value": 99.48473,
+                                "Type": "1"
+                            },
+                            {
+                                "Value": 0.01746,
+                                "Type": "2"
+                            },
+                            {
+                                "Value": 0.4978,
+                                "Type": "3"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "4"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "99"
+                            }
+                        ]
+                    },
+                    {
+                        "Type": "MorningstarEUR3",
+                        "SalePosition": "S",
+                        "BreakdownValues": [
+                            {
+                                "Value": 0,
+                                "Type": "1"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "2"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "3"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "4"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "99"
+                            }
+                        ]
+                    }
+                ],
+                "RegionalExposure": [
+                    {
+                        "NotClassified": 0.51527,
+                        "SalePosition": "N",
+                        "BreakdownValues": [
+                            {
+                                "Value": 0,
+                                "Type": "1"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "2"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "3"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "4"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "5"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "6"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "7"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "8"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "9"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "10"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "11"
+                            },
+                            {
+                                "Value": 14.476071,
+                                "Type": "12"
+                            },
+                            {
+                                "Value": 85.523929,
+                                "Type": "13"
+                            },
+                            {
+                                "Value": 85.523929,
+                                "Type": "14"
+                            },
+                            {
+                                "Value": 14.476071,
+                                "Type": "15"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "16"
+                            }
+                        ]
+                    }
+                ],
+                "StyleBoxBreakdown": [
+                    {
+                        "NotClassified": 5.67482,
+                        "SalePosition": "N",
+                        "BreakdownValues": [
+                            {
+                                "Value": 6.908346,
+                                "Type": "1"
+                            },
+                            {
+                                "Value": 43.003544,
+                                "Type": "2"
+                            },
+                            {
+                                "Value": 50.08811,
+                                "Type": "3"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "4"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "5"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "6"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "7"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "8"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "9"
+                            }
+                        ]
+                    }
+                ],
+                "GlobalStockSectorBreakdown": [
+                    {
+                        "NotClassified": 0.51527,
+                        "SalePosition": "N",
+                        "BreakdownValues": [
+                            {
+                                "Value": 3.282916,
+                                "Type": "101"
+                            },
+                            {
+                                "Value": 35.861393,
+                                "Type": "102"
+                            },
+                            {
+                                "Value": 12.844041,
+                                "Type": "103"
+                            },
+                            {
+                                "Value": 2.792157,
+                                "Type": "104"
+                            },
+                            {
+                                "Value": 13.555889,
+                                "Type": "205"
+                            },
+                            {
+                                "Value": 7.163552,
+                                "Type": "206"
+                            },
+                            {
+                                "Value": 14.176537,
+                                "Type": "308"
+                            },
+                            {
+                                "Value": 4.021924,
+                                "Type": "309"
+                            },
+                            {
+                                "Value": 5.300924,
+                                "Type": "310"
+                            },
+                            {
+                                "Value": 1.000666,
+                                "Type": "311"
+                            }
+                        ]
+                    },
+                    {
+                        "NotClassified": 0.51527,
+                        "SalePosition": "L",
+                        "BreakdownValues": [
+                            {
+                                "Value": 3.282916,
+                                "Type": "101"
+                            },
+                            {
+                                "Value": 35.861393,
+                                "Type": "102"
+                            },
+                            {
+                                "Value": 12.844041,
+                                "Type": "103"
+                            },
+                            {
+                                "Value": 2.792157,
+                                "Type": "104"
+                            },
+                            {
+                                "Value": 13.555889,
+                                "Type": "205"
+                            },
+                            {
+                                "Value": 7.163552,
+                                "Type": "206"
+                            },
+                            {
+                                "Value": 14.176537,
+                                "Type": "308"
+                            },
+                            {
+                                "Value": 4.021924,
+                                "Type": "309"
+                            },
+                            {
+                                "Value": 5.300924,
+                                "Type": "310"
+                            },
+                            {
+                                "Value": 1.000666,
+                                "Type": "311"
+                            }
+                        ]
+                    },
+                    {
+                        "NotClassified": 100,
+                        "SalePosition": "S",
+                        "BreakdownValues": [
+                            {
+                                "Value": 0,
+                                "Type": "101"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "102"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "103"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "104"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "205"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "206"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "308"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "309"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "310"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "311"
+                            }
+                        ]
+                    }
+                ],
+                "MaturityRange": [
+                    {
+                        "NotClassified": 99.98254,
+                        "SalePosition": "N",
+                        "BreakdownValues": [
+                            {
+                                "Value": 100,
+                                "Type": "1"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "2"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "3"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "4"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "5"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "6"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "7"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "8"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "9"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "10"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "11"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "12"
+                            },
+                            {
+                                "Value": 0,
+                                "Type": "13"
+                            }
+                        ]
+                    }
+                ],
+                "EquityStatistics": {
+                    "ProspectiveEarningsYield": 23.27381,
+                    "Forecasted5YearEarningsGrowth": 12.89845,
+                    "MarketCapital": 42407.16977
+                }
+            }
+        ],
+        "ValuationRatios": [
+            {
+                "AsOf": "DayEnd"
+            }
+        ],
+        "PriceMultiples": []
+    }
+]

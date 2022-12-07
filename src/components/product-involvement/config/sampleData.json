@@ -1,0 +1,36 @@
+{
+    "portfolio": {
+        "abortiveContraceptivesStemcell": 6.6914544,
+        "animalTesting": 12.180668,
+        "controversialWeapons": 1.2591741,
+        "adultEntertainment": 0,
+        "alcohol": 1.1270572,
+        "furAndSpecialtyLeather": 0,
+        "gambling": 0.28550306,
+        "militaryContracting": 2.0566392,
+        "nuclear": 0.43815938,
+        "palmOil": 0.008738188,
+        "pesticides": 0.06944976,
+        "smallArms": 1.3401275,
+        "thermalCoal": 0.12252558,
+        "tobacco": 0.16017261,
+        "gmo": 0.017991528
+    },
+    "benchmark": {
+        "abortiveContraceptivesStemcell": 9.76653,
+        "animalTesting": 20.19085,
+        "controversialWeapons": 1.88323,
+        "adultEntertainment": 0,
+        "alcohol": 0.15723,
+        "furAndSpecialtyLeather": 0,
+        "gambling": 0.15979,
+        "militaryContracting": 3.08397,
+        "nuclear": 1.94728,
+        "palmOil": 0,
+        "pesticides": 0.15281,
+        "smallArms": 0.98947,
+        "thermalCoal": 1.36642,
+        "tobacco": 0.62949,
+        "gmo": 0.10922
+    }
+}

@@ -1,0 +1,380 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import PortfolioHoldings from "@/components/portfolio-holdings/PortfolioHoldings.vue";
+import { PORTFOLIO_ANALYSIS_AMERICAS_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="PortfolioHoldings" component={ PortfolioHoldings }/>
+
+<style> {
+    `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .hide {
+      opacity: 0;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+
+</style>
+
+# Portfolio Holdings (Americas)
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+
+
+## Description
+
+The Portfolio Holdings component displays a list of the securities in a portfolio including information such as symbol, exchange code, and so on. Each security's weight percentage in the portfolio is also displayed.
+
+<Canvas withSource="open" withToolbar>
+    <Story id="components-portfolio-holdings--story-details-us"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={PortfolioHoldings} />
+
+## Fetching Data
+The component is populated with data returned by calls to the <a href={PORTFOLIO_ANALYSIS_AMERICAS_URL} target="_blank">Portfolio Analysis API (Americas)</a>.
+
+<!--
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request-example)
+- [Request Payload Example](#request-payload-example)
+-->
+
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.xray.getPortfolioHoldingsUsData({ portfolios: samplePortfolio, languageId: 'en-US' });
+```
+
+<details>
+    <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+const samplePortfolio = [
+    {
+        name: 'US demo portfolio - weight',
+        totalValue: 10000,
+        currency: 'USD',
+        holdings: [
+            {
+                securityId: 'FOUSA06OEZ',
+                weight: 30,
+            },
+            {
+                securityId: 'FOUSA06IVV',
+                weight: 50,
+            },
+            {
+                securityId: 'F00000T770',
+                weight: 20,
+            },
+        ],
+        benchmark: {
+            type: 'Standard',
+            holdings: [
+                {
+                    securityId: 'XIUSA0010V',
+                    weight: 100,
+                },
+            ],
+        },
+    },
+];
+
+window.mstarApisSdk.xray.getPortfolioHoldingsUsData({ portfolios: samplePortfolio, languageId: 'en-US' });
+
+```
+
+</details>
+
+### Request Example
+
+Requests to the API have the following format:
+
+```javascript dark
+"https://www.us-api.morningstar.com/portfolioanalysis/v1/esg?langcult={{languageId}}"
+```
+
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- |
+| `languageId` |	ISO culture codes. If not provided, defaults to language defined in settings. |`languageId=en-US` |
+
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Integration Data Format](#integration-data-format) 
+- [Integration Transformation Operation](#integration-transformation-operation) 
+- [Component Transformed Data Format](#component-transformed-data-format) 
+- [Component Transformation Operation](#component-transformation-operation)
+-->
+
+### API Response Data Format
+
+<details>
+    <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "topHoldings": [
+        {
+            "SecurityId": "FOUSA06IVV",
+            "ISIN": "US46138E7435",
+            "Name": "Invesco FTSE RAFI Dev Mkts ex-US ETF",
+            "TradingSymbol": "PXF",
+            "BaseCurrency": "USD",
+            "Type": "FE",
+            "InceptionDate": "2007-06-25T00:00:00",
+            "SecurityReferenceTypes": [
+                "PortfolioHolding"
+            ],
+            "FundPortfolioDate": "2022-09-15T00:00:00",
+            "Year1": -14.91,
+            "Year3": 4.09,
+            "Year5": 1.44,
+            "Year10": 0,
+            "PercentAssets": 50,
+            "MarketValue": 5000
+        },
+    ],
+    "stockOverlap": [
+        {
+            "SecurityId": "0P00007OU3",
+            "SecurityName": "Shell PLC(GBP)",
+            "TradingSymbol": "SHEL",
+            "PercentOfInvestments": 1.576659,
+            "MarketValue": 157.6659,
+            "StockSector": "b2",
+            "EquitySector": "Energy",
+            "parentHoldings": [
+                {
+                    "SecurityId": "FOUSA06IVV",
+                    "CUSIP": "46138E743",
+                    "FundPortfolioDate": "2022-09-15T00:00:00",
+                    "PercentOfInvestments": 1.469235,
+                    "MarketValue": 146.9235,
+                    "SecurityName": "Invesco FTSE RAFI Dev Mkts ex-US ETF",
+                    "TradingSymbol": "PXF"
+                },
+                {
+                    "SecurityId": "FOUSA06OEZ",
+                    "CUSIP": "464288257",
+                    "FundPortfolioDate": "2022-09-13T00:00:00",
+                    "PercentOfInvestments": 0.107424,
+                    "MarketValue": 10.7424,
+                    "SecurityName": "iShares MSCI ACWI ETF",
+                    "TradingSymbol": "ACWI"
+                }
+            ]
+        }
+    ]
+}
+```
+</details>
+
+### Integration Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "topHoldings": [
+        {
+            "holdingId": 0,
+            "securityId": "F0GBR052QA",
+            "symbol": "BRIG"
+        }
+    ],
+    "stockOverlap": [
+        {
+            "holdingId": "GB0009895292",
+            "name": "AstraZeneca PLC",
+            "securityId": "E0GBR00FA0",
+            "securityType": "E",
+        }
+    ]
+}
+```
+</details>
+&nbsp;
+
+### Integration Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+function getPortfolioHoldingsUsData(xrayData) {
+    const portfolioHoldings = get(xrayData, 'holdings.PortfolioHoldings.Security', []);
+    const stockHoldings = get(xrayData, 'holdings.StockIntersection.Stock', []);
+    const topUnderlyingHoldings = get(xrayData, 'holdings.TopNetUnderlyingHoldings.Security', []);
+    const topHoldings = portfolioHoldings.map((security) => {
+        const secRef = xrayData.securityReference.find((obj) => {
+            if (obj.NotClassifiedHoldingId) {
+                return obj.NotClassifiedHoldingId === security.NotClassifiedHoldingId;
+            }
+            return obj.SecurityId === security.SecurityId;
+        });
+        return { ...secRef, ...security };
+    });
+    const stockOverlap = stockHoldings.map((holding) => {
+        const currentHolding = holding;
+        currentHolding.EquitySector = topUnderlyingHoldings.find(
+            (obj) => obj.SecurityId === currentHolding.SecurityId,
+        )?.EquitySector;
+        currentHolding.parentHoldings = currentHolding.SourceOfStock.map((parentHoldings) => {
+            const currParentHolding = parentHoldings;
+            const secRef = xrayData.securityReference.find((obj) => {
+                const holdingData = obj.SecurityId === currParentHolding.SecurityId;
+                return holdingData;
+            });
+            currParentHolding.SecurityName = secRef?.Name;
+            currParentHolding.TradingSymbol = secRef?.TradingSymbol;
+            return currParentHolding;
+        });
+        return currentHolding;
+    });
+    return {
+        topHoldings,
+        stockOverlap,
+    };
+}
+```
+</details>
+&nbsp;
+
+### Component Transformed Data Format
+
+<details>
+    <summary><span class="summary-text">Top Holdings</span></summary>
+
+```json dark
+[
+    {
+        "Name": "Invesco FTSE RAFI Dev Mkts ex-US ETF",
+        "TradingSymbol": "PXF",
+        "Year3": 4.09,
+        "PercentAssets": 50.00
+    }
+]
+```
+</details>
+&nbsp;
+
+<details>
+    <summary><span class="summary-text">Stock Overlap</span></summary>
+
+```json dark
+[
+    {
+        "SecurityId": "0P00007OU3",
+        "SecurityName": "Shell PLC(GBP)",
+        "TradingSymbol": "SHEL",
+        "PercentOfInvestments": 1.576659,
+        "MarketValue": 157.6659,
+        "StockSector": "b2",
+        "EquitySector": "Energy",
+        "parentHoldings": [
+            {
+                "SecurityId": "FOUSA06IVV",
+                "CUSIP": "46138E743",
+                "FundPortfolioDate": "2022-09-15T00:00:00",
+                "PercentOfInvestments": 1.469235,
+                "MarketValue": 146.9235,
+                "SecurityName": "Invesco FTSE RAFI Dev Mkts ex-US ETF",
+                "TradingSymbol": "PXF"
+            },
+            {
+                "SecurityId": "FOUSA06OEZ",
+                "CUSIP": "464288257",
+                "FundPortfolioDate": "2022-09-13T00:00:00",
+                "PercentOfInvestments": 0.107424,
+                "MarketValue": 10.7424,
+                "SecurityName": "iShares MSCI ACWI ETF",
+                "TradingSymbol": "ACWI"
+            }
+        ]
+    }
+]
+```
+</details>
+
+### Component Transformation Operation
+
+<details>
+    <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+    parsedModelData(){
+        if (this.modelData) {
+            const selectedTab = this.tabs[this.selectedTab];
+            if (selectedTab === 'topHoldings') {
+                return this.getTopHoldingsModelData();
+            }
+            if (selectedTab === 'stockOverlap') {
+                return this.getStockOverlapModelData();
+            }
+        }
+        return [];
+    },
+    getRows(holding, currentField) {
+        return this.fieldDefinitions[currentField].reduce((preValue, currValue) => {
+            let field;
+            if (typeof holding[currValue.value] === 'number') {
+                field = this.formatNumber(holding[currValue.value]);
+            } else {
+                field = holding[currValue.value] || '-';
+            }
+            return {
+                ...preValue,
+                [currValue.value]: field,
+            };
+        }, {});
+    },
+    getStockOverlapModelData() {
+        const newStockOverlap = [];
+        const stockHoldings = get(this.modelData, 'stockOverlap', []);
+        this.numberOfStockHoldings = stockHoldings.length;
+        stockHoldings.forEach((stockHolding) => {
+            const stockOverlapObject = this.getStockOverlapObject(stockHolding);
+            newStockOverlap.push(stockOverlapObject);
+        });
+        return newStockOverlap;
+    },
+    getStockOverlapObject(stockHolding) {
+        const stockOverlapObject = this.getRows(stockHolding, 'stockOverlap');
+        stockOverlapObject.childRows = [];
+        stockHolding.parentHoldings.forEach((parentHolding) => {
+            const currParentHolding = parentHolding;
+            currParentHolding.sectorKey = currParentHolding?.sectorName;
+            const stockOverlapParentObject = this.getRows(currParentHolding, 'stockOverlap');
+            stockOverlapObject.childRows.push(stockOverlapParentObject);
+        });
+        return stockOverlapObject;
+    },
+```
+</details>

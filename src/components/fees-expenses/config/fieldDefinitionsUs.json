@@ -1,0 +1,29 @@
+{
+    "fields": [
+        {
+            "key": "Average Gross Expense Ratio",
+            "value": "AverageGrossExpenseRatio",
+            "format": "number"
+        },
+        {
+            "key": "Average Net Expense Ratio",
+            "value": "AverageNetExpenseRatio",
+            "format": "number"
+        },
+        {
+            "key": "Potential Cap Gains Exposure",
+            "value": "PotentialCapGainsExposure",
+            "format": "number"
+        }
+    ],
+    "breakdownFields": {
+        "fields": [
+            "securityName",
+            "averageGrossExpenseRatio",
+            "averageNetExpenseRatio",
+            "potentialCapGainsExposure",
+            "weight"
+        ]
+    },
+    "type": "us"
+}

@@ -1,0 +1,543 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import StockType from "@/components/stock-type/StockType.vue";
+import { PORTFOLIO_ANALYSIS_AMERICAS_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="StockType" component={ StockType }/>
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+  
+</style>
+
+# Stock Type
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+
+
+## Description
+The Stock Type  component displays the percentage of stocks in a portfolio according to the underlying fundamentals of the company.
+
+Companies are classified based on where they are in their economic lifecycles or by the underlying economic force driving their earnings.
+
+<Canvas withSource="open" withToolbar>
+  <Story id="components-stocktype--story-details"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={ StockType } />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={PORTFOLIO_ANALYSIS_AMERICAS_URL} target="_blank">Portfolio Analysis API (Americas)</a>.
+<!--
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request)
+- [Request Payload Example](#request-payload)
+-->
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.xray.getStockTypeData({ portfolios: helper.sampleUsPortfolio, languageId: 'en-US' });
+```
+<details>
+  <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+const sampleUsPortfolio = [
+    {
+        name: 'US demo portfolio - weight',
+        totalValue: 10000,
+        currency: 'USD',
+        holdings: [
+            {
+                securityId: 'FOUSA06OEZ',
+                weight: 30,
+            },
+            {
+                securityId: 'FOUSA06IVV',
+                weight: 50,
+            },
+            {
+                securityId: 'F00000T770',
+                weight: 20,
+            },
+        ],
+        benchmark: {
+            type: 'Standard',
+            holdings: [
+                {
+                    securityId: 'XIUSA0010V',
+                    weight: 100,
+                },
+            ],
+        },
+    },
+];
+
+window.mstarApisSdk.xray.getStockTypeData({ portfolios: sampleUsPortfolio, languageId: 'en-US' });
+```
+</details>
+&nbsp;
+
+### Request Example
+
+```javascript dark
+https://www.us-api.morningstar.com/portfolioanalysis/v1/xray?langcult={{languageId}}
+
+```
+
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- | 
+| `languageId` | ISO culture codes. If not provided, defaults to language defined in settings. | `languageId=en-US` |
+
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Component Transformed Data Format](#component-transformed-data-format) 
+- [Component Transformation Operation](#component-transformation-operation) 
+-->
+### API Response Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "AsOfDate": "2022-07-31T00:00:00",
+    "PortfolioAnalyzed": 79.89,
+    "Portfolio": [
+        {
+            "Id": "AggressiveGrowth",
+            "Value": 7.4188423
+        },
+        {
+            "Id": "ClassicGrowth",
+            "Value": 5.29029252
+        },
+        {
+            "Id": "Cyclical",
+            "Value": 16.17795196
+        },
+        {
+            "Id": "Distressed",
+            "Value": 0.24828088
+        },
+        {
+            "Id": "HardAsset",
+            "Value": 2.53823195
+        },
+        {
+            "Id": "HighYield",
+            "Value": 0.94444098
+        },
+        {
+            "Id": "NotAvailable",
+            "Value": 63.57273909
+        },
+        {
+            "Id": "SlowGrowth",
+            "Value": 2.80224102
+        },
+        {
+            "Id": "SpeculativeGrowth",
+            "Value": 1.0069793
+        }
+    ],
+    "Benchmark": [
+        {
+            "Id": "AggressiveGrowth",
+            "Value": 18.912
+        },
+        {
+            "Id": "ClassicGrowth",
+            "Value": 14.127
+        },
+        {
+            "Id": "Cyclical",
+            "Value": 41.889
+        },
+        {
+            "Id": "Distressed",
+            "Value": 0.984
+        },
+        {
+            "Id": "HardAsset",
+            "Value": 7.785
+        },
+        {
+            "Id": "HighYield",
+            "Value": 3.208
+        },
+        {
+            "Id": "NotAvailable",
+            "Value": 2.435
+        },
+        {
+            "Id": "SlowGrowth",
+            "Value": 7.768
+        },
+        {
+            "Id": "SpeculativeGrowth",
+            "Value": 2.892
+        }
+    ]
+}
+```
+</details>
+&nbsp;
+
+### Integration Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "stockTypeData": {
+        "Portfolio": [
+            {
+                "Id": "AggressiveGrowth",
+                "Value": 7.39647146
+            },
+            {
+                "Id": "ClassicGrowth",
+                "Value": 5.32769071
+            },
+            {
+                "Id": "Cyclical",
+                "Value": 15.86140116
+            },
+            {
+                "Id": "Distressed",
+                "Value": 0.2074022
+            },
+            {
+                "Id": "HardAsset",
+                "Value": 2.68349989
+            },
+            {
+                "Id": "HighYield",
+                "Value": 1.20210912
+            },
+            {
+                "Id": "NotAvailable",
+                "Value": 63.59305277
+            },
+            {
+                "Id": "SlowGrowth",
+                "Value": 2.80142714
+            },
+            {
+                "Id": "SpeculativeGrowth",
+                "Value": 0.92694556
+            }
+        ],
+        "Benchmark": [
+            {
+                "Id": "AggressiveGrowth",
+                "Value": 18.912
+            },
+            {
+                "Id": "ClassicGrowth",
+                "Value": 14.127
+            },
+            {
+                "Id": "Cyclical",
+                "Value": 41.889
+            },
+            {
+                "Id": "Distressed",
+                "Value": 0.984
+            },
+            {
+                "Id": "HardAsset",
+                "Value": 7.785
+            },
+            {
+                "Id": "HighYield",
+                "Value": 3.208
+            },
+            {
+                "Id": "NotAvailable",
+                "Value": 2.435
+            },
+            {
+                "Id": "SlowGrowth",
+                "Value": 7.768
+            },
+            {
+                "Id": "SpeculativeGrowth",
+                "Value": 2.892
+            }
+        ]
+    }
+}
+```
+</details>
+&nbsp;
+
+### Integration Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+function getStockTypeUsData(stockTypeData, breakdown = {}) {
+    const breakdownData = {};
+    if (breakdown.showBreakdown) {
+        breakdownData.securityBreakdownData = getSecurityBreakdownDetails(
+            stockTypeData,
+            breakdown.portfolioSecurityReference,
+            breakdown.portfolioHoldings,
+        );
+    }
+    return {
+        stockTypeData,
+        breakdownData,
+    };
+}
+```
+</details>
+&nbsp;
+
+### Component Transformed Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+[
+    {
+        "key": "highYield",
+        "name": "High Yield",
+        "portfolio": 0.94444098,
+        "benchmark": 3.208
+    },
+    {
+        "key": "distressed",
+        "name": "Distressed",
+        "portfolio": 0.24828088,
+        "benchmark": 0.984
+    },
+    {
+        "key": "hardAsset",
+        "name": "Hard Asset",
+        "portfolio": 2.53823195,
+        "benchmark": 7.785
+    },
+    {
+        "key": "cyclical",
+        "name": "Cyclical",
+        "portfolio": 16.17795196,
+        "benchmark": 41.889
+    },
+    {
+        "key": "slowGrowth",
+        "name": "Slow Growth",
+        "portfolio": 2.80224102,
+        "benchmark": 7.768
+    },
+    {
+        "key": "classicGrowth",
+        "name": "Classic Growth",
+        "portfolio": 5.29029252,
+        "benchmark": 14.127
+    },
+    {
+        "key": "aggressiveGrowth",
+        "name": "Aggressive Growth",
+        "portfolio": 7.4188423,
+        "benchmark": 18.912
+    },
+    {
+        "key": "speculativeGrowth",
+        "name": "Speculative Growth",
+        "portfolio": 1.0069793,
+        "benchmark": 2.892
+    },
+    {
+        "key": "notAvailable",
+        "name": "Not Classified",
+        "portfolio": 63.57273909,
+        "benchmark": 2.435
+    }
+]
+```
+</details>
+&nbsp;
+
+### Component Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+parsedModelData() {
+const { stockTypeData } = this.modelData;
+const parsedData = {
+    portfolio: get(stockTypeData, 'Portfolio', {})
+        .reduce((newObj, currentObj) => (
+            { ...newObj, [currentObj.Id]: currentObj.Value }), {}),
+    benchmark: get(stockTypeData, 'Benchmark', {})
+        .reduce((newObj, currentObj) => (
+            { ...newObj, [currentObj.Id]: currentObj.Value }), {}),
+};
+
+const keys = Object.keys(mapping.dataPoints);
+return keys.map((key) => {
+    const dataPoint = key;
+    return {
+        key: camelCase(key),
+        name: mapping.dataPoints[dataPoint],
+        portfolio: this.formatNumber(get(parsedData, `portfolio.${dataPoint}`)) || '-',
+        benchmark: this.formatNumber(get(parsedData, `benchmark.${dataPoint}`)) || '-',
+    };
+});
+}
+```
+</details>
+&nbsp;
+
+### Security Breakdown Data Format
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+  "breakdownData": {
+    "securityBreakdownData": [
+      {
+        "SecurityId": "FOUSA06OEZ",
+        "Analyzed": 99.54196,
+        "NotAnalyzed": 0.45804,
+        "EquityTypeBreakdownItem": [
+          {
+            "Id": "AggressiveGrowth",
+            "Value": 18.155
+          },
+          {
+            "Id": "ClassicGrowth",
+            "Value": 15.913
+          },
+          {
+            "Id": "Cyclical",
+            "Value": 42.835
+          },
+          {
+            "Id": "Distressed",
+            "Value": 0.398
+          },
+          {
+            "Id": "HardAsset",
+            "Value": 7.818
+          },
+          {
+            "Id": "HighYield",
+            "Value": 1.177
+          },
+          {
+            "Id": "NotAvailable",
+            "Value": 2.886
+          },
+          {
+            "Id": "SlowGrowth",
+            "Value": 8.399
+          },
+          {
+            "Id": "SpeculativeGrowth",
+            "Value": 2.418
+          }
+        ],
+        "Name": "iShares MSCI ACWI ETF",
+        "Weight": 100
+      }
+    ]
+  },
+  "securityBreakdown": [
+    {
+      "securityName": "iShares MSCI ACWI ETF",
+      "weight": 100,
+      "aggressiveGrowth": "18.16",
+      "classicGrowth": "15.91",
+      "cyclical": "42.84",
+      "distressed": "0.40",
+      "hardAsset": "7.82",
+      "highYield": "1.18",
+      "notAvailable": "2.89",
+      "slowGrowth": "8.40",
+      "speculativeGrowth": "2.42"
+    }
+  ],
+  "portfolioAnalyzed": [
+    {
+      "securityName": "iShares MSCI ACWI ETF",
+      "analyzedPercent": 99.54,
+      "notAnalyzedPercent": 0.46,
+      "weight": 100
+    }
+  ]
+}
+```
+</details>
+&nbsp;
+
+### Security Breakdown Transformation Operation
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+function getSecurityBreakdownDetails(componentData, securityReference, portfolioHoldings) {
+    const breakdown = get(componentData, 'SecurityBreakdown', []);
+    return breakdown.map((security) => {
+        const currSecurity = security;
+        currSecurity.Name = getSecurityDetail(securityReference, currSecurity.SecurityId)?.Name;
+        currSecurity.Weight = portfolioHoldings ? getSecurityDetail(
+            portfolioHoldings,
+            currSecurity.SecurityId,
+        )?.PercentAssets : null;
+        return currSecurity;
+    });
+}
+
+function getStockTypeUsData(stockTypeData, breakdown = {}) {
+    const breakdownData = {};
+    if (breakdown.showBreakdown) { // Security Breakdown Data
+        breakdownData.securityBreakdownData = getSecurityBreakdownDetails(
+            stockTypeData,
+            breakdown.portfolioSecurityReference,
+            breakdown.portfolioHoldings,
+        );
+    }
+    return {
+        stockTypeData,
+        breakdownData, // Security Breakdown Data
+    };
+}
+```
+</details>

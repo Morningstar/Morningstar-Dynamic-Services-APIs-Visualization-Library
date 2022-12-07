@@ -1,0 +1,282 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import StockStats from '@/components/stock-stats/StockStats.vue';
+import { PORTFOLIO_ANALYSIS_EMEA_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="StockStats" component={StockStats} />
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+  
+</style>
+
+# Stock Stats (APAC/EMEA)
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+
+## Description
+Stock Stats displays statistics about a portfolio including Prospective Earnings, Price/Book Ratio, Price/Sales Ration, and so on.
+
+<Canvas withSource="open" withToolbar>
+  <Story id="components-stock-stats--story-details"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={StockStats} />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={PORTFOLIO_ANALYSIS_EMEA_URL} target="_blank">Portfolio Analysis API (APAC/EMEA)</a>.
+<!--
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request)
+- [Request Payload Example](#request-payload)
+-->
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+
+``` javascript dark
+window.mstarApisSdk.xray.getStockStatsData({ portfolios: samplePortfolio });
+```
+<details>
+  <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+const samplePortfolio = {
+    type: 3,
+    benchmark: {
+        type: 'Standard',
+        holdings: [
+            {
+                identifier: 'EUCA000555',
+                identifierType: 'MSID',
+                weight: 100,
+            },
+        ],
+    },
+    holdings: [
+        {
+            identifier: 'F0GBR052QA',
+            identifierType: 'MSID',
+            amount: 5000,
+        },
+        {
+            identifier: 'F000000EY1',
+            identifierType: 'MSID',
+            amount: 2500,
+        },
+        {
+            identifier: 'F00000OXG7',
+            identifierType: 'MSID',
+            amount: 2000,
+        },
+        {
+            identifier: 'F00000TWNO',
+            identifierType: 'MSID',
+            amount: 10000,
+        },
+    ],
+    name: 'UK demo portfolio - amount',
+};
+
+window.mstarApisSdk.xray.getStockStatsData({ portfolios: samplePortfolio });
+```
+</details>
+&nbsp;
+
+### Request Example
+
+```javascript dark
+https://www.emea-api.morningstar.com/ecint/v1/xray/json?languageId={{languageId}}&portfolioDataPoints={{portfolioDataPoints}}&holdingDataPoints={{holdingDataPoints}}&benchmarkDataPoints={{benchmarkDataPoints}}
+
+```
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- | 
+| `languageId` |	ISO culture codes. If not provided, defaults to language defined in settings. |`languageId=en-GB` |
+| `portfolioDataPoints` |Comma-separated list of portfolio data points.|`portfolioDataPoints=prospectiveEarningsYield,prospectiveBookValueYield` | 
+| `benchmarkDataPoints` | Comma-separated list of benchmark data points.|`benchmarkDataPoints=ShowBreakdown` |
+
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Integration Data Format](#integration-data-format) 
+- [Integration Transformation Operation](#integration-transformation-operation) 
+- [Component Transformed Data Format](#component-transformed-data-format) 
+- [Component Transformation Operation](#component-transformation-operation)
+-->
+### API Response Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "portfolio": {
+        "prospectiveEarningsYield": 19.46527,
+        "prospectiveBookValueYield": 3.0437,
+        "prospectiveCashFlowYield": 14.67762,
+        "prospectiveRevenueYield": 2.60577
+    },
+    "benchmark": {
+        "equityWeighting": 93.68134,
+        "equityWeightingLong": 93.80115,
+        "marketCapital": 140482.39025,
+        "prospectiveEarningsYield": 16.06189,
+        "prospectiveBookValueYield": 2.69622,
+        "prospectiveCashFlowYield": 10.06219,
+        "prospectiveRevenueYield": 1.86583
+    }
+}
+```
+</details>
+&nbsp;
+
+### Integration Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "portfolio": {
+        "prospectiveEarningsYield": 19.46527,
+        "prospectiveBookValueYield": 3.0437,
+        "prospectiveCashFlowYield": 14.67762,
+        "prospectiveRevenueYield": 2.60577,
+        "PriceBook": 1.37375337,
+        "PriceCashFlow": 7.43423703,
+        "PriceEarnings": 11.19976804,
+        "PriceSales": 1.03639848,
+        "DebtCapital": 39.98816017,
+        "NetMargin": 14.9181137,
+        "ROA": 6.77104036,
+        "ROE": 18.82830188
+    },
+    "benchmark": {
+        "equityWeighting": 93.68134,
+        "equityWeightingLong": 93.80115,
+        "marketCapital": 140482.39025,
+        "prospectiveEarningsYield": 16.06189,
+        "prospectiveBookValueYield": 2.69622,
+        "prospectiveCashFlowYield": 10.06219,
+        "prospectiveRevenueYield": 1.86583,
+        "PriceBook": 3.51692,
+        "PriceCashFlow": 14.63272,
+        "PriceEarnings": 18.82176,
+        "PriceSales": 2.25043,
+        "DebtCapital": 42.25015,
+        "NetMargin": 17.71919,
+        "ROA": 10.72313,
+        "ROE": 29.62747
+    }
+}
+```
+</details>
+&nbsp;
+
+### Integration Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+function getStockStatsData(xrayData) {
+    const portfolioData = get(xrayData, 'equityStatistics', {});
+    const benchmarkData = get(xrayData, 'benchmark[0].equityStatistics', {});
+
+    const portfolio = {};
+    const benchmark = {};
+
+    Object.keys(portfolioData).forEach((item) => {
+        portfolio[item] = portfolioData[item].value;
+    });
+    Object.keys(benchmarkData).forEach((item) => {
+        benchmark[item] = benchmarkData[item].value;
+    });
+
+    return {
+        portfolio,
+        benchmark,
+    };
+}
+```
+</details>
+&nbsp;
+
+### Component Transformed Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+[
+    {
+        "key": "Price/Prospective Earnings",
+        "portfolio": 16.59367,
+        "benchmark": 15.78044
+    },
+    {
+        "key": "Price/Book Ratio",
+        "portfolio": 2.46805,
+        "benchmark": 2.81765
+    },
+    {
+        "key": "Price/Sales Ratio",
+        "portfolio": 1.95647,
+        "benchmark": 1.87912
+    },
+    {
+        "key": "Price/Cash Flow Ratio",
+        "portfolio": 12.19094,
+        "benchmark": 9.13403
+    }
+]
+```
+</details>
+&nbsp;
+
+### Component Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+parsedModelData() {
+    const { modelData } = this;
+    const stockStatisticsData = modelData;
+    const keys = Object.keys(this.dataPoints);
+    return keys.map((key) => {
+        const dataPoint = key;
+        return {
+            key: this.dataPoints[dataPoint],
+            portfolio: this.formatNumber(get(stockStatisticsData.portfolio, `${dataPoint}`, null)),
+            benchmark: this.formatNumber(get(stockStatisticsData.benchmark, `${dataPoint}`, null)),
+        };
+    });
+},
+```
+</details>
+&nbsp;

@@ -1,0 +1,291 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import FixedIncomeSectors from "@/components/fixed-income-sectors/FixedIncomeSectors.vue";
+import { PORTFOLIO_ANALYSIS_AMERICAS_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="FixedIncomeSectors" component={FixedIncomeSectors} />
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+  
+</style>
+
+# Fixed Income Sectors (Americas)
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+
+
+## Description
+Fixed Income sector represents the different kind of sector which total make your fixed income.
+
+
+<Canvas withSource="open" withToolbar>
+  <Story id="components-fixed-income-sectors--story-details-us"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={ FixedIncomeSectors } />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={PORTFOLIO_ANALYSIS_AMERICAS_URL} target="_blank">Portfolio Analysis API (Americas)</a>.
+<!--
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request)
+- [Request Payload Example](#request-payload)
+-->
+
+### API Data Access Library
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.xray.getFixedIncomeSectorsUsData({ portfolios: helper.sampleUsPortfolio, languageId: 'en-US' })
+```
+<details>
+  <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+const samplePortfolio = [
+    {
+        name: 'US demo portfolio - weight',
+        totalValue: 10000,
+        currency: 'USD',
+        holdings: [
+            {
+                securityId: 'FOUSA06OEZ',
+                weight: 30,
+            },
+            {
+                securityId: 'FOUSA06IVV',
+                weight: 50,
+            },
+            {
+                securityId: 'F00000T770',
+                weight: 20,
+            },
+        ],
+        benchmark: {
+            type: 'Standard',
+            holdings: [
+                {
+                    securityId: 'XIUSA0010V',
+                    weight: 100,
+                },
+            ],
+        },
+    },
+];
+
+window.mstarApisSdk.xray.getFixedIncomeSectorsUsData({ portfolios: helper.sampleUsPortfolio, languageId: 'en-US' })
+```
+</details>
+&nbsp;
+
+### Request Example
+
+```javascript dark
+"https://www.us-api.morningstar.com/portfolioanalysis/v1/esg?langcult={{languageId}}"
+
+```
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- | 
+| `languageId` |	ISO culture codes. If not provided, defaults to language defined in settings. |`languageId=en-US` |
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Integration Data Format](#integration-data-format) 
+- [Integration Transformation Operation](#integration-transformation-operation) 
+- [Component Transformed Data Format](#component-transformed-data-format) 
+- [Component Transformation Operation](#component-transformation-operation) 
+-->
+
+### API Response Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "Portfolio": [
+        {
+            "Id": "Government",
+            "Value": 0
+        },
+        {
+            "Id": "Corporate",
+            "Value": 96.38
+        },
+        {
+            "Id": "Securitized",
+            "Value": 0
+        },
+        {
+            "Id": "Municipal",
+            "Value": 0
+        },
+        {
+            "Id": "CashEquivalents",
+            "Value": 3.62
+        },
+        {
+            "Id": "Derivative",
+            "Value": 0
+        }
+    ],
+    "Benchmark": [
+        {
+            "Id": "Government"
+        },
+        {
+            "Id": "Corporate"
+        },
+        {
+            "Id": "Securitized"
+        },
+        {
+            "Id": "Municipal"
+        },
+        {
+            "Id": "CashEquivalents"
+        },
+        {
+            "Id": "Derivative"
+        }
+    ]
+}
+```
+</details>
+&nbsp;
+
+### Integration Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "portfolio": {
+        "Government": 0,
+        "Corporate": 96.38,
+        "Securitized": 0,
+        "Municipal": 0,
+        "CashEquivalents": 3.62,
+        "Derivative": 0
+    },
+    "benchmark": {
+        "Government": 0,
+        "Corporate": 0,
+        "Securitized": 0,
+        "Municipal": 0,
+        "CashEquivalents": 0,
+        "Derivative": 0
+    }
+}
+```
+</details>
+&nbsp;
+
+### Integration Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+function getFixedIncomeSectorsUsData(xrayData, breakdown = {}) {
+    const portfolioData = get(xrayData, 'Portfolio', []);
+    const benchmarkData = get(xrayData, 'Benchmark', []);
+    const portfolio = {};
+    const benchmark = {};
+    portfolioData.forEach((sector) => {
+        portfolio[sector.Id] = sector.Value;
+    });
+    benchmarkData.forEach((sector) => {
+        benchmark[sector.Id] = sector.Value;
+    });
+    return {
+        portfolio,
+        benchmark
+    };
+}
+```
+</details>
+
+### Component Transformed Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+[
+    {
+        "key": "Government",
+        "portfolio": 0,
+        "benchmark": "-"
+    },
+    {
+        "key": "Municipal",
+        "portfolio": 0,
+        "benchmark": "-"
+    },
+    {
+        "key": "Corporate",
+        "portfolio": 96.38,
+        "benchmark": "-"
+    },
+    {
+        "key": "Securitized",
+        "portfolio": 0,
+        "benchmark": "-"
+    },
+    {
+        "key": "CashEquivalents",
+        "portfolio": 3.62,
+        "benchmark": "-"
+    },
+    {
+        "key": "Derivative",
+        "portfolio": 0,
+        "benchmark": "-"
+    }
+]
+```
+</details>
+&nbsp;
+
+### Component Transformation Operation
+<details>
+  	<summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+    parsedModelData() {
+        return this.dataPoints.map((sector) => ({
+            key: sector,
+            portfolio: this.modelData.portfolio[sector] ?? '-',
+            benchmark: this.modelData.benchmark[sector] ?? '-',
+        }));
+    },
+```
+</details>
+

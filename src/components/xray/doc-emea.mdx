@@ -1,0 +1,3054 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import Xray from "@/components/xray/Xray.vue";
+import { PORTFOLIO_ANALYSIS_EMEA_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="Xray" component={ Xray }/>
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .hide {
+      opacity: 0;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+  
+</style>
+
+# Xray (APAC/EMEA)
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+
+## Description
+
+The X-Ray component illustrates how a portfolio is diversified by region, sector, and investment style. 
+
+<Canvas withSource="open" withToolbar>
+  <Story id="tools-xray--story-details"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={ Xray } />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={PORTFOLIO_ANALYSIS_EMEA_URL} target="_blank">Portfolio Analysis API (APAC/EMEA)</a>.
+
+<!-- 
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request-example)
+- [Request Payload Example](#request-payload-example)
+-->
+
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.xray.getXrayIntlData({ portfolios: samplePortfolio });
+window.mstarApisSdk.portfolioAnalysis.getEsgPerformanceIntlData({ portfolios: sampleEsgPortfolio });
+window.mstarApisSdk.portfolioAnalysis.getRiskScore({ portfolios: samplePortfolio });
+window.mstarApisSdk.costCalculator.getCostCalculation({ portfolios: sampleCostCalculationPortfolio });
+```
+
+<details>
+  <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+const samplePortfolio = {
+    type: 3,
+    benchmark: {
+        type: 'Standard',
+        holdings: [{
+            identifier: 'XIUSA0010V',
+            identifierType: 'MSID',
+            weight: 100,
+        }],
+    },
+    holdings: [
+        {
+            identifier: 'F0GBR052QA',
+            identifierType: 'MSID',
+            amount: 5000,
+        },
+        {
+            identifier: 'F000000EY1',
+            identifierType: 'MSID',
+            amount: 2500,
+        },
+        {
+            identifier: 'F00000OXG7',
+            identifierType: 'MSID',
+            amount: 2000,
+        },
+        {
+            identifier: 'F00000TWNO',
+            identifierType: 'MSID',
+            amount: 10000,
+        },
+    ],
+    name: 'UK demo portfolio - amount',
+};
+
+window.mstarApisSdk.xray.getXrayIntlData({ portfolios: samplePortfolio });
+window.mstarApisSdk.portfolioAnalysis.getRiskScore({ portfolios: samplePortfolio });
+
+const sampleEsgPortfolio = [
+    {
+        Name: 'TestPortfolio1',
+        TotalValue: 10000,
+        Holdings: [
+            {
+                SecurityId: 'F00000VCTT',
+                Weight: 20,
+            },
+            {
+                SecurityId: '0P00002NW8',
+                Weight: 10,
+            },
+            {
+                TradingSymbol: 'AAPL',
+                Weight: 15,
+            },
+            {
+                ISIN: 'US09251T1034',
+                Weight: 35,
+            },
+            {
+                CUSIP: '256219106',
+                Weight: 20,
+            },
+        ],
+        Benchmark: {
+            Type: 'Standard',
+            Holdings: [
+                {
+                    SecurityId: 'XIUSA04G92',
+                    Type: 'XI',
+                    Weight: 100,
+                },
+            ],
+        },
+    },
+];
+
+window.mstarApisSdk.portfolioAnalysis.getEsgPerformanceIntlData({ portfolios: sampleEsgPortfolio });
+
+const sampleCostCalculationPortfolio = [
+    {
+        id: 'default',
+        amount: 10000,
+        holdings: [
+            {
+                identifier: 'F0GBR052QA',
+                identifierType: 'MSID',
+                weight: 25.64102564102564,
+                initial: {},
+                ongoing: [
+                    {
+                        name: 'Ongoing',
+                    },
+                    {
+                        name: 'Transaction',
+                    },
+                    {
+                        name: 'Performance',
+                    },
+                ],
+            },
+            {
+                identifier: 'F000000EY1',
+                identifierType: 'MSID',
+                weight: 12.82051282051282,
+                initial: {},
+                ongoing: [
+                    {
+                        name: 'Ongoing',
+                    },
+                    {
+                        name: 'Transaction',
+                    },
+                    {
+                        name: 'Performance',
+                    },
+                ],
+            },
+            {
+                identifier: 'F00000OXG7',
+                identifierType: 'MSID',
+                weight: 10.256410256410255,
+                initial: {},
+                ongoing: [
+                    {
+                        name: 'Ongoing',
+                    },
+                    {
+                        name: 'Transaction',
+                    },
+                    {
+                        name: 'Performance',
+                    },
+                ],
+            },
+            {
+                identifier: 'F00000TWNO',
+                identifierType: 'MSID',
+                weight: 51.28205128205128,
+                initial: {},
+                ongoing: [
+                    {
+                        name: 'Ongoing',
+                    },
+                    {
+                        name: 'Transaction',
+                    },
+                    {
+                        name: 'Performance',
+                    },
+                ],
+            },
+        ],
+    },
+];
+
+window.mstarApisSdk.costCalculator.getCostCalculation({ portfolios: sampleCostCalculationPortfolio });
+
+```
+</details>
+
+### Request Example
+
+Requests to the API have the following format:
+
+```javascript dark
+https://www.emea-api.morningstar.com/ecint/v1/xray/json?languageId={{languageId}}&portfolioDataPoints={{portfolioDataPoints}}&holdingDataPoints={{holdingDataPoints}}&benchmarkDataPoints={{benchmarkDataPoints}}
+https://www.emea-api.morningstar.com/portfolioanalysis/v1/esg?langcult={{languageId}}
+https://www.us-api.morningstar.com/portfolioanalysis/v1/riskScore?langcult={{languageId}}
+https://www.emea-api.morningstar.com/ecint/v1/investment-fees/calculate
+
+```
+
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- | 
+| `languageId` |	ISO culture codes. If not provided, defaults to language defined in settings. |`languageId=en-GB` |
+| `portfolioDataPoints` |Comma-separated list of portfolio data points.|`portfolioDataPoints=StyleBox,GlobalStockSector` | 
+| `holdingDataPoints` |Comma-separated list of holding data points.|`HoldingDataPoints=ShowBreakdown` |
+| `benchmarkDataPoints` | Comma-separated list of benchmark data points.|`benchmarkDataPoints=GrowthSeries,HistoricalPerformanceSeries,ShowStatistic` |
+
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format) 
+- [Integration Data Format](#integration-data-format) 
+- [Integration Transformation Operation](#integration-transformation-operation) 
+-->
+
+### API Response Data Format
+
+<details>
+  <summary><span class="summary-text">Xray Data</span></summary>
+
+```json dark
+{
+    "benchmarkId": "XIUSA0010V",
+    "benchmarkName": "Morningstar US Market TR USD",
+    "bondStatistics": {
+        "effectiveDuration": {
+            "value": 6.02,
+            "notClassified": "20"
+        },
+        "averageCreditQuality": {
+            "value": 11,
+            "notClassified": "0",
+            "code": "BBB"
+        }
+    },
+    "holdingOverlap": [
+        {
+            "holdingId": "AU000000NCM7",
+            "name": "Newcrest Mining Ltd",
+            "securityId": "E0AUS00AK7",
+            "securityType": "E",
+            "performanceId": "0P00006WQO",
+            "weight": 0.43191,
+            "currencyName": "Australian Dollar",
+            "parentHoldings": [
+                {
+                    "holdingId": "0",
+                    "weight": 0.39222,
+                    "weightInParent": 1.96108
+                },
+                {
+                    "holdingId": "1",
+                    "weight": 0.0397,
+                    "weightInParent": 0.04962
+                }
+            ]
+        }
+    ],
+    "holdings": [
+        {
+            "holdingId": 0,
+            "securityId": "F0GBR052QA",
+            "symbol": "BRIG",
+            "name": "BlackRock Income and Growth Ord",
+            "iSIN": "GB0030961691",
+            "portfolioDate": "2020-03-31",
+            "initialAmount": 2500,
+            "marketValue": 2500,
+            "weight": 25,
+            "starRatingM255": 4,
+            "exchangeCode": "LSE"
+        }
+    ],
+    "underlyHoldings": [
+        {
+            "holdingId": "459200101",
+            "name": "International Business Machines Corp",
+            "weight": 50,
+            "marketValue": 84574478738,
+            "sector": "311",
+            "sectorId": "",
+            "globalSectorId": "311",
+            "symbol": "IBM"
+        }
+    ],
+    "trailingPerformance": [
+        {
+            "type": "MonthEnd",
+            "returnType": "TotalReturn",
+            "currencyId": "GBP",
+            "endDate": "2020-07-31",
+            "returns": [
+                {
+                    "timePeriod": "M0",
+                    "value": -7.27306
+                },
+                {
+                    "timePeriod": "M1",
+                    "value": -2.98626
+                },
+                {
+                    "timePeriod": "M2",
+                    "value": -2.68029
+                },
+                {
+                    "timePeriod": "M3",
+                    "value": -0.59432
+                }
+            ]
+        }
+    ],
+    "correlationMatrix": [
+        {
+            "timePeriod": "M12",
+            "endDate": "2020-07-31",
+            "correlationMatrixDetail": [
+                {
+                    "id": "2",
+                    "correlationDetail": [
+                        {
+                            "id": "2",
+                            "correlation": "1"
+                        },
+                        {
+                            "id": "0",
+                            "correlation": "0.40771"
+                        },
+                        {
+                            "id": "1",
+                            "correlation": "0.42429"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "historicalPerformanceSeries": [
+        {
+            "returnType": "TotalReturn",
+            "timePeriod": "M1",
+            "frequency": "Monthly",
+            "startDate": "2009-12-31",
+            "returns": [
+                [
+                    "2010-01-31",
+                    0.3295
+                ],
+                [
+                    "2010-02-28",
+                    1.72681
+                ],
+                [
+                    "2010-03-31",
+                    3.30637
+                ],
+                [
+                    "2010-04-30",
+                    -0.70923
+                ]
+            ]
+        },
+        {
+            "returnType": "TotalReturn",
+            "timePeriod": "M3",
+            "frequency": "Quarterly",
+            "startDate": "2009-12-31",
+            "returns": [
+                [
+                    "2010-03-31",
+                    5.43654
+                ],
+                [
+                    "2010-06-30",
+                    -4.61063
+                ],
+                [
+                    "2010-09-30",
+                    8.75383
+                ],
+                [
+                    "2010-12-31",
+                    6.6205
+                ]
+            ]
+        },
+        {
+            "returnType": "TotalReturn",
+            "timePeriod": "M12",
+            "frequency": "Annual",
+            "startDate": "2009-12-31",
+            "returns": [
+                [
+                    "2010-12-31",
+                    16.62091
+                ],
+                [
+                    "2011-12-31",
+                    16.00074
+                ],
+                [
+                    "2012-12-31",
+                    7.38727
+                ]
+            ]
+        }
+    ],
+    "bestWorstPeriods": {
+        "type": "MonthEnd",
+        "currencyId": "GBP",
+        "date": "2020-07-31",
+        "returns": [
+            {
+                "timePeriod": "M1",
+                "startDate": "2012-12-31",
+                "endDate": "2013-01-31",
+                "type": "Best",
+                "value": 8.24162
+            }
+        ]
+    },
+    "breakdowns": {
+        "assetAllocation": [
+            {
+                "type": "MorningstarEUR3",
+                "salePosition": "N",
+                "values": {
+                    "1": 90.42966,
+                    "2": 0.21931,
+                    "3": 3.28567,
+                    "4": 6.06535,
+                    "99": 0.00001
+                }
+            }
+        ],
+        "styleBox": [
+            {
+                "salePosition": "N",
+                "values": {
+                    "1": 68.52403,
+                    "2": 5.67696,
+                    "3": 0,
+                    "4": 2.21841,
+                    "5": 1.95093,
+                    "6": 1.11964,
+                    "7": 2.51006,
+                    "8": 5.15162,
+                    "9": 9.84669,
+                    "99": 3.00163
+                }
+            }
+        ],
+        "regionalExposure": [
+            {
+                "salePosition": "N",
+                "values": {
+                    "1": 56.28222,
+                    "2": 0.00576,
+                    "3": 0.00629,
+                    "4": 43.40694,
+                    "5": 0.01775,
+                    "6": 0.12872,
+                    "7": 0.11905,
+                    "8": 0,
+                    "9": 0.00452,
+                    "10": 0.00552,
+                    "11": 0.01563,
+                    "12": 0.00686,
+                    "13": 0,
+                    "99": 0.00074
+                }
+            }
+        ],
+        "globalStockSector": [
+            {
+                "salePosition": "N",
+                "values": {
+                    "99": 1.67643,
+                    "101": 2.08623,
+                    "102": 5.27175,
+                    "103": 4.17857,
+                    "104": 0.36218,
+                    "205": 7.10425,
+                    "206": 5.3839,
+                    "207": 1.64585,
+                    "308": 2.79994,
+                    "309": 2.0374,
+                    "310": 6.02451,
+                    "311": 61.42898
+                }
+            }
+        ],
+        "countryExposure": [
+            {
+                "type": "1",
+                "salePosition": "N",
+                "values": {
+                    "99": 0.00074,
+                    "aRE": 0.00452,
+                    "aUS": 0.01563,
+                    "aUT": 0.00895,
+                    "bEL": 0.0088,
+                    "cAN": 0.00576,
+                    "cHL": 0.00629,
+                    "dNK": 0.00584,
+                    "gBR": 43.40694,
+                    "jPN": 0.00552,
+                    "kOR": 0.00686,
+                    "pOL": 0.11464,
+                    "rUS": 0.00442,
+                    "uSA": 56.28222,
+                    "sWE": 0.12288
+                }
+            },
+            {
+                "type": "2",
+                "salePosition": "N",
+                "values": {
+                    "99": 5.60052,
+                    "aUS": 22.05554,
+                    "cAN": 6.98555,
+                    "dEU": 8.75017,
+                    "gBR": 38.03748,
+                    "nLD": 8.21212,
+                    "sWE": 4.49136,
+                    "uSA": 5.86841
+                }
+            }
+        ],
+        "bondStyleBox": [
+            {
+                "salePosition": "N",
+                "values": {
+                    "1": 0,
+                    "2": 0,
+                    "3": 0,
+                    "4": 0,
+                    "5": 0,
+                    "6": 0,
+                    "7": 0,
+                    "8": 0,
+                    "9": 0,
+                    "99": 100
+                }
+            }
+        ],
+        "globalBondSector": [
+            {
+                "salePosition": "N",
+                "level": "1",
+                "values": {
+                    "10": 2.95654,
+                    "30": 3.23417,
+                    "50": 93.45999,
+                    "99": 0.34916
+                }
+            },
+            {
+                "salePosition": "N",
+                "level": "2",
+                "values": {
+                    "99": 0.34923,
+                    "1010": 1.89271,
+                    "1020": 1.06412,
+                    "3030": 2.93208,
+                    "3040": 0.3018,
+                    "5010": 93.45999
+                }
+            },
+            {
+                "salePosition": "N",
+                "level": "3",
+                "values": {
+                    "99": 0.34937,
+                    "101010": 1.89271,
+                    "102010": 1.06412,
+                    "303002": 0.34816,
+                    "303003": 2.58392,
+                    "304012": 0.3018,
+                    "501011": 36.25793,
+                    "501012": 1.5747,
+                    "501016": 0.56548,
+                    "501019": 35.11473,
+                    "501021": 8.94388,
+                    "501022": 2.28184,
+                    "501023": 8.72144
+                }
+            }
+        ],
+        "creditQuality": [
+            {
+                "salePosition": "N",
+                "values": {
+                    "1": 0,
+                    "2": 0,
+                    "3": 0,
+                    "4": 0,
+                    "5": 0,
+                    "6": 0,
+                    "7": 0,
+                    "8": 0,
+                    "9": 0,
+                    "99": 100
+                }
+            }
+        ]
+    },
+    "equityStatistics": {
+        "marketCapital": {
+            "value": 40353.00121,
+            "notClassified": "0"
+        },
+        "prospectiveEarningsYield": {
+            "value": 12.34881,
+            "notClassified": "0"
+        },
+        "prospectiveBookValueYield": {
+            "value": 3.98121,
+            "notClassified": "0"
+        },
+        "prospectiveCashFlowYield": {
+            "value": 7.13069,
+            "notClassified": "0"
+        },
+        "prospectiveRevenueYield": {
+            "value": 1.20754,
+            "notClassified": "0"
+        }
+    },
+    "fees": {
+        "actualManagementFee": {
+            "value": 0.775,
+            "analyzedWeight": "100"
+        },
+        "managementFee": {
+            "value": 0.775,
+            "analyzedWeight": "100"
+        },
+        "ongoingCharge": {
+            "value": 0.955,
+            "analyzedWeight": "100"
+        }
+    },
+    "benchmark": [
+        {
+            "trailingPerformance": [
+                {
+                    "type": "MonthEnd",
+                    "returnType": "TotalReturn",
+                    "currencyId": "GBP",
+                    "endDate": "2020-07-31",
+                    "returns": [
+                        {
+                            "timePeriod": "M0",
+                            "value": 3.42815
+                        },
+                        {
+                            "timePeriod": "M1",
+                            "value": -0.43954
+                        },
+                        {
+                            "timePeriod": "M2",
+                            "value": 1.8641
+                        },
+                        {
+                            "timePeriod": "M3",
+                            "value": 9.51099
+                        }
+                    ]
+                }
+            ],
+            "historicalPerformanceSeries": [
+                {
+                    "returnType": "TotalReturn",
+                    "timePeriod": "M1",
+                    "frequency": "Monthly",
+                    "startDate": "1991-12-31",
+                    "returns": [
+                        [
+                            "1992-01-31",
+                            3.46086
+                        ],
+                        [
+                            "1992-02-29",
+                            3.18693
+                        ],
+                        [
+                            "1992-03-31",
+                            -1.02535
+                        ],
+                        [
+                            "1992-04-30",
+                            -0.17745
+                        ]
+                    ]
+                },
+                {
+                    "returnType": "TotalReturn",
+                    "timePeriod": "M3",
+                    "frequency": "Quarterly",
+                    "startDate": "1991-12-31",
+                    "returns": [
+                        [
+                            "1992-03-31",
+                            5.66344
+                        ],
+                        [
+                            "1992-06-30",
+                            -8.11279
+                        ],
+                        [
+                            "1992-09-30",
+                            10.48066
+                        ],
+                        [
+                            "1992-12-31",
+                            25.3811
+                        ]
+                    ]
+                },
+                {
+                    "returnType": "TotalReturn",
+                    "timePeriod": "M12",
+                    "frequency": "Annual",
+                    "startDate": "1991-12-31",
+                    "returns": [
+                        [
+                            "1992-12-31",
+                            34.49252
+                        ],
+                        [
+                            "1993-12-31",
+                            12.58729
+                        ],
+                        [
+                            "1994-12-31",
+                            -5.25268
+                        ],
+                        [
+                            "1995-12-31",
+                            37.81754
+                        ]
+                    ]
+                }
+            ],
+            "breakdowns": {
+                "assetAllocation": [
+                    {
+                        "type": "MorningstarEUR3",
+                        "salePosition": "N",
+                        "values": {
+                            "1": 100.00013,
+                            "2": 0,
+                            "3": 0,
+                            "4": 0,
+                            "99": -0.00013
+                        }
+                    },
+                    {
+                        "type": "MorningstarEUR3",
+                        "salePosition": "L",
+                        "values": {
+                            "1": 100.00013,
+                            "2": 0,
+                            "3": 0,
+                            "4": 0,
+                            "99": 0
+                        }
+                    },
+                    {
+                        "type": "MorningstarEUR3",
+                        "salePosition": "S",
+                        "values": {
+                            "1": 0,
+                            "2": 0,
+                            "3": 0,
+                            "4": 0,
+                            "99": 0
+                        }
+                    },
+                    {
+                        "type": "Default1",
+                        "salePosition": "N",
+                        "values": {
+                            "1": 100.00013,
+                            "2": 0,
+                            "3": 0,
+                            "4": 0,
+                            "5": 0,
+                            "6": 0,
+                            "7": 0,
+                            "8": 0,
+                            "99": -0.00013
+                        }
+                    },
+                    {
+                        "type": "Default1",
+                        "salePosition": "L",
+                        "values": {
+                            "1": 100.00013,
+                            "2": 0,
+                            "3": 0,
+                            "4": 0,
+                            "5": 0,
+                            "6": 0,
+                            "7": 0,
+                            "8": 0,
+                            "99": 0
+                        }
+                    },
+                    {
+                        "type": "Default1",
+                        "salePosition": "S",
+                        "values": {
+                            "1": 0,
+                            "2": 0,
+                            "3": 0,
+                            "4": 0,
+                            "5": 0,
+                            "6": 0,
+                            "7": 0,
+                            "8": 0,
+                            "99": 0
+                        }
+                    }
+                ],
+                "styleBox": [
+                    {
+                        "salePosition": "N",
+                        "values": {
+                            "1": 24.87078,
+                            "2": 26.75742,
+                            "3": 26.45905,
+                            "4": 5.67438,
+                            "5": 6.03605,
+                            "6": 5.77338,
+                            "7": 1.28745,
+                            "8": 1.34742,
+                            "9": 1.22776,
+                            "99": 0.56632
+                        }
+                    }
+                ],
+                "regionalExposure": [
+                    {
+                        "salePosition": "N",
+                        "values": {
+                            "1": 98.79823,
+                            "2": 0,
+                            "3": 0.17865,
+                            "4": 0.6142,
+                            "5": 0,
+                            "6": 0.25641,
+                            "7": 0,
+                            "8": 0,
+                            "9": 0,
+                            "10": 0,
+                            "11": 0,
+                            "12": 0.05575,
+                            "13": 0.09676,
+                            "99": 0
+                        }
+                    }
+                ],
+                "globalStockSector": [
+                    {
+                        "salePosition": "N",
+                        "values": {
+                            "99": 0,
+                            "101": 2.29692,
+                            "102": 11.67377,
+                            "103": 12.81601,
+                            "104": 3.67898,
+                            "205": 6.88838,
+                            "206": 14.66697,
+                            "207": 3.04869,
+                            "308": 10.24215,
+                            "309": 2.35183,
+                            "310": 8.50058,
+                            "311": 23.83573
+                        }
+                    }
+                ],
+                "countryExposure": [
+                    {
+                        "type": "1",
+                        "salePosition": "N",
+                        "values": {
+                            "99": 0,
+                            "bRA": 0.16231,
+                            "cHE": 0.24011,
+                            "cHN": 0.07716,
+                            "gBR": 0.6142,
+                            "iND": 0.0196,
+                            "pRI": 0.01634,
+                            "sGP": 0.05106,
+                            "sWE": 0.0163,
+                            "tWN": 0.00469,
+                            "uSA": 98.79823
+                        }
+                    },
+                    {
+                        "type": "2",
+                        "salePosition": "N",
+                        "values": {
+                            "dEU": 5.75017,
+                            "gBR": 37.03748,
+                            "nLD": 2.21212,
+                            "sWE": 13.49136,
+                            "uSA": 55.86841
+                        }
+                    }
+                ],
+                "globalBondSector": [],
+                "creditQuality": [
+                    {
+                        "salePosition": "N",
+                        "values": {
+                            "1": 0,
+                            "2": 0,
+                            "3": 0,
+                            "4": 0,
+                            "5": 0,
+                            "6": 0,
+                            "7": 0,
+                            "8": 0,
+                            "9": 0,
+                            "99": 0
+                        }
+                    }
+                ],
+                "bondStyleBox": [
+                    {
+                        "salePosition": "N",
+                        "values": {
+                            "1": 0,
+                            "2": 0,
+                            "3": 0,
+                            "4": 0,
+                            "5": 0,
+                            "6": 0,
+                            "7": 0,
+                            "8": 0,
+                            "9": 0,
+                            "99": 0
+                        }
+                    }
+                ]
+            },
+            "equityStatistics": {
+                "equityWeighting": {
+                    "value": 100.00013
+                },
+                "equityWeightingLong": {
+                    "value": 100.00013
+                },
+                "marketCapital": {
+                    "value": 77501.66905
+                },
+                "prospectiveEarningsYield": {
+                    "value": 23.96534
+                },
+                "prospectiveBookValueYield": {
+                    "value": 2.97401
+                },
+                "prospectiveCashFlowYield": {
+                    "value": 11.7471
+                },
+                "prospectiveRevenueYield": {
+                    "value": 2.15261
+                }
+            }
+        }
+    ],
+    "portfolioRiskScore": {
+        "portfolios": [
+            {
+                "returnCode": -1,
+                "errorDescription": "Minimum R-Squared requirement not met",
+                "rSquared": 0.5765551571194764,
+                "riskScore": -1,
+                "zone": null,
+                "misfitRisk": -1,
+                "misfitRiskBudget": -1,
+                "customBenchmarkWeights": null,
+                "identifier": null,
+                "styleWeights": [
+                    {
+                        "identifier": "XIUSA0001H",
+                        "value": -3.474428992570581e-18
+                    },
+                    {
+                        "identifier": "XIUSA04CG5",
+                        "value": 5.556023704803105e-17
+                    },
+                    {
+                        "identifier": "XIUSA04CTD",
+                        "value": 0.15247143926544449
+                    }
+                ]
+            }
+        ],
+        "wedgeParameter": 0.2,
+        "minimumRSquared": 0.85,
+        "annualizationFactor": 12,
+        "lambdaIndexStart": 0,
+        "misfitRiskAlpha": 0,
+        "misfitRiskBeta": 0,
+        "modelPortfolios": [
+            {
+                "identifier": "Ultra Cautious",
+                "averageMisfitRisk": 0,
+                "equityReallocationMisfitRisk": 0,
+                "fixedReallocationMisfitRisk": 0
+            },
+            {
+                "identifier": "Cautious",
+                "averageMisfitRisk": 0,
+                "equityReallocationMisfitRisk": 0,
+                "fixedReallocationMisfitRisk": 0
+            },
+            {
+                "identifier": "Moderate Cautious",
+                "averageMisfitRisk": 0,
+                "equityReallocationMisfitRisk": 0,
+                "fixedReallocationMisfitRisk": 0
+            },
+            {
+                "identifier": "Moderate",
+                "averageMisfitRisk": 0,
+                "equityReallocationMisfitRisk": 0,
+                "fixedReallocationMisfitRisk": 0
+            }
+        ],
+        "errorCode": 0,
+        "errorDescription": null
+    },
+    "riskStatistics": {
+        "type": "MonthEnd",
+        "currencyId": "GBP",
+        "endDate": "2021-12-31",
+        "sRRI": [
+            {
+                "value": 4,
+                "timePeriod": "W260",
+                "frequency": "W",
+                "endDate": "2021-12-31"
+            }
+        ]
+    }
+}
+```
+</details>
+&nbsp;
+<details>
+  <summary><span class="summary-text">ESG data</span></summary>
+
+```json dark
+{
+    "ESG": [
+        {
+            "sustainability": {
+                "portfolio": {
+                    "name": "TestPortfolio1",
+                    "portfolioDate": "2022-06-30",
+                    "esgRisk": {
+                        "portfolioCorporateSustainabilityScore": 21.977004466752362,
+                        "corporateSustainabilityRatingPercentOfEligiblePortfolioCovered": 91.08188366347714,
+                        "portfolioEnvironmentalRiskScore": 3.3938291540851737,
+                        "portfolioSocialRiskScore": 8.044274769816289,
+                        "portfolioGovernanceRiskScore": 6.950278316115634,
+                        "portfolioCorporateESGRiskExposureScore": 40.30746050574244,
+                        "portfolioCorporateESGManagedRiskScore": 18.329724006804366,
+                        "corporatePercentOfPortfolioCoveredWithHighESGRiskScores": 14.294103948513516,
+                        "corporatePercentOfPortfolioCoveredWithLowESGRiskScores": 48.886990778444705,
+                        "corporatePercentOfPortfolioCoveredWithMediumESGRiskScores": 33.4821172157836,
+                        "corporatePercentOfPortfolioCoveredWithNegligibleESGRiskScores": 0.2542501200243926,
+                        "corporatePercentOfPortfolioCoveredWithSevereESGRiskScores": 3.0825379372337833,
+                    },
+                    "productInvolvement": {
+                        "abortiveContraceptivesStemcell": 6.6882706,
+                        "animalTesting": 12.127789,
+                        "controversialWeapons": 0.9124976,
+                        "adultEntertainment": 0,
+                        "alcohol": 1.0358891,
+                        "furAndSpecialtyLeather": 0,
+                        "gambling": 0.31149513,
+                        "militaryContracting": 1.8615547,
+                        "nuclear": 0.4293387,
+                        "palmOil": 0.013239475,
+                        "pesticides": 0.041176625,
+                        "smallArms": 1.0017776,
+                        "thermalCoal": 0.102476425,
+                        "tobacco": 0.14087544,
+                        "gmo": 0.014180776
+                    },
+                    "carbonData": {
+                        "percentAUMCoveredCarbon": 84.25,
+                        "carbonRiskScore": 8.7,
+                        "scope1Emissions": 2051473.5,
+                        "scope2Emissions": 1080364.8,
+                        "carbonRiskClassification": "Low Risk",
+                        "percentOfAUMWithNegligibleCarbonRisk": 19.08,
+                        "percentOfAUMWithLowCarbonRisk": 48.95,
+                        "percentOfAUMWithMediumCarbonRisk": 26.68,
+                        "percentOfAUMWithHighCarbonRisk": 4.94,
+                        "percentOfAUMWithSevereCarbonRisk": 0.36,
+                        "fossilFuelInvolvement": 7.14,
+                        "thermalCoalPowerGenerationInvolvement": 0.09,
+                        "thermalCoalExtractionInvolvement": 0,
+                        "oilSandsExtractionInvolvement": 1.59,
+                        "carbonExposureScore": 16.18,
+                        "carbonManagementScore": 57.51,
+                        "carbonOperationsRisk": 4.85,
+                        "carbonProductsAndServicesRisk": 2.35,
+                        "strandedAssetsRisk": 3.37,
+                        "carbonIntensity": 139.53,
+                        "arcticOilAndGasExplorationInvolvement": 1.59,
+                        "carbonSolutionsInvolvement": 23.16,
+                        "oilAndGasGenerationInvolvement": 2.34,
+                        "oilAndGasProductionInvolvement": 5.45,
+                        "oilAndGasProductsAndServiceInvolvement": 0.72
+                    }
+                },
+                "benchmark": {
+                    "name": "S&P 500 TR USD",
+                    "portfolioDate": "2022-06-30",
+                    "identifier": "XIUSA04G92",
+                    "identifierType": "SecurityId",
+                    "securityType": "XI",
+                    "esgRisk": {
+                        "portfolioCorporateSustainabilityScore": 21.55,
+                        "corporateSustainabilityRatingPercentOfEligiblePortfolioCovered": 99.90634,
+                        "portfolioEnvironmentalRiskScore": 4.04,
+                        "portfolioSocialRiskScore": 9.89,
+                        "portfolioGovernanceRiskScore": 7.61,
+                        "portfolioCorporateESGRiskExposureScore": 39.45173,
+                        "portfolioCorporateESGManagedRiskScore": 17.90302,
+                        "corporatePercentOfPortfolioCoveredWithHighESGRiskScores": 12.41885,
+                        "corporatePercentOfPortfolioCoveredWithLowESGRiskScores": 45.76532,
+                        "corporatePercentOfPortfolioCoveredWithMediumESGRiskScores": 38.71241,
+                        "corporatePercentOfPortfolioCoveredWithNegligibleESGRiskScores": 1.5494,
+                        "corporatePercentOfPortfolioCoveredWithSevereESGRiskScores": 1.55402,
+                    },
+                    "productInvolvement": {
+                        "abortiveContraceptivesStemcell": 9.76653,
+                        "animalTesting": 20.19085,
+                        "controversialWeapons": 1.88323,
+                        "adultEntertainment": 0,
+                        "alcohol": 0.15723,
+                        "furAndSpecialtyLeather": 0,
+                        "gambling": 0.15979,
+                        "militaryContracting": 3.08397,
+                        "nuclear": 1.94728,
+                        "palmOil": 0,
+                        "pesticides": 0.15281,
+                        "smallArms": 0.98947,
+                        "thermalCoal": 1.36642,
+                        "tobacco": 0.62949,
+                        "gmo": 0.10922
+                    },
+                    "carbonData": {
+                        "percentAUMCoveredCarbon": 99.87,
+                        "carbonRiskScore": 7.08,
+                        "scope1Emissions": 5221947,
+                        "scope2Emissions": 2083370.5,
+                        "carbonRiskClassification": "Low Risk",
+                        "percentOfAUMWithNegligibleCarbonRisk": 30.35,
+                        "percentOfAUMWithLowCarbonRisk": 42.74,
+                        "percentOfAUMWithMediumCarbonRisk": 23.26,
+                        "percentOfAUMWithHighCarbonRisk": 3.6,
+                        "percentOfAUMWithSevereCarbonRisk": 0.06,
+                        "fossilFuelInvolvement": 8.13,
+                        "thermalCoalPowerGenerationInvolvement": 1.37,
+                        "thermalCoalExtractionInvolvement": 0,
+                        "oilSandsExtractionInvolvement": 2.2,
+                        "carbonExposureScore": 13.71,
+                        "carbonManagementScore": 56.21,
+                        "carbonOperationsRisk": 4.32,
+                        "carbonProductsAndServicesRisk": 1.6,
+                        "strandedAssetsRisk": 2.3,
+                        "carbonIntensity": 150.28,
+                        "arcticOilAndGasExplorationInvolvement": 2.07,
+                        "carbonSolutionsInvolvement": 17.14,
+                        "oilAndGasGenerationInvolvement": 4.24,
+                        "oilAndGasProductionInvolvement": 4.04,
+                        "oilAndGasProductsAndServiceInvolvement": 0.33
+                    }
+                }
+            }
+        }
+    ]
+}
+```
+</details>
+&nbsp;
+<details>
+  <summary><span class="summary-text">Risk Score data</span></summary>
+
+```json dark
+[
+    {
+        "portfolioName": "US demo portfolio - weight",
+        "portfolioRiskScore": 124.59250330226178,
+        "portfolioAlignmentScore": 26.5809594176668,
+        "portfolioRsquared": 0.8449991593394772,
+        "isProxyUsedInRiskScore": false
+    }
+]
+```
+</details>
+&nbsp;
+<details>
+  <summary><span class="summary-text">Calculate data</span></summary>
+
+```json dark
+{
+    "feeLevel": "N/A",
+    "portfolioId": "default",
+    "assumptions": {
+        "amount": 10000,
+        "growthRatePercent": 5,
+        "id": "default",
+        "monthlySavingsAmount": 0,
+        "yearsToCalculate": 5
+    },
+    "holdings": [
+        {
+            "identifier": "F0GBR052QA",
+            "identifierType": "MSID",
+            "initial": {
+                "amount": 0,
+                "EMTsource": true,
+                "percentage": 0
+            },
+            "name": "BlackRock Income and Growth Ord",
+            "ongoing": [
+                {
+                    "amount": 0,
+                    "EMTsource": true,
+                    "name": "Ongoing",
+                    "percentage": 1.27
+                },
+                {
+                    "amount": 0,
+                    "EMTsource": true,
+                    "name": "Transaction",
+                    "percentage": 0.57243
+                },
+                {
+                    "amount": 0,
+                    "EMTsource": true,
+                    "name": "Performance",
+                    "percentage": 0
+                }
+            ],
+            "secId": "F0GBR052QA"
+        },
+        {
+            "identifier": "F000000EY1",
+            "identifierType": "MSID",
+            "initial": {
+                "amount": 0,
+                "EMTsource": true,
+                "percentage": 0
+            },
+            "name": "Baronsmead Second Venture Trust Ord",
+            "ongoing": [
+                {
+                    "amount": 0,
+                    "EMTsource": true,
+                    "name": "Ongoing",
+                    "percentage": 2.56
+                },
+                {
+                    "amount": 0,
+                    "EMTsource": true,
+                    "name": "Transaction",
+                    "percentage": 0
+                },
+                {
+                    "amount": 0,
+                    "EMTsource": true,
+                    "name": "Performance",
+                    "percentage": 0
+                }
+            ],
+            "secId": "F000000EY1"
+        }
+    ],
+    "summary": {
+        "initialAdviserCostAmount": 0,
+        "initialAdviserCostPercentage": 0,
+        "initialCostAmount": 0,
+        "initialCostPercentage": 0,
+        "initialDFMCostAmount": 0,
+        "initialDFMCostPercentage": 0,
+        "initialPlatformCostAmount": 0,
+        "initialPlatformCostPercentage": 0,
+        "initialProductCostAmount": 0,
+        "initialProductCostPercentage": 0,
+        "ongoingAdviserCostAmount": 0,
+        "ongoingAdviserCostPercentage": 0,
+        "ongoingCostAmount": 944.89905,
+        "ongoingCostPercentage": 9.44899,
+        "ongoingDFMCostAmount": 0,
+        "ongoingDFMCostPercentage": 0,
+        "ongoingPlatformCostAmount": 0,
+        "ongoingPlatformCostPercentage": 0,
+        "ongoingProductCostAmount": 944.89905,
+        "ongoingProductCostPercentage": 9.44899,
+        "ongoingServiceCostAmount": 0,
+        "ongoingServiceCostPercentage": 0,
+        "ongoingServiceTransactionCostAmount": 0,
+        "ongoingServiceTransactionCostPercentage": 0,
+        "productCostAmount": 944.89905,
+        "productCostPercentage": 9.44899,
+        "productOngoingCostAmount": 753.97411,
+        "productOngoingCostPercentage": 7.53974,
+        "productPerformanceCostAmount": 0,
+        "productPerformanceCostPercentage": 0,
+        "productTransactionCostAmount": 190.92494,
+        "productTransactionCostPercentage": 1.90925,
+        "reductionInReturnAmount": 1064.6221,
+        "reductionInReturnPercentage": 10.64622,
+        "returnExcludingFeesAmount": 12762.81563,
+        "returnExcludingFeesPercentage": 27.62816,
+        "returnIncludingFeesAmount": 11698.19353,
+        "returnIncludingFeesPercentage": 16.98194,
+        "serviceCostAmount": 0,
+        "serviceCostPercentage": 0,
+        "totalCostAmount": 944.89905,
+        "totalCostPercentage": 9.44899,
+        "ongoingProductDistributorCompensationAmount": 0,
+        "ongoingProductDistributorCompensationPercentage": 0
+    },
+    "holdingFees": [
+        {
+            "breakdown": {
+                "initial": {
+                    "amount": 0,
+                    "percentage": 0
+                },
+                "annualAverage": {
+                    "amount": 50.92418,
+                    "breakdown": [
+                        {
+                            "amount": 35.06777,
+                            "name": "Ongoing",
+                            "percentage": 1.27
+                        },
+                        {
+                            "amount": 15.85641,
+                            "name": "Transaction",
+                            "percentage": 0.57243
+                        },
+                        {
+                            "amount": 0,
+                            "name": "Performance",
+                            "percentage": 0
+                        }
+                    ],
+                    "percentage": 1.84243
+                },
+                "recurringTotal": {
+                    "amount": 254.62089,
+                    "breakdown": [
+                        {
+                            "amount": 175.33883,
+                            "name": "Ongoing",
+                            "percentage": 1.75339
+                        },
+                        {
+                            "amount": 79.28206,
+                            "name": "Transaction",
+                            "percentage": 0.79282
+                        },
+                        {
+                            "amount": 0,
+                            "name": "Performance",
+                            "percentage": 0
+                        }
+                    ],
+                    "percentage": 2.54621
+                }
+            },
+            "identifier": "F0GBR052QA",
+            "identifierType": "MSID",
+            "name": "BlackRock Income and Growth Ord",
+            "secId": "F0GBR052QA"
+        },
+        {
+            "breakdown": {
+                "initial": {
+                    "amount": 0,
+                    "percentage": 0
+                },
+                "annualAverage": {
+                    "amount": 34.52731,
+                    "breakdown": [
+                        {
+                            "amount": 34.52731,
+                            "name": "Ongoing",
+                            "percentage": 2.56
+                        },
+                        {
+                            "amount": 0,
+                            "name": "Transaction",
+                            "percentage": 0
+                        },
+                        {
+                            "amount": 0,
+                            "name": "Performance",
+                            "percentage": 0
+                        }
+                    ],
+                    "percentage": 2.56
+                },
+                "recurringTotal": {
+                    "amount": 172.63654,
+                    "breakdown": [
+                        {
+                            "amount": 172.63654,
+                            "name": "Ongoing",
+                            "percentage": 1.72637
+                        },
+                        {
+                            "amount": 0,
+                            "name": "Transaction",
+                            "percentage": 0
+                        },
+                        {
+                            "amount": 0,
+                            "name": "Performance",
+                            "percentage": 0
+                        }
+                    ],
+                    "percentage": 1.72637
+                }
+            },
+            "identifier": "F000000EY1",
+            "identifierType": "MSID",
+            "name": "Baronsmead Second Venture Trust Ord",
+            "secId": "F000000EY1"
+        }
+    ],
+    "feeBreakdown": {
+        "annual": [
+            {
+                "period": "Y1",
+                "product": {
+                    "amount": 177.54293,
+                    "breakdown": [
+                        {
+                            "amount": 47.87202,
+                            "breakdown": [
+                                {
+                                    "amount": 32.96597,
+                                    "name": "Ongoing",
+                                    "percentage": 0.32966
+                                },
+                                {
+                                    "amount": 14.90605,
+                                    "name": "Transaction",
+                                    "percentage": 0.14906
+                                },
+                                {
+                                    "amount": 0,
+                                    "name": "Performance",
+                                    "percentage": 0
+                                }
+                            ],
+                            "identifier": "F0GBR052QA",
+                            "identifierType": "MSID",
+                            "percentage": 0.47872
+                        },
+                        {
+                            "amount": 32.92665,
+                            "breakdown": [
+                                {
+                                    "amount": 32.92665,
+                                    "name": "Ongoing",
+                                    "percentage": 0.32927
+                                },
+                                {
+                                    "amount": 0,
+                                    "name": "Transaction",
+                                    "percentage": 0
+                                },
+                                {
+                                    "amount": 0,
+                                    "name": "Performance",
+                                    "percentage": 0
+                                }
+                            ],
+                            "identifier": "F000000EY1",
+                            "identifierType": "MSID",
+                            "percentage": 0.32927
+                        },
+                        {
+                            "amount": 14.53724,
+                            "breakdown": [
+                                {
+                                    "amount": 9.69096,
+                                    "name": "Ongoing",
+                                    "percentage": 0.09691
+                                },
+                                {
+                                    "amount": 4.84628,
+                                    "name": "Transaction",
+                                    "percentage": 0.04846
+                                },
+                                {
+                                    "amount": 0,
+                                    "name": "Performance",
+                                    "percentage": 0
+                                }
+                            ],
+                            "identifier": "F00000OXG7",
+                            "identifierType": "MSID",
+                            "percentage": 0.14537
+                        },
+                        {
+                            "amount": 82.20703,
+                            "breakdown": [
+                                {
+                                    "amount": 66.1944,
+                                    "name": "Ongoing",
+                                    "percentage": 0.66194
+                                },
+                                {
+                                    "amount": 16.01264,
+                                    "name": "Transaction",
+                                    "percentage": 0.16013
+                                },
+                                {
+                                    "amount": 0,
+                                    "name": "Performance",
+                                    "percentage": 0
+                                }
+                            ],
+                            "identifier": "F00000TWNO",
+                            "identifierType": "MSID",
+                            "percentage": 0.82207
+                        }
+                    ],
+                    "percentage": 1.77543
+                },
+                "service": {
+                    "amount": 0,
+                    "percentage": 0
+                },
+                "toDateTotal": {
+                    "product": {
+                        "amount": 177.54293,
+                        "breakdown": [
+                            {
+                                "amount": 47.87202,
+                                "breakdown": [
+                                    {
+                                        "amount": 32.96597,
+                                        "name": "Ongoing",
+                                        "percentage": 0.32966
+                                    },
+                                    {
+                                        "amount": 14.90605,
+                                        "name": "Transaction",
+                                        "percentage": 0.14906
+                                    },
+                                    {
+                                        "amount": 0,
+                                        "name": "Performance",
+                                        "percentage": 0
+                                    }
+                                ],
+                                "identifier": "F0GBR052QA",
+                                "identifierType": "MSID",
+                                "percentage": 0.47872
+                            },
+                            {
+                                "amount": 32.92665,
+                                "breakdown": [
+                                    {
+                                        "amount": 32.92665,
+                                        "name": "Ongoing",
+                                        "percentage": 0.32927
+                                    },
+                                    {
+                                        "amount": 0,
+                                        "name": "Transaction",
+                                        "percentage": 0
+                                    },
+                                    {
+                                        "amount": 0,
+                                        "name": "Performance",
+                                        "percentage": 0
+                                    }
+                                ],
+                                "identifier": "F000000EY1",
+                                "identifierType": "MSID",
+                                "percentage": 0.32927
+                            },
+                            {
+                                "amount": 14.53724,
+                                "breakdown": [
+                                    {
+                                        "amount": 9.69096,
+                                        "name": "Ongoing",
+                                        "percentage": 0.09691
+                                    },
+                                    {
+                                        "amount": 4.84628,
+                                        "name": "Transaction",
+                                        "percentage": 0.04846
+                                    },
+                                    {
+                                        "amount": 0,
+                                        "name": "Performance",
+                                        "percentage": 0
+                                    }
+                                ],
+                                "identifier": "F00000OXG7",
+                                "identifierType": "MSID",
+                                "percentage": 0.14537
+                            },
+                            {
+                                "amount": 82.20703,
+                                "breakdown": [
+                                    {
+                                        "amount": 66.1944,
+                                        "name": "Ongoing",
+                                        "percentage": 0.66194
+                                    },
+                                    {
+                                        "amount": 16.01264,
+                                        "name": "Transaction",
+                                        "percentage": 0.16013
+                                    },
+                                    {
+                                        "amount": 0,
+                                        "name": "Performance",
+                                        "percentage": 0
+                                    }
+                                ],
+                                "identifier": "F00000TWNO",
+                                "identifierType": "MSID",
+                                "percentage": 0.82207
+                            }
+                        ],
+                        "percentage": 1.77543
+                    },
+                    "service": {
+                        "amount": 0,
+                        "percentage": 0
+                    }
+                }
+            },
+            {
+                "period": "Y2",
+                "product": {
+                    "amount": 183.08308,
+                    "breakdown": [
+                        {
+                            "amount": 49.35165,
+                            "breakdown": [
+                                {
+                                    "amount": 33.98488,
+                                    "name": "Ongoing",
+                                    "percentage": 0.33985
+                                },
+                                {
+                                    "amount": 15.36677,
+                                    "name": "Transaction",
+                                    "percentage": 0.15367
+                                },
+                                {
+                                    "amount": 0,
+                                    "name": "Performance",
+                                    "percentage": 0
+                                }
+                            ],
+                            "identifier": "F0GBR052QA",
+                            "identifierType": "MSID",
+                            "percentage": 0.49352
+                        },
+                        {
+                            "amount": 33.7082,
+                            "breakdown": [
+                                {
+                                    "amount": 33.7082,
+                                    "name": "Ongoing",
+                                    "percentage": 0.33708
+                                },
+                                {
+                                    "amount": 0,
+                                    "name": "Transaction",
+                                    "percentage": 0
+                                },
+                                {
+                                    "amount": 0,
+                                    "name": "Performance",
+                                    "percentage": 0
+                                }
+                            ],
+                            "identifier": "F000000EY1",
+                            "identifierType": "MSID",
+                            "percentage": 0.33708
+                        },
+                        {
+                            "amount": 15.0534,
+                            "breakdown": [
+                                {
+                                    "amount": 10.03505,
+                                    "name": "Ongoing",
+                                    "percentage": 0.10035
+                                },
+                                {
+                                    "amount": 5.01835,
+                                    "name": "Transaction",
+                                    "percentage": 0.05018
+                                },
+                                {
+                                    "amount": 0,
+                                    "name": "Performance",
+                                    "percentage": 0
+                                }
+                            ],
+                            "identifier": "F00000OXG7",
+                            "identifierType": "MSID",
+                            "percentage": 0.15053
+                        },
+                        {
+                            "amount": 84.96982,
+                            "breakdown": [
+                                {
+                                    "amount": 68.41904,
+                                    "name": "Ongoing",
+                                    "percentage": 0.68419
+                                },
+                                {
+                                    "amount": 16.55078,
+                                    "name": "Transaction",
+                                    "percentage": 0.16551
+                                },
+                                {
+                                    "amount": 0,
+                                    "name": "Performance",
+                                    "percentage": 0
+                                }
+                            ],
+                            "identifier": "F00000TWNO",
+                            "identifierType": "MSID",
+                            "percentage": 0.8497
+                        }
+                    ],
+                    "percentage": 1.83083
+                },
+                "service": {
+                    "amount": 0,
+                    "percentage": 0
+                },
+                "toDateTotal": {
+                    "product": {
+                        "amount": 360.62601,
+                        "breakdown": [
+                            {
+                                "amount": 97.22367,
+                                "breakdown": [
+                                    {
+                                        "amount": 66.95085,
+                                        "name": "Ongoing",
+                                        "percentage": 0.66951
+                                    },
+                                    {
+                                        "amount": 30.27282,
+                                        "name": "Transaction",
+                                        "percentage": 0.30273
+                                    },
+                                    {
+                                        "amount": 0,
+                                        "name": "Performance",
+                                        "percentage": 0
+                                    }
+                                ],
+                                "identifier": "F0GBR052QA",
+                                "identifierType": "MSID",
+                                "percentage": 0.97224
+                            },
+                            {
+                                "amount": 66.63485,
+                                "breakdown": [
+                                    {
+                                        "amount": 66.63485,
+                                        "name": "Ongoing",
+                                        "percentage": 0.66635
+                                    },
+                                    {
+                                        "amount": 0,
+                                        "name": "Transaction",
+                                        "percentage": 0
+                                    },
+                                    {
+                                        "amount": 0,
+                                        "name": "Performance",
+                                        "percentage": 0
+                                    }
+                                ],
+                                "identifier": "F000000EY1",
+                                "identifierType": "MSID",
+                                "percentage": 0.66635
+                            },
+                            {
+                                "amount": 29.59064,
+                                "breakdown": [
+                                    {
+                                        "amount": 19.72601,
+                                        "name": "Ongoing",
+                                        "percentage": 0.19726
+                                    },
+                                    {
+                                        "amount": 9.86463,
+                                        "name": "Transaction",
+                                        "percentage": 0.09865
+                                    },
+                                    {
+                                        "amount": 0,
+                                        "name": "Performance",
+                                        "percentage": 0
+                                    }
+                                ],
+                                "identifier": "F00000OXG7",
+                                "identifierType": "MSID",
+                                "percentage": 0.29591
+                            },
+                            {
+                                "amount": 167.17685,
+                                "breakdown": [
+                                    {
+                                        "amount": 134.61343,
+                                        "name": "Ongoing",
+                                        "percentage": 1.34613
+                                    },
+                                    {
+                                        "amount": 32.56342,
+                                        "name": "Transaction",
+                                        "percentage": 0.32563
+                                    },
+                                    {
+                                        "amount": 0,
+                                        "name": "Performance",
+                                        "percentage": 0
+                                    }
+                                ],
+                                "identifier": "F00000TWNO",
+                                "identifierType": "MSID",
+                                "percentage": 1.67177
+                            }
+                        ],
+                        "percentage": 3.60626
+                    },
+                    "service": {
+                        "amount": 0,
+                        "percentage": 0
+                    }
+                }
+            }
+        ],
+        "annualAverage": {
+            "product": {
+                "amount": 188.97981,
+                "breakdown": [
+                    {
+                        "amount": 50.92418,
+                        "breakdown": [
+                            {
+                                "amount": 35.06777,
+                                "name": "Ongoing",
+                                "percentage": 1.27
+                            },
+                            {
+                                "amount": 15.85641,
+                                "name": "Transaction",
+                                "percentage": 0.57243
+                            },
+                            {
+                                "amount": 0,
+                                "name": "Performance",
+                                "percentage": 0
+                            }
+                        ],
+                        "identifier": "F0GBR052QA",
+                        "identifierType": "MSID",
+                        "percentage": 1.84243
+                    },
+                    {
+                        "amount": 34.52731,
+                        "breakdown": [
+                            {
+                                "amount": 34.52731,
+                                "name": "Ongoing",
+                                "percentage": 2.56
+                            },
+                            {
+                                "amount": 0,
+                                "name": "Transaction",
+                                "percentage": 0
+                            },
+                            {
+                                "amount": 0,
+                                "name": "Performance",
+                                "percentage": 0
+                            }
+                        ],
+                        "identifier": "F000000EY1",
+                        "identifierType": "MSID",
+                        "percentage": 2.56
+                    },
+                    {
+                        "amount": 15.60687,
+                        "breakdown": [
+                            {
+                                "amount": 10.40401,
+                                "name": "Ongoing",
+                                "percentage": 0.93
+                            },
+                            {
+                                "amount": 5.20286,
+                                "name": "Transaction",
+                                "percentage": 0.46409
+                            },
+                            {
+                                "amount": 0,
+                                "name": "Performance",
+                                "percentage": 0
+                            }
+                        ],
+                        "identifier": "F00000OXG7",
+                        "identifierType": "MSID",
+                        "percentage": 1.39409
+                    },
+                    {
+                        "amount": 87.92145,
+                        "breakdown": [
+                            {
+                                "amount": 70.79574,
+                                "name": "Ongoing",
+                                "percentage": 1.27354
+                            },
+                            {
+                                "amount": 17.12572,
+                                "name": "Transaction",
+                                "percentage": 0.30672
+                            },
+                            {
+                                "amount": 0,
+                                "name": "Performance",
+                                "percentage": 0
+                            }
+                        ],
+                        "identifier": "F00000TWNO",
+                        "identifierType": "MSID",
+                        "percentage": 1.58026
+                    }
+                ],
+                "percentage": 1.754
+            },
+            "service": {
+                "amount": 0,
+                "percentage": 0
+            }
+        },
+        "initial": {
+            "product": {
+                "amount": 0,
+                "breakdown": [
+                    {
+                        "amount": 0,
+                        "identifier": "F0GBR052QA",
+                        "identifierType": "MSID",
+                        "percentage": 0
+                    },
+                    {
+                        "amount": 0,
+                        "identifier": "F000000EY1",
+                        "identifierType": "MSID",
+                        "percentage": 0
+                    },
+                    {
+                        "amount": 0,
+                        "identifier": "F00000OXG7",
+                        "identifierType": "MSID",
+                        "percentage": 0
+                    },
+                    {
+                        "amount": 0,
+                        "identifier": "F00000TWNO",
+                        "identifierType": "MSID",
+                        "percentage": 0
+                    }
+                ],
+                "percentage": 0
+            },
+            "service": {
+                "amount": 0,
+                "percentage": 0
+            }
+        },
+        "recurring": [
+            {
+                "period": "M1",
+                "product": {
+                    "amount": 14.58783,
+                    "percentage": 0.14588
+                },
+                "service": {
+                    "amount": 0,
+                    "percentage": 0
+                }
+            },
+            {
+                "period": "M2",
+                "product": {
+                    "amount": 14.62521,
+                    "percentage": 0.14625
+                },
+                "service": {
+                    "amount": 0,
+                    "percentage": 0
+                }
+            },
+            {
+                "period": "M3",
+                "product": {
+                    "amount": 14.6627,
+                    "percentage": 0.14663
+                },
+                "service": {
+                    "amount": 0,
+                    "percentage": 0
+                }
+            },
+            {
+                "period": "M4",
+                "product": {
+                    "amount": 14.70028,
+                    "percentage": 0.147
+                },
+                "service": {
+                    "amount": 0,
+                    "percentage": 0
+                }
+            }
+            {
+                "period": "M31",
+                "product": {
+                    "amount": 15.75277,
+                    "percentage": 0.15753
+                },
+                "service": {
+                    "amount": 0,
+                    "percentage": 0
+                }
+            }
+        ]
+    },
+    "initialCosts": {
+        "securityFees": [
+            {
+                "fees": [
+                    {
+                        "name": "Security",
+                        "value": 0
+                    }
+                ],
+                "identifier": "F0GBR052QA",
+                "identifierType": "MSID",
+                "startValue": 2564.10256
+            },
+            {
+                "fees": [
+                    {
+                        "name": "Security",
+                        "value": 0
+                    }
+                ],
+                "identifier": "F000000EY1",
+                "identifierType": "MSID",
+                "startValue": 1282.05128
+            }
+        ],
+        "startValue": 10000,
+        "totalFees": 0
+    },
+    "periodicCosts": [
+        {
+            "period": "M1",
+            "periodTotal": {
+                "fees": [
+                    {
+                        "name": "Security",
+                        "subFees": [
+                            {
+                                "name": "Ongoing",
+                                "value": 11.65122
+                            },
+                            {
+                                "name": "Transaction",
+                                "value": 2.93661
+                            },
+                            {
+                                "name": "Performance",
+                                "value": 0
+                            }
+                        ],
+                        "value": 14.58783
+                    }
+                ],
+                "netGrowth": 26.15341,
+                "startValue": 10040.74124,
+                "totalFees": 14.58783
+            },
+            "securities": [
+                {
+                    "fees": [
+                        {
+                            "name": "Security",
+                            "subFees": [
+                                {
+                                    "name": "Ongoing",
+                                    "value": 2.709
+                                },
+                                {
+                                    "name": "Transaction",
+                                    "value": 1.22491
+                                },
+                                {
+                                    "name": "Performance",
+                                    "value": 0
+                                }
+                            ],
+                            "value": 3.93391
+                        }
+                    ],
+                    "identifier": "F0GBR052QA",
+                    "identifierType": "MSID",
+                    "netGrowth": 6.51256,
+                    "startValue": 2574.54904
+                },
+                {
+                    "fees": [
+                        {
+                            "name": "Security",
+                            "subFees": [
+                                {
+                                    "name": "Ongoing",
+                                    "value": 2.71448
+                                },
+                                {
+                                    "name": "Transaction",
+                                    "value": 0
+                                },
+                                {
+                                    "name": "Performance",
+                                    "value": 0
+                                }
+                            ],
+                            "value": 2.71448
+                        }
+                    ],
+                    "identifier": "F000000EY1",
+                    "identifierType": "MSID",
+                    "netGrowth": 2.50875,
+                    "startValue": 1287.27452
+                },
+                {
+                    "fees": [
+                        {
+                            "name": "Security",
+                            "subFees": [
+                                {
+                                    "name": "Ongoing",
+                                    "value": 0.79473
+                                },
+                                {
+                                    "name": "Transaction",
+                                    "value": 0.39743
+                                },
+                                {
+                                    "name": "Performance",
+                                    "value": 0
+                                }
+                            ],
+                            "value": 1.19216
+                        }
+                    ],
+                    "identifier": "F00000OXG7",
+                    "identifierType": "MSID",
+                    "netGrowth": 2.98643,
+                    "startValue": 1029.81961
+                },
+                {
+                    "fees": [
+                        {
+                            "name": "Security",
+                            "subFees": [
+                                {
+                                    "name": "Ongoing",
+                                    "value": 5.43301
+                                },
+                                {
+                                    "name": "Transaction",
+                                    "value": 1.31426
+                                },
+                                {
+                                    "name": "Performance",
+                                    "value": 0
+                                }
+                            ],
+                            "value": 6.74727
+                        }
+                    ],
+                    "identifier": "F00000TWNO",
+                    "identifierType": "MSID",
+                    "netGrowth": 14.14567,
+                    "startValue": 5149.09807
+                }
+            ],
+            "toDateTotal": {
+                "fees": [
+                    {
+                        "name": "Security",
+                        "subFees": [
+                            {
+                                "name": "Ongoing",
+                                "value": 11.65122
+                            },
+                            {
+                                "name": "Transaction",
+                                "value": 2.93661
+                            },
+                            {
+                                "name": "Performance",
+                                "value": 0
+                            }
+                        ],
+                        "value": 14.58783
+                    }
+                ],
+                "totalFees": 14.58783
+            }
+        },
+        {
+            "period": "M39",
+            "periodTotal": {
+                "fees": [
+                    {
+                        "name": "Security",
+                        "subFees": [
+                            {
+                                "name": "Ongoing",
+                                "value": 12.82705
+                            },
+                            {
+                                "name": "Transaction",
+                                "value": 3.25202
+                            },
+                            {
+                                "name": "Performance",
+                                "value": 0
+                            }
+                        ],
+                        "value": 16.07907
+                    }
+                ],
+                "netGrowth": 28.91575,
+                "startValue": 11089.04233,
+                "totalFees": 16.07907
+            },
+            "securities": [
+                {
+                    "fees": [
+                        {
+                            "name": "Security",
+                            "subFees": [
+                                {
+                                    "name": "Ongoing",
+                                    "value": 2.98313
+                                },
+                                {
+                                    "name": "Transaction",
+                                    "value": 1.34887
+                                },
+                                {
+                                    "name": "Performance",
+                                    "value": 0
+                                }
+                            ],
+                            "value": 4.33199
+                        }
+                    ],
+                    "identifier": "F0GBR052QA",
+                    "identifierType": "MSID",
+                    "netGrowth": 7.17158,
+                    "startValue": 2835.07431
+                },
+                {
+                    "fees": [
+                        {
+                            "name": "Security",
+                            "subFees": [
+                                {
+                                    "name": "Ongoing",
+                                    "value": 2.92381
+                                },
+                                {
+                                    "name": "Transaction",
+                                    "value": 0
+                                },
+                                {
+                                    "name": "Performance",
+                                    "value": 0
+                                }
+                            ],
+                            "value": 2.92381
+                        }
+                    ],
+                    "identifier": "F000000EY1",
+                    "identifierType": "MSID",
+                    "netGrowth": 2.70222,
+                    "startValue": 1386.5436
+                },
+                {
+                    "fees": [
+                        {
+                            "name": "Security",
+                            "subFees": [
+                                {
+                                    "name": "Ongoing",
+                                    "value": 0.88757
+                                },
+                                {
+                                    "name": "Transaction",
+                                    "value": 0.44386
+                                },
+                                {
+                                    "name": "Performance",
+                                    "value": 0
+                                }
+                            ],
+                            "value": 1.33143
+                        }
+                    ],
+                    "identifier": "F00000OXG7",
+                    "identifierType": "MSID",
+                    "netGrowth": 3.33531,
+                    "startValue": 1150.12443
+                },
+                {
+                    "fees": [
+                        {
+                            "name": "Security",
+                            "subFees": [
+                                {
+                                    "name": "Ongoing",
+                                    "value": 6.03254
+                                },
+                                {
+                                    "name": "Transaction",
+                                    "value": 1.45929
+                                },
+                                {
+                                    "name": "Performance",
+                                    "value": 0
+                                }
+                            ],
+                            "value": 7.49183
+                        }
+                    ],
+                    "identifier": "F00000TWNO",
+                    "identifierType": "MSID",
+                    "netGrowth": 15.70664,
+                    "startValue": 5717.3
+                }
+            ],
+            "toDateTotal": {
+                "fees": [
+                    {
+                        "name": "Security",
+                        "subFees": [
+                            {
+                                "name": "Ongoing",
+                                "value": 476.96247
+                            },
+                            {
+                                "name": "Transaction",
+                                "value": 120.57606
+                            },
+                            {
+                                "name": "Performance",
+                                "value": 0
+                            }
+                        ],
+                        "value": 597.53853
+                    }
+                ],
+                "totalFees": 597.53853
+            }
+        }
+    ],
+    "totalCosts": {
+        "grandTotal": 944.89905,
+        "productSubTotals": [
+            {
+                "identifier": "F0GBR052QA",
+                "identifierType": "MSID",
+                "value": 254.62089
+            },
+            {
+                "identifier": "F000000EY1",
+                "identifierType": "MSID",
+                "value": 172.63654
+            },
+            {
+                "identifier": "F00000OXG7",
+                "identifierType": "MSID",
+                "value": 78.03437
+            },
+            {
+                "identifier": "F00000TWNO",
+                "identifierType": "MSID",
+                "value": 439.60726
+            }
+        ],
+        "recurringSubTotals": [
+            {
+                "name": "Security",
+                "subFees": [
+                    {
+                        "name": "Ongoing",
+                        "value": 753.97411
+                    },
+                    {
+                        "name": "Transaction",
+                        "value": 190.92494
+                    },
+                    {
+                        "name": "Performance",
+                        "value": 0
+                    }
+                ],
+                "value": 944.89905
+            }
+        ],
+        "serviceSubTotals": [],
+        "totalProduct": 944.89905,
+        "totalRecurring": 944.89905,
+        "totalService": 0
+    },
+    "maximumExitFee": {
+        "holdings": [
+            {
+                "EMTSource": false,
+                "fee": 0,
+                "identifier": "F0GBR052QA",
+                "identifierType": "MSID"
+            },
+            {
+                "EMTSource": false,
+                "fee": 0,
+                "identifier": "F000000EY1",
+                "identifierType": "MSID"
+            },
+            {
+                "EMTSource": false,
+                "fee": 0,
+                "identifier": "F00000OXG7",
+                "identifierType": "MSID"
+            },
+            {
+                "EMTSource": true,
+                "fee": 2,
+                "identifier": "F00000TWNO",
+                "identifierType": "MSID"
+            }
+        ],
+        "portfolio": 1.03432
+    }
+}
+```
+</details>
+
+### Integration Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "portfolioName": "UK demo portfolio",
+    "riskScore": {
+        "riskScore": [
+            {
+                "portfolioName": "US demo portfolio - weight",
+                "portfolioRiskScore": 122.37272875931704,
+                "portfolioAlignmentScore": 26.84060796890573,
+                "portfolioRsquared": 0.8368803527643834,
+                "isProxyUsedInRiskScore": false
+            }
+        ]
+    },
+    "assetAllocation": {
+        "portfolio": [
+            {
+                "key": "1",
+                "long": 42.87298,
+                "net": 42.87298,
+                "short": 0
+            },
+            {
+                "key": "2",
+                "long": 38.28291,
+                "net": 35.93181,
+                "short": 2.35111
+            },
+            {
+                "key": "3",
+                "long": 8.0031,
+                "net": 6.91409,
+                "short": 1.08901
+            },
+            {
+                "key": "4",
+                "long": 14.72662,
+                "net": 14.2811,
+                "short": 0.44552
+            },
+            {
+                "key": "99",
+                "long": 0,
+                "net": 0.00002,
+                "short": 0
+            }
+        ],
+        "benchmark": [
+            {
+                "key": "1",
+                "long": 95.8847,
+                "net": 95.73916,
+                "short": 0.14554
+            },
+            {
+                "key": "2",
+                "long": 0.03294,
+                "net": 0.00807,
+                "short": 0.02487
+            },
+            {
+                "key": "3",
+                "long": 2.71587,
+                "net": -3.51042,
+                "short": 6.22629
+            },
+            {
+                "key": "4",
+                "long": 7.89677,
+                "net": 7.76319,
+                "short": 0.13358
+            },
+            {
+                "key": "99",
+                "long": 0,
+                "net": 0,
+                "short": 0
+            }
+        ]
+    },
+    "trailingReturns": {
+        "portfolio": [
+            {
+                "timePeriod": "M0",
+                "value": -5.52204
+            },
+            {
+                "timePeriod": "M1",
+                "value": -1.65452
+            },
+            {
+                "timePeriod": "M2",
+                "value": 3.37161
+            },
+            {
+                "timePeriod": "M3",
+                "value": 0.51999
+            },
+            {
+                "timePeriod": "M6",
+                "value": -0.89226
+            },
+            {
+                "timePeriod": "M12",
+                "value": -6.44911
+            },
+            {
+                "timePeriod": "M36",
+                "value": 1.90237
+            },
+            {
+                "timePeriod": "M60",
+                "value": 1.866
+            },
+            {
+                "timePeriod": "M120",
+                "value": 5.71935
+            }
+        ],
+        "benchmark": [
+            {
+                "timePeriod": "M0",
+                "value": -6.80837
+            },
+            {
+                "timePeriod": "M1",
+                "value": 0.50109
+            },
+            {
+                "timePeriod": "M2",
+                "value": 6.51298
+            },
+            {
+                "timePeriod": "M3",
+                "value": 1.37291
+            },
+            {
+                "timePeriod": "M6",
+                "value": 1.15662
+            },
+            {
+                "timePeriod": "M12",
+                "value": -4.01803
+            },
+            {
+                "timePeriod": "M36",
+                "value": 7.20791
+            },
+            {
+                "timePeriod": "M60",
+                "value": 6.67369
+            },
+            {
+                "timePeriod": "M120",
+                "value": 10.13198
+            }
+        ]
+    },
+    "stockRegions": {
+        "portfolio": [
+            {
+                "Value": 14.12799,
+                "Id": "Americas",
+                "ExposureItem": [
+                    {
+                        "Value": 14.12799,
+                        "Id": "NorthAmerica"
+                    },
+                    {
+                        "Value": 0,
+                        "Id": "LatinAmerica"
+                    }
+                ]
+            },
+            {
+                "Value": 0.64738,
+                "Id": "GreaterAsia",
+                "ExposureItem": [
+                    {
+                        "Value": 0.64738,
+                        "Id": "Japan"
+                    },
+                    {
+                        "Value": 0,
+                        "Id": "Australia"
+                    },
+                    {
+                        "Value": 0,
+                        "Id": "AsiaDeveloped"
+                    },
+                    {
+                        "Value": 0,
+                        "Id": "AsiaEmerging"
+                    }
+                ]
+            },
+            {
+                "Value": 18.68766,
+                "Id": "GreaterEurope",
+                "ExposureItem": [
+                    {
+                        "Value": 17.57335,
+                        "Id": "UnitedKingdom"
+                    },
+                    {
+                        "Value": 1.11431,
+                        "Id": "EuropeDeveloped"
+                    },
+                    {
+                        "Value": 0,
+                        "Id": "EuropeEmerging"
+                    },
+                    {
+                        "Value": 0,
+                        "Id": "AfricaMiddleEast"
+                    }
+                ]
+            },
+            {
+                "Value": 62.58541,
+                "Id": "NotClassified"
+            }
+        ],
+        "benchmark": [
+            {
+                "Value": 65.24987999999999,
+                "Id": "Americas",
+                "ExposureItem": [
+                    {
+                        "Value": 64.94697,
+                        "Id": "NorthAmerica"
+                    },
+                    {
+                        "Value": 0.30291,
+                        "Id": "LatinAmerica"
+                    }
+                ]
+            },
+            {
+                "Value": 10.77172,
+                "Id": "GreaterAsia",
+                "ExposureItem": [
+                    {
+                        "Value": 5.41734,
+                        "Id": "Japan"
+                    },
+                    {
+                        "Value": 1.4376,
+                        "Id": "Australia"
+                    },
+                    {
+                        "Value": 2.33349,
+                        "Id": "AsiaDeveloped"
+                    },
+                    {
+                        "Value": 1.58329,
+                        "Id": "AsiaEmerging"
+                    }
+                ]
+            },
+            {
+                "Value": 11.131620000000002,
+                "Id": "GreaterEurope",
+                "ExposureItem": [
+                    {
+                        "Value": 5.57793,
+                        "Id": "UnitedKingdom"
+                    },
+                    {
+                        "Value": 5.48379,
+                        "Id": "EuropeDeveloped"
+                    },
+                    {
+                        "Value": 0.00934,
+                        "Id": "EuropeEmerging"
+                    },
+                    {
+                        "Value": 0.06056,
+                        "Id": "AfricaMiddleEast"
+                    }
+                ]
+            },
+            {
+                "Value": 0.49303,
+                "Id": "NotClassified"
+            }
+        ]
+    },
+    "stockStats": {
+        "portfolio": {
+            "marketCapital": 39372.81465,
+            "prospectiveEarningsYield": 18.51874,
+            "prospectiveBookValueYield": 2.84814,
+            "prospectiveCashFlowYield": 13.41046,
+            "prospectiveRevenueYield": 2.42864
+        },
+        "benchmark": {
+            "equityWeighting": 95.73916,
+            "equityWeightingLong": 95.8847,
+            "marketCapital": 133361.30107,
+            "prospectiveEarningsYield": 15.9035,
+            "prospectiveBookValueYield": 2.76346,
+            "prospectiveCashFlowYield": 9.56021,
+            "prospectiveRevenueYield": 1.82801
+        }
+    },
+    "stockSectors": {
+        "portfolio": {
+            "BasicMaterials": 1.44888,
+            "ConsumerCyclical": 0.95972,
+            "FinancialServices": 4.32755,
+            "RealEstate": 0.6094,
+            "CommunicationServices": 3.62578,
+            "Industrials": 7.29275,
+            "Technology": 11.29798,
+            "ConsumerDefensive": 1.65489,
+            "Healthcare": 6.17454,
+            "Utilities": 0.02307
+        },
+        "benchmark": {
+            "BasicMaterials": 3.78184,
+            "ConsumerCyclical": 10.15603,
+            "FinancialServices": 15.14445,
+            "RealEstate": 2.34601,
+            "CommunicationServices": 7.48568,
+            "Energy": 3.63075,
+            "Industrials": 10.38591,
+            "Technology": 20.62795,
+            "ConsumerDefensive": 7.81614,
+            "Healthcare": 14.64459,
+            "Utilities": 2.28864
+        }
+    },
+    "fixedIncomeSectors": {
+        "portfolio": {
+            "Government": 8.97421,
+            "Corporate": 81.08461,
+            "Cash & Equivalents": 69.11821,
+            "Derivative": -1.81452,
+            "undefined": -57.36252
+        },
+        "benchmark": {
+            "Government": 0,
+            "Corporate": 0,
+            "Cash & Equivalents": 0,
+            "Derivative": 0,
+            "undefined": 0
+        }
+    },
+    "fixedIncomeCountry": {
+        "portfolio": {
+            "type": "2",
+            "salePosition": "N",
+            "values": {
+                "99": 0.73444,
+                "aUS": 0.11701,
+                "cAN": 0.66102,
+                "nZL": 0.03649,
+                "bEL": 1.59525,
+                "dEU": 7.52098,
+                "eSP": 2.82316,
+                "fRA": 6.6025,
+                "gBR": 14.17222,
+                "iND": 6.87921,
+                "iTA": 1.64372,
+                "jPN": 2.95445,
+                "nLD": 2.53015,
+                "uSA": 51.7293
+            }
+        },
+        "benchmark": {
+            "type": "2",
+            "salePosition": "N",
+            "values": {
+                "99": 0.94111,
+                "aUS": 0.03036,
+                "fRA": 9.65392,
+                "gBR": 3.18761,
+                "iND": 0,
+                "iRL": 0.85003,
+                "nLD": 4.55373,
+                "nOR": 6.34487,
+                "uSA": 74.43837
+            }
+        }
+    },
+    "portfolioSrri": {
+        "type": "MonthEnd",
+        "currencyId": "GBP",
+        "endDate": "2022-08-31",
+        "sRRI": [
+            {
+                "value": 4,
+                "timePeriod": "W260",
+                "frequency": "W",
+                "endDate": "2022-09-23"
+            }
+        ]
+    },
+    "productInvolvement": {
+        "portfolio": {
+            "abortiveContraceptivesStemcell": 6.6914544,
+            "animalTesting": 12.180668,
+            "controversialWeapons": 1.2591741,
+            "adultEntertainment": 0,
+            "alcohol": 1.1270572,
+            "furAndSpecialtyLeather": 0,
+            "gambling": 0.28550306,
+            "militaryContracting": 2.0566392,
+            "nuclear": 0.43815938,
+            "palmOil": 0.008738188,
+            "pesticides": 0.06944976,
+            "smallArms": 1.3401275,
+            "thermalCoal": 0.12252558,
+            "tobacco": 0.16017261,
+            "gmo": 0.017991528
+        },
+        "benchmark": {}
+    }
+}
+```
+</details>
+&nbsp;
+
+### Integration Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+function getXrayData(apiData, sections, portfolio) {
+    const modelData = {};
+    const xrayData = apiData[0]?.value || null;
+    const esgData = apiData[1]?.value || null;
+    const riskScoreData = apiData[2]?.value || null;
+    const calculateData = apiData[3]?.value || null;
+    modelData.portfolioName = portfolio?.name;
+    sections.forEach((section) => {
+        section.components.forEach((component) => {
+            switch (component) {
+            case 'assetAllocation': {
+                modelData.assetAllocation = getAssetAllocationData(xrayData);
+                break;
+            }
+            case 'feesExpenses': {
+                modelData.feesExpenses = {
+                    feesExpensesData: calculateData,
+                };
+                break;
+            }
+            case 'fixedIncomeSectors': {
+                modelData.fixedIncomeSectors = getFixedIncomeSectorsData(xrayData);
+                break;
+            }
+            case 'fixedIncomeCountry': {
+                modelData.fixedIncomeCountry = getFixedIncomeCountryData(xrayData);
+                break;
+            }
+            case 'performanceGraph': {
+                modelData.performanceGraph = getPerformanceData(xrayData);
+                break;
+            }
+            case 'portfolioHoldings': {
+                modelData.portfolioHoldings = getPortfolioHoldingsData(xrayData);
+                break;
+            }
+            case 'portfolioSrri': {
+                modelData.portfolioSrri = get(xrayData, 'riskStatistics');
+                break;
+            }
+            case 'productInvolvement': {
+                modelData.productInvolvement = getproductInvolvementData(esgData);
+                break;
+            }
+            case 'riskScore': {
+                modelData.riskScore = riskScoreData;
+                break;
+            }
+            case 'stockRegions': {
+                modelData.stockRegions = getStockRegionsData(xrayData);
+                break;
+            }
+            case 'stockSectors': {
+                modelData.stockSectors = getStockSectorsData(xrayData);
+                break;
+            }
+            case 'stockStats': {
+                modelData.stockStats = getStockStatsData(xrayData);
+                break;
+            }
+            case 'sustainability': {
+                modelData.sustainability = esgData;
+                break;
+            }
+            case 'trailingReturns': {
+                modelData.trailingReturns = getTrailingReturnsData(xrayData);
+                break;
+            }
+            default:
+                break;
+            }
+        });
+    });
+    return modelData;
+}
+```
+</details>
+&nbsp;

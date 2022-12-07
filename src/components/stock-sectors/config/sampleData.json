@@ -1,0 +1,36 @@
+{
+    "portfolio": {
+        "BasicMaterials": 7.07,
+        "CommunicationServices": 6.33,
+        "ConsumerCyclical": 10.47,
+        "ConsumerDefensive": 7.97,
+        "Cyclical": 41.17,
+        "Defensive": 21.2,
+        "Energy": 9.04,
+        "FinancialServices": 21.14,
+        "Healthcare": 9.15,
+        "Industrials": 11.48,
+        "RealEstate": 2.49,
+        "Sensitive": 37.63,
+        "Technology": 10.78,
+        "Utilities": 4.08,
+        "NotClassified": 0
+    },
+    "benchmark": {
+        "BasicMaterials": 2.49,
+        "CommunicationServices": 7.78,
+        "ConsumerCyclical": 11.32,
+        "ConsumerDefensive": 6.61,
+        "Cyclical": 30.57,
+        "Defensive": 23.48,
+        "Energy": 4.75,
+        "FinancialServices": 13.13,
+        "Healthcare": 13.79,
+        "Industrials": 9.03,
+        "RealEstate": 3.63,
+        "Sensitive": 45.95,
+        "Technology": 24.39,
+        "Utilities": 3.08,
+        "NotClassified": 0
+    }
+}

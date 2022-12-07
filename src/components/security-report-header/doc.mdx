@@ -1,0 +1,178 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import SecurityReportHeader from '@/components/security-report-header/SecurityReportHeader.vue';
+import { SECURITY_DETAILS_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="Security Report Header" component={SecurityReportHeader} />
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+  
+</style>
+
+# Security Report Header
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+
+<Canvas withSource="open" withToolbar>
+  <Story id="components-securityreportheader--story-details"></Story>
+</Canvas>
+
+## Description
+
+The Security Report Header component displays a security's details.
+
+## Properties
+
+<ArgsTable of={ SecurityReportHeader } />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={SECURITY_DETAILS_URL} target="_blank">Security Details API</a>.
+<!--
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request)
+- [Request Payload Example](#request-payload)
+-->
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.securityDetails.getSecurity(securityId);
+```
+<details>
+  <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+const securityId = "FOUSA00B4J";
+window.mstarApisSdk.securityDetails.getSecurity(securityId)
+```
+</details>
+&nbsp;
+
+### Request Example
+
+```javascript dark
+https://www.emea-api.morningstar.com/ecint/v1/securities/{{securityId}}?viewId={{viewId}}&idtype={{idtype}}&languageId={{languageId}}&currencyId={{currencyId}}&responseViewFormat={{responseViewFormat}}
+
+```
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- | 
+| `securityId`| Security ID for which data needs to be fetched | `securityId=F0GBR050DD`|
+| `viewId` | View ID or snapshot ID | `viewId=snapshot` |
+| `idtype` | ID type |`idtype=msid`|
+| `languageId`| Language in which data needs to fetched | `languageId=en-GB`|
+| `currencyId` | Currency in which data needs to fetched | `currencyId=GBP`|
+| `responseViewFormat`| Format of the data to be received | `responseViewFormat=json`|
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Component Data Format](#component-data-format)
+- [Transformation Operation](#transformation-operation)
+-->
+### API Response Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+[
+    {
+        dbgtime: '142',
+        Id: 'FOUSA00B4J',
+        HasPriceEntitlement: false,
+        PerformanceId: '0P00002OBU',
+        InceptionDate: '1975-07-25T00:00:00',
+        Isin: 'US0240711020',
+        ISINMIC: 'US0240711020XNASUSD',
+        InvestmentType: 'FD',
+        HoldingType: '2',
+        Exchange: 'EX$$$$XNAS',
+        Type: 'Fund',
+        Name: 'American Funds American Balanced A',
+        LegalName: 'American Funds American Balanced Fund® Class A',
+        InvestmentStrategy: 'The investment seeks conservation of capital, current income and long-term growth of capital and income...',
+    }
+]
+```
+</details>
+&nbsp;
+
+### Component Transformed Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+  "investmentName": "American Funds American Balanced Fund® Class A",
+  "investmentStrategy": "The investment seeks conservation of capital, current income and long-term growth of capital and income...",
+  "symbol": "ABALX",
+  "analystRatingScale": "4",
+  "sustainabilityRank": "",
+  "mstarRating": 5,
+  "keyValuePairData": [
+    { "key": "Security ID", "value": "FOUSA00B4J" },
+    { "key": "ISIN", "value": "US0240711020" },
+    { "key": "Currency", "value": "USD" },
+    { "key": "Exchange", "value": "EX$$$$XNAS" },
+    { "key": "Legal Structure", "value": "Open Ended Investment Company" },
+    { "key": "Fund Benchmark", "value": "Bloomberg US Agg Bond TR USD" }
+  ]
+}
+```
+</details>
+&nbsp;
+
+### Component Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+    parsedModelData() {
+        const security = this.modelData[0] || {};
+        const parsedData = {};
+
+        // Main header data
+        parsedData.investmentName = security.LegalName;
+        parsedData.investmentStrategy = security.InvestmentStrategy;
+        parsedData.symbol = security.Symbol;
+        parsedData.analystRatingScale = security.AnalystRatingScale;
+        parsedData.mstarRating = security.RiskAndRating?.filter(
+            (periodData) => periodData.TimePeriod === 'M255',
+        )[0]?.RatingValue;
+
+        // Key Value Pair data
+        parsedData.keyValuePairData = this.fieldDefinitions?.map((field) => ({
+            key: get(labelMapping.dataPoints, field.fieldName),
+            value: get(security, field.modelPath) ?? '-',
+        }));
+        return parsedData;
+    }
+```
+</details>
+&nbsp;

@@ -1,0 +1,28 @@
+[
+    {
+        "InceptionDate": "1998-11-13T00:00:00",
+        "FundAttributes": {
+            "UCITS": "true"
+        },
+        "Domicile": "GBR",
+        "ProviderCompany": {
+            "Name": "Aviva Investors UK Fund Services Limited",
+            "AddressLine1": "St Helens, 1 Undershaft",
+            "Phone": "+44 8000512003",
+            "City": "London",
+            "Country": "United Kingdom",
+            "PostalCode": "EC3P 3DQ",
+            "Homepage": "http://www.avivainvestors.co.uk"
+        },
+        "ManagerList": [
+            {
+                "ManagerId": 81506,
+                "DisplayPreference": 1,
+                "GivenName": "Chris",
+                "FamilyName": "Murphy",
+                "StartDate": "2022-05-09T00:00:00",
+                "ManagerProvidedBiography": "Chris manages the Aviva Investors UK Equity Income and Aviva Investors UK Equity strategies. Chris joined Aviva Investors in 2006 from Framlington Investment Management where he was responsible for managing the firms UK income and growth retail portfolios. Chris began his investment career in 1988 as a graduate UK equity analyst for Lehman Bros before joining James Capel in UK equity analyst role. Chris holds a BSc (Hons) in Physics from University College, Cardiff and holds the IIMR (Institute of Investment Management Research) qualification."
+            }
+        ]
+    }
+]

@@ -1,0 +1,37 @@
+{
+    "ultraConservative": {
+        "name": "Ultra Conservative",
+        "abbrName": "Ultra Con",
+        "value": 0
+    },
+    "conservative": {
+        "name": "Conservative",
+        "abbrName": "Con",
+        "value": 23
+    },
+    "moderateConservative": {
+        "name": "Moderate Conservative",
+        "abbrName": "Mod Con",
+        "value": 40
+    },
+    "moderate": {
+        "name": "Moderate",
+        "abbrName": "Mod",
+        "value": 60
+    },
+    "moderateAggressive": {
+        "name": "Moderate Aggressive",
+        "abbrName": "Mod Agg",
+        "value": 78
+    },
+    "aggressive": {
+        "name": "Aggressive",
+        "abbrName": "Agg",
+        "value": 92
+    },
+    "ultraAggressive": {
+        "name": "Ultra Aggressive",
+        "abbrName": "Ultra Agg",
+        "value": 110
+    }
+}

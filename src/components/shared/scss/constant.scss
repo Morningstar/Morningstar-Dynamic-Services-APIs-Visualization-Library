@@ -1,0 +1,67 @@
+// FONT WEIGHT
+// ———————————————————————————————————————
+$wal-font-weight-thin: 200 !default;
+$wal-font-weight-light: 300 !default;
+$wal-font-weight-regular: 400 !default;
+$wal-font-weight-bold: 600 !default;
+// Color
+// ———————————————————————————————————————
+$wal-color-black: #000000;
+$wal-color-dark-grey: #1e1e1e;
+$wal-color-grey: #333333;
+$wal-color-regular: #e5e5e5;
+$wal-color-light-grey: #cccccc;
+$wal-color-light-grey-1: rgba(0,0,0,0.12);
+$wal-color-light-blue: #1673E0;
+$wal-color-primary-blue: #0077cf;
+$wal-color-light-green: #518428;
+$wal-color-white: #ffffff;
+$wal-color-orange: #e67300;
+// Maps
+// ———————————————————————————————————————
+$wal: (
+    'headings': (
+        'font-size': (
+            'level-1': 45px,
+            'level-2': 32px,
+            'level-3': 28px,
+            'level-4': 23px,
+            'level-5': 20px,
+            'level-6': 18px,
+        ),
+        'line-height': (
+            'level-1': 50px,
+            'level-2': 36px,
+            'level-3': 34px,
+            'level-4': 27px,
+            'level-5': 23px,
+            'level-6': 16px,
+        ),
+    ),
+    'space': (
+        'quarter-x': 2px,
+        'half-x': 4px,
+        'three-quarter-x': 6px,
+        '1-x': 8px,
+        '1-and-a-quarter-x': 10px,
+        '1-and-a-half-x': 12px,
+        '2-x': 16px,
+        '2-and-a-quarter-x': 18px,
+        '2-and-a-half-x': 20px,
+        '3-x': 24px,
+        '3-and-a-half-x': 28px,
+        '4-x': 32px,
+        '5-x': 40px,
+        '6-x': 48px,
+        '7-x': 56px,
+        '8-x': 64px,
+  ),
+    'font-size': (
+        'xs': 12px,
+        's': 14px,
+        'm': 16px,
+        'l': 18px,
+        'xl': 20px,
+        'xxl': 23px,
+    )
+);

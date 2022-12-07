@@ -1,0 +1,132 @@
+{
+    "portfolio": [
+        {
+            "ExposureItem": [
+                {
+                    "Value": 14.06533,
+                    "Id": "NorthAmerica"
+                },
+                {
+                    "Value": 0,
+                    "Id": "LatinAmerica"
+                }
+            ],
+            "Value": 14.06533,
+            "Id": "Americas"
+        },
+        {
+            "ExposureItem": [
+                {
+                    "Value": 0.68639,
+                    "Id": "Japan"
+                },
+                {
+                    "Value": 0,
+                    "Id": "Australia"
+                },
+                {
+                    "Value": 0,
+                    "Id": "AsiaDeveloped"
+                },
+                {
+                    "Value": 0,
+                    "Id": "AsiaEmerging"
+                }
+            ],
+            "Value": 0.68639,
+            "Id": "GreaterAsia"
+        },
+        {
+            "ExposureItem": [
+                {
+                    "Value": 17.52924,
+                    "Id": "UnitedKingdom"
+                },
+                {
+                    "Value": 1.08238,
+                    "Id": "EuropeDeveloped"
+                },
+                {
+                    "Value": 0,
+                    "Id": "EuropeEmerging"
+                },
+                {
+                    "Value": 0,
+                    "Id": "AfricaMiddleEast"
+                }
+            ],
+            "Value": 18.611620000000002,
+            "Id": "GreaterEurope"
+        },
+        {
+            "ExposureItem": [],
+            "Value": 62.62962,
+            "Id": "NotClassified"
+        }
+    ],
+    "benchmark": [
+        {
+            "ExposureItem": [
+                {
+                    "Value": 64.94697,
+                    "Id": "NorthAmerica"
+                },
+                {
+                    "Value": 0.30291,
+                    "Id": "LatinAmerica"
+                }
+            ],
+            "Value": 65.24987999999999,
+            "Id": "Americas"
+        },
+        {
+            "ExposureItem": [
+                {
+                    "Value": 5.41734,
+                    "Id": "Japan"
+                },
+                {
+                    "Value": 1.4376,
+                    "Id": "Australia"
+                },
+                {
+                    "Value": 2.33349,
+                    "Id": "AsiaDeveloped"
+                },
+                {
+                    "Value": 1.58329,
+                    "Id": "AsiaEmerging"
+                }
+            ],
+            "Value": 10.77172,
+            "Id": "GreaterAsia"
+        },
+        {
+            "ExposureItem": [
+                {
+                    "Value": 5.57793,
+                    "Id": "UnitedKingdom"
+                },
+                {
+                    "Value": 5.48379,
+                    "Id": "EuropeDeveloped"
+                },
+                {
+                    "Value": 0.00934,
+                    "Id": "EuropeEmerging"
+                },
+                {
+                    "Value": 0.06056,
+                    "Id": "AfricaMiddleEast"
+                }
+            ],
+            "Value": 11.131620000000002,
+            "Id": "GreaterEurope"
+        },
+        {
+            "ExposureItem": [],
+            "Value": 0.49303,
+            "Id": "NotClassified"
+        }
+    ]
+}

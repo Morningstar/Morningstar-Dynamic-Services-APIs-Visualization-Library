@@ -1,0 +1,11 @@
+{
+    "rating_1": "Low",
+    "rating_2": "Below Average",
+    "rating_3": "Average",
+    "rating_4": "Above Average",
+    "rating_5": "High",
+    "timePeriod_M36": "3 Years",
+    "timePeriod_M60": "5 Years",
+    "timePeriod_M120": "10 Years",
+    "timePeriod_M255": "Overall"
+}

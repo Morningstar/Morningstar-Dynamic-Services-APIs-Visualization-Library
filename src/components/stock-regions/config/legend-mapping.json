@@ -1,0 +1,63 @@
+{
+	"northAmerica": {
+		"coordinates": [
+			70,
+			70
+		]
+	},
+	"africaMiddleEast": {
+		"coordinates": [
+			240,
+			140
+		]
+	},
+	"latinAmerica": {
+		"coordinates": [
+			125,
+			150
+		]
+	},
+	"asiaEmerging": {
+		"coordinates": [
+			300,
+			115
+		]
+	},
+	"asiaDeveloped": {
+		"coordinates": [
+			358,
+			96
+		]
+	},
+	"australasia": {
+		"coordinates": [
+			370,
+			180
+		]
+	},
+	"japan": {
+		"coordinates": [
+			373,
+			95
+		],
+		"showRight": true
+	},
+	"unitedKingdom": {
+		"coordinates": [
+			207,
+			70
+		]
+	},
+	"europeEmerging": {
+		"coordinates": [
+			300,
+			40
+		]
+	},
+	"europeDeveloped": {
+		"coordinates": [
+			160,
+			40
+		]
+	}
+}

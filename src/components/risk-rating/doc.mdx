@@ -1,0 +1,1852 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import RiskRating from "@/components/risk-rating/RiskRating.vue";
+import { SECURITY_DETAILS_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="Risk & Rating" component={ RiskRating }/>
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+  
+</style>
+
+# Risk & Rating
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+- [Data Models](#data-models)
+
+
+## Description
+
+The Risk & Rating component displays a security's Morningstar Risk and Return rating, SRRI measurement, and other risk measures including Alpha, Beta, Sharpe Ration, and Standard Deviation.
+
+<Canvas withSource="open" withToolbar>
+  <Story id="components-riskrating--story-details"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={ RiskRating } />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={SECURITY_DETAILS_URL} target="_blank">Security Details API</a>.
+<!--
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request)
+- [Request Payload Example](#request-payload)
+-->
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.securityDetails.getSecurityDetails(securityId);
+```
+<details>
+  <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+const securityId = "F0GBR050DD";
+window.mstarApisSdk.securityDetails.getSecurityDetails(securityId);
+```
+</details>
+
+### Request Example
+
+```javascript dark
+https://www.emea-api.morningstar.com/ecint/v1/securities/{{securityId}}?viewId={{viewId}}&idtype={{idType}}&languageId={{languageId}}&currencyId={{currencyId}}&responseViewFormat={{responseViewFormat}}
+
+```
+
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- |
+| `id` | Unique identifier of a security, such as a MSID or ISIN.| `securityId=F0GBR050DD` |
+| `viewId` |Unique identifier of a view.| `viewId=snapshot` |
+| `idtype` | Type of security identifier used. |`idtype=msid` |
+|` languageId`| 	ISO culture codes.| `languageId=en-GB`|
+| `currencyId` | 	ISO alpha-3 currency code.| `currencyId=GBP`|
+| `responseViewFormat` | Format of the output data. | `responseViewFormat=json` |
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Component Data Format](#component-data-format)
+- [Transformation Operation](#transformation-operation)
+-->
+### API Response Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+[
+  {
+    "dbgtime": "142",
+    "Id": "F0GBR050DD",
+    "CollectedSRRI": {
+      "Date": "2022-07-25T00:00:00",
+      "Rank": 6
+    },
+    "RiskAndRating": [
+      {
+        "Date": "2022-06-30T00:00:00",
+        "TimePeriod": "M36",
+        "RatingValue": 5,
+        "RiskAdjustedReturn": 2.14,
+        "RiskRatingValue": 5,
+        "RiskScore": 6.76,
+        "CategoryRank": 2.41,
+        "PerformanceRatingValue": 5
+      },
+      {
+        "Date": "2022-06-30T00:00:00",
+        "TimePeriod": "M60",
+        "RatingValue": 3,
+        "RiskAdjustedReturn": 0.62,
+        "RiskRatingValue": 5,
+        "RiskScore": 4.59,
+        "CategoryRank": 34.79,
+        "PerformanceRatingValue": 5
+      },
+      {
+        "Date": "2022-06-30T00:00:00",
+        "TimePeriod": "M120",
+        "RatingValue": 4,
+        "RiskAdjustedReturn": 5.72,
+        "RiskRatingValue": 5,
+        "RiskScore": 2.88,
+        "CategoryRank": 11.85,
+        "PerformanceRatingValue": 5
+      },
+      {
+        "Date": "2022-06-30T00:00:00",
+        "TimePeriod": "M255",
+        "RatingValue": 4,
+        "RiskAdjustedReturn": 3.47,
+        "RiskRatingValue": 5,
+        "RiskScore": 4.17,
+        "PerformanceRatingValue": 5
+      }
+    ],
+    "RiskStatistics": [
+      {
+        "CurrencyId": "GBP",
+        "CurrencyOption": "DISPLAYCURRENCY",
+        "Date": "2022-07-31T00:00:00",
+        "Type": "MonthEnd",
+        "ReturnType": "ItPostTax",
+        "benchmarkType": "CategoryPrimaryIndexId",
+        "Alphas": [
+          {
+            "Value": -4.03037,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 6.95719,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 1.86958,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "Betas": [
+          {
+            "Value": 1.14395,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 1.50904,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 1.40671,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "RSquareds": [
+          {
+            "Value": 76.849,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 89.74,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 85.637,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "InformationRatios": [
+          {
+            "Value": -0.56873,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 0.66298,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 0.26159,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "TrackingErrors": [
+          {
+            "Value": 6.49784,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 11.49745,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 9.81499,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "ArithmeticMeans": [
+          {
+            "Value": 0.2164,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 1.1205,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 0.71156,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "SortinoRatios": [
+          {
+            "Value": 0.25034,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 0.82106,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 0.59864,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "StandardDeviations": [
+          {
+            "Value": 13.15,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 25.38,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 21.13,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "SharpeRatios": [
+          {
+            "Frequency": "M",
+            "TimePeriod": "M12",
+            "Value": 0.16661
+          },
+          {
+            "Frequency": "M",
+            "TimePeriod": "M36",
+            "Value": 0.51608
+          },
+          {
+            "Frequency": "M",
+            "TimePeriod": "M60",
+            "Value": 0.38326
+          }
+        ],
+        "MaxDrawdowns": [
+          {
+            "Value": -8.02932,
+            "Frequency": "M",
+            "TimePeriod": "M12",
+            "StartDate": "2022-02-01T00:00:00",
+            "EndDate": "2022-06-30T00:00:00"
+          },
+          {
+            "Value": -33.13171,
+            "Frequency": "M",
+            "TimePeriod": "M36",
+            "StartDate": "2020-01-01T00:00:00",
+            "EndDate": "2020-03-31T00:00:00",
+            "RecoveryMonth": 9,
+            "RecoveryDate": "2020-12-31T00:00:00"
+          },
+          {
+            "Value": -33.13171,
+            "Frequency": "M",
+            "TimePeriod": "M60",
+            "StartDate": "2020-01-01T00:00:00",
+            "EndDate": "2020-03-31T00:00:00",
+            "RecoveryMonth": 9,
+            "RecoveryDate": "2020-12-31T00:00:00"
+          }
+        ],
+        "MaximumReturns": [
+          {
+            "Value": 5.38194,
+            "Frequency": "M",
+            "TimePeriod": "M12",
+            "Date": "2021-12-31T00:00:00"
+          },
+          {
+            "Value": 25.19912,
+            "Frequency": "M",
+            "TimePeriod": "M36",
+            "Date": "2020-11-30T00:00:00"
+          },
+          {
+            "Value": 25.19912,
+            "Frequency": "M",
+            "TimePeriod": "M60",
+            "Date": "2020-11-30T00:00:00"
+          }
+        ],
+        "MinimumReturns": [
+          {
+            "Value": -6.83313,
+            "Frequency": "M",
+            "TimePeriod": "M12",
+            "Date": "2022-06-30T00:00:00"
+          },
+          {
+            "Value": -21.80095,
+            "Frequency": "M",
+            "TimePeriod": "M36",
+            "Date": "2020-03-31T00:00:00"
+          },
+          {
+            "Value": -21.80095,
+            "Frequency": "M",
+            "TimePeriod": "M60",
+            "Date": "2020-03-31T00:00:00"
+          }
+        ],
+        "NumberOfPositives": [
+          {
+            "Count": 6.0,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Count": 21.0,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Count": 32.0,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "NumberOfNegatives": [
+          {
+            "Count": 6.0,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Count": 15.0,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Count": 28.0,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ]
+      },
+      {
+        "CurrencyId": "GBP",
+        "CurrencyOption": "BENCHMARKCURRENCY",
+        "Date": "2022-07-31T00:00:00",
+        "Type": "MonthEnd",
+        "ReturnType": "ItPostTax",
+        "benchmarkType": "CategoryPrimaryIndexId",
+        "Alphas": [
+          {
+            "Value": -4.03037,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 6.95719,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 1.86958,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "Betas": [
+          {
+            "Value": 1.14395,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 1.50904,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 1.40671,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "RSquareds": [
+          {
+            "Value": 76.849,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 89.74,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 85.637,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "InformationRatios": [
+          {
+            "Value": -0.56873,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 0.66298,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 0.26159,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "TrackingErrors": [
+          {
+            "Value": 6.49784,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 11.49745,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 9.81499,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "SortinoRatios": [
+          {
+            "Value": 0.25034,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 0.82106,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 0.59864,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "StandardDeviations": [
+          {
+            "Value": 13.15,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 25.38,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 21.13,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "SharpeRatios": [
+          {
+            "Frequency": "M",
+            "TimePeriod": "M12",
+            "Value": 0.16661
+          },
+          {
+            "Frequency": "M",
+            "TimePeriod": "M36",
+            "Value": 0.51608
+          },
+          {
+            "Frequency": "M",
+            "TimePeriod": "M60",
+            "Value": 0.38326
+          }
+        ],
+        "MaximumReturns": [
+          {
+            "Value": 5.38194,
+            "Frequency": "M",
+            "TimePeriod": "M12",
+            "Date": "2021-12-31T00:00:00"
+          },
+          {
+            "Value": 25.19912,
+            "Frequency": "M",
+            "TimePeriod": "M36",
+            "Date": "2020-11-30T00:00:00"
+          },
+          {
+            "Value": 25.19912,
+            "Frequency": "M",
+            "TimePeriod": "M60",
+            "Date": "2020-11-30T00:00:00"
+          }
+        ],
+        "MinimumReturns": [
+          {
+            "Value": -6.83313,
+            "Frequency": "M",
+            "TimePeriod": "M12",
+            "Date": "2022-06-30T00:00:00"
+          },
+          {
+            "Value": -21.80095,
+            "Frequency": "M",
+            "TimePeriod": "M36",
+            "Date": "2020-03-31T00:00:00"
+          },
+          {
+            "Value": -21.80095,
+            "Frequency": "M",
+            "TimePeriod": "M60",
+            "Date": "2020-03-31T00:00:00"
+          }
+        ],
+        "NumberOfPositives": [
+          {
+            "Count": 6.0,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Count": 21.0,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Count": 32.0,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "NumberOfNegatives": [
+          {
+            "Count": 6.0,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Count": 15.0,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Count": 28.0,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ]
+      },
+      {
+        "CurrencyId": "GBP",
+        "CurrencyOption": "BASECURRENCY",
+        "Date": "2022-07-31T00:00:00",
+        "Type": "MonthEnd",
+        "ReturnType": "ItPostTax",
+        "benchmarkType": "CategoryPrimaryIndexId",
+        "Alphas": [
+          {
+            "Value": -4.03037,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 6.95719,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 1.86958,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "Betas": [
+          {
+            "Value": 1.14395,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 1.50904,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 1.40671,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "RSquareds": [
+          {
+            "Value": 76.849,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 89.74,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 85.637,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "InformationRatios": [
+          {
+            "Value": -0.56873,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 0.66298,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 0.26159,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "TrackingErrors": [
+          {
+            "Value": 6.49784,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 11.49745,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 9.81499,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "SortinoRatios": [
+          {
+            "Value": 0.25034,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 0.82106,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 0.59864,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "StandardDeviations": [
+          {
+            "Value": 13.15,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 25.38,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 21.13,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "SharpeRatios": [
+          {
+            "Frequency": "M",
+            "TimePeriod": "M12",
+            "Value": 0.16661
+          },
+          {
+            "Frequency": "M",
+            "TimePeriod": "M36",
+            "Value": 0.51608
+          },
+          {
+            "Frequency": "M",
+            "TimePeriod": "M60",
+            "Value": 0.38326
+          }
+        ],
+        "MaximumReturns": [
+          {
+            "Value": 5.38194,
+            "Frequency": "M",
+            "TimePeriod": "M12",
+            "Date": "2021-12-31T00:00:00"
+          },
+          {
+            "Value": 25.19912,
+            "Frequency": "M",
+            "TimePeriod": "M36",
+            "Date": "2020-11-30T00:00:00"
+          },
+          {
+            "Value": 25.19912,
+            "Frequency": "M",
+            "TimePeriod": "M60",
+            "Date": "2020-11-30T00:00:00"
+          }
+        ],
+        "MinimumReturns": [
+          {
+            "Value": -6.83313,
+            "Frequency": "M",
+            "TimePeriod": "M12",
+            "Date": "2022-06-30T00:00:00"
+          },
+          {
+            "Value": -21.80095,
+            "Frequency": "M",
+            "TimePeriod": "M36",
+            "Date": "2020-03-31T00:00:00"
+          },
+          {
+            "Value": -21.80095,
+            "Frequency": "M",
+            "TimePeriod": "M60",
+            "Date": "2020-03-31T00:00:00"
+          }
+        ],
+        "NumberOfPositives": [
+          {
+            "Count": 6.0,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Count": 21.0,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Count": 32.0,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "NumberOfNegatives": [
+          {
+            "Count": 6.0,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Count": 15.0,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Count": 28.0,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ]
+      }
+    ]
+  }
+]
+```
+</details>
+
+### Component Transformed Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+[
+  {
+    "sRRI": [
+      {
+        "value": 6
+      }
+    ],
+    "RiskAndRating": [
+      {
+        "Date": "2022-06-30T00:00:00",
+        "TimePeriod": "M36",
+        "RatingValue": 5,
+        "RiskAdjustedReturn": 2.14,
+        "RiskRatingValue": 5,
+        "RiskScore": 6.76,
+        "CategoryRank": 2.41,
+        "PerformanceRatingValue": 5
+      },
+      {
+        "Date": "2022-06-30T00:00:00",
+        "TimePeriod": "M60",
+        "RatingValue": 3,
+        "RiskAdjustedReturn": 0.62,
+        "RiskRatingValue": 5,
+        "RiskScore": 4.59,
+        "CategoryRank": 34.79,
+        "PerformanceRatingValue": 5
+      },
+      {
+        "Date": "2022-06-30T00:00:00",
+        "TimePeriod": "M120",
+        "RatingValue": 4,
+        "RiskAdjustedReturn": 5.72,
+        "RiskRatingValue": 5,
+        "RiskScore": 2.88,
+        "CategoryRank": 11.85,
+        "PerformanceRatingValue": 5
+      },
+      {
+        "Date": "2022-06-30T00:00:00",
+        "TimePeriod": "M255",
+        "RatingValue": 4,
+        "RiskAdjustedReturn": 3.47,
+        "RiskRatingValue": 5,
+        "RiskScore": 4.17,
+        "PerformanceRatingValue": 5
+      }
+    ],
+    "RiskStatistics": [
+      {
+        "CurrencyId": "GBP",
+        "CurrencyOption": "DISPLAYCURRENCY",
+        "Date": "2022-07-31T00:00:00",
+        "Type": "MonthEnd",
+        "ReturnType": "ItPostTax",
+        "benchmarkType": "CategoryPrimaryIndexId",
+        "Alphas": [
+          {
+            "Value": -4.03037,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 6.95719,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 1.86958,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "Betas": [
+          {
+            "Value": 1.14395,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 1.50904,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 1.40671,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "RSquareds": [
+          {
+            "Value": 76.849,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 89.74,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 85.637,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "InformationRatios": [
+          {
+            "Value": -0.56873,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 0.66298,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 0.26159,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "TrackingErrors": [
+          {
+            "Value": 6.49784,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 11.49745,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 9.81499,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "ArithmeticMeans": [
+          {
+            "Value": 0.2164,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 1.1205,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 0.71156,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "SortinoRatios": [
+          {
+            "Value": 0.25034,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 0.82106,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 0.59864,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "StandardDeviations": [
+          {
+            "Value": 13.15,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 25.38,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 21.13,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "SharpeRatios": [
+          {
+            "Frequency": "M",
+            "TimePeriod": "M12",
+            "Value": 0.16661
+          },
+          {
+            "Frequency": "M",
+            "TimePeriod": "M36",
+            "Value": 0.51608
+          },
+          {
+            "Frequency": "M",
+            "TimePeriod": "M60",
+            "Value": 0.38326
+          }
+        ],
+        "MaxDrawdowns": [
+          {
+            "Value": -8.02932,
+            "Frequency": "M",
+            "TimePeriod": "M12",
+            "StartDate": "2022-02-01T00:00:00",
+            "EndDate": "2022-06-30T00:00:00"
+          },
+          {
+            "Value": -33.13171,
+            "Frequency": "M",
+            "TimePeriod": "M36",
+            "StartDate": "2020-01-01T00:00:00",
+            "EndDate": "2020-03-31T00:00:00",
+            "RecoveryMonth": 9,
+            "RecoveryDate": "2020-12-31T00:00:00"
+          },
+          {
+            "Value": -33.13171,
+            "Frequency": "M",
+            "TimePeriod": "M60",
+            "StartDate": "2020-01-01T00:00:00",
+            "EndDate": "2020-03-31T00:00:00",
+            "RecoveryMonth": 9,
+            "RecoveryDate": "2020-12-31T00:00:00"
+          }
+        ],
+        "MaximumReturns": [
+          {
+            "Value": 5.38194,
+            "Frequency": "M",
+            "TimePeriod": "M12",
+            "Date": "2021-12-31T00:00:00"
+          },
+          {
+            "Value": 25.19912,
+            "Frequency": "M",
+            "TimePeriod": "M36",
+            "Date": "2020-11-30T00:00:00"
+          },
+          {
+            "Value": 25.19912,
+            "Frequency": "M",
+            "TimePeriod": "M60",
+            "Date": "2020-11-30T00:00:00"
+          }
+        ],
+        "MinimumReturns": [
+          {
+            "Value": -6.83313,
+            "Frequency": "M",
+            "TimePeriod": "M12",
+            "Date": "2022-06-30T00:00:00"
+          },
+          {
+            "Value": -21.80095,
+            "Frequency": "M",
+            "TimePeriod": "M36",
+            "Date": "2020-03-31T00:00:00"
+          },
+          {
+            "Value": -21.80095,
+            "Frequency": "M",
+            "TimePeriod": "M60",
+            "Date": "2020-03-31T00:00:00"
+          }
+        ],
+        "NumberOfPositives": [
+          {
+            "Count": 6.0,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Count": 21.0,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Count": 32.0,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "NumberOfNegatives": [
+          {
+            "Count": 6.0,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Count": 15.0,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Count": 28.0,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ]
+      },
+      {
+        "CurrencyId": "GBP",
+        "CurrencyOption": "BENCHMARKCURRENCY",
+        "Date": "2022-07-31T00:00:00",
+        "Type": "MonthEnd",
+        "ReturnType": "ItPostTax",
+        "benchmarkType": "CategoryPrimaryIndexId",
+        "Alphas": [
+          {
+            "Value": -4.03037,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 6.95719,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 1.86958,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "Betas": [
+          {
+            "Value": 1.14395,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 1.50904,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 1.40671,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "RSquareds": [
+          {
+            "Value": 76.849,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 89.74,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 85.637,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "InformationRatios": [
+          {
+            "Value": -0.56873,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 0.66298,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 0.26159,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "TrackingErrors": [
+          {
+            "Value": 6.49784,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 11.49745,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 9.81499,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "SortinoRatios": [
+          {
+            "Value": 0.25034,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 0.82106,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 0.59864,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "StandardDeviations": [
+          {
+            "Value": 13.15,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 25.38,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 21.13,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "SharpeRatios": [
+          {
+            "Frequency": "M",
+            "TimePeriod": "M12",
+            "Value": 0.16661
+          },
+          {
+            "Frequency": "M",
+            "TimePeriod": "M36",
+            "Value": 0.51608
+          },
+          {
+            "Frequency": "M",
+            "TimePeriod": "M60",
+            "Value": 0.38326
+          }
+        ],
+        "MaximumReturns": [
+          {
+            "Value": 5.38194,
+            "Frequency": "M",
+            "TimePeriod": "M12",
+            "Date": "2021-12-31T00:00:00"
+          },
+          {
+            "Value": 25.19912,
+            "Frequency": "M",
+            "TimePeriod": "M36",
+            "Date": "2020-11-30T00:00:00"
+          },
+          {
+            "Value": 25.19912,
+            "Frequency": "M",
+            "TimePeriod": "M60",
+            "Date": "2020-11-30T00:00:00"
+          }
+        ],
+        "MinimumReturns": [
+          {
+            "Value": -6.83313,
+            "Frequency": "M",
+            "TimePeriod": "M12",
+            "Date": "2022-06-30T00:00:00"
+          },
+          {
+            "Value": -21.80095,
+            "Frequency": "M",
+            "TimePeriod": "M36",
+            "Date": "2020-03-31T00:00:00"
+          },
+          {
+            "Value": -21.80095,
+            "Frequency": "M",
+            "TimePeriod": "M60",
+            "Date": "2020-03-31T00:00:00"
+          }
+        ],
+        "NumberOfPositives": [
+          {
+            "Count": 6.0,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Count": 21.0,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Count": 32.0,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "NumberOfNegatives": [
+          {
+            "Count": 6.0,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Count": 15.0,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Count": 28.0,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ]
+      },
+      {
+        "CurrencyId": "GBP",
+        "CurrencyOption": "BASECURRENCY",
+        "Date": "2022-07-31T00:00:00",
+        "Type": "MonthEnd",
+        "ReturnType": "ItPostTax",
+        "benchmarkType": "CategoryPrimaryIndexId",
+        "Alphas": [
+          {
+            "Value": -4.03037,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 6.95719,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 1.86958,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "Betas": [
+          {
+            "Value": 1.14395,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 1.50904,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 1.40671,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "RSquareds": [
+          {
+            "Value": 76.849,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 89.74,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 85.637,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "InformationRatios": [
+          {
+            "Value": -0.56873,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 0.66298,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 0.26159,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "TrackingErrors": [
+          {
+            "Value": 6.49784,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 11.49745,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 9.81499,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "SortinoRatios": [
+          {
+            "Value": 0.25034,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 0.82106,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 0.59864,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "StandardDeviations": [
+          {
+            "Value": 13.15,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Value": 25.38,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Value": 21.13,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "SharpeRatios": [
+          {
+            "Frequency": "M",
+            "TimePeriod": "M12",
+            "Value": 0.16661
+          },
+          {
+            "Frequency": "M",
+            "TimePeriod": "M36",
+            "Value": 0.51608
+          },
+          {
+            "Frequency": "M",
+            "TimePeriod": "M60",
+            "Value": 0.38326
+          }
+        ],
+        "MaximumReturns": [
+          {
+            "Value": 5.38194,
+            "Frequency": "M",
+            "TimePeriod": "M12",
+            "Date": "2021-12-31T00:00:00"
+          },
+          {
+            "Value": 25.19912,
+            "Frequency": "M",
+            "TimePeriod": "M36",
+            "Date": "2020-11-30T00:00:00"
+          },
+          {
+            "Value": 25.19912,
+            "Frequency": "M",
+            "TimePeriod": "M60",
+            "Date": "2020-11-30T00:00:00"
+          }
+        ],
+        "MinimumReturns": [
+          {
+            "Value": -6.83313,
+            "Frequency": "M",
+            "TimePeriod": "M12",
+            "Date": "2022-06-30T00:00:00"
+          },
+          {
+            "Value": -21.80095,
+            "Frequency": "M",
+            "TimePeriod": "M36",
+            "Date": "2020-03-31T00:00:00"
+          },
+          {
+            "Value": -21.80095,
+            "Frequency": "M",
+            "TimePeriod": "M60",
+            "Date": "2020-03-31T00:00:00"
+          }
+        ],
+        "NumberOfPositives": [
+          {
+            "Count": 6.0,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Count": 21.0,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Count": 32.0,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ],
+        "NumberOfNegatives": [
+          {
+            "Count": 6.0,
+            "Frequency": "M",
+            "TimePeriod": "M12"
+          },
+          {
+            "Count": 15.0,
+            "Frequency": "M",
+            "TimePeriod": "M36"
+          },
+          {
+            "Count": 28.0,
+            "Frequency": "M",
+            "TimePeriod": "M60"
+          }
+        ]
+      }
+    ]
+  }
+]
+```
+</details>
+
+### Component Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+import { get, set } from 'lodash';
+//
+parsedModelData() {
+  const data = (this.modelData && this.modelData[0]) || {};
+  set(data, 'sRRI[0].value', get(data, 'CollectedSRRI.Rank'));
+  return data;
+},
+```
+</details>
+&nbsp;
+<details>
+  <summary><span class="summary-text">Sub-component "MorningstarRating"</span></summary>
+
+```javascript dark
+fieldDefinitions = [
+  {
+    text: '',
+    value: 'timePeriod',
+  },
+  {
+    text: 'Morningstar Return',
+    value: 'morningstarReturn',
+  },
+  {
+    text: 'Morningstar Risk',
+    value: 'morningstarRisk',
+  },
+  {
+    text: 'Morningstar Rating',
+    value: 'morningstarRating',
+  },
+]
+
+riskRatingMappings = {
+    "rating_1": "Low",
+    "rating_2": "Below Average",
+    "rating_3": "Average",
+    "rating_4": "Above Average",
+    "rating_5": "High",
+    "timePeriod_M36": "3 Years",
+    "timePeriod_M60": "5 Years",
+    "timePeriod_M120": "10 Years",
+    "timePeriod_M255": "Overall"
+}
+
+parsedModelData() {
+  const tableData = [];
+  const riskAndRating = this.modelData || [];
+  const periods = ['M36', 'M60', 'M120', 'M255'];
+  periods.forEach((timePeriod) => {
+      const timePeriodData = riskAndRating.find((data) => data.TimePeriod === timePeriod);
+      tableData.push({
+          morningstarRating: timePeriodData && timePeriodData.RatingValue,
+          morningstarReturn: riskRatingMappings[`rating_${
+              timePeriodData && timePeriodData.PerformanceRatingValue
+          }`] || '–',
+          morningstarRisk: riskRatingMappings[`rating_${
+              timePeriodData && timePeriodData.RiskRatingValue
+          }`] || '–',
+          timePeriod: riskRatingMappings[`timePeriod_${timePeriod}`],
+      });
+  });
+  return tableData;
+},
+```
+</details>
+&nbsp;
+<details>
+  <summary><span class="summary-text">Sub-component "RiskMeasures"</span></summary>
+
+```javascript dark
+fieldDefinitions = [
+  {
+    text: 'Alpha',
+    value: 'Alphas',
+  },
+  {
+    text: 'Beta',
+    value: 'Betas',
+  },
+  {
+    text: 'Information Ratio',
+    value: 'InformationRatios',
+  },
+  {
+    text: 'R-Squared (%)',
+    value: 'RSquareds',
+  },
+  {
+    text: 'Sharpe Ratio',
+    value: 'SharpeRatios',
+  },
+  {
+    text: 'Standard Deviation (%)',
+    value: 'StandardDeviations',
+  },
+  {
+    text: 'Tracking Error (%)',
+    value: 'TrackingErrors',
+  },
+]
+
+periods = [
+  {
+    text: '',
+    value: 'dataPoint',
+  },
+  {
+    text: '1 Year',
+    value: 'M12',
+  },
+  {
+    text: '3 Years',
+    value: 'M36',
+  },
+  {
+    text: '5 Years',
+    value: 'M60',
+  },
+]
+
+parsedModelData() {
+  const tableData = [];
+  const riskStatisticsData = this.modelData || [];
+  const riskStatistics = riskStatisticsData.find(
+    (data) => data.Type === 'MonthEnd' && data.CurrencyOption === 'DISPLAYCURRENCY',
+  ) || {};
+  const frequency = 'M';
+  this.fieldDefinitions.forEach((fieldDef) => {
+    const rowData = { dataPoint: fieldDef.text };
+    this.periods.slice(1).forEach((timePeriod) => {
+      const fieldData = riskStatistics[fieldDef.value] || [];
+      const filteredObject = fieldData.find(
+        (dataItem) => dataItem.Frequency === frequency
+          && dataItem.TimePeriod === timePeriod.value,
+      ) || {};
+      rowData[timePeriod.value] = this.formatNumber(filteredObject.Value, 2) || '–';
+    });
+    tableData.push(rowData);
+  });
+  return tableData;
+},
+```
+</details>
+
+## Data Models
+The sub-components use the following data models:
+<details>
+  <summary><span class="summary-text">Morningstar Rating</span></summary>
+
+```json dark
+[
+  {
+    "morningstarRating": 5,
+    "morningstarReturn": "High",
+    "morningstarRisk": "High",
+    "timePeriod": "3 Years"
+  },
+  {
+    "morningstarRating": 3,
+    "morningstarReturn": "High",
+    "morningstarRisk": "High",
+    "timePeriod": "5 Years"
+  },
+  {
+    "morningstarRating": 4,
+    "morningstarReturn": "High",
+    "morningstarRisk": "High",
+    "timePeriod": "10 Years"
+  },
+  {
+    "morningstarRating": 4,
+    "morningstarReturn": "High",
+    "morningstarRisk": "High",
+    "timePeriod": "Overall"
+  }
+]
+```
+</details>
+&nbsp;
+<details>
+  <summary><span class="summary-text">Risk Measures</span></summary>
+
+```json dark
+[
+  {
+    "dataPoint": "Alpha",
+    "M12": "-4.03",
+    "M36": "6.96",
+    "M60": "1.87"
+  },
+  {
+    "dataPoint": "Beta",
+    "M12": "1.14",
+    "M36": "1.51",
+    "M60": "1.41"
+  },
+  {
+    "dataPoint": "Information Ratio",
+    "M12": "-0.57",
+    "M36": "0.66",
+    "M60": "0.26"
+  },
+  {
+    "dataPoint": "R-Squared (%)",
+    "M12": "76.85",
+    "M36": "89.74",
+    "M60": "85.64"
+  },
+  {
+    "dataPoint": "Sharpe Ratio",
+    "M12": "0.17",
+    "M36": "0.52",
+    "M60": "0.38"
+  },
+  {
+    "dataPoint": "Standard Deviation (%)",
+    "M12": "13.15",
+    "M36": "25.38",
+    "M60": "21.13"
+  },
+  {
+    "dataPoint": "Tracking Error (%)",
+    "M12": "6.50",
+    "M36": "11.50",
+    "M60": "9.81"
+  }
+]
+```
+</details>

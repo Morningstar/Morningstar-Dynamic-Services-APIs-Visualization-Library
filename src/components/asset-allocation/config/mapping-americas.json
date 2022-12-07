@@ -1,0 +1,80 @@
+{
+    "assetAllocation": {
+        "MorningstarUSA": {
+            "AC-USEQ": "US Stocks",
+            "AC-NUSEQ": "Non US Stocks",
+            "AC-ALLBOND": "Bonds",
+            "AC-USCASH": "Cash",
+            "AC-USBROAD-OTHER": "Other",
+            "AC-NOTCLASSIFIED": "Not Classified"
+        },
+        "MorningstarCABroad": {
+            "AC-CANCASH": "Cash",
+            "AC-CANEQ": "Canadian Equity",
+            "AC-USEQ-XOI": "US Equity",
+            "AC-NUSNCANEQ": "International Equity",
+            "AC-ALLBOND-XOI": "Fixed Income",
+            "AC-CANOTHER": "Other/Not Classified"
+        }
+    },
+    "assetAllocationTypeMapping": {
+        "ACG-USBROAD": "MorningstarUSA",
+        "ACG-CABROAD": "MorningstarCABroad"
+    },
+    "breakdown": {
+        "mapping": {
+            "MorningstarUSA": {
+                "AC-USEQ": "1",
+                "AC-NUSEQ": "2",
+                "AC-ALLBOND": "3",
+                "AC-USCASH": "4",
+                "AC-USBROAD-OTHER": "5",
+                "AC-NOTCLASSIFIED": "6"
+            },
+            "MorningstarCABroad": {
+                "AC-CANCASH": "1",
+                "AC-CANEQ": "2",
+                "AC-USEQ-XOI": "3",
+                "AC-NUSNCANEQ": "4",
+                "AC-ALLBOND-XOI": "5",
+                "AC-CANOTHER": "6"
+            }
+        },
+        "fields": {
+            "MorningstarUSA": [
+                "securityName",
+                "MorningstarUSA_1",
+                "MorningstarUSA_2",
+                "MorningstarUSA_3",
+                "MorningstarUSA_4",
+                "MorningstarUSA_5",
+                "weight"
+            ],
+            "MorningstarCABroad": [
+                "securityName",
+                "MorningstarCABroad_1",
+                "MorningstarCABroad_2",
+                "MorningstarCABroad_3",
+                "MorningstarCABroad_4",
+                "MorningstarCABroad_5",
+                "MorningstarCABroad_6",
+                "weight"
+            ],
+            "ACG-Detailed-NML2": [
+                "securityName",
+                "ACG-Detailed-NML2_1",
+                "ACG-Detailed-NML2_2",
+                "ACG-Detailed-NML2_3",
+                "ACG-Detailed-NML2_4",
+                "ACG-Detailed-NML2_5",
+                "ACG-Detailed-NML2_6",
+                "ACG-Detailed-NML2_7",
+                "ACG-Detailed-NML2_8",
+                "ACG-Detailed-NML2_9",
+                "ACG-Detailed-NML2_10",
+                "weight"
+            ]
+        }
+    },
+    "default": "MorningstarUSA"
+}

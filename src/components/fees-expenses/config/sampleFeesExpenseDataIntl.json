@@ -1,0 +1,14 @@
+{
+    "feesExpensesData": {
+        "fees": {
+            "managementFee": {
+                "value": 2.0641,
+                "analyzedWeight": 100
+            },
+            "ongoingCharge": {
+                "value": 2.46077,
+                "analyzedWeight": 100
+            }
+        }
+    }
+}

@@ -1,0 +1,68 @@
+@forward "sass:map";
+@forward "~@/components/shared/scss/constant.scss";
+@use "sass:map";
+@import '~@/components/shared/scss/constant.scss';
+
+@mixin applyIcon($url) {
+    background-image: url($url);
+    height: map.get($wal, space, '2-and-a-half-x');
+    width: map.get($wal, space, '2-and-a-half-x');
+}
+
+@mixin border($color: $wal-color-dark-grey, $direction: bottom, $width: 1px, $style: solid) {
+    @if $direction == 'all' {
+        border: $width $style $color;
+    } @else {
+        border-#{$direction}: $width $style $color;
+    }
+}
+
+@mixin wal-component-title($darkBorder: false, $bold: true) {
+    .title {
+        margin: map.get($wal, space, '1-and-a-quarter-x') 0;
+        h2 {
+            @include wal-heading(6, $bold);
+            padding-bottom: map.get($wal, space, '1-and-a-quarter-x');
+            @if $darkBorder {
+                @include border($wal-color-grey, bottom);
+            } @else {
+                @include border($wal-color-regular, bottom);
+            }
+        }
+    }
+}
+
+@mixin wal-group-title() {
+    .group-title {
+        @include border($wal-color-grey, top, 2px);
+        h2 {
+            @include wal-heading(4, false);
+            color: $wal-color-grey;
+            margin-top: map.get($wal, space, '1-x');
+        }
+    }
+}
+
+@mixin wal-heading($level: 2, $bold: false) {
+    font-size: map.get($wal, headings, 'font-size', 'level-' + $level);
+    line-height: map.get($wal, headings, 'line-height', 'level-' + $level);
+    @if $bold {
+        font-weight: $wal-font-weight-bold;
+    } @else {
+        font-weight: $wal-font-weight-light;
+    }
+}
+
+@mixin wal-highlight-table-cell {
+    .highlight {
+        td {
+            font-weight: 700;
+        }
+    }
+}
+
+@mixin wal-table {
+    thead th {
+        font-size: map.get($wal, 'font-size', 's') !important;
+    }
+}

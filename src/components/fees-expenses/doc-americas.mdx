@@ -1,0 +1,337 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import FeesExpenses from '@/components/fees-expenses/FeesExpenses.vue';
+import { PORTFOLIO_ANALYSIS_AMERICAS_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="FeesExpenses" component={FeesExpenses} />
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+  
+</style>
+
+# Fees Expenses (Americas)
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+
+
+## Description
+The Fees Expenses component evaluates how the ongoing costs an investor incurs to own mutual funds compares to those incurrred by investors across the globe.
+
+
+<Canvas withSource="open" withToolbar>
+  <Story id="components-fees-expenses--story-details-us"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={ FeesExpenses } />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={PORTFOLIO_ANALYSIS_AMERICAS_URL} target="_blank">Portfolio Analysis API (Americas)</a>.
+<!--
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request)
+- [Request Payload Example](#request-payload)
+-->
+
+### API Data Access Library
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.xray.getFeesExpensesUsData({ portfolios: helper.sampleUsPortfolio, languageId: 'en-US' })
+```
+<details>
+  <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+const samplePortfolio = [
+    {
+        name: 'US demo portfolio - weight',
+        totalValue: 10000,
+        currency: 'USD',
+        holdings: [
+            {
+                securityId: 'FOUSA06OEZ',
+                weight: 30,
+            },
+            {
+                securityId: 'FOUSA06IVV',
+                weight: 50,
+            },
+            {
+                securityId: 'F00000T770',
+                weight: 20,
+            },
+        ],
+        benchmark: {
+            type: 'Standard',
+            holdings: [
+                {
+                    securityId: 'XIUSA0010V',
+                    weight: 100,
+                },
+            ],
+        },
+    },
+];
+
+window.mstarApisSdk.xray.getFeesExpensesUsData({ portfolios: helper.sampleUsPortfolio, languageId: 'en-US' })
+```
+</details>
+&nbsp;
+
+### Request Example
+
+```javascript dark
+"https://www.us-api.morningstar.com/portfolioanalysis/v1/esg?langcult={{languageId}}"
+
+```
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- | 
+| `languageId` |	ISO culture codes. If not provided, defaults to language defined in settings. |`languageId=en-US` |
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Integration Data Format](#integration-data-format) 
+- [Integration Transformation Operation](#integration-transformation-operation) 
+- [Component Transformed Data Format](#component-transformed-data-format) 
+- [Component Transformation Operation](#component-transformation-operation) 
+-->
+
+### API Response Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "AverageNetExpenseRatio": 0.521,
+    "AverageGrossExpenseRatio": 0.612,
+    "PotentialCapGainsExposure": 6.367637
+}
+```
+</details>
+&nbsp;
+
+### Integration Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "feesExpensesData": {
+        "AverageNetExpenseRatio": 0.521,
+        "AverageGrossExpenseRatio": 0.612,
+        "PotentialCapGainsExposure": 6.367637
+    }
+}
+```
+</details>
+&nbsp;
+
+### Integration Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+function getFeesExpensesUsData(xrayData, breakdown = {}) {
+    const feesExpensesData = get(xrayData, 'XRay[0].Statistics.FundStatistics.Portfolio', {});
+    const breakdownData = {};
+    if (breakdown?.showBreakdown) {
+        const feesExpenses = get(xrayData, 'XRay[0].Statistics.FundStatistics', {});
+        breakdownData.securityBreakdownData = getSecurityBreakdownDetails(
+            feesExpenses,
+            breakdown.portfolioSecurityReference,
+            breakdown.portfolioHoldings,
+        );
+        breakdownData.portfolioAnalyzedPercent = feesExpenses.PortfolioAnalyzed;
+    }
+    return {
+        feesExpensesData,
+        breakdownData,
+    };
+}
+```
+</details>
+&nbsp;
+
+### Component Transformed Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+[
+    {
+        "feesExpensesKey": "Average Gross Expense Ratio",
+        "expenses": "0.61"
+    },
+    {
+        "feesExpensesKey": "Average Net Expense Ratio",
+        "expenses": "0.52"
+    },
+    {
+        "feesExpensesKey": "Potential Cap Gains Exposure",
+        "expenses": "6.37"
+    }
+]
+```
+</details>
+&nbsp;
+
+### Component Transformation Operation
+<details>
+  	<summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+    parsedModelData() {
+        const feesExpensesData = this.modelData?.feesExpensesData;
+        const feesData = Array.isArray(feesExpensesData)
+            ? feesExpensesData[0] : feesExpensesData;
+        const isNotMifid = Boolean(feesData.fees);
+        let result = [];
+        if (this.fieldDefinitions.type === 'us' || isNotMifid) { // Used for US API data
+            const feesExpensesFields = this.fieldDefinitions.fields;
+            result = feesExpensesFields.map((field) => {
+                const expensesValue = feesData[field.value]
+                    ? feesData[field.value].toFixed(2)
+                    : feesData.fees[field.value].value.toFixed(2);
+                return {
+                    feesExpensesKey: field.key,
+                    expenses: expensesValue,
+                };
+            });
+        } else {
+            result = this.getMifidData(feesData);
+        }
+        return result;
+    },
+    getMifidData(model) { // Used for Cost calulator API Data (Not for Americas)
+        const summary = get(model, 'summary', {});
+        const totalCosts = get(model, 'totalCosts', {});
+        const initialCosts = get(model, 'initialCosts', {});
+        const feesExpensesFields = this.fieldDefinitions.fields;
+
+        return feesExpensesFields.map((field) => ({
+            feesExpensesKey: field.key,
+            expenses: (summary[field.value]
+                || totalCosts[field.value]
+                || initialCosts[field.value]
+                || null),
+            type: field.format,
+        }));
+    },
+```
+</details>
+&nbsp;
+
+### Security Breakdown Data Format
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+  "breakdownData": {
+    "securityBreakdownData": [
+      {
+        "SecurityId": "FOUSA06OEZ",
+        "Analyzed": 100,
+        "NotAnalyzed": 0,
+        "FundStatisticsItem": {
+          "AverageNetExpenseRatio": 0.32,
+          "AverageGrossExpenseRatio": 0.33,
+          "PotentialCapGainsExposure": 0.33
+        },
+        "Name": "iShares MSCI ACWI ETF",
+        "Weight": 100
+      }
+    ],
+    "portfolioAnalyzedPercent": 100
+  },
+  "securityBreakdown": [
+    {
+      "securityName": "iShares MSCI ACWI ETF",
+      "averageGrossExpenseRatio": 0.33,
+      "averageNetExpenseRatio": 0.32,
+      "potentialCapGainsExposure": 0.33,
+      "weight": 100
+    }
+  ],
+  "portfolioAnalyzed": [
+    {
+      "securityName": "iShares MSCI ACWI ETF",
+      "analyzedPercent": 100,
+      "notAnalyzedPercent": 0,
+      "weight": 100
+    }
+  ],
+  "portfolioAnalyzedPercent": 100
+}
+```
+</details>
+&nbsp;
+
+### Security Breakdown Transformation Operation
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+function getSecurityBreakdownDetails(componentData, securityReference, portfolioHoldings) {
+    const breakdown = get(componentData, 'SecurityBreakdown', []);
+    return breakdown.map((security) => {
+        const currSecurity = security;
+        currSecurity.Name = getSecurityDetail(securityReference, currSecurity.SecurityId)?.Name;
+        currSecurity.Weight = portfolioHoldings ? getSecurityDetail(
+            portfolioHoldings,
+            currSecurity.SecurityId,
+        )?.PercentAssets : null;
+        return currSecurity;
+    });
+}
+
+function getFeesExpensesUsData(xrayData, breakdown = {}) {
+    const feesExpensesData = get(xrayData, 'XRay[0].Statistics.FundStatistics.Portfolio', {});
+    const breakdownData = {};
+    if (breakdown?.showBreakdown) { // Security Breakdown Data
+        const feesExpenses = get(xrayData, 'XRay[0].Statistics.FundStatistics', {});
+        breakdownData.securityBreakdownData = getSecurityBreakdownDetails(
+            feesExpenses,
+            breakdown.portfolioSecurityReference,
+            breakdown.portfolioHoldings,
+        );
+        breakdownData.portfolioAnalyzedPercent = feesExpenses.PortfolioAnalyzed;
+    }
+    return {
+        feesExpensesData,
+        breakdownData, // Security Breakdown data
+    };
+}
+```
+</details>

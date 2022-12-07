@@ -1,0 +1,473 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import PerformanceGraph from "@/components/performance-graph/PerformanceGraph.vue";
+import { PORTFOLIO_ANALYSIS_AMERICAS_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="PerformanceGraph" component={PerformanceGraph} />
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+  
+</style>
+
+# Performance Graph - Growth of 10k (Americas)
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+- [Subcomponent Configuration](#subcomponent-configuration)
+
+## Description
+The Growth of 10K performance graph is illustrates the change in value of an initial $10,000 investment in a financial asset during a given period of time.
+
+<Canvas withSource="open" withToolbar>
+  <Story id="components-performance-graph-growth-of-10k--story-details-us"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={PerformanceGraph} />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={PORTFOLIO_ANALYSIS_AMERICAS_URL} target="_blank">Portfolio Analysis API (Americas)</a>.
+<!--
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request)
+- [Request Payload Example](#request-payload)
+-->
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.xray.getPerformanceGraphUsData({ portfolios: helper.samplePortfolio, languageId: 'en-US' }),
+```
+<details>
+  <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+const samplePortfolio = [
+    {
+        name: 'US demo portfolio - weight',
+        totalValue: 10000,
+        currency: 'USD',
+        holdings: [
+            {
+                securityId: 'FOUSA06OEZ',
+                weight: 30,
+            },
+            {
+                securityId: 'FOUSA06IVV',
+                weight: 50,
+            },
+            {
+                securityId: 'F00000T770',
+                weight: 20,
+            },
+        ],
+        benchmark: {
+            type: 'Standard',
+            holdings: [
+                {
+                    securityId: 'XIUSA0010V',
+                    weight: 100,
+                },
+            ],
+        },
+    },
+];
+
+window.mstarApisSdk.xray.getPerformanceGraphUsData({ portfolios: samplePortfolio, languageId: 'en-US' });
+```
+</details>
+&nbsp;
+
+### Request Example
+
+```javascript dark
+"https://www.us-api.morningstar.com/portfolioanalysis/v1/esg?langcult={{languageId}}"
+
+```
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- | 
+| `languageId` | ISO culture codes. If not provided, defaults to language defined in settings. | `languageId=en-US` |
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Integration Data Format](#integration-data-format) 
+- [Integration Transformation Operation](#integration-transformation-operation) 
+- [Component Transformed Data Format](#component-transformed-data-format) 
+- [Component Transformation Operation](#component-transformation-operation)
+-->
+### API Response Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+"performanceData": {
+    "DataFrequency": "Monthly",
+    "Portfolio": [
+        {
+            "Sequence": 1,
+            "StartDate": "2015-01-01T00:00:00",
+            "EndDate": "2015-01-31T00:00:00",
+            "BeginningBalance": 10000,
+            "MarketValue": 9966.57
+        },
+        {
+            "Sequence": 2,
+            "StartDate": "2015-02-01T00:00:00",
+            "EndDate": "2015-02-28T00:00:00",
+            "BeginningBalance": 9966.57,
+            "MarketValue": 10491.18
+        },
+        {
+            "Sequence": 3,
+            "StartDate": "2015-03-01T00:00:00",
+            "EndDate": "2015-03-31T00:00:00",
+            "BeginningBalance": 10491.18,
+            "MarketValue": 10325.38
+        },
+    ],
+    "Benchmark": [
+        {
+            "Sequence": 1,
+            "StartDate": "2015-01-01T00:00:00",
+            "EndDate": "2015-01-31T00:00:00",
+            "BeginningBalance": 10000,
+            "MarketValue": 9727.79
+        },
+        {
+            "Sequence": 2,
+            "StartDate": "2015-02-01T00:00:00",
+            "EndDate": "2015-02-28T00:00:00",
+            "BeginningBalance": 9727.79,
+            "MarketValue": 10288.82
+        },
+        {
+            "Sequence": 3,
+            "StartDate": "2015-03-01T00:00:00",
+            "EndDate": "2015-03-31T00:00:00",
+            "BeginningBalance": 10288.82,
+            "MarketValue": 10176.95
+        },
+    ],
+    "MaxSequence": 0
+},
+"securityReference": [
+    {
+        "SecurityId": "FOUSA06OEZ",
+        "ISIN": "US4642882579",
+        "Name": "iShares MSCI ACWI ETF",
+        "TradingSymbol": "ACWI",
+        "BaseCurrency": "USD",
+        "Type": "FE",
+        "InceptionDate": "2008-03-26T00:00:00",
+        "SecurityReferenceTypes": [
+            "PortfolioHolding"
+        ]
+    },
+    {
+        "SecurityId": "FOUSA06IVV",
+        "ISIN": "US46138E7435",
+        "Name": "Invesco FTSE RAFI Dev Mkts ex-US ETF",
+        "TradingSymbol": "PXF",
+        "BaseCurrency": "USD",
+        "Type": "FE",
+        "InceptionDate": "2007-06-25T00:00:00",
+        "SecurityReferenceTypes": [
+            "PortfolioHolding"
+        ]
+    },
+    {
+        "SecurityId": "F00000T770",
+        "ISIN": "US68246A5048",
+        "Name": "1290 High Yield Bond A",
+        "TradingSymbol": "TNHAX",
+        "BaseCurrency": "USD",
+        "Type": "FO",
+        "InceptionDate": "2014-11-12T00:00:00",
+        "SecurityReferenceTypes": [
+            "PortfolioHolding"
+        ]
+    },
+]
+```
+</details>
+&nbsp;
+
+### Integration Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "portfolio": [
+        [
+            "2012-01-31",
+            0.4466
+        ],
+        [
+            "2012-02-29",
+            7.94494
+        ]
+    ],
+    "benchmark": [
+        [
+            "1972-01-31",
+            4.22415
+        ],
+        [
+            "1972-02-29",
+            3.85105
+        ],
+    ],
+    "benchmarkName": "Global Large-Cap Blend Equity"
+}
+```
+</details>
+&nbsp;
+
+### Integration Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+function getPerformanceUsData(xrayData, portfolio) {
+    let benchmarkName;
+    if (portfolio[0]?.benchmark?.type !== 'AutoAsset' && portfolio[0]?.benchmark?.type !== 'AutoCategory') {
+        const securityId = portfolio[0]?.benchmark?.holdings[0]?.securityId;
+        benchmarkName = getSecurityDetail(xrayData.securityReference, securityId)?.Name;
+    }
+    const parsedPortfolio = get(xrayData, 'performanceData.Portfolio', []);
+    const portfolioData = transformPerformanceChartData(parsedPortfolio);
+    const parsedBenchmark = get(xrayData, 'performanceData.Benchmark', []);
+    const benchmarkData = transformPerformanceChartData(parsedBenchmark);
+
+    return {
+        portfolio: portfolioData,
+        benchmark: benchmarkData,
+        portfolioName: portfolio[0]?.name,
+        benchmarkName: benchmarkName || 'Benchmark',
+    };
+}
+```
+</details>
+&nbsp;
+
+### Component Transformed Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+    [{
+        "name": "UK demo portfolio - amount",
+        "type": "portfolio",
+        "useLabel": false,
+        "data": [
+            {
+                "endDate": "2012-01-31T00:00:00.000",
+                "value": 0.4466
+            },
+            {
+                "endDate": "2012-02-29T00:00:00.000",
+                "value": 7.94494
+            },
+            {
+                "endDate": "2012-03-31T00:00:00.000",
+                "value": -2.62418
+            }
+        ]
+    },
+    {
+        "name": "Global Large-Cap Blend Equity",
+        "type": "benchmark",
+        "useLabel": false,
+        "data": [
+            {
+                "endDate": "1972-01-31T00:00:00.000",
+                "value": 4.22415
+            },
+            {
+                "endDate": "1972-02-29T00:00:00.000",
+                "value": 3.85105
+            },
+            {
+                "endDate": "1972-03-31T00:00:00.000",
+                "value": 0.66122
+            },
+        ]
+    }]
+
+```
+</details>
+&nbsp;
+
+### Component Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+parsedModelData() {
+    const data = this.modelData;
+    const portfolioName = this.portfolio?.name;
+
+    return [{
+        name: portfolioName || 'Portfolio',
+        type: 'portfolio',
+        data: data.portfolio
+            ? this.transformPerformanceChartData(data.portfolio) : [],
+    }, {
+        name: data.benchmarkName ? data.benchmarkName : 'Benchmark',
+        type: 'benchmark',
+        data: data.benchmark
+            ? this.transformPerformanceChartData(data.benchmark) : [],
+    }];
+},
+transformPerformanceChartData(data, overrideValue) {
+    return data.map((item) => {
+        const value = item[1];
+        const endDate = toUTCLocalISOString(new Date(item[0]));
+        return {
+            endDate,
+            value: overrideValue ?? value,
+        };
+    });
+},
+drawGraphByFrequency(seriesData, months) {
+    let monthCount = months;
+    if (monthCount === 'YTD') {
+        monthCount = Service.getYTDMonthCount(seriesData);
+    }
+    return Service.getFrequencySeriesData(this.graphBaseValue, seriesData, monthCount);
+},
+getChartData(monthCount) {
+    const frequencySeriesData = this.drawGraphByFrequency(this.parsedModelData, monthCount);
+    const lineChartData = Service.getLineChartData(frequencySeriesData);
+    return lineChartData;
+},
+parseChartData(tab) {
+    const selectedTab = this.getTabs.find((item) => item.key === tab);
+    const portfolioData = this.getChartData(selectedTab?.value)[0];
+    const benchmarkData = this.getChartData(selectedTab?.value)[1];
+    const portfolioLegendLabel = this.getFormattedLegendValue(portfolioData);
+    const benchmarkLegendLabel = this.getFormattedLegendValue(benchmarkData);
+    return {
+        datasets: [
+            {
+                label: portfolioLegendLabel,
+                borderColor: this.chartColors[0],
+                backgroundColor: this.chartColors[0],
+                data: portfolioData,
+            },
+            {
+                label: benchmarkLegendLabel,
+                borderColor: this.chartColors[1],
+                backgroundColor: this.chartColors[1],
+                data: benchmarkData,
+            },
+        ],
+    };
+},
+getFormattedLegendValue(value) {
+    const getLatestDate = value.reduce((m, current, index) => (
+        (current.date > m.date) && index ? current : m));
+    let newValue = getLatestDate?.value;
+    const name = getLatestDate?.name;
+
+    const { graphBaseValue } = this;
+    newValue = ((newValue - graphBaseValue) / graphBaseValue) * 100.0;
+
+    return `${name} : ${newValue.toFixed(2)}`;
+},
+```
+</details>
+&nbsp;
+
+## Subcomponent Configuration
+
+<details>
+  <summary><span class="summary-text">Chart config</span></summary>
+
+``` javascript dark
+    chartOptions: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+            mode: 'index',
+            intersect: false,
+        },
+        parsing: {
+            xAxisKey: 'formattedDate',
+            yAxisKey: 'value',
+        },
+        pointStyle: 'circle',
+        pointRadius: 1,
+        pointHoverRadius: 6,
+        plugins: {
+            tooltip: {
+                backgroundColor: '#000000',
+                titleColor: '#ffffff',
+                bodyColor: '#ffffff',
+                bodySpacing: 10,
+                borderWidth: 2,
+                borderColor: '#000000',
+                callbacks: {
+                    label(context) {
+                        const label = context.raw.name || '';
+                        const value = context.raw.value || '';
+                        return `${label} : ${value}`;
+                    },
+                },
+            },
+            legend: {
+                position: 'top',
+                align: 'start',
+                labels: {
+                    color: '#6e7383',
+                    boxWidth: 25,
+                    boxHeight: 2,
+                },
+            },
+        },
+        scales: {
+            x: {
+                grid: {
+                    color: '#eef5ff',
+                },
+            },
+            y: {
+                grid: {
+                    color: '#eef5ff',
+                },
+            },
+        },
+    },
+```
+</details>
+
+See [line Chart](https://www.chartjs.org/docs/3.4.1/samples/line/line.html) from [chart JS](https://www.chartjs.org/docs/3.4.1/) for more info.

@@ -1,0 +1,16 @@
+{
+    "emea": {
+        "prospectiveEarningsYield": "Price/Prospective Earnings",
+        "prospectiveBookValueYield": "Price/Book Ratio",
+        "prospectiveRevenueYield": "Price/Sales Ratio",
+        "prospectiveCashFlowYield": "Price/Cash Flow Ratio"
+    },
+    "america": {
+        "PriceEarnings": "Price/Prospective Earnings",
+        "PriceBook": "Price/Book Ratio",
+        "PriceSales": "Price/Sales Ratio",
+        "PriceCashFlow": "Price/Cash Flow Ratio",
+        "ROA": "Return on Assets (ROA)",
+        "ROE": "Return on Equity (ROE)"
+    }
+}

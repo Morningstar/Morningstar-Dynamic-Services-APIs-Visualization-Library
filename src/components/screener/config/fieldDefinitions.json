@@ -1,0 +1,196 @@
+{
+    "filters": {
+        "fundProvider": {
+            "type": "select",
+            "label": "Fund Provider",
+            "dynamic": "true",
+            "placeholderLabelId": "",
+            "listItems": [],
+            "apiParam": "BrandingCompanyId:EQ:",
+            "fetchFromApiData": "brandingCompanyId"
+        },
+        "yieldPercent": {
+            "type": "select",
+            "placeholderLabelId": "",
+            "label": "Yield (%)",
+            "listItems": [
+                {
+                    "id": "Yield_M12:BTW:0:2",
+                    "name": "0% - 2%"
+                },
+                {
+                    "id": "Yield_M12:BTW:2:4",
+                    "name": "2% - 4%"
+                },
+                {
+                    "id": "Yield_M12:BTW:4:6",
+                    "name": "4% - 6%"
+                },
+                {
+                    "id": "Yield_M12:BTW:6:8",
+                    "name": "6% - 8%"
+                },
+                {
+                    "id": "Yield_M12:GT:8",
+                    "name": "> 8%"
+                }
+            ]
+        },
+        "ongoingCharge": {
+            "type": "select",
+            "placeholderLabelId": "",
+            "label": "Ongoing Charge (%)",
+            "listItems": [
+                {
+                    "id": "OngoingCharge:LT:0.5",
+                    "name": "< 0.5"
+                },
+                {
+                    "id": "OngoingCharge:BTW:0.5:1",
+                    "name": "0.5 - 1"
+                },
+                {
+                    "id": "OngoingCharge:BTW:1:1.5",
+                    "name": "1 - 1.5"
+                },
+                {
+                    "id": "OngoingCharge:BTW:1.5:2",
+                    "name": "1.5 - 2"
+                },
+                {
+                    "id": "OngoingCharge::GT:2",
+                    "name": "> 2"
+                }
+            ]
+        },
+        "starRating": {
+            "type": "combobox",
+            "placeholderLabelId": "",
+            "label": "Star Rating",
+            "listItems": [
+                "5",
+                "4",
+                "3",
+                "2",
+                "1"
+            ],
+            "apiParam": "StarRatingM255:IN:"
+        },
+        "totalReturnTimeFrame": {
+            "type": "select",
+            "placeholderLabelId": "",
+            "childFiltersId": ["totalReturn"],
+            "label": "Total Return Time Frame",
+            "listItems": [
+                {
+                    "id": "GBRReturnM0",
+                    "name": "YTD"
+                },
+                {
+                    "id": "GBRReturnM12",
+                    "name": "1 Year"
+                },
+                {
+                    "id": "GBRReturnM36",
+                    "name": "3 Years"
+                },
+                {
+                    "id": "GBRReturnM60",
+                    "name": "5 Years"
+                },
+                {
+                    "id": "GBRReturnM120",
+                    "name": "10 Years"
+                }
+            ]
+        },
+        "totalReturn": {
+            "type": "select",
+            "dependsOn": {
+                "filter": "totalReturnTimeFrame"
+            },
+            "label": "Total Return (%)",
+            "placeholderLabelId": "",
+            "disableState": true,
+            "listItems": [
+                {
+                    "id": ":LT:0",
+                    "name": "< 0"
+                },
+                {
+                    "id": ":BTW:0:20",
+                    "name": "0 - 20"
+                },
+                {
+                    "id": ":BTW:20:40",
+                    "name": "20 - 40"
+                },
+                {
+                    "id": ":BTW:40:60",
+                    "name": "40 - 60"
+                },
+                {
+                    "id": ":BTW:60:80",
+                    "name": "60 - 80"
+                },
+                {
+                    "id": ":BTW:80:100",
+                    "name": "80 - 100"
+                },
+                {
+                    "id": ":GT:100",
+                    "name": "> 100"
+                }
+            ],
+            "parentValue": ""
+        }
+    },
+    "quickFilters": {
+        "highlyRated": {
+            "label": "Highly Rated",
+            "placeholderLabelId": "",
+            "filterLabel": "Morningstar Rating™ - 5, Morningstar Analyst Rating™ - Gold",
+            "apiParam": "StarRatingM255:IN:5|AnalystRatingScale:IN:5"
+        },
+        "topPerformerFunds": {
+            "label": "Top Performer funds",
+            "placeholderLabelId": "",
+            "filterLabel": "Total Return Time Frame - YTD, Total Return - 40-60(%)",
+            "apiParam": "GBRReturnM0:BTW:40:60"
+        },
+        "highlySustainable": {
+            "label": "Highly Sustainable",
+            "placeholderLabelId": "",
+            "filterLabel": "Low Carbon Designation™, Carbon Risk Score - 0, Morningstar Sustainability Rating™ - 5",
+            "apiParam": "LowCarbonDesignation:IN:TRUE|CarbonRiskScore:EQ:0|SustainabilityRank:IN:5"
+        },
+        "lowExpenses": {
+            "label": "Low Expenses",
+            "placeholderLabelId": "",
+            "filterLabel": "Ongoing Charge - <0.5%, Minimum Initial Purchase - <500M, Initial Charge - <=5% , Deferred Fee - <5%",
+            "apiParam": "OngoingCharge:LT:0.5|initialPurchase:LT:500000000|maxFrontEndLoad:LT:5|maxDeferredLoad:LT:5"
+        }
+    },
+    "securityList": {
+        "headers": [
+            {
+                "text": "Name",
+                "align": "start",
+                "value": "name",
+                "width": "310px",
+                "fixed": true
+            },
+            { "text": "Last Close Price", "value": "closePrice", "align": "end" },
+            { "text": "Yield (%)", "value": "yield_M12", "align": "end" },
+            { "text": "Ongoing Charge (%)", "value": "ongoingCharge", "align": "end" },
+            { "text": "Morningstar Rating™", "value": "starRatingM255", "align": "center" },
+            { "text": "1 Day Return (%)", "value": "gbrReturnD1", "align": "end"},
+            { "text": "1 Week Return (%)", "value": "gbrReturnW1", "align": "end" },
+            { "text": "1 Month Return (%)", "value": "gbrReturnM1", "align": "end" },
+            { "text": "3 Months Return (%)", "value": "gbrReturnM3", "align": "end" },
+            { "text": "6 Months Return (%)", "value": "gbrReturnM6", "align": "end" }
+        ],
+        "itemsPerPage": 10,
+        "itemsPerPageOptions": [10, 25, 50]
+    }
+}

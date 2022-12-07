@@ -1,0 +1,196 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import PortfolioSrri from "@/components/portfolio-srri/PortfolioSrri.vue";
+import { PORTFOLIO_ANALYSIS_EMEA_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="PortfolioSrri" component={ PortfolioSrri }/>
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .hide {
+      opacity: 0;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+
+</style>
+
+# Portfolio SRRI
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+
+
+## Description
+
+The Portfolio SRRI illustrates a portfolio's synthetic risk and reward indicator (SRRI) level.
+
+<Canvas withSource="open" withToolbar>
+  <Story id="components-portfoliosrri--story-details"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={ PortfolioSrri } />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={PORTFOLIO_ANALYSIS_EMEA_URL} target="_blank">Portfolio Analysis API (APAC/EMEA)</a>.
+<!--
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request)
+- [Request Payload Example](#request-payload)
+-->
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.xray.getSrri({ portfolios: samplePortfolio });
+```
+<details>
+  <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+const samplePortfolio = {
+  "type": 3,
+  "benchmark": {
+    "type": "Standard",
+    "holdings": [
+      {
+        "identifier": "EUCA000555",
+        "identifierType": "MSID",
+        "weight": 100
+      }
+    ]
+  },
+  "holdings": [
+    {
+      "identifier": "F0GBR052QA",
+      "identifierType": "MSID",
+      "amount": 5000
+    },
+    {
+      "identifier": "F000000EY1",
+      "identifierType": "MSID",
+      "amount": 2500
+    },
+    {
+      "identifier": "F00000OXG7",
+      "identifierType": "MSID",
+      "amount": 2000
+    },
+    {
+      "identifier": "F00000TWNO",
+      "identifierType": "MSID",
+      "amount": 10000
+    }
+  ],
+  "name": "UK demo portfolio - amount"
+}
+
+window.mstarApisSdk.xray.getSrri({ portfolios: samplePortfolio});
+
+```
+
+</details>
+
+### Request Example
+
+```javascript dark
+https://www.emea-api.morningstar.com.morningstar.com/ecint/v1/xray/json?languageId={{languageId}}
+
+```
+
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- | 
+| `languageId` |	ISO culture codes. If not provided, defaults to language defined in settings. |`languageId=en-GB` |
+
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Component Data Format](#component-data-format)
+- [Transformation Operation](#transformation-operation)
+-->
+
+### API Response Data Format
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+  "status": {
+    "detailedStatusMessage": "",
+    "statusCode": 200,
+    "statusDescription": ""
+  },
+  "riskStatistics": {
+    "type": "MonthEnd",
+    "currencyId": "GBP",
+    "endDate": "2022-06-30",
+    "sRRI": [
+      {
+        "value": 4,
+        "timePeriod": "W260",
+        "frequency": "W",
+        "endDate": "2022-07-22"
+      }
+    ]
+  }
+}
+```
+</details>
+
+### Component Data Format
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+  "srriRank": 4
+}
+```
+</details>
+
+### Transformation Operation
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+import { get } from 'lodash';
+/*
+...
+*/
+  parsedModelData() {
+      const srriRank = get(this.modelData, 'sRRI[0].value');
+      return {
+          srriRank,
+      };
+  },
+```
+</details>

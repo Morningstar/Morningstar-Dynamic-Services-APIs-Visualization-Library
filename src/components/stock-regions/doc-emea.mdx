@@ -1,0 +1,529 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import StockRegions from "@/components/stock-regions/StockRegions.vue";
+import { PORTFOLIO_ANALYSIS_EMEA_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="StockRegions" component={ StockRegions }/>
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .hide {
+      opacity: 0;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+  
+</style>
+
+# Stock Regions (APAC/EMEA)
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+- [Data Models](#data-models)
+
+## Description
+
+The Stock Regions component illustrates the geographical distribution of portfolio holdings.
+
+<Canvas withSource="open" withToolbar>
+  <Story id="components-stock-regions--story-details"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={ StockRegions } />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={PORTFOLIO_ANALYSIS_EMEA_URL} target="_blank">Portfolio Analysis API (APAC/EMEA)</a>.
+
+<!-- 
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request-example)
+- [Request Payload Example](#request-payload-example)
+-->
+
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.xray.getStockRegionsData({ portfolios: samplePortfolio });
+```
+
+<details>
+  <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+const samplePortfolio = {
+    "type": 3,
+    "benchmarkId": "EUCA000555",
+    "currencyId": "GBP",
+    "holdings": [
+        {
+            "identifier": "F0GBR052QA",
+            "identifierType": "MSID",
+            "amount": 5000
+        },
+        {
+            "identifier": "F000000EY1",
+            "identifierType": "MSID",
+            "amount": 2000
+        },
+        {
+            "identifier": "F00000OXG7",
+            "identifierType": "MSID",
+            "amount": 2000
+        },
+        {
+            "identifier": "F00000TWNO",
+            "identifierType": "MSID",
+            "amount": 1000
+        }
+    ],
+    "name": "UK demo portfolio"
+};
+
+window.mstarApisSdk.xray.getStockRegionsData({ portfolios: samplePortfolio });
+
+```
+
+</details>
+
+### Request Example
+
+Requests to the API have the following format:
+
+```javascript dark
+https://www.emea-api.morningstar.com/ecint/v1/xray/json?languageId={{languageId}}&portfolioDataPoints={{portfolioDataPoints}}&holdingDataPoints={{holdingDataPoints}}&benchmarkDataPoints={{benchmarkDataPoints}}
+
+```
+
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- | 
+| `languageId` |	ISO culture codes. If not provided, defaults to language defined in settings. |`languageId=en-GB` |
+| `portfolioDataPoints` |Comma-separated list of portfolio data points.|`portfolioDataPoints=RegionalExposure` | 
+| `holdingDataPoints` |Comma-separated list of holding data points.|`HoldingDataPoints=""` |
+| `benchmarkDataPoints` | Comma-separated list of benchmark data points.|`benchmarkDataPoints=ShowBreakdown` |
+
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format) 
+- [Integration Data Format](#integration-data-format) 
+- [Integration Transformation Operation](#integration-transformation-operation) 
+- [Component Transformed Data Format](#component-transformed-data-format) 
+- [Component Transformation Operation](#component-transformation-operation) 
+-->
+
+### API Response Data Format
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "breakdowns": {
+        "regionalExposure": [
+            {
+                "salePosition": "N",
+                "values": {
+                    "1": 14.61036,
+                    "2": 0,
+                    "3": 0,
+                    "4": 15.38292,
+                    "5": 4.00695,
+                    "6": 1.1113,
+                    "7": 0,
+                    "8": 0,
+                    "9": 0.07671,
+                    "10": 0.67216,
+                    "11": 0,
+                    "12": 0,
+                    "13": 0,
+                    "99": 64.1396
+                }
+            }
+        ]
+    },
+    "benchmark": [
+        {
+            "breakdowns": {
+                "regionalExposure": [
+                    {
+                        "salePosition": "N",
+                        "values": {
+                            "1": 64.94697,
+                            "2": 2.6852,
+                            "3": 0.30291,
+                            "4": 5.57793,
+                            "5": 9.45172,
+                            "6": 5.48379,
+                            "7": 0.00934,
+                            "8": 0.06056,
+                            "9": 0.21682,
+                            "10": 5.41734,
+                            "11": 1.4376,
+                            "12": 2.33349,
+                            "13": 1.58329,
+                            "99": 0.49303
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
+```
+</details>
+
+### Integration Data Format
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "portfolio": [
+        {
+            "Value": 14.61036,
+            "Id": "Americas",
+            "ExposureItem": [
+                {
+                    "Value": 14.61036,
+                    "Id": "NorthAmerica"
+                },
+                {
+                    "Value": 0,
+                    "Id": "LatinAmerica"
+                }
+            ]
+        },
+        {
+            "Value": 0.67216,
+            "Id": "GreaterAsia",
+            "ExposureItem": [
+                {
+                    "Value": 0.67216,
+                    "Id": "Japan"
+                },
+                {
+                    "Value": 0,
+                    "Id": "Australia"
+                },
+                {
+                    "Value": 0,
+                    "Id": "AsiaDeveloped"
+                },
+                {
+                    "Value": 0,
+                    "Id": "AsiaEmerging"
+                }
+            ]
+        },
+        {
+            "Value": 16.49422,
+            "Id": "GreaterEurope",
+            "ExposureItem": [
+                {
+                    "Value": 15.38292,
+                    "Id": "UnitedKingdom"
+                },
+                {
+                    "Value": 1.1113,
+                    "Id": "EuropeDeveloped"
+                },
+                {
+                    "Value": 0,
+                    "Id": "EuropeEmerging"
+                },
+                {
+                    "Value": 0,
+                    "Id": "AfricaMiddleEast"
+                }
+            ]
+        },
+        {
+            "Value": 64.1396,
+            "Id": "NotClassified"
+        }
+    ],
+    "benchmark": [
+        {
+            "Value": 65.24987999999999,
+            "Id": "Americas",
+            "ExposureItem": [
+                {
+                    "Value": 64.94697,
+                    "Id": "NorthAmerica"
+                },
+                {
+                    "Value": 0.30291,
+                    "Id": "LatinAmerica"
+                }
+            ]
+        },
+        {
+            "Value": 10.77172,
+            "Id": "GreaterAsia",
+            "ExposureItem": [
+                {
+                    "Value": 5.41734,
+                    "Id": "Japan"
+                },
+                {
+                    "Value": 1.4376,
+                    "Id": "Australia"
+                },
+                {
+                    "Value": 2.33349,
+                    "Id": "AsiaDeveloped"
+                },
+                {
+                    "Value": 1.58329,
+                    "Id": "AsiaEmerging"
+                }
+            ]
+        },
+        {
+            "Value": 11.131620000000002,
+            "Id": "GreaterEurope",
+            "ExposureItem": [
+                {
+                    "Value": 5.57793,
+                    "Id": "UnitedKingdom"
+                },
+                {
+                    "Value": 5.48379,
+                    "Id": "EuropeDeveloped"
+                },
+                {
+                    "Value": 0.00934,
+                    "Id": "EuropeEmerging"
+                },
+                {
+                    "Value": 0.06056,
+                    "Id": "AfricaMiddleEast"
+                }
+            ]
+        },
+        {
+            "Value": 0.49303,
+            "Id": "NotClassified"
+        }
+    ]
+}
+```
+
+</details>
+
+### Integration Transformation Operation
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+import { get } from 'lodash';
+
+function getStockRegionsData(xrayData) {
+    const regionData = getComponentData(
+        xrayData,
+        'breakdowns.regionalExposure',
+        'benchmark[0].breakdowns.regionalExposure',
+    );
+    return {
+        portfolio: getStockRegionsParsedData(regionData.portfolio),
+        benchmark: getStockRegionsParsedData(regionData.benchmark),
+    };
+}
+
+function getComponentData(data, portfolioPath, benchmarkPath) {
+    if (!data) {
+        return false;
+    }
+    return {
+        portfolio: get(data, portfolioPath, []),
+        benchmark: get(data, benchmarkPath, []),
+    };
+}
+
+function getValues(modelData, salePositionType) {
+    const data = modelData.find(
+        (item) => item.salePosition === salePositionType,
+    ) || {};
+    const { values } = data;
+    return values;
+}
+
+function getStockRegionsParsedData(modelData) {
+    const regionValues = getValues(modelData, 'N');
+    const mapping = stockRegionsMapping.regions;
+    const stockRegionsParsedData = [];
+    Object.keys(mapping).forEach((region) => {
+        const data = mapping[region];
+        const subRegionalModel = {};
+        const { keys, subRegions } = data;
+        if (typeof regionValues[keys[0]] === 'number') {
+            subRegionalModel.Value = keys.reduce((sum, key) => sum + regionValues[key], 0);
+            subRegionalModel.Id = data.name;
+        }
+        if (subRegions) {
+            subRegionalModel.ExposureItem = [];
+            Object.keys(subRegions).forEach((subRegion) => {
+                const subRegionObj = {};
+                subRegionObj.Value = regionValues[subRegions[subRegion].key];
+                subRegionObj.Id = subRegion;
+                subRegionalModel.ExposureItem.push(subRegionObj);
+            });
+        }
+        stockRegionsParsedData.push(subRegionalModel);
+    });
+    return stockRegionsParsedData;
+}
+```
+</details>
+&nbsp;
+
+
+
+### Component Transformed Data Format
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+[
+    {
+        "portfolio": "14.61",
+        "benchmark": "65.25",
+        "name": "americas"
+    },
+    {
+        "name": "northAmerica",
+        "portfolio": "14.61",
+        "benchmark": "64.95",
+        "color": "#A6ACC2"
+    },
+    {
+        "name": "latinAmerica",
+        "portfolio": "0.00",
+        "benchmark": "0.30",
+        "color": "#C1C6D6"
+    },
+    {
+        "portfolio": "64.14",
+        "benchmark": "0.49",
+        "name": "notClassified",
+        "color": "null"
+    }
+]
+```
+
+</details>
+
+### Component Transformation Operation
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+parsedModelData() {
+    if (this.modelData) {
+        const selectedTab = this.tabs[this.selectedTab];
+        this.$emit('tab-change', { tabId: selectedTab });
+        const stockRegionsModel = [];
+        const rawData = this.modelData;
+        const portfolioValues = get(rawData, 'portfolio', []);
+        const benchmarkValues = get(rawData, 'benchmark', []);
+        const mapping = stockRegionsMapping.regions;
+        Object.keys(mapping).forEach((region) => {
+            const data = mapping[region];
+            const regionModel = {};
+            const mappedPortfolioData = portfolioValues.find(item => data.name === item.Id) || {};
+            const mappedBenchmarkData = benchmarkValues.find(item => data.name === item.Id) || {};
+            if (selectedTab === region || region === 'notClassified') {
+                regionModel.portfolio = mappedPortfolioData.Value.toFixed(2);
+                regionModel.benchmark = mappedBenchmarkData.Value.toFixed(2);
+                regionModel.name = lowerFirst(region);
+                if (region === 'notClassified') {
+                    regionModel.color = 'null'; // only for alignment purpose
+                }
+                stockRegionsModel.push(regionModel);
+                if (mappedPortfolioData.ExposureItem && selectedTab === region) {
+                    mappedPortfolioData.ExposureItem.forEach((subRegion) => {
+                        const regionData = {};
+                        regionData.name = lowerFirst(data.subRegions[subRegion.Id]?.region || subRegion.Id);
+                        regionData.portfolio = subRegion?.Value.toFixed(2) || '-';
+                        const subRegionBenchmarkObj = mappedBenchmarkData.ExposureItem.find(item => subRegion.Id === item.Id) || {};
+                        regionData.benchmark = subRegionBenchmarkObj?.Value.toFixed(2) || '-';
+                        regionData.color = this.getRegionIconColor(
+                            regionData.portfolio,
+                        );
+                        stockRegionsModel.push(regionData);
+                    });
+                }
+            }
+        });
+        return stockRegionsModel;
+    }
+    return [];
+},
+```
+</details>
+&nbsp;
+
+
+## Data Models
+The component uses the following data models:
+<details>
+    <summary><span class="summary-text">Table Data</span></summary>
+
+```json dark
+[
+    {
+        "portfolio": "14.61",
+        "benchmark": "65.25",
+        "name": "americas"
+    },
+    {
+        "name": "northAmerica",
+        "portfolio": "14.61",
+        "benchmark": "64.95",
+        "color": "#A6ACC2"
+    },
+    {
+        "name": "latinAmerica",
+        "portfolio": "0.00",
+        "benchmark": "0.30",
+        "color": "#C1C6D6"
+    },
+    {
+        "portfolio": "64.14",
+        "benchmark": "0.49",
+        "name": "notClassified",
+        "color": "null"
+    }
+]
+```
+</details>

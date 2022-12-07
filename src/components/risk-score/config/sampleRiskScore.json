@@ -1,0 +1,11 @@
+{ 
+    "riskScore": [ 
+        { 
+            "portfolioName": "US demo portfolio - weight", 
+            "portfolioRiskScore": 122.52514387989147, 
+            "portfolioAlignmentScore": 24.535489481591917, 
+            "portfolioRsquared": 0.840970300308755, 
+            "isProxyUsedInRiskScore": false 
+        } 
+    ] 
+}

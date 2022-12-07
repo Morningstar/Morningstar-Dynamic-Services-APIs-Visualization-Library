@@ -1,0 +1,463 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import PerformanceGraph from "@/components/performance-graph/PerformanceGraph.vue";
+import { PORTFOLIO_ANALYSIS_EMEA_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="PerformanceGraph" component={PerformanceGraph} />
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+  
+</style>
+
+# Performance Graph - Growth of 10k (APAC/EMEA)
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+- [Subcomponent Configuration](#subcomponent-configuration)
+
+## Description
+The Growth of 10K performance graph is illustrates the change in value of an initial $10,000 investment in a financial asset during a given period of time.
+
+<Canvas withSource="open" withToolbar>
+  <Story id="components-performance-graph-growth-of-10k--story-details"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={PerformanceGraph} />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={PORTFOLIO_ANALYSIS_EMEA_URL} target="_blank">Portfolio Analysis API (APAC/EMEA)</a>.
+<!--
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request)
+- [Request Payload Example](#request-payload)
+-->
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.xray.getPerformanceGraphData({ portfolios: helper.samplePortfolio }),
+```
+<details>
+  <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+const samplePortfolio = {
+    type: 3,
+    benchmark: {
+        type: "Standard",
+        holdings: [
+            {
+                identifier: "EUCA000555",
+                identifierType: "MSID",
+                weight: 100
+            }
+        ]
+    },
+    holdings: [
+        {
+            identifier: 'F0GBR052QA',
+            identifierType: 'MSID',
+            amount: 5000,
+        },
+        {
+            identifier: 'F000000EY1',
+            identifierType: 'MSID',
+            amount: 2500,
+        },
+        {
+            identifier: 'F00000OXG7',
+            identifierType: 'MSID',
+            amount: 2000,
+        },
+        {
+            identifier: 'F00000TWNO',
+            identifierType: 'MSID',
+            amount: 10000,
+        }
+    ],
+    name: 'UK demo portfolio - amount',
+};
+
+window.mstarApisSdk.xray.getPerformanceGraphData({ portfolios: samplePortfolio });
+```
+</details>
+&nbsp;
+
+### Request Example
+
+```javascript dark
+https://www.emea-api.morningstar.com/ecint/v1/xray/json?languageId={{languageId}}&portfolioDataPoints={{portfolioDataPoints}}&holdingDataPoints={{holdingDataPoints}}&benchmarkDataPoints={{benchmarkDataPoints}}
+
+```
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- | 
+| `languageId` | ISO culture codes. If not provided, defaults to language defined in settings. | `languageId=en-GB` |
+| `portfolioDataPoints` | Comma-separated list of portfolio data points.| `portfolioDataPoints=BenchmarkName,HistoricalPerformanceSeries` | 
+| `holdingDataPoints` | Comma-separated list of holding data points.| `HoldingDataPoints=ShowBreakdown` |
+| `benchmarkDataPoints` | Comma-separated list of benchmark data points.| `benchmarkDataPoints=ShowBreakdown,HistoricalPerformanceSeries` |
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Integration Data Format](#integration-data-format) 
+- [Integration Transformation Operation](#integration-transformation-operation) 
+- [Component Transformed Data Format](#component-transformed-data-format) 
+- [Component Transformation Operation](#component-transformation-operation)
+-->
+### API Response Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "benchmarkName": "Global Large-Cap Blend Equity",
+    "historicalPerformanceSeries": [
+        {
+            "returnType": "TotalReturn",
+            "timePeriod": "M1",
+            "frequency": "Monthly",
+            "startDate": "2011-12-31",
+            "returns": [
+                [
+                    "2012-01-31",
+                    0.4466
+                ],
+                [
+                    "2012-02-29",
+                    7.94494
+                ],
+                [
+                    "2012-03-31",
+                    -2.62418
+                ],
+            ]
+        },
+        {
+            "returnType": "TotalReturn",
+            "timePeriod": "M3",
+            "frequency": "Quarterly",
+            "startDate": "2011-12-31",
+            "returns": [
+                [
+                    "2012-03-31",
+                    5.58169
+                ],
+                [
+                    "2012-06-30",
+                    -1.5665
+                ],
+                [
+                    "2012-09-30",
+                    5.00531
+                ],                
+            ]
+        },
+    ],
+    "benchmark": [
+        {
+            "historicalPerformanceSeries": [
+                {
+                    "returnType": "TotalReturn",
+                    "timePeriod": "M1",
+                    "frequency": "Monthly",
+                    "startDate": "1971-12-31",
+                    "returns": [
+                        [
+                            "1972-01-31",
+                            4.22415
+                        ],
+                        [
+                            "1972-02-29",
+                            3.85105
+                        ],
+                        [
+                            "1972-03-31",
+                            0.66122
+                        ],                        
+                    ]
+                },
+            ]
+        }
+    ]
+}
+```
+</details>
+&nbsp;
+
+### Integration Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "portfolio": [
+        [
+            "2012-01-31",
+            0.4466
+        ],
+        [
+            "2012-02-29",
+            7.94494
+        ]
+    ],
+    "benchmark": [
+        [
+            "1972-01-31",
+            4.22415
+        ],
+        [
+            "1972-02-29",
+            3.85105
+        ],
+    ],
+    "benchmarkName": "Global Large-Cap Blend Equity"
+}
+```
+</details>
+&nbsp;
+
+### Integration Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+function getPerformanceData(xrayData) {
+    const performanceGraphData = getComponentData(
+        xrayData,
+        'historicalPerformanceSeries',
+        'benchmark[0].historicalPerformanceSeries',
+    );
+    let { portfolio, benchmark } = performanceGraphData;
+    portfolio = portfolio.find((data) => data.timePeriod === 'M1').returns;
+    benchmark = benchmark.find((data) => data.timePeriod === 'M1').returns;
+
+    return {
+        portfolio,
+        benchmark,
+        benchmarkName: get(xrayData, 'benchmarkName', ''),
+    };
+}
+```
+</details>
+&nbsp;
+
+### Component Transformed Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+    [{
+        "name": "UK demo portfolio - amount",
+        "type": "portfolio",
+        "useLabel": false,
+        "data": [
+            {
+                "endDate": "2012-01-31T00:00:00.000",
+                "value": 0.4466
+            },
+            {
+                "endDate": "2012-02-29T00:00:00.000",
+                "value": 7.94494
+            },
+            {
+                "endDate": "2012-03-31T00:00:00.000",
+                "value": -2.62418
+            }
+        ]
+    },
+    {
+        "name": "Global Large-Cap Blend Equity",
+        "type": "benchmark",
+        "useLabel": false,
+        "data": [
+            {
+                "endDate": "1972-01-31T00:00:00.000",
+                "value": 4.22415
+            },
+            {
+                "endDate": "1972-02-29T00:00:00.000",
+                "value": 3.85105
+            },
+            {
+                "endDate": "1972-03-31T00:00:00.000",
+                "value": 0.66122
+            },
+        ]
+    }]
+
+```
+</details>
+&nbsp;
+
+### Component Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+parsedModelData() {
+    const data = this.modelData;
+    const portfolioName = this.portfolio?.name;
+
+    return [{
+        name: portfolioName || 'Portfolio',
+        type: 'portfolio',
+        data: data.portfolio
+            ? this.transformPerformanceChartData(data.portfolio) : [],
+    }, {
+        name: data.benchmarkName ? data.benchmarkName : 'Benchmark',
+        type: 'benchmark',
+        data: data.benchmark
+            ? this.transformPerformanceChartData(data.benchmark) : [],
+    }];
+},
+transformPerformanceChartData(data, overrideValue) {
+    return data.map((item) => {
+        const value = item[1];
+        const endDate = toUTCLocalISOString(new Date(item[0]));
+        return {
+            endDate,
+            value: overrideValue ?? value,
+        };
+    });
+},
+drawGraphByFrequency(seriesData, months) {
+    let monthCount = months;
+    if (monthCount === 'YTD') {
+        monthCount = Service.getYTDMonthCount(seriesData);
+    }
+    return Service.getFrequencySeriesData(this.graphBaseValue, seriesData, monthCount);
+},
+getChartData(monthCount) {
+    const frequencySeriesData = this.drawGraphByFrequency(this.parsedModelData, monthCount);
+    const lineChartData = Service.getLineChartData(frequencySeriesData);
+    return lineChartData;
+},
+parseChartData(tab) {
+    const selectedTab = this.getTabs.find((item) => item.key === tab);
+    const portfolioData = this.getChartData(selectedTab?.value)[0];
+    const benchmarkData = this.getChartData(selectedTab?.value)[1];
+    const portfolioLegendLabel = this.getFormattedLegendValue(portfolioData);
+    const benchmarkLegendLabel = this.getFormattedLegendValue(benchmarkData);
+    return {
+        datasets: [
+            {
+                label: portfolioLegendLabel,
+                borderColor: this.chartColors[0],
+                backgroundColor: this.chartColors[0],
+                data: portfolioData,
+            },
+            {
+                label: benchmarkLegendLabel,
+                borderColor: this.chartColors[1],
+                backgroundColor: this.chartColors[1],
+                data: benchmarkData,
+            },
+        ],
+    };
+},
+getFormattedLegendValue(value) {
+    const getLatestDate = value.reduce((m, current, index) => (
+        (current.date > m.date) && index ? current : m));
+    let newValue = getLatestDate?.value;
+    const name = getLatestDate?.name;
+
+    const { graphBaseValue } = this;
+    newValue = ((newValue - graphBaseValue) / graphBaseValue) * 100.0;
+
+    return `${name} : ${newValue.toFixed(2)}`;
+},
+```
+</details>
+&nbsp;
+
+## Subcomponent Configuration
+
+<details>
+  <summary><span class="summary-text">Chart config</span></summary>
+
+``` javascript dark
+    chartOptions: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+            mode: 'index',
+            intersect: false,
+        },
+        parsing: {
+            xAxisKey: 'formattedDate',
+            yAxisKey: 'value',
+        },
+        pointStyle: 'circle',
+        pointRadius: 1,
+        pointHoverRadius: 6,
+        plugins: {
+            tooltip: {
+                backgroundColor: '#000000',
+                titleColor: '#ffffff',
+                bodyColor: '#ffffff',
+                bodySpacing: 10,
+                borderWidth: 2,
+                borderColor: '#000000',
+                callbacks: {
+                    label(context) {
+                        const label = context.raw.name || '';
+                        const value = context.raw.value || '';
+                        return `${label} : ${value}`;
+                    },
+                },
+            },
+            legend: {
+                position: 'top',
+                align: 'start',
+                labels: {
+                    color: '#6e7383',
+                    boxWidth: 25,
+                    boxHeight: 2,
+                },
+            },
+        },
+        scales: {
+            x: {
+                grid: {
+                    color: '#eef5ff',
+                },
+            },
+            y: {
+                grid: {
+                    color: '#eef5ff',
+                },
+            },
+        },
+    },
+```
+</details>
+
+See [line Chart](https://www.chartjs.org/docs/3.4.1/samples/line/line.html) from [chart JS](https://www.chartjs.org/docs/3.4.1/) for more info.

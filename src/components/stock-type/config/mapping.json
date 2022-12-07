@@ -1,0 +1,26 @@
+{
+    "dataPoints": {
+        "HighYield": "High Yield",
+        "Distressed": "Distressed",
+        "HardAsset": "Hard Asset",
+        "Cyclical": "Cyclical",
+        "SlowGrowth": "Slow Growth",
+        "ClassicGrowth": "Classic Growth",
+        "AggressiveGrowth": "Aggressive Growth",
+        "SpeculativeGrowth": "Speculative Growth",
+        "NotAvailable": "Not Classified"
+    },
+    "breakdownFields": [
+        "securityName",
+        "highYield",
+        "distressed",
+        "hardAsset",
+        "cyclical",
+        "slowGrowth",
+        "classicGrowth",
+        "aggressiveGrowth",
+        "speculativeGrowth",
+        "notAvailable",
+        "weight"
+    ]
+}

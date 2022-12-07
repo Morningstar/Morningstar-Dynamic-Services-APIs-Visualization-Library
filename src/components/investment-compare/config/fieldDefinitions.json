@@ -1,0 +1,196 @@
+[
+    {
+        "headerText": "Security Name",
+        "customTemplate": "<div class='investment-compare__title-header'><h4>{{Name}}</h4> {{Isin}}</div>",
+        "sticky": true
+    },
+    {
+        "text": "Key Information",
+        "header": true
+    },
+    {
+        "text": "Morningstar Rating",
+        "value": "StarRating"
+    },
+    {
+        "text": "Inception date",
+        "value": "InceptionDate"
+    },
+    {
+        "text": "Analyst Rating",
+        "value": "AnalystRatingScale"
+    },
+    {
+        "text": "Category",
+        "value": "Category"
+    },
+    {
+        "text": "Total Assets",
+        "value": "TotalAssets",
+        "format": "number"
+    },
+    {
+        "text": "Ongoing Charge",
+        "value": "OngoingCharge",
+        "format": "number"
+    },
+    {
+        "text": "Currency",
+        "value": "Currency"
+    },
+    {
+        "text": "Benchmark",
+        "value": "BenchmarkName"
+    },
+    {
+        "text": "Best Fit Index",
+        "value": "BestFitIndex"
+    },
+    {
+        "text": "Style",
+        "value": "Style"
+    },
+    {
+        "text": "Morningstar Risk (Overall)",
+        "value": "OverallRisk"
+    },
+    {
+        "text": "Morningstar Return (Overall)",
+        "value": "OverallReturn"
+    },
+    {
+        "text": "Prospectus Objective",
+        "value": "InvestmentStrategy"
+    },
+    {
+        "text": "Performance",
+        "header": true
+    },
+    {
+        "text": "Performance (as of date)",
+        "value": "AsOfDate"
+    },
+    {
+        "text": "Calendar Year Returns",
+        "subHeader": true
+    }, 
+    {
+        "text": "Year to Date",
+        "value": "CalendarYearReturnsYearToDate",
+        "format": "percent"
+    },
+    {
+        "text": "Year 1",
+        "value": "CalendarYearReturnsYear1",
+        "headerDataPoint": "CalendarYearReturnsYear1FullYear",
+        "format": "percent"
+    },
+    {
+        "text": "Year 2",
+        "value": "CalendarYearReturnsYear2",
+        "headerDataPoint": "CalendarYearReturnsYear2FullYear",
+        "format": "percent"
+    },
+    {
+        "text": "Year 3",
+        "value": "CalendarYearReturnsYear3",
+        "headerDataPoint": "CalendarYearReturnsYear3FullYear",
+        "format": "percent"
+    },
+    {
+        "text": "Year 4",
+        "value": "CalendarYearReturnsYear4",
+        "headerDataPoint": "CalendarYearReturnsYear4FullYear",
+        "format": "percent"
+    },
+    {
+        "text": "Year 5",
+        "value": "CalendarYearReturnsYear5",
+        "headerDataPoint": "CalendarYearReturnsYear5FullYear",
+        "format": "percent"
+    },
+    {
+        "text": "Year 6",
+        "value": "CalendarYearReturnsYear6",
+        "headerDataPoint": "CalendarYearReturnsYear6FullYear",
+        "format": "percent"
+    },
+    {
+        "text": "Year 7",
+        "value": "CalendarYearReturnsYear7",
+        "headerDataPoint": "CalendarYearReturnsYear7FullYear",
+        "format": "percent"
+    },
+    {
+        "text": "Year 8",
+        "value": "CalendarYearReturnsYear8",
+        "headerDataPoint": "CalendarYearReturnsYear8FullYear",
+        "format": "percent"
+    },
+    {
+        "text": "Year 9",
+        "value": "CalendarYearReturnsYear9",
+        "headerDataPoint": "CalendarYearReturnsYear9FullYear",
+        "format": "percent"
+    },
+    {
+        "text": "Year 10",
+        "value": "CalendarYearReturnsYear10",
+        "headerDataPoint": "CalendarYearReturnsYear10FullYear",
+        "format": "percent"
+    },
+    {
+        "text": "Trailing Performance",
+        "subHeader": true
+    },
+    {
+        "text": "1 Day",
+        "value": "D1",
+        "format": "percent"
+    },
+    {
+        "text": "1 Week",
+        "value": "W1",
+        "format": "percent"
+    },
+    {
+        "text": "1 Month",
+        "value": "M1",
+        "format": "percent"
+    },
+    {
+        "text": "3 Months",
+        "value": "M3",
+        "format": "percent"
+    },
+    {
+        "text": "6 Months",
+        "value": "M6",
+        "format": "percent"
+    },
+    {
+        "text": "Year to Dates",
+        "value": "M0",
+        "format": "percent"
+    },
+    {
+        "text": "1 Year (annualized)",
+        "value": "M12ann",
+        "format": "percent"
+    },
+    {
+        "text": "3 Years (annualized)",
+        "value": "M36ann",
+        "format": "percent"
+    },
+    {
+        "text": "5 Years (annualized)",
+        "value": "M60ann",
+        "format": "percent"
+    },
+    {
+        "text": "10 Years (annualized)",
+        "value": "M120ann",
+        "format": "percent"
+    }
+]

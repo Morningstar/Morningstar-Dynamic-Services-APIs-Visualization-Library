@@ -1,0 +1,20 @@
+{
+    "dataPoints": {
+        "M1": "1 Month",
+        "M3": "3 Months",
+        "M6": "6 Months",
+        "M12": "1 Year",
+        "M0": "YTD",
+        "M36": "3 Years Annualised",
+        "M60": "5 Years Annualised",
+        "M120": "10 Years Annualised",
+        "Month3": "3 Months",
+        "Month6": "6 Months",
+        "Year1": "1 Year",
+        "YearToDate": "YTD",
+        "Year3": "3 Years Annualised",
+        "Year5": "5 Years Annualised",
+        "Year10": "10 Years Annualised"
+        
+    }
+}

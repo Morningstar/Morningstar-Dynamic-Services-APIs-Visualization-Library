@@ -1,0 +1,26 @@
+{
+    "fixedIncomeSectors": {
+        "10": "Government",
+        "20": "Municipal",
+        "30": "Corporate",
+        "40": "Securitized",
+        "50": "Cash & Equivalents",
+        "60": "Derivative"
+    },
+    "dataPoints": [
+        "Government",
+        "Municipal",
+        "Corporate",
+        "Securitized",
+        "Cash & Equivalents",
+        "Derivative"
+    ],
+    "dataPointsUs": [
+        "Government",
+        "Municipal",
+        "Corporate",
+        "Securitized",
+        "CashEquivalents",
+        "Derivative"
+    ]
+}

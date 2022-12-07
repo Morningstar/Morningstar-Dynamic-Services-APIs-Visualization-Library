@@ -1,0 +1,414 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import TrailingReturns from "@/components/trailing-returns/TrailingReturns.vue";
+import { PORTFOLIO_ANALYSIS_EMEA_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="TrailingReturns" component={TrailingReturns} />
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+  
+</style>
+
+# Trailing Returns (APAC/EMEA)
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+
+## Description
+The Trailing Returns component displays a fund's annualized return over a specific time period.
+
+<Canvas withSource="open" withToolbar>
+  <Story id="components-trailing-returns--story-details"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={TrailingReturns} />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={PORTFOLIO_ANALYSIS_EMEA_URL} target="_blank">Portfolio Analysis API (APAC/EMEA)</a>.
+<!--
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request)
+- [Request Payload Example](#request-payload)
+-->
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.xray.getTrailingReturnsData({ portfolios: samplePortfolio });
+```
+<details>
+  <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+const samplePortfolio = {
+    type: 3,
+    benchmarkId: 'XIUSA0010V',
+    holdings: [
+        {
+            identifier: 'F0GBR052QA',
+            identifierType: 'MSID',
+            amount: 5000,
+        },
+        {
+            identifier: 'F000000EY1',
+            identifierType: 'MSID',
+            amount: 2500,
+        },
+        {
+            identifier: 'F00000OXG7',
+            identifierType: 'MSID',
+            amount: 2000,
+        },
+        {
+            identifier: 'F00000TWNO',
+            identifierType: 'MSID',
+            amount: 10000,
+        },
+    ],
+    name: 'UK demo portfolio - amount',
+};
+window.mstarApisSdk.xray.getTrailingReturnsData({ portfolios: samplePortfolio });
+```
+</details>
+&nbsp;
+
+### Request Example
+
+```javascript dark
+https://www.emea-api.morningstar.com/ecint/v1/xray/json?languageId={{languageId}}&portfolioDataPoints={{portfolioDataPoints}}&benchmarkDataPoints={{benchmarkDataPoints}}
+
+```
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- | 
+| `languageId` |	ISO culture codes. If not provided, defaults to language defined in settings. |`languageId=en-GB` |
+| `portfolioDataPoints` |Comma-separated list of portfolio data points.|`portfolioDataPoints=PerformanceReturn` | 
+| `benchmarkDataPoints` | Comma-separated list of benchmark data points.|`benchmarkDataPoints=PerformanceReturn` |
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Integration Data Format](#integration-data-format) 
+- [Integration Transformation Operation](#integration-transformation-operation) 
+- [Component Transformed Data Format](#component-transformed-data-format) 
+- [Component Transformation Operation](#component-transformation-operation) 
+-->
+### API Response Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "trailingPerformance": [
+        {
+            "type": "MonthEnd",
+            "returnType": "TotalReturn",
+            "currencyId": "GBP",
+            "endDate": "2022-06-30",
+            "returns": [
+                {
+                    "timePeriod": "M0",
+                    "value": -8.60358
+                },
+                {
+                    "timePeriod": "M1",
+                    "value": -2.75861
+                },
+                {
+                    "timePeriod": "M2",
+                    "value": -3.94606
+                },
+                {
+                    "timePeriod": "M3",
+                    "value": -5.03136
+                },
+                {
+                    "timePeriod": "M6",
+                    "value": -8.60358
+                },
+                {
+                    "timePeriod": "M12",
+                    "value": -7.70734
+                },
+                {
+                    "timePeriod": "M36",
+                    "value": 1.12603
+                },
+                {
+                    "timePeriod": "M60",
+                    "value": 1.35404
+                },
+                {
+                    "timePeriod": "M120",
+                    "value": 5.79128
+                }
+            ]
+        }
+    ],
+    "benchmark": [
+        {
+            "trailingPerformance": [
+                {
+                    "type": "MonthEnd",
+                    "returnType": "TotalReturn",
+                    "currencyId": "GBP",
+                    "endDate": "2022-06-30",
+                    "returns": [
+                        {
+                            "timePeriod": "M0",
+                            "value": -11.34153
+                        },
+                        {
+                            "timePeriod": "M1",
+                            "value": -5.2134
+                        },
+                        {
+                            "timePeriod": "M2",
+                            "value": -5.50366
+                        },
+                        {
+                            "timePeriod": "M3",
+                            "value": -9.13271
+                        },
+                        {
+                            "timePeriod": "M6",
+                            "value": -11.34153
+                        },
+                        {
+                            "timePeriod": "M12",
+                            "value": -2.55886
+                        },
+                        {
+                            "timePeriod": "M36",
+                            "value": 8.68141
+                        },
+                        {
+                            "timePeriod": "M60",
+                            "value": 9.12674
+                        },
+                        {
+                            "timePeriod": "M120",
+                            "value": 12.34814
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+```
+</details>
+&nbsp;
+
+### Integration Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "portfolio": [
+        {
+            "timePeriod": "M0",
+            "value": -8.60358
+        },
+        {
+            "timePeriod": "M1",
+            "value": -2.75861
+        },
+        {
+            "timePeriod": "M2",
+            "value": -3.94606
+        },
+        {
+            "timePeriod": "M3",
+            "value": -5.03136
+        },
+        {
+            "timePeriod": "M6",
+            "value": -8.60358
+        },
+        {
+            "timePeriod": "M12",
+            "value": -7.70734
+        },
+        {
+            "timePeriod": "M36",
+            "value": 1.12603
+        },
+        {
+            "timePeriod": "M60",
+            "value": 1.35404
+        },
+        {
+            "timePeriod": "M120",
+            "value": 5.79128
+        }
+    ],
+    "benchmark": [
+        {
+            "timePeriod": "M0",
+            "value": -11.34153
+        },
+        {
+            "timePeriod": "M1",
+            "value": -5.2134
+        },
+        {
+            "timePeriod": "M2",
+            "value": -5.50366
+        },
+        {
+            "timePeriod": "M3",
+            "value": -9.13271
+        },
+        {
+            "timePeriod": "M6",
+            "value": -11.34153
+        },
+        {
+            "timePeriod": "M12",
+            "value": -2.55886
+        },
+        {
+            "timePeriod": "M36",
+            "value": 8.68141
+        },
+        {
+            "timePeriod": "M60",
+            "value": 9.12674
+        },
+        {
+            "timePeriod": "M120",
+            "value": 12.34814
+        }
+    ]
+}
+```
+</details>
+&nbsp;
+
+### Integration Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+function getTrailingReturnsData(xrayData) {
+    return getComponentData(
+        xrayData,
+        'trailingPerformance[0].returns',
+        'benchmark[0].trailingPerformance[0].returns',
+    );
+}
+```
+</details>
+&nbsp;
+
+### Component Transformed Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+[
+    {
+        "portfolio": -2.75861,
+        "benchmark": -5.2134,
+        "timePeriod": "1 Month"
+    },
+    {
+        "portfolio": -5.03136,
+        "benchmark": -9.13271,
+        "timePeriod": "3 Months"
+    },
+    {
+        "portfolio": -8.60358,
+        "benchmark": -11.34153,
+        "timePeriod": "6 Months"
+    },
+    {
+        "portfolio": -7.70734,
+        "benchmark": -2.55886,
+        "timePeriod": "1 Year"
+    },
+    {
+        "portfolio": -8.60358,
+        "benchmark": -11.34153,
+        "timePeriod": "YTD"
+    },
+    {
+        "portfolio": 1.12603,
+        "benchmark": 8.68141,
+        "timePeriod": "3 Years Annualised"
+    },
+    {
+        "portfolio": 1.35404,
+        "benchmark": 9.12674,
+        "timePeriod": "5 Years Annualised"
+    },
+    {
+        "portfolio": 5.79128,
+        "benchmark": 12.34814,
+        "timePeriod": "10 Years Annualised"
+    }
+]
+```
+</details>
+&nbsp;
+
+### Component Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+    parsedModelData() {
+        if (this.modelData) {
+            let tableData = [];
+            const rawData = this.modelData;
+            const { portfolio, benchmark } = rawData;
+            tableData = this.dataPoints.map((data) => {
+                const portfolioData = portfolio.find(
+                    (item) => item.timePeriod === data,
+                ) || {};
+                const benchmarkData = benchmark.find(
+                    (item) => item.timePeriod === data,
+                ) || {};
+                return {
+                    portfolio: this.formatNumber(portfolioData?.value) || '-',
+                    benchmark: this.formatNumber(benchmarkData?.value)|| '-',
+                    timePeriod: trailingReturnsMapping.dataPoints[data],
+                };
+            });
+            return tableData;
+        }
+    return null;
+    }
+```
+</details>
+&nbsp;
+

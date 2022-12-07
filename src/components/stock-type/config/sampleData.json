@@ -1,0 +1,80 @@
+{
+    "stockTypeData": {
+        "Portfolio": [
+            {
+                "Id": "AggressiveGrowth",
+                "Value": 7.39647146
+            },
+            {
+                "Id": "ClassicGrowth",
+                "Value": 5.32769071
+            },
+            {
+                "Id": "Cyclical",
+                "Value": 15.86140116
+            },
+            {
+                "Id": "Distressed",
+                "Value": 0.2074022
+            },
+            {
+                "Id": "HardAsset",
+                "Value": 2.68349989
+            },
+            {
+                "Id": "HighYield",
+                "Value": 1.20210912
+            },
+            {
+                "Id": "NotAvailable",
+                "Value": 63.59305277
+            },
+            {
+                "Id": "SlowGrowth",
+                "Value": 2.80142714
+            },
+            {
+                "Id": "SpeculativeGrowth",
+                "Value": 0.92694556
+            }
+        ],
+        "Benchmark": [
+            {
+                "Id": "AggressiveGrowth",
+                "Value": 18.912
+            },
+            {
+                "Id": "ClassicGrowth",
+                "Value": 14.127
+            },
+            {
+                "Id": "Cyclical",
+                "Value": 41.889
+            },
+            {
+                "Id": "Distressed",
+                "Value": 0.984
+            },
+            {
+                "Id": "HardAsset",
+                "Value": 7.785
+            },
+            {
+                "Id": "HighYield",
+                "Value": 3.208
+            },
+            {
+                "Id": "NotAvailable",
+                "Value": 2.435
+            },
+            {
+                "Id": "SlowGrowth",
+                "Value": 7.768
+            },
+            {
+                "Id": "SpeculativeGrowth",
+                "Value": 2.892
+            }
+        ]
+    }
+}

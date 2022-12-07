@@ -1,0 +1,1057 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import SecurityReport from "@/components/security-report/SecurityReport.vue";
+import { SECURITY_DETAILS_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="SecurityReport" component={ SecurityReport }/>
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+  
+</style>
+
+# Security Report
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+
+
+## Description
+
+The Security Report component displays detailed information about a security, including its performance, latest price, fund management, and the portfolio it is associated with.
+
+<Canvas withSource="open" withToolbar>
+  <Story id="tools-securityreport--story-details"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={ SecurityReport } />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={SECURITY_DETAILS_URL} target="_blank">Security Details API</a>.
+<!--
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request)
+- [Request Payload Example](#request-payload)
+-->
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.securityDetails.getSecurityDetails('F0GBR050DD');
+```
+
+### Request Example
+
+```javascript dark
+https://www.emea-api.morningstar.com/ecint/v1/securities/{{securityId}}?viewId={{viewId}}&idtype={{idType}}&languageId={{languageId}}&currencyId={{currencyId}}&responseViewFormat={{responseViewFormat}}
+
+```
+
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- | 
+| `securityId`| Security ID for which data needs to be fetched | `securityId=F0GBR050DD`|
+| `viewId` | View ID or snapshot ID | `viewId=snapshot` |
+| `idtype` | ID type |`idtype=msid`|
+| `languageId`| Language in which data needs to fetched | `languageId=en-GB`|
+| `currencyId` | Currency in which data needs to fetched | `currencyId=GBP`|
+| `responseViewFormat`| Format of the data to be received | `responseViewFormat=json`|
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Component Data Format](#component-data-format)
+- [Transformation Operation](#transformation-operation)
+-->
+### API Response Data Format
+<details>
+  <summary><span class="summary-text">Security details</span></summary>
+
+```json dark
+[
+    {
+        "dbgtime": "290",
+        "Id": "F0GBR050DD",
+        "HasPriceEntitlement": false,
+        "PerformanceId": "0P00000VFA",
+        "InceptionDate": "1998-11-13T00:00:00",
+        "Isin": "GB0004460357",
+        "ISINMIC": "GB0004460357XXXXGBP",
+        "InvestmentType": "FD",
+        "HoldingType": "2",
+        "BrandingCompanyId": "BN0000081K",
+        "BrandingCompanyName": "Aviva",
+        "Type": "Fund",
+        "Name": "Aviva Investors UK Lstd Eq Uncons2GBPAcc",
+        "LegalName": "Aviva Investors UK Listed Equity Unconstrained Fund 2 GBP Acc",
+        "InceptionDate": "1998-11-13T00:00:00",
+        "FundAttributes": {
+            "UCITS": "true"
+        },
+        "Domicile": "GBR",
+        "ProviderCompany": {
+            "Name": "Aviva Investors UK Fund Services Limited",
+            "AddressLine1": "St Helens, 1 Undershaft",
+            "Phone": "+44 8000512003",
+            "City": "London",
+            "Country": "United Kingdom",
+            "PostalCode": "EC3P 3DQ",
+            "Homepage": "http://www.avivainvestors.co.uk"
+        },
+        "ManagerList": [
+            {
+                "ManagerId": 81506,
+                "DisplayPreference": 1,
+                "GivenName": "Chris",
+                "FamilyName": "Murphy",
+                "StartDate": "2022-05-09T00:00:00",
+                "ManagerProvidedBiography": "Chris manages the Aviva Investors UK Equity Income and Aviva Investors UK Equity strategies. Chris joined Aviva Investors in 2006 from Framlington Investment Management where he was responsible for managing the firms UK income and growth retail portfolios. Chris began his investment career in 1988 as a graduate UK equity analyst for Lehman Bros before joining James Capel in UK equity analyst role. Chris holds a BSc (Hons) in Physics from University College, Cardiff and holds the IIMR (Institute of Investment Management Research) qualification."
+            }
+        ],
+        "CollectedSRRI": {
+            "Date": "2022-07-25T00:00:00",
+            "Rank": 6
+        },
+        "RiskAndRating": [
+            {
+                "Date": "2022-06-30T00:00:00",
+                "TimePeriod": "M36",
+                "RatingValue": 5,
+                "RiskAdjustedReturn": 2.14,
+                "RiskRatingValue": 5,
+                "RiskScore": 6.76,
+                "CategoryRank": 2.41,
+                "PerformanceRatingValue": 5
+            },
+            {
+                "Date": "2022-06-30T00:00:00",
+                "TimePeriod": "M60",
+                "RatingValue": 3,
+                "RiskAdjustedReturn": 0.62,
+                "RiskRatingValue": 5,
+                "RiskScore": 4.59,
+                "CategoryRank": 34.79,
+                "PerformanceRatingValue": 5
+            },
+            {
+                "Date": "2022-06-30T00:00:00",
+                "TimePeriod": "M120",
+                "RatingValue": 4,
+                "RiskAdjustedReturn": 5.72,
+                "RiskRatingValue": 5,
+                "RiskScore": 2.88,
+                "CategoryRank": 11.85,
+                "PerformanceRatingValue": 5
+            },
+            {
+                "Date": "2022-06-30T00:00:00",
+                "TimePeriod": "M255",
+                "RatingValue": 5,
+                "RiskAdjustedReturn": 5.81,
+                "RiskRatingValue": 2,
+                "RiskScore": 1,
+                "PerformanceRatingValue": 5
+            }
+        ],
+        "RiskStatistics": [
+            {
+                "CurrencyId": "GBP",
+                "CurrencyOption": "DISPLAYCURRENCY",
+                "Date": "2022-07-31T00:00:00",
+                "Type": "MonthEnd",
+                "ReturnType": "ItPostTax",
+                "benchmarkType": "CategoryPrimaryIndexId",
+                "Alphas": [
+                    {
+                        "Value": -4.03037,
+                        "Frequency": "M",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": 6.95719,
+                        "Frequency": "M",
+                        "TimePeriod": "M36"
+                    },
+                    {
+                        "Value": 1.86958,
+                        "Frequency": "M",
+                        "TimePeriod": "M60"
+                    }
+                ],
+                "Betas": [
+                    {
+                        "Value": 1.14395,
+                        "Frequency": "M",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": 1.50904,
+                        "Frequency": "M",
+                        "TimePeriod": "M36"
+                    },
+                    {
+                        "Value": 1.40671,
+                        "Frequency": "M",
+                        "TimePeriod": "M60"
+                    }
+                ],
+                "RSquareds": [
+                    {
+                        "Value": 76.849,
+                        "Frequency": "M",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": 89.74,
+                        "Frequency": "M",
+                        "TimePeriod": "M36"
+                    },
+                    {
+                        "Value": 85.637,
+                        "Frequency": "M",
+                        "TimePeriod": "M60"
+                    }
+                ],
+                "InformationRatios": [
+                    {
+                        "Value": -0.56873,
+                        "Frequency": "M",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": 0.66298,
+                        "Frequency": "M",
+                        "TimePeriod": "M36"
+                    },
+                    {
+                        "Value": 0.26159,
+                        "Frequency": "M",
+                        "TimePeriod": "M60"
+                    }
+                ],
+                "TrackingErrors": [
+                    {
+                        "Value": 6.49784,
+                        "Frequency": "M",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": 11.49745,
+                        "Frequency": "M",
+                        "TimePeriod": "M36"
+                    },
+                    {
+                        "Value": 9.81499,
+                        "Frequency": "M",
+                        "TimePeriod": "M60"
+                    }
+                ],
+                "StandardDeviations": [
+                    {
+                        "Value": 13.15,
+                        "Frequency": "M",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": 25.38,
+                        "Frequency": "M",
+                        "TimePeriod": "M36"
+                    },
+                    {
+                        "Value": 21.13,
+                        "Frequency": "M",
+                        "TimePeriod": "M60"
+                    }
+                ],
+                "SharpeRatios": [
+                    {
+                        "Frequency": "M",
+                        "TimePeriod": "M12",
+                        "Value": 0.16661
+                    },
+                    {
+                        "Frequency": "M",
+                        "TimePeriod": "M36",
+                        "Value": 0.51608
+                    },
+                    {
+                        "Frequency": "M",
+                        "TimePeriod": "M60",
+                        "Value": 0.38326
+                    }
+                ]
+            },
+            {
+                "CurrencyId": "GBP",
+                "CurrencyOption": "BENCHMARKCURRENCY",
+                "Date": "2022-07-31T00:00:00",
+                "Type": "MonthEnd",
+                "ReturnType": "ItPostTax",
+                "benchmarkType": "CategoryPrimaryIndexId",
+                "Alphas": [
+                    {
+                        "Value": -4.03037,
+                        "Frequency": "M",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": 6.95719,
+                        "Frequency": "M",
+                        "TimePeriod": "M36"
+                    },
+                    {
+                        "Value": 1.86958,
+                        "Frequency": "M",
+                        "TimePeriod": "M60"
+                    }
+                ],
+                "Betas": [
+                    {
+                        "Value": 1.14395,
+                        "Frequency": "M",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": 1.50904,
+                        "Frequency": "M",
+                        "TimePeriod": "M36"
+                    },
+                    {
+                        "Value": 1.40671,
+                        "Frequency": "M",
+                        "TimePeriod": "M60"
+                    }
+                ],
+                "RSquareds": [
+                    {
+                        "Value": 76.849,
+                        "Frequency": "M",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": 89.74,
+                        "Frequency": "M",
+                        "TimePeriod": "M36"
+                    },
+                    {
+                        "Value": 85.637,
+                        "Frequency": "M",
+                        "TimePeriod": "M60"
+                    }
+                ],
+                "InformationRatios": [
+                    {
+                        "Value": -0.56873,
+                        "Frequency": "M",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": 0.66298,
+                        "Frequency": "M",
+                        "TimePeriod": "M36"
+                    },
+                    {
+                        "Value": 0.26159,
+                        "Frequency": "M",
+                        "TimePeriod": "M60"
+                    }
+                ],
+                "TrackingErrors": [
+                    {
+                        "Value": 6.49784,
+                        "Frequency": "M",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": 11.49745,
+                        "Frequency": "M",
+                        "TimePeriod": "M36"
+                    },
+                    {
+                        "Value": 9.81499,
+                        "Frequency": "M",
+                        "TimePeriod": "M60"
+                    }
+                ],
+                "SortinoRatios": [
+                    {
+                        "Value": 0.25034,
+                        "Frequency": "M",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": 0.82106,
+                        "Frequency": "M",
+                        "TimePeriod": "M36"
+                    },
+                    {
+                        "Value": 0.59864,
+                        "Frequency": "M",
+                        "TimePeriod": "M60"
+                    }
+                ],
+                "StandardDeviations": [
+                    {
+                        "Value": 13.15,
+                        "Frequency": "M",
+                        "TimePeriod": "M12"
+                    },
+                    {
+                        "Value": 25.38,
+                        "Frequency": "M",
+                        "TimePeriod": "M36"
+                    },
+                    {
+                        "Value": 21.13,
+                        "Frequency": "M",
+                        "TimePeriod": "M60"
+                    }
+                ],
+                "SharpeRatios": [
+                    {
+                        "Frequency": "M",
+                        "TimePeriod": "M12",
+                        "Value": 0.16661
+                    },
+                    {
+                        "Frequency": "M",
+                        "TimePeriod": "M36",
+                        "Value": 0.51608
+                    },
+                    {
+                        "Frequency": "M",
+                        "TimePeriod": "M60",
+                        "Value": 0.38326
+                    }
+                ]
+            }
+        ]
+    }
+]
+```
+</details>
+
+### Integration Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    securityDetails: [
+        {
+            "dbgtime": "225",
+            "Id": "F0GBR050DD",
+            "HasPriceEntitlement": false,
+            "PerformanceId": "0P00000VFA",
+            "InceptionDate": "1998-11-13T00:00:00",
+            "Isin": "GB0004460357",
+            "ISINMIC": "GB0004460357XXXXGBP",
+        }
+    ],
+    portfolio: {
+        "assetAllocation": {
+            "benchmark": [
+                {
+                    "key": "1",
+                    "long": 95.94677,
+                    "net": 95.93341,
+                    "short": 0.01336
+                },
+                {
+                    "key": "2",
+                    "long": 0.10942,
+                    "net": 0.06613,
+                    "short": 0.04329
+                },
+            ],
+            "portfolio": [
+                {
+                    "key": "1",
+                    "long": 93.66822,
+                    "net": 93.66822,
+                    "short": 0
+                },
+                {
+                    "key": "2",
+                    "long": 0.16829,
+                    "net": 0.16829,
+                    "short": 0
+                },
+            ]
+        },
+        "stockRegions": {
+            "portfolio": [
+                {
+                    "Value": 0,
+                    "Id": "Americas",
+                    "ExposureItem": [
+                        {
+                            "Value": 0,
+                            "Id": "NorthAmerica"
+                        },
+                        {
+                            "Value": 0,
+                            "Id": "LatinAmerica"
+                        }
+                    ]
+                },
+            ],
+            "benchmark": [
+                {
+                    "Value": 4.037196,
+                    "Id": "Americas",
+                    "ExposureItem": [
+                        {
+                            "Value": 3.911401,
+                            "Id": "NorthAmerica"
+                        },
+                        {
+                            "Value": 0.125795,
+                            "Id": "LatinAmerica"
+                        }
+                    ]
+                },
+            ]
+        },
+        "stockSectors": {
+            "portfolio": {
+                "BasicMaterials": 5.983311,
+                "ConsumerCyclical": 5.78715,
+                "FinancialServices": 18.49825,
+                "CommunicationServices": 7.540018,
+                "Energy": 5.368267,
+                "Industrials": 24.422021,
+                "Technology": 7.497837,
+                "ConsumerDefensive": 15.608988,
+                "Healthcare": 3.807524,
+                "Utilities": 5.486632
+            },
+            "benchmark": {
+                "BasicMaterials": 9.879306,
+                "ConsumerCyclical": 8.085722,
+                "FinancialServices": 15.837178,
+                "RealEstate": 2.107569,
+                "CommunicationServices": 5.899146,
+                "Energy": 13.306873,
+                "Industrials": 9.106696,
+                "Technology": 2.064189,
+                "ConsumerDefensive": 17.98048,
+                "Healthcare": 12.165912,
+                "Utilities": 3.566928
+            }
+        },
+        "stockStats": {
+            "portfolio": {
+                "prospectiveEarningsYield": 9.85808,
+                "prospectiveBookValueYield": 1.42085,
+                "prospectiveRevenueYield": 0.79842, 
+            },
+            "benchmark": {
+                "prospectiveEarningsYield": 9.29681,
+                "prospectiveBookValueYield": 1.38378,
+                "prospectiveRevenueYield": 0.9631,
+            }
+        },
+        "portfolioHoldings": {
+            "topHoldings": [
+                {
+                    "id": "F0GBR06KUM",
+                    "externalId": "3166330",
+                    "detailHoldingTypeId": "FO",
+                    "externalName": "AVIVA INV-GBP LIQUIDITY-3",
+                    "isin": "IE0031663309",
+                    "currencyId": "GBP",
+                    "cusip": "G6271E119",
+                    "countryId": "IRL",
+                    "securityName": "Aviva Investors Stlg Lqudty 3 GBP Inc",
+                    "weighting": 5.30058,
+                    "marketValue": 10000000,
+                    "numberOfShare": 10000000,
+                    "shareChange": 6500000,
+                    "localCurrencyCode": "GBP",
+                    "globalSectorId": null
+                }
+            ]
+        }
+    },
+    performance: {
+        "annualPerformance": {
+            "labels": [
+                "Sep 30, 2021 - Sep 30, 2022"
+            ],
+            "datasets": [
+                {
+                    "label": "Fund",
+                    "backgroundColor": "#024A7A",
+                    "data": [
+                        19.79979,
+                        17.84706,
+                        4.06846,
+                        6.48435,
+                        14.16025,
+                        14.16258,
+                        3.41969,
+                        -2.97267,
+                        -14.24909,
+                        58.04675,
+                        -13.41183
+                    ]
+                },
+            ]
+        },
+        "calendarYearReturns": {
+            "labels": [
+                2012,
+                2013,
+                2014,
+            ],
+            "datasets": [
+                {
+                    "label": "Fund",
+                    "backgroundColor": "#024A7A",
+                    "data": [
+                        13.56655,
+                        24.81813,
+                        0.66931,
+                        9.69245,
+                        10.83988,
+                        14.08751,
+                        -11.96648,
+                        22.4675,
+                        1.12808,
+                        22.32789,
+                        -9.248484
+                    ]
+                },
+            ]
+        },
+        "performanceGraph": {
+            "portfolio": [
+                [
+                    "2012-12-31T00:00:00",
+                    10000
+                ],
+                [
+                    "2013-01-31T00:00:00",
+                    10432.484999999999
+                ],
+            ],
+            "portfolioName": "Aviva Investors UK Listed Equity Unconstrained Fund 2 GBP Acc",
+            "benchmark": [
+                [
+                    "2012-12-31T00:00:00",
+                    10000
+                ],
+                [
+                    "2013-01-31T00:00:00",
+                    10622.983999999999
+                ],
+            ],   
+            "benchmarkName": "UK Large-Cap Equity"
+        },
+        "trailingReturns": {
+            "labels": [
+                "1M",
+                "3M",
+                "6M",
+                "1Y(ann)",
+                "3Y(ann)",
+                "5Y(ann)"
+            ],
+            "datasets": [
+                {
+                    "label": "Fund",
+                    "backgroundColor": "#024A7A",
+                    "data": [
+                        4.690056,
+                        -7.773913,
+                        -4.864297,
+                        -8.381667,
+                        6.276356,
+                        4.23249
+                    ]
+                },
+            ]
+        }
+    }
+}
+```
+</details>
+
+### Integration Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+getPortfolio() {
+    const data = this.securityReportData.securityDetails;
+    if (!data) {
+        return false;
+    }
+    const currentSecurityObj = this.camelizeKeys(data[0]);
+
+    return {
+        assetAllocation: this.getAssetAllocationData(currentSecurityObj),
+        stockRegions: this.getStockRegionsData(currentSecurityObj),
+        stockSectors: this.getStockSectorsData(currentSecurityObj),
+        stockStats: this.getStockStatsData(currentSecurityObj),
+        portfolioHoldings: this.getPortfolioHoldings(currentSecurityObj),
+    };
+},
+getAssetAllocationData(data) {
+    const portfolio = this.getComponentData(data, 'portfolios[0].assetAllocations');
+    const benchmark = this.getComponentData(data, 'portfolios[0].assetAllocations', '', 'PrimaryBenchmark');
+    const assetType = assetAllocationMapping.default;
+    const assetObject = assetAllocationMapping
+        .assetAllocation[assetType];
+    const getParsedData = (modelData, type) => {
+        const assetData = filter(modelData, (item) => item.type === type);
+        const long = this.getFilteredvalues(assetData, 'L');
+        const net = this.getFilteredvalues(assetData, 'N');
+        const short = this.getFilteredvalues(assetData, 'S');
+        const results = [];
+        Object.keys(assetObject).forEach((item) => {
+            results.push({
+                key: item,
+                long: filter(long, (arr) => arr.type === item)[0]?.value,
+                net: filter(net, (arr) => arr.type === item)[0]?.value,
+                short: filter(short, (arr) => arr.type === item)[0]?.value,
+            });
+        });
+        return results;
+    };
+
+    return {
+        benchmark: getParsedData(benchmark, assetType),
+        portfolio: getParsedData(portfolio, assetType),
+    };
+},
+getStockRegionsData(data) {
+    const portfolioData = this.getComponentData(data, 'portfolios[0].regionalExposure', 'N');
+    const benchmarkData = this.getComponentData(data, 'portfolios[0].regionalExposure', 'N', 'PrimaryBenchmark');
+    const portfolioValues = this.getValues(portfolioData.breakdownValues);
+    const benchmarkValues = this.getValues(benchmarkData.breakdownValues);
+    return {
+        portfolio: this.getStockRegionsParsedData(portfolioValues),
+        benchmark: this.getStockRegionsParsedData(benchmarkValues),
+    };
+},
+getStockRegionsParsedData(regionValues) {
+    const regionMapping = stockRegionsMapping.regions;
+    const stockRegionsParsedData = [];
+    Object.keys(regionMapping).forEach((region) => {
+        const data = regionMapping[region];
+        const subRegionalModel = {};
+        const { keys, subRegions } = data;
+        if (typeof regionValues[keys[0]] === 'number') {
+            subRegionalModel.Value = keys.reduce((sum, key) => sum + regionValues[key], 0);
+            subRegionalModel.Id = data.name;
+        }
+        if (subRegions) {
+            subRegionalModel.ExposureItem = [];
+            Object.keys(subRegions).forEach((subRegion) => {
+                const subRegionObj = {};
+                subRegionObj.Value = regionValues[subRegions[subRegion].key];
+                subRegionObj.Id = subRegion;
+                subRegionalModel.ExposureItem.push(subRegionObj);
+            });
+        }
+        stockRegionsParsedData.push(subRegionalModel);
+    });
+    return stockRegionsParsedData;
+},
+getStockSectorsData(data) {
+    let portfolioData = this.getComponentData(data, 'portfolios[0].globalStockSectorBreakdown', 'N');
+    let benchmarkData = this.getComponentData(data, 'portfolios[0].globalStockSectorBreakdown', 'N', 'PrimaryBenchmark');
+
+    portfolioData = this.getValues(portfolioData.breakdownValues);
+    benchmarkData = this.getValues(benchmarkData.breakdownValues);
+    const portfolio = {};
+    const benchmark = {};
+    this.sectorTypes.forEach((sectorType) => {
+        const mappingKey = stockSectorsMapping.stockSectors[sectorType];
+        Object.keys(mappingKey).forEach((dataKey) => {
+            portfolio[mappingKey[dataKey]] = portfolioData && portfolioData[dataKey];
+            benchmark[mappingKey[dataKey]] = benchmarkData && benchmarkData[dataKey];
+        });
+    });
+    return {
+        portfolio,
+        benchmark,
+    };
+},
+getStockStatsData(data) {
+    const portfolio = this.getComponentData(data, 'portfolios[0].equityStatistics');
+    const benchmark = this.getComponentData(data, 'benchmark[0].portfolios[0].equityStatistics');
+
+    return {
+        portfolio,
+        benchmark,
+    };
+},
+getPortfolioHoldings(data) {
+    const holdingsData = this.getComponentData(data, 'portfolios[0].portfolioHoldings');
+    const sectorMapping = portfolioHoldingsMapping.topNetUnderlyingHoldings.sector;
+    const portfolioHoldingsData = holdingsData.map((holding) => {
+        const currHolding = holding;
+        const { globalSectorId } = currHolding;
+        currHolding.globalSectorId = globalSectorId ? sectorMapping[globalSectorId] : null;
+        return currHolding;
+    });
+    return {
+        topHoldings: portfolioHoldingsData,
+    };
+},
+getComponentData(modelData, referenceNode, salePositionType, benchmarkType) {
+    let data = modelData;
+    if (benchmarkType) {
+        data = filter(data.benchmark, (item) => item.type === benchmarkType);
+        data = get(data[0], referenceNode, []);
+    } else {
+        data = get(modelData, referenceNode, []);
+    }
+
+    if (salePositionType) {
+        data = data.find(
+            (item) => item.salePosition === salePositionType,
+        ) || {};
+    }
+    return data;
+},
+getValues(data) {
+    return data?.reduce((acc, obj) => ({ ...acc, [obj.type]: obj.value }), {});
+},
+getFilteredvalues(modelData, salePositionType) {
+    const data = modelData.find(
+        (item) => item.salePosition === salePositionType,
+    ) || {};
+    const { breakdownValues } = data;
+    return breakdownValues;
+},
+getPerformance() {
+    const securityDetails = this.securityReportData.securityDetails[0];
+    const benchmarkData = securityDetails.Benchmark.find((benchmark) => benchmark.Type === 'Category');
+    return {
+        annualPerformance: this.getAnnualPerformance(securityDetails, benchmarkData),
+        calendarYearReturns: this.getCalendarYearReturns(securityDetails, benchmarkData),
+        performanceGraph: this.getPerformanceChartData(securityDetails, benchmarkData),
+        trailingReturns: this.getTrailingReturns(securityDetails, benchmarkData),
+    };
+},
+getAnnualPerformance(securityDetails, benchmarkDetails) {
+    const filterItem = 'HistoricalPerformanceSeries';
+    const filters = {
+        Frequency: 'Q',
+        ReturnType: 'GbPostTax',
+        TimePeriod: 'M12',
+    };
+    const pickItem = 'Return';
+    const labels = [];
+    const fundData = [];
+    const benchmarkData = [];
+    const fundReturns = this.getFilteredData(securityDetails, filterItem, filters, pickItem) || [];
+    const benchmarkReturns = this.getFilteredData(benchmarkDetails, filterItem, filters, pickItem) || [];
+    const dates = fundReturns.map((dataItem) => dataItem.Date);
+    benchmarkReturns.forEach((dataItem) => {
+        if (dates.indexOf(dataItem.Date) === -1) {
+            dates.push(dataItem.Date);
+        }
+    });
+    dates.sort().forEach((date) => {
+        const currentDate = new Date(date);
+        const lastYearDate = new Date(currentDate.getTime()).setFullYear(currentDate.getFullYear() - 1);
+        labels.push(`${this.formatDate(lastYearDate)} - ${this.formatDate(currentDate)}`);
+        let returnDataItem = fundReturns.find((dataItem) => dataItem.Date === date) || {};
+        fundData.push(returnDataItem.Value);
+        returnDataItem = benchmarkReturns.find((dataItem) => dataItem.Date === date) || {};
+        benchmarkData.push(returnDataItem.Value);
+    });
+    return {
+        labels,
+        datasets: [
+            {
+                label: 'Fund',
+                backgroundColor: '#024A7A',
+                data: fundData,
+            },
+            {
+                label: benchmarkDetails.Name,
+                backgroundColor: '#1DADE2',
+                data: benchmarkData,
+            },
+        ],
+    };
+},
+getPerformanceChartData(securityDetails, benchmarkData) {
+    return {
+        portfolio: this.parseHistoricDetailsData('GrowthOf10K[0]', 'StartValue', 'HistoryDetails', securityDetails),
+        portfolioName: securityDetails?.LegalName,
+        benchmark: this.parseHistoricDetailsData('GrowthOf10K[0]', 'StartValue', 'HistoryDetails', benchmarkData),
+        benchmarkName: benchmarkData?.Name,
+    };
+},
+getCalendarYearReturns(securityDetails, benchmarkDetails) {
+    let filterItem = 'HistoricalPerformanceSeries';
+    let filters = {
+        Frequency: 'Y',
+        ReturnType: 'GbPostTax',
+    };
+    const pickItem = 'Return';
+    const labels = [];
+    const fundData = [];
+    const benchmarkData = [];
+    let fundReturns = this.getFilteredData(
+        securityDetails,
+        filterItem,
+        filters,
+        pickItem,
+    ) || [];
+    let benchmarkReturns = this.getFilteredData(
+        benchmarkDetails,
+        filterItem,
+        filters,
+        pickItem,
+    ) || [];
+    fundReturns.forEach((dataItem) => {
+        labels.unshift(new Date(dataItem.Date).getFullYear());
+        fundData.unshift(dataItem.Value);
+        const sameDateBenchmarkData = find(benchmarkReturns, { Date: dataItem.Date }) || {};
+        benchmarkData.unshift(sameDateBenchmarkData.Value);
+    });
+    filterItem = 'TrailingPerformance';
+    filters = {
+        Type: 'DayEnd',
+        ReturnType: 'GbPostTax',
+    };
+    fundReturns = this.getFilteredData(
+        securityDetails,
+        filterItem,
+        filters,
+        pickItem,
+    ) || [];
+    benchmarkReturns = this.getFilteredData(
+        benchmarkDetails,
+        filterItem,
+        filters,
+        pickItem,
+    ) || [];
+    labels.push('YTD');
+    let dataItem = find(fundReturns, { TimePeriod: 'M0' }) || {};
+    fundData.push(dataItem.Value);
+    dataItem = find(benchmarkReturns, { TimePeriod: 'M0' }) || {};
+    benchmarkData.push(dataItem.Value);
+    return {
+        labels,
+        datasets: [
+            {
+                label: 'Fund',
+                backgroundColor: '#024A7A',
+                data: fundData,
+            },
+            {
+                label: benchmarkDetails.Name,
+                backgroundColor: '#1DADE2',
+                data: benchmarkData,
+            },
+        ],
+    };
+},
+getFilteredData(data, filterItem, filters, pickItem) {
+    const filteredData = find(get(data, filterItem, []), filters) || {};
+    return filteredData[pickItem];
+},
+getTrailingPerformance(data, filterItem, filters, pickItem, timePeriods) {
+    const returns = this.getFilteredData(data, filterItem, filters, pickItem) || [];
+    return timePeriods.map((timePeriod) => {
+        const returnData = returns
+            .find((dataItem) => dataItem.Annualized && dataItem.TimePeriod === timePeriod)
+            || {};
+        return returnData.Value;
+    });
+},
+getTrailingReturns(securityDetails, benchmarkDetails) {
+    const timePeriods = {
+        M1: '1M',
+        M3: '3M',
+        M6: '6M',
+        M12: '1Y(ann)',
+        M36: '3Y(ann)',
+        M60: '5Y(ann)',
+    };
+    const filterItem = 'TrailingPerformance';
+    const filters = {
+        Type: 'DayEnd',
+        ReturnType: 'GbPostTax',
+    };
+    const pickItem = 'Return';
+    const timePeriodDataPoints = Object.keys(timePeriods);
+    const fundReturns = this.getTrailingPerformance(
+        securityDetails,
+        filterItem,
+        filters,
+        pickItem,
+        timePeriodDataPoints,
+    );
+    const benchmarkReturns = this.getTrailingPerformance(
+        benchmarkDetails,
+        filterItem,
+        filters,
+        pickItem,
+        timePeriodDataPoints,
+    );
+    return {
+        labels: Object.values(timePeriods),
+        datasets: [
+            {
+                label: 'Fund',
+                backgroundColor: '#024A7A',
+                data: fundReturns,
+            },
+            {
+                label: benchmarkDetails.Name,
+                backgroundColor: '#1DADE2',
+                data: benchmarkReturns,
+            },
+        ],
+    };
+},
+parseHistoricDetailsData(growth10KReference, startValueRef, historicDetailsRef, data = {}) {
+    const growth10KData = get(data, growth10KReference, {});
+    const rebaseValue = 10000 / get(growth10KData, startValueRef, 10000);
+    const timeSeriesData = get(growth10KData, historicDetailsRef, []);
+    const timeSeriesDetails = [];
+
+    const details = timeSeriesData.map((item) => [item.EndDate, item.Value * rebaseValue]);
+    timeSeriesDetails.push(...details);
+
+    return timeSeriesDetails;
+},
+```
+</details>
+&nbsp;
