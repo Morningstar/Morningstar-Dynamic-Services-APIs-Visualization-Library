@@ -1,0 +1,14 @@
+{
+    "intl": {
+        "qa": "us-qa-api",
+        "stg": "us-stg-api",
+        "uat": "emea-uat-api",
+        "prod": "emea-api"
+    },
+    "na": {
+        "qa": "us-qa-api",
+        "stg": "us-stg-api",
+        "uat": "us-uat-api",
+        "prod": "us-api"
+    }
+}

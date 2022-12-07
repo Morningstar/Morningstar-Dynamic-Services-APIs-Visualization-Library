@@ -1,0 +1,421 @@
+<html>
+    <head>
+        <script src="./mstar-apis-sdk.js"></script>
+    </head>
+    <style>
+        .input-wrapper {
+            display: table;
+        }
+        .input-wrapper > div {
+            display: table-row;
+        }
+        .input-wrapper > div > * {
+            display: table-cell;
+        }
+    </style>
+    <script>
+        const samplePortfolio = {
+            portfolios: {
+                type: 3,
+                benchmark: {
+                    type: 'Standard',
+                    holdings: [
+                        {
+                            identifier: 'EUCA000555',
+                            identifierType: 'MSID',
+                            weight: 100
+                        }
+                    ]
+                },
+                holdings: [
+                    {
+                        identifier: 'F0GBR052QA',
+                        identifierType: 'MSID',
+                        amount: 5000,
+                    },
+                    {
+                        identifier: 'F000000EY1',
+                        identifierType: 'MSID',
+                        amount: 2500,
+                    },
+                    {
+                        identifier: 'F00000OXG7',
+                        identifierType: 'MSID',
+                        amount: 2000,
+                    },
+                    {
+                        identifier: 'F00000TWNO',
+                        identifierType: 'MSID',
+                        amount: 10000,
+                    }
+                ],
+                name: 'UK demo portfolio - amount',
+            },
+        };
+        const sampleTestPortfolio = {
+            portfolios: [
+                {
+                    Name: 'TestPortfolio1',
+                    TotalValue: 10000,
+                    Holdings: [
+                        {
+                            SecurityId: 'F00000VCTT',
+                            Weight: 20,
+                        },
+                        {
+                            SecurityId: '0P00002NW8',
+                            Weight: 10,
+                        },
+                        {
+                            TradingSymbol: 'AAPL',
+                            Weight: 15,
+                        },
+                        {
+                            ISIN: 'US09251T1034',
+                            Weight: 35,
+                        },
+                        {
+                            CUSIP: '256219106',
+                            Weight: 20,
+                        },
+                    ],
+                    Benchmark: {
+                        Type: 'Standard',
+                        Holdings: [
+                            {
+                                SecurityId: 'XIUSA04G92',
+                                Type: 'XI',
+                                Weight: 100,
+                            },
+                        ],
+                    },
+                },
+            ],
+        };
+        const sampleUsPortfolio = {
+            portfolios: [
+                {
+                    name: 'US demo portfolio - weight',
+                    totalValue: 10000,
+                    currency: 'USD',
+                    holdings: [
+                        {
+                            securityId: 'FOUSA06OEZ',
+                            weight: 30,
+                        },
+                        {
+                            securityId: 'FOUSA06IVV',
+                            weight: 50,
+                        },
+                        {
+                            securityId: 'F00000T770',
+                            weight: 20,
+                        },
+                    ],
+                    benchmark: {
+                        type: 'Standard',
+                        holdings: [
+                            {
+                                securityId: 'XIUSA0010V',
+                                weight: 100,
+                            },
+                        ],
+                    },
+                },
+            ],
+        };
+        const sampleCostCalculationPortfolio = {
+            portfolios: [
+                {
+                    id: '99575444',
+                    amount: 8356.4427321306580000,
+                    ongoing: [
+                        {
+                            name: 'Platform',
+                            percentage: 5.0,
+                        },
+                    ],
+                    holdings: [
+                        {
+                            identifier: 'ZZ0001U9IE',
+                            identifierType: 'MSID',
+                            weight: 12.17552,
+                            ongoing: [
+                                {
+                                    name: 'Ongoing',
+                                },
+                                {
+                                    name: 'Transaction',
+                                },
+                                {
+                                    name: 'Performance',
+                                },
+                            ],
+                        },
+                        {
+                            identifier: '0P00002RGO',
+                            identifierType: 'MSID',
+                            weight: 87.82448,
+                            ongoing: [
+                                {
+                                    name: 'Ongoing',
+                                    percentage: 0.85,
+                                },
+                                {
+                                    name: 'Transaction',
+                                },
+                                {
+                                    name: 'Performance',
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        };
+        const sampleIntlScreener = {
+            page: 1,
+            pageSize: 10,
+            sortField: 'name',
+            sortOrder: 'asc',
+            universeIds: 'FOGBR$$ALL|E0EXG$XLON',
+            securityDataPoints: 'secId,tenforeId,name,closePrice,yield_M12,ongoingCharge,starRatingM255,gbrReturnD1,gbrReturnW1,gbrReturnM1,gbrReturnM3,gbrReturnM6,investmentType,holdingTypeId,universe',
+            filterValues: '',
+            term: '',
+        };
+        var refs = {};
+        function getRefs(id) {
+            if (!refs[id]) {
+                refs[id] = document.getElementById(id);
+            }
+            return refs[id];
+        }
+
+        function defaultTokenExpiryCallback(dataAccessCallback) {
+            const errorMessage = 'Your token is not valid! Update token and initialize again!';
+            alert(errorMessage);
+            dataAccessCallback(errorMessage);
+        }
+
+        function updateParams() {
+            const languageId = getRefs('language-input').value;
+            const currencyId = getRefs('currency-input').value;
+            const token = getRefs('token-input').value;
+            const params = {
+                token: token,
+            };
+            if (languageId) {
+                params.languageId = languageId;
+            }
+            if (currencyId) {
+                params.currencyId = currencyId;
+            }
+            getRefs('initializer').value = JSON.stringify(params, null, 2);
+        }
+
+        function initializeToken() {
+            var params = getRefs('initializer').value;
+            if (params) {
+                params = JSON.parse(params);
+                params.apiTokenExpiredCallback = defaultTokenExpiryCallback;
+                window.mstarApisSdk.initialize(params);
+            }
+        }
+
+        function addSampleParam() {
+            const methodName = getRefs('method-name').value;
+            var sampleParam = '';
+            switch(methodName) {
+                case 'xray.getAssetAllocationBreakdown':
+                case 'xray.getFeesExpensesData':
+                case 'xray.getFixedIncomeCountryData':
+                case 'xray.getFixedIncomeSectorsData':
+                case 'xray.getTrailingReturnsData':
+                case 'xray.getSrri':
+                case 'xray.getStockStatsData':
+                case 'xray.getStockSectorsData':
+                case 'xray.getStockRegionsData':
+                case 'xray.getStockRegionsUsData':
+                case 'xray.getPerformanceGraphData':
+                case 'xray.getPortfolioHoldingsData':
+                case 'xray.getXrayIntlData':
+                    sampleParam = JSON.stringify(samplePortfolio, null, 2);
+                    break;
+                case 'xray.getRiskStatisticsData':
+                case 'xray.getStockSectorsUsData':
+                case 'xray.getFeesExpensesUsData':
+                case 'xray.getFixedIncomeSectorsUsData':
+                case 'xray.getAssetAllocationUsData':
+                case 'xray.getStockTypeData':
+                case 'xray.getTrailingReturnsUsData':
+                case 'xray.getPortfolioHoldingsUsData':
+                case 'xray.getPerformanceGraphUsData':
+                case 'xray.getStockStatsUsData':
+                case 'portfolioAnalysis.getHypotheticalPerformance':
+                    sampleParam = JSON.stringify(sampleUsPortfolio, null, 2);
+                    break;
+                case 'portfolioAnalysis.getEsgPerformance':
+                case 'portfolioAnalysis.getEsgPerformanceIntlData':
+                case 'portfolioAnalysis.getRiskScore':
+                case 'portfolioAnalysis.getRegulatoryData':
+                    sampleParam = JSON.stringify(sampleTestPortfolio, null, 2);
+                    break;
+                case 'costCalculator.getCostCalculation':
+                    sampleParam = JSON.stringify(sampleCostCalculationPortfolio, null, 2);
+                    break;
+                case 'portfolioAnalysis.getIdrPdf': sampleParam = 'FOUSA05H5F';
+                    break;
+                case 'securityDetails.getSecurity': sampleParam = 'F0GBR050DD';
+                    break;
+                case 'investmentCompare.getIntlCompareSecurities': sampleParam = 'F0GBR050DD|F00000Q5PZ';
+                    break;
+                case 'timeSeries.getIntlTimeseriesData': sampleParam = 'F0GBR052QA|F000000EY1|F00000OXG7|F00000TWNO';
+                    break;
+                case 'screener.searchSecurities': sampleParam = 'abaco';
+                    break;
+                case 'screener.getIntlScreenerData': sampleParam = JSON.stringify(sampleIntlScreener, 0, 2);
+                    break;
+                default: break;
+            }
+            getRefs('primary-param').value = sampleParam;
+        }
+
+        function callApi() {
+            let methodName = getRefs('method-name').value;
+            var primaryParam = getRefs('primary-param').value;
+            switch(methodName) {
+                case 'xray.getAssetAllocationBreakdown':
+                case 'xray.getAssetAllocationUsData':
+                case 'xray.getFeesExpensesData':
+                case 'xray.getFixedIncomeCountryData':
+                case 'xray.getFixedIncomeSectorsData':
+                case 'xray.getFixedIncomeSectorsUsData':
+                case 'xray.getFeesExpensesUsData':
+                case 'xray.getTrailingReturnsData':
+                case 'xray.getPerformanceGraphData':
+                case 'xray.getRiskStatisticsData':
+                case 'xray.getStockTypeData':
+                case 'xray.getSrri':
+                case 'xray.getStockStatsData':
+                case 'xray.getStockSectorsData':
+                case 'xray.getStockSectorsUsData':
+                case 'xray.getStockRegionsData':
+                case 'xray.getStockRegionsUsData':
+                case 'xray.getPortfolioHoldingsData':
+                case 'xray.getTrailingReturnsUsData':
+                case 'xray.getPortfolioHoldingsUsData':
+                case 'xray.getPerformanceGraphUsData':
+                case 'xray.getStockStatsUsData':
+                case 'xray.getXrayIntlData':
+                case 'costCalculator.getCostCalculation':
+                case 'portfolioAnalysis.getEsgPerformance':
+                case 'portfolioAnalysis.getEsgPerformanceIntlData':
+                case 'portfolioAnalysis.getHypotheticalPerformance':
+                case 'portfolioAnalysis.getRiskScore':
+                case 'portfolioAnalysis.getRegulatoryData':
+                    primaryParam = JSON.parse(primaryParam);
+                    break;
+                default: break;
+            }
+            const lastIndexOfDot = methodName.indexOf('.');
+            if (lastIndexOfDot > -1) {
+                instance = _.get(window.mstarApisSdk, methodName.slice(0, lastIndexOfDot));
+                methodName = methodName.slice(lastIndexOfDot + 1);
+            } else {
+                instance = window.mstarApisSdk;
+            }
+            instance[methodName](primaryParam).then(function (apiResponse) {
+                var stringifiedResponse;
+                switch (methodName) {
+                    case 'getIdrPdf':
+                        stringifiedResponse = 'PDF response can not be displayed in textbox. Please check the browser developer tool network panel!';
+                        break;
+                    default:
+                        stringifiedResponse = JSON.stringify(apiResponse, null, 2);
+                        break;
+                }
+                getRefs('api-response').value = stringifiedResponse;
+            });
+        }
+    </script>
+    <body>
+        <div class="input-wrapper">
+            <div>
+                <label for="initializer">SDK initialization params:</label>
+                <textarea name="initializer" id="initializer" cols="30" rows="10" disabled></textarea>
+            </div>
+            <div>
+                <label for="language-input">Language ID (default - "en-GB"):</label>
+                <input type="text" id="language-input" oninput="updateParams()" />
+            </div>
+            <div>
+                <label for="currency-input">Currency ID (default - "GBP"):</label>
+                <input type="text" id="currency-input" oninput="updateParams()" />
+            </div>
+            <div>
+                <label for="token-input">MaaS Token:</label>
+                <textarea id="token-input" name="tokenInput" oninput="updateParams()"></textarea>
+            </div>
+            <button onclick="initializeToken()">Initialize SDK</button>
+        </div>
+        <br/>
+        <hr/>
+        <br/>
+        <div class="input-wrapper">
+            <div>
+                <label for="initializer">Call method:</label>
+                <select name="methodName" id="method-name">
+                    <option value="xray.getAssetAllocationBreakdown">getAssetAllocationBreakdown</option>
+                    <option value="xray.getAssetAllocationUsData">getAssetAllocationUsData</option>
+                    <option value="xray.getFeesExpensesData">getFeesExpensesData</option>
+                    <option value="xray.getFixedIncomeCountryData">getFixedIncomeCountryData</option>
+                    <option value="xray.getFixedIncomeSectorsData">getFixedIncomeSectorsData</option>
+                    <option value="xray.getFixedIncomeSectorsUsData">getFixedIncomeSectorsUsData</option>
+                    <option value="xray.getFeesExpensesUsData">getFeesExpensesUsData</option>
+                    <option value="xray.getTrailingReturnsData">getTrailingReturnsData</option>
+                    <option value="xray.getPerformanceGraphData">getPerformanceGraphData</option>
+                    <option value="xray.getRiskStatisticsData">getRiskStatisticsData</option>
+                    <option value="xray.getStockTypeData">getStockTypeData</option>
+                    <option value="xray.getPortfolioHoldingsData">getPortfolioHoldingsData</option>
+                    <option value="xray.getSrri">getSrri</option>
+                    <option value="xray.getStockStatsData">getStockStatsData</option>
+                    <option value="xray.getStockSectorsData">getStockSectorsData</option>
+                    <option value="xray.getStockSectorsUsData">getStockSectorsUsData</option>
+                    <option value="xray.getStockRegionsData">getStockRegionsData</option>
+                    <option value="xray.getStockRegionsUsData">getStockRegionsUsData</option>
+                    <option value="xray.getTrailingReturnsUsData">getTrailingReturnsUsData</option>
+                    <option value="xray.getPortfolioHoldingsUsData">getPortfolioHoldingsUsData</option>
+                    <option value="xray.getPerformanceGraphUsData">getPerformanceGraphUsData</option>
+                    <option value="xray.getStockStatsUsData">getStockStatsUsData</option>
+                    <option value="xray.getXrayIntlData">getXrayIntlData</option>
+                    <option value="securityDetails.getSecurity">getSecurity</option>
+                    <option value="investmentCompare.getIntlCompareSecurities">getIntlCompareSecurities</option>
+                    <option value="screener.searchSecurities">searchSecurities</option>
+                    <option value="screener.getIntlFiltersData">getIntlFiltersData</option>
+                    <option value="screener.getIntlScreenerData">getIntlScreenerData</option>
+                    <option value="timeSeries.getIntlTimeseriesData">getIntlTimeseriesData</option>
+                    <option value="portfolioAnalysis.getRiskScore">getRiskScore</option>
+                    <option value="portfolioAnalysis.getEsgPerformance">getEsgPerformance</option>
+                    <option value="portfolioAnalysis.getEsgPerformanceIntlData">getEsgPerformanceIntlData</option>
+                    <option value="portfolioAnalysis.getHypotheticalPerformance">getHypotheticalPerformance</option>
+                    <option value="portfolioAnalysis.getIdrPdf">getIdrPdf</option>
+                    <option value="portfolioAnalysis.getRegulatoryData">getRegulatoryData</option>
+                    <option value="costCalculator.getCostCalculation">getCostCalculation</option>
+                </select>
+                <button onclick="addSampleParam()">Use sample parameter</button>
+            </div>
+            <div>
+                <label for="primaryParam">Primary parameter:</label>
+                <textarea id="primary-param" name="primaryParam" cols="50"></textarea>
+            </div>
+            <button onclick="callApi()">Call API</button>
+        </div>
+        <br/>
+        <hr/>
+        <br/>
+        <div>
+            <strong>API Response</strong>
+        </div>
+        <textarea id="api-response" name="apiResponse" disabled cols="75" rows="40"></textarea>
+    </body>
+</html>

@@ -1,0 +1,48 @@
+{
+    "costCalculator": {
+        "intl": {
+            "url": "https://www.{{hostName}}.morningstar.com/ecint/v1/investment-fees/calculate"
+        }
+    },
+    "portfolioAnalysis": {
+        "intl": {
+            "url": "https://www.{{hostName}}.morningstar.com/portfolioanalysis/v1/{{apiEndPoint}}?langcult={{languageId}}"
+        },
+        "na": {
+            "url": "https://www.{{hostName}}.morningstar.com/portfolioanalysis/v1/{{apiEndPoint}}?langcult={{languageId}}"
+        }
+    },
+    "screener": {
+        "intl": {
+            "url": "https://www.{{hostName}}.morningstar.com/ecint/v1/screener?page={{page}}&pageSize={{pageSize}}&sortOrder={{sortField}}%20{{sortOrder}}&outputType=json&version=1&languageId={{languageId}}&currencyId={{currencyId}}&universeIds={{universeIds}}&securityDataPoints={{securityDataPoints}}&filters={{filterValues}}&term={{term}}"
+        }
+    },
+    "filters": {
+        "intl": {
+            "url": "https://www.{{hostName}}.morningstar.com/ecint/v1/screener?languageId={{languageId}}&currencyId={{currencyId}}&universeIds={{universeIds}}&outputType=json&filterDataPoints={{filterDataPoints}}&filters={{filterValues}}"
+        }
+    },
+    "securityDetails": {
+        "intl": {
+            "url": "https://www.{{hostName}}.morningstar.com/ecint/v1/securities/{{securityId}}?viewId={{viewId}}&idtype={{idType}}&languageId={{languageId}}&currencyId={{currencyId}}&responseViewFormat=json"
+        }
+    },
+    "timeSeries": {
+        "intl": {
+            "url": "https://www.{{hostName}}.morningstar.com/ecint/v1/timeseries/{{method}}?id={{securityId}}&idtype={{idType}}&frequency={{frequency}}&startDate={{startDate}}&languageId={{languageId}}&currencyId={{currencyId}}&outputType=json"
+        }
+    },
+    "investmentCompare": {
+        "intl": {
+            "url": "https://www.{{hostName}}.morningstar.com/ecint/v1/multi-securities?ids={{securityIds}}&idType={{idType}}&viewIds={{viewId}}&currencyId={{currencyId}}&languageId={{languageId}}&responseViewFormat=json"
+        }
+    },
+    "xray": {
+        "na": {
+            "url": "https://www.{{hostName}}.morningstar.com/portfolioanalysis/v1/xray?langcult={{languageId}}"
+        },
+        "intl": {
+            "url": "https://www.{{hostName}}.morningstar.com/ecint/v1/xray/json?languageId={{languageId}}&portfolioDataPoints={{portfolioDataPoints}}&holdingDataPoints={{holdingDataPoints}}&benchmarkDataPoints={{benchmarkDataPoints}}"
+        }
+    }
+}

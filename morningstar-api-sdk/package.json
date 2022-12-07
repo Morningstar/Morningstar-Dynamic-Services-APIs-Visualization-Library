@@ -1,0 +1,26 @@
+{
+  "name": "mstar-apis-sdk",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "webpack",
+    "preview": "nodemon ./dist/app.js",
+    "build:debug": "webpack --config ./webpack.config.debug.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "express": "^4.18.1",
+    "nodemon": "^2.0.16",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "uuid": "^8.3.2",
+    "webpack": "^4.23.1",
+    "webpack-cli": "^3.1.2"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
