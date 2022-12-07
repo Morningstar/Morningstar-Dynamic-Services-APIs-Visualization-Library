@@ -88,3 +88,4 @@ Currently we have two branches
 
 ## License
 Morningstar Visualization Library is licensed under the Apache License 2.0. Details can be found in the LICENSE file.
+*
