@@ -74,18 +74,6 @@ Change types mostly follow the semver standard (https://semver.org/):
 * `patch` - a backwards-compatible bug fix
 * `chore` - code clean up without any change to functionality, e.g. formatting or linting
 
-## Deployment
-Currently we have two branches
-* Develop
-    * Used for development 
-    * When pull request is merged below job is triggered which generate the latest story book and is pushed to S3 bucket
-        * https://jenkins.morningstar.com/job/IWT-GIT/job/00946-Hosting-Platform-Client-Assets-Web-Asset-Library
-    * S3 bucket hosts the static resource can be access using the below url 
-        * https://echost-qa.morningstar.com/web-asset-library/index.html
-* Master
-    * This will be the production branch
-    * We will sync up with develop branch for publishing final changes.
 
 ## License
 Morningstar Visualization Library is licensed under the Apache License 2.0. Details can be found in the LICENSE file.
-*
