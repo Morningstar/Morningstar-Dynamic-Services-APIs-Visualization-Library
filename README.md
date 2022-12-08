@@ -1,4 +1,5 @@
-# Web-Asset-Library
+# Morningstar-Visualization-Library
+The Morningstar Visualization Library is a collection of example web components that demonstrate how data returned by Dynamic Services APIs can be rendered for use in front-end applications.
 
 ### Note :
 Use node version 16.13.2, Since this version has npm(8.1.2) which works fine and later version has [issues](https://getridbug.com/node-js/unexpected-token-when-trying-to-run-npm-install/)
