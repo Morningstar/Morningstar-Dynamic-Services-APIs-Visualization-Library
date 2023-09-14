@@ -1,0 +1,79 @@
+{
+    "assetAllocation": {
+        "MorningstarAUS10": {
+            "1": "AU Equity",
+            "10": "Other",
+            "2": "INT'L Equity",
+            "3": "AU Fixed Income",
+            "4": "INT'L Fixed Income",
+            "5": "AU Listed Prop",
+            "6": "INT'L Listed Prop",
+            "7": "Cash",
+            "9": "Unlisted Property",
+            "99": "Not Classified"
+        },
+        "MorningstarEUR3": {
+            "1": "Stocks",
+            "2": "Bonds",
+            "3": "Cash",
+            "4": "Other",
+            "99": "Not Classified"
+        },
+        "MorningstarEUR5": {
+            "1": "UK/Euro Equity",
+            "2": "North America Equity",
+            "3": "Other Equity",
+            "4": "Bonds",
+            "5": "Cash",
+            "6": "Other",
+            "99": "Not Classified"
+        },
+        "MorningstarUK6": {
+            "1": "UK/Euro Equity",
+            "2": "North America Equity",
+            "3": "Other Equity",
+            "4": "Bonds",
+            "5": "Cash",
+            "6": "Property",
+            "7": "Other",
+            "99": "Not Classified"
+        },
+        "MorningstarUSA": {
+            "1": "US Stocks",
+            "2": "Non US Stocks",
+            "3": "Bonds",
+            "4": "Cash",
+            "5": "Other",
+            "6": "Not Classified"
+        },
+        "MorningstarCABroad": {
+            "1": "Cash",
+            "2": "Canadian Equity",
+            "3": "US Equity",
+            "4": "International Equity",
+            "5": "Fixed Income",
+            "6": "Other/Not Classified"
+        },
+        "MorningstarSA12": {
+            "1": "SA Bond",
+            "2": "Non-SA Bond",
+            "3": "SA Equity",
+            "4": "SA Property",
+            "5": "Non-SA Equity",
+            "6": "Non-SA Property",
+            "7": "SA Cash",
+            "8": "Non-SA Cash",
+            "9": "SA Other",
+            "10": "Non-SA Other",
+            "11": "SA Unit Trust",
+            "12": "Non-SA Unit Trust",
+            "13": "Africa Bond",
+            "14": "Africa Equity",
+            "15": "Africa Property",
+            "16": "Africa Cash",
+            "17": "Africa Unit Trust",
+            "18": "Africa Other"
+        }
+    },
+    "default": "MorningstarEUR3"
+}

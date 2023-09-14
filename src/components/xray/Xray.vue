@@ -47,6 +47,10 @@ export default {
             portfolioData: {},
         };
     },
+    created() {
+        // scroll to top in case of scroll position is changed in workflow
+        this.$vuetify.goTo(0);
+    },
     computed: {
         getPortfolioName() {
             return this.modelData.portfolioName || '';

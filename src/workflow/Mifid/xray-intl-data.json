@@ -1,0 +1,6081 @@
+{
+    "portfolioName": "UK demo portfolio",
+    "portfolioHoldings": {
+        "topHoldings": [
+            {
+                "holdingId": 0,
+                "securityId": "F000015BVI",
+                "securityType": "FO",
+                "holdingType": 2,
+                "universeId": "FOGBR$$ALL",
+                "name": "Allianz Emerging Markets SRI Bd AT H2SEK",
+                "iSIN": "LU2185877557",
+                "portfolioDate": "2023-05-31",
+                "initialAmount": 5000,
+                "marketValue": 5000,
+                "weight": 50,
+                "currencyId": "SEK",
+                "ongoingCharge": 1.5,
+                "fundShareClassId": "F000015BVI",
+                "returnM12": -3.71,
+                "returnM36": -9.09,
+                "contributionReturn": -23.62694,
+                "eET_SustInvEUTaxonomy_A8": "Y",
+                "eET_PlannedInvtsSustInvEUTaxonomy": 0.1,
+                "eET_EUSFDRType": 8,
+                "eET_PAI_EnergyInefficientExposureConsidered": "N",
+                "eET_PAI_NegativeAffectConsidered": "Y",
+                "eET_PAI_EmissionsToWaterConsidered": "Y",
+                "eET_PAI_HazardousWasteConsidered": "Y",
+                "eET_PAI_UNGCViolationsConsidered": "Y",
+                "eET_PAI_SocialViolationsNumberConsidered": "Y",
+                "eET_PAI_CarbonIntensityConsidered": "N",
+                "eET_PAI_SocialViolationsPercentageConsidered": "Y",
+                "userPref1": 1,
+                "preferenceAligned": true
+            },
+            {
+                "holdingId": 1,
+                "securityId": "F000013M7Y",
+                "securityType": "FO",
+                "holdingType": 2,
+                "universeId": "FOGBR$$ALL",
+                "name": "Allianz Emerging Markets SRI Bd A H2 EUR",
+                "iSIN": "LU1958619352",
+                "portfolioDate": "2023-05-31",
+                "initialAmount": 2000,
+                "marketValue": 2000,
+                "weight": 20,
+                "currencyId": "EUR",
+                "starRatingM255": 2,
+                "morningstarRiskM255": 3,
+                "ongoingCharge": 1.5,
+                "fundShareClassId": "F000013M7Y",
+                "returnM12": 2.69,
+                "returnM36": -7.01,
+                "contributionReturn": -3.92777,
+                "eET_SustInvEUTaxonomy_A8": "Y",
+                "eET_PlannedInvtsSustInvEUTaxonomy": 0.1,
+                "eET_EUSFDRType": 8,
+                "eET_PAI_EnergyInefficientExposureConsidered": "N",
+                "eET_PAI_NegativeAffectConsidered": "Y",
+                "eET_PAI_EmissionsToWaterConsidered": "Y",
+                "eET_PAI_HazardousWasteConsidered": "Y",
+                "eET_PAI_UNGCViolationsConsidered": "Y",
+                "eET_PAI_SocialViolationsNumberConsidered": "Y",
+                "eET_PAI_CarbonIntensityConsidered": "N",
+                "eET_PAI_SocialViolationsPercentageConsidered": "Y",
+                "userPref1": 1,
+                "preferenceAligned": true
+            },
+            {
+                "holdingId": 2,
+                "securityId": "F00000OXG7",
+                "securityType": "FO",
+                "holdingType": 2,
+                "universeId": "FOGBR$$ALL",
+                "name": "BlackRock Dev Mkts Sust Eq Fund UK D Inc",
+                "iSIN": "GB00B8DDP952",
+                "portfolioDate": "2023-05-31",
+                "initialAmount": 2000,
+                "marketValue": 2000,
+                "weight": 20,
+                "currencyId": "GBP",
+                "starRatingM255": 2,
+                "morningstarRiskM255": 2,
+                "ongoingCharge": 0.92,
+                "fundShareClassId": "F00000OXG7",
+                "returnM12": 5.15,
+                "returnM36": 3.2,
+                "returnM60": 4.62,
+                "returnM120": 6.81,
+                "contributionReturn": 75.51032,
+                "userPref1": 0,
+                "preferenceAligned": false
+            },
+            {
+                "holdingId": 3,
+                "securityId": "F00000TWNO",
+                "securityType": "FO",
+                "holdingType": 2,
+                "universeId": "FOGBR$$ALL",
+                "name": "London & Capital Global Bond I GBP Inc",
+                "iSIN": "IE00BDV0B626",
+                "portfolioDate": "2023-05-31",
+                "initialAmount": 1000,
+                "marketValue": 1000,
+                "weight": 10,
+                "currencyId": "GBP",
+                "starRatingM255": 3,
+                "morningstarRiskM255": 4,
+                "ongoingCharge": 1.28,
+                "fundShareClassId": "F00000TWNO",
+                "returnM12": -1.04,
+                "returnM36": -2.3,
+                "returnM60": -0.38,
+                "contributionReturn": 4.1059,
+                "eET_EUSFDRType": 6,
+                "userPref1": 0,
+                "preferenceAligned": false
+            }
+        ],
+        "topUnderlyingHoldings": [
+            {
+                "holdingId": "DE0001030872",
+                "name": "Germany (Federal Republic Of) 0%",
+                "securityId": "B10002PPNY",
+                "securityType": "GS",
+                "weight": 6.83941,
+                "marketValue": 15361626,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Germany",
+                "countryId": "DEU",
+                "iSIN": "DE0001030872",
+                "currencyId": "EUR",
+                "currencyName": "Euro"
+            },
+            {
+                "holdingId": "105756CC2",
+                "name": "Brazil (Federative Republic) 3.875%",
+                "securityId": "B00038GWR5",
+                "securityType": "BT",
+                "weight": 3.02191,
+                "marketValue": 6787368,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Brazil",
+                "countryId": "BRA",
+                "iSIN": "US105756CC23",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "P3579ECF2",
+                "name": "Dominican Republic 4.5%",
+                "securityId": "B0003814KN",
+                "securityType": "BT",
+                "weight": 2.51424,
+                "marketValue": 5647094,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Dominican Republic",
+                "countryId": "DOM",
+                "iSIN": "USP3579ECF27",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "Y7177RAD7",
+                "name": "Azerbaijan (Republic of) 3.5%",
+                "securityId": "B00036GXCO",
+                "securityType": "BT",
+                "weight": 2.49848,
+                "marketValue": 5611714,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Azerbaijan",
+                "countryId": "AZE",
+                "iSIN": "XS1678623734",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "698299BK9",
+                "name": "Panama (Republic of) 3.16%",
+                "securityId": "B00037LFSJ",
+                "securityType": "BT",
+                "weight": 2.46245,
+                "marketValue": 5530790,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Panama",
+                "countryId": "PAN",
+                "iSIN": "US698299BK97",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "Y000WRAE8",
+                "name": "Uzbekistan (The Republic of) 3.9%",
+                "securityId": "B10000Y5YM",
+                "securityType": "BT",
+                "weight": 2.43641,
+                "marketValue": 5472304,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Uzbekistan",
+                "countryId": "UZB",
+                "iSIN": "XS2365195978",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "P3579ECH8",
+                "name": "Dominican Republic 4.875%",
+                "securityId": "B00038SDJI",
+                "securityType": "BT",
+                "weight": 2.2791,
+                "marketValue": 5118972,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Dominican Republic",
+                "countryId": "DOM",
+                "iSIN": "USP3579ECH82",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "X93622GL0",
+                "name": "Hungary (Republic Of) 6.75%",
+                "securityId": "B100039PN0",
+                "securityType": "BT",
+                "weight": 2.27748,
+                "marketValue": 5115326,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Hungary",
+                "countryId": "HUN",
+                "iSIN": "XS2574267345",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "455780CQ7",
+                "name": "Indonesia (Republic of) 2.85%",
+                "securityId": "B00037YCGE",
+                "securityType": "BT",
+                "weight": 2.19404,
+                "marketValue": 4927906,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Indonesia",
+                "countryId": "IDN",
+                "iSIN": "US455780CQ75",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "470160CB6",
+                "name": "Jamaica (Government of) 7.875%",
+                "securityId": "B000353YUB",
+                "securityType": "BT",
+                "weight": 2.12076,
+                "marketValue": 4763330,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Jamaica",
+                "countryId": "JAM",
+                "iSIN": "US470160CB63",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "594918104",
+                "name": "Microsoft Corp",
+                "securityId": "E0USA00A05",
+                "securityType": "E",
+                "weight": 1.75054,
+                "marketValue": 15785983,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "311",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "US5949181045",
+                "currencyId": "USD",
+                "currencyName": "US Dollar",
+                "symbol": "MSFT"
+            },
+            {
+                "holdingId": "57636Q104",
+                "name": "Mastercard Inc Class A",
+                "securityId": "E0USA04HDR",
+                "securityType": "E",
+                "weight": 1.06299,
+                "marketValue": 9585825,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "103",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "US57636Q1040",
+                "currencyId": "USD",
+                "currencyName": "US Dollar",
+                "symbol": "MA"
+            },
+            {
+                "holdingId": "CH0038863350",
+                "name": "Nestle SA",
+                "securityId": "E0CHE00AHS",
+                "securityType": "E",
+                "weight": 0.83621,
+                "marketValue": 7540731,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "205",
+                "country": "Switzerland",
+                "countryId": "CHE",
+                "iSIN": "CH0038863350",
+                "currencyId": "CHF",
+                "currencyName": "Swiss Franc",
+                "symbol": "NESN"
+            },
+            {
+                "holdingId": "FR0000121972",
+                "name": "Schneider Electric SE",
+                "securityId": "E0FRA00CLU",
+                "securityType": "E",
+                "weight": 0.8042,
+                "marketValue": 7252115,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "310",
+                "country": "France",
+                "countryId": "FRA",
+                "iSIN": "FR0000121972",
+                "currencyId": "EUR",
+                "currencyName": "Euro",
+                "symbol": "SU"
+            },
+            {
+                "holdingId": "NL0010273215",
+                "name": "ASML Holding NV",
+                "securityId": "E0NLD018RS",
+                "securityType": "E",
+                "weight": 0.73256,
+                "marketValue": 6606092,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "311",
+                "country": "Netherlands",
+                "countryId": "NLD",
+                "iSIN": "NL0010273215",
+                "currencyId": "EUR",
+                "currencyName": "Euro",
+                "symbol": "ASML"
+            },
+            {
+                "holdingId": "02079K305",
+                "name": "Alphabet Inc Class A",
+                "securityId": "E0USA04B8G",
+                "securityType": "E",
+                "weight": 0.72152,
+                "marketValue": 6506539,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "308",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "US02079K3059",
+                "currencyId": "USD",
+                "currencyName": "US Dollar",
+                "symbol": "GOOGL"
+            },
+            {
+                "holdingId": "G8473T100",
+                "name": "Steris PLC",
+                "securityId": "E0USA00DD4",
+                "securityType": "E",
+                "weight": 0.69386,
+                "marketValue": 6257089,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "206",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "IE00BFY8C754",
+                "currencyId": "USD",
+                "currencyName": "US Dollar",
+                "symbol": "STE"
+            },
+            {
+                "holdingId": "883556102",
+                "name": "Thermo Fisher Scientific Inc",
+                "securityId": "E0USA00DXC",
+                "securityType": "E",
+                "weight": 0.67052,
+                "marketValue": 6046629,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "206",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "US8835561023",
+                "currencyId": "USD",
+                "currencyName": "US Dollar",
+                "symbol": "TMO"
+            },
+            {
+                "holdingId": "GB00B082RF11",
+                "name": "Rentokil Initial PLC",
+                "securityId": "E0GBR00C1J",
+                "securityType": "E",
+                "weight": 0.65778,
+                "marketValue": 5931713,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "310",
+                "country": "United Kingdom",
+                "countryId": "GBR",
+                "iSIN": "GB00B082RF11",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling",
+                "symbol": "RTO"
+            },
+            {
+                "holdingId": "194162103",
+                "name": "Colgate-Palmolive Co",
+                "securityId": "E0USA004VZ",
+                "securityType": "E",
+                "weight": 0.64039,
+                "marketValue": 5774862,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "205",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "US1941621039",
+                "currencyId": "USD",
+                "currencyName": "US Dollar",
+                "symbol": "CL"
+            },
+            {
+                "holdingId": "912828YB0",
+                "name": "United States Treasury Notes 1.625%",
+                "securityId": "B00032BR99",
+                "securityType": "BT",
+                "weight": 0.5066,
+                "marketValue": 5696416,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "US912828YB05",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "912828V98",
+                "name": "United States Treasury Notes 2.25%",
+                "securityId": "B0003663V2",
+                "securityType": "BT",
+                "weight": 0.49123,
+                "marketValue": 5523560,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "US912828V988",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "912828J27",
+                "name": "United States Treasury Notes 2%",
+                "securityId": "B0003475OZ",
+                "securityType": "BT",
+                "weight": 0.27419,
+                "marketValue": 3083064,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "US912828J272",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "H3698DDB7",
+                "name": "Credit Suisse Group Funding (Guernsey) Limited 2.75%",
+                "securityId": "B00035S0G2",
+                "securityType": "CT",
+                "weight": 0.19506,
+                "marketValue": 2193390,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Switzerland",
+                "countryId": "CHE",
+                "iSIN": "CH0330938876",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling"
+            },
+            {
+                "holdingId": "N3114HKL7",
+                "name": "Mercedes-Benz International Finance B.V. 1.625%",
+                "securityId": "B00037TEZI",
+                "securityType": "B",
+                "weight": 0.16907,
+                "marketValue": 1901118,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Germany",
+                "countryId": "DEU",
+                "iSIN": "XS2078691636",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling"
+            },
+            {
+                "holdingId": "N22616AR2",
+                "name": "Cooperatieve Rabobank U.A. 3.25%",
+                "securityId": "B00037OES9",
+                "securityType": "B",
+                "weight": 0.1589,
+                "marketValue": 1786684,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Netherlands",
+                "countryId": "NLD",
+                "iSIN": "XS2050933972",
+                "currencyId": "EUR",
+                "currencyName": "Euro"
+            },
+            {
+                "holdingId": "Y72596BU5",
+                "name": "Reliance Industries Ltd. 4.125%",
+                "securityId": "B00034QY1E",
+                "securityType": "B",
+                "weight": 0.15487,
+                "marketValue": 1741424,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "India",
+                "countryId": "IND",
+                "iSIN": "USY72596BU56",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "58507LAS8",
+                "name": "Medtronic Global Holdings SCA 0%",
+                "securityId": "B00038T38H",
+                "securityType": "B",
+                "weight": 0.14849,
+                "marketValue": 1669700,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "XS2238787415",
+                "currencyId": "EUR",
+                "currencyName": "Euro"
+            },
+            {
+                "holdingId": "F2R16UQE9",
+                "name": "Danone SA 0%",
+                "securityId": "B10000KV92",
+                "securityType": "B",
+                "weight": 0.1484,
+                "marketValue": 1668631,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "France",
+                "countryId": "FRA",
+                "iSIN": "FR0014003Q41",
+                "currencyId": "EUR",
+                "currencyName": "Euro"
+            },
+            {
+                "holdingId": "N8765Q3P8",
+                "name": "Toyota Motor Finance (Netherlands) B.V. 0%",
+                "securityId": "B10001CKBO",
+                "securityType": "B",
+                "weight": 0.14788,
+                "marketValue": 1662849,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "XS2400997131",
+                "currencyId": "EUR",
+                "currencyName": "Euro"
+            },
+            {
+                "holdingId": "404280CR8",
+                "name": "HSBC Holdings PLC 1.75%",
+                "securityId": "B10000DEKH",
+                "securityType": "CT",
+                "weight": 0.14577,
+                "marketValue": 1639059,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United Kingdom",
+                "countryId": "GBR",
+                "iSIN": "XS2322315727",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling"
+            },
+            {
+                "holdingId": "U94974LH0",
+                "name": "Wells Fargo & Company 3.473%",
+                "securityId": "B1000252FI",
+                "securityType": "B",
+                "weight": 0.14443,
+                "marketValue": 1624033,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "XS2472602932",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling"
+            },
+            {
+                "holdingId": "42824CBK4",
+                "name": "Hewlett Packard Enterprise Company 1.75%",
+                "securityId": "B00038LMRY",
+                "securityType": "B",
+                "weight": 0.13918,
+                "marketValue": 1564983,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "US42824CBK45",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "E11805N58",
+                "name": "Banco Bilbao Vizcaya Argentaria, S.A. 3.104%",
+                "securityId": "B00038LMS5",
+                "securityType": "B",
+                "weight": 0.13836,
+                "marketValue": 1555750,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Spain",
+                "countryId": "ESP",
+                "iSIN": "XS2206805769",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling"
+            },
+            {
+                "holdingId": "U84258AF6",
+                "name": "Southern Co. 1.875%",
+                "securityId": "B100017S05",
+                "securityType": "CT",
+                "weight": 0.13587,
+                "marketValue": 1527745,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "XS2387675395",
+                "currencyId": "EUR",
+                "currencyName": "Euro"
+            },
+            {
+                "holdingId": "F3R92TAK0",
+                "name": "Electricite de France SA 6%",
+                "securityId": "B00033BM2B",
+                "securityType": "B",
+                "weight": 0.13204,
+                "marketValue": 1484692,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "France",
+                "countryId": "FRA",
+                "iSIN": "FR0011401728",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling"
+            },
+            {
+                "holdingId": "W9T10Z7W9",
+                "name": "Svenska Handelsbanken AB (publ) 4.625%",
+                "securityId": "B10002PZWC",
+                "securityType": "CT",
+                "weight": 0.13187,
+                "marketValue": 1482791,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Sweden",
+                "countryId": "SWE",
+                "iSIN": "XS2523511165",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling"
+            },
+            {
+                "holdingId": "F2276JXM2",
+                "name": "Credit Agricole S.A. 7.5%",
+                "securityId": "B10000P6MZ",
+                "securityType": "CT",
+                "weight": 0.12859,
+                "marketValue": 1445931,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "France",
+                "countryId": "FRA",
+                "iSIN": "XS2353099638",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling"
+            },
+            {
+                "holdingId": "E2R99C7U5",
+                "name": "Banco Santander, S.A. 4.375%",
+                "securityId": "B00037ZDEE",
+                "securityType": "P",
+                "weight": 0.12792,
+                "marketValue": 1438337,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Spain",
+                "countryId": "ESP",
+                "iSIN": "XS2102912966",
+                "currencyId": "EUR",
+                "currencyName": "Euro"
+            },
+            {
+                "holdingId": "D18190PG3",
+                "name": "Deutsche Bank AG 7.125%",
+                "securityId": "B00034ASTW",
+                "securityType": "CT",
+                "weight": 0.12541,
+                "marketValue": 1410156,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Germany",
+                "countryId": "DEU",
+                "iSIN": "XS1071551391",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling"
+            },
+            {
+                "holdingId": "E62705AB9",
+                "name": "EDP-Energias de Portugal SA 2.875%",
+                "securityId": "B00035N9MR",
+                "securityType": "B",
+                "weight": 0.12407,
+                "marketValue": 1395065,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Portugal",
+                "countryId": "PRT",
+                "iSIN": "XS1419664997",
+                "currencyId": "EUR",
+                "currencyName": "Euro"
+            },
+            {
+                "holdingId": "G0809LJC4",
+                "name": "Barclays PLC 9.25%",
+                "securityId": "B10003I7UU",
+                "securityType": "CT",
+                "weight": 0.12314,
+                "marketValue": 1384620,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United Kingdom",
+                "countryId": "GBR",
+                "iSIN": "XS2591803841",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling"
+            },
+            {
+                "holdingId": "G8108WAX4",
+                "name": "Santander UK Group Holdings PLC 7.098%",
+                "securityId": "B100031JKH",
+                "securityType": "B",
+                "weight": 0.12293,
+                "marketValue": 1382262,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United Kingdom",
+                "countryId": "GBR",
+                "iSIN": "XS2555708036",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling"
+            },
+            {
+                "holdingId": "369604BQ5",
+                "name": "General Electric Company 8.19629%",
+                "securityId": "B00035DB6D",
+                "securityType": "P",
+                "weight": 0.12238,
+                "marketValue": 1376137,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "US369604BQ57",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "G55365FZ1",
+                "name": "Lloyds Banking Group PLC 5.125%",
+                "securityId": "B00037UA3U",
+                "securityType": "CT",
+                "weight": 0.1223,
+                "marketValue": 1375223,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United Kingdom",
+                "countryId": "GBR",
+                "iSIN": "XS2080995405",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling"
+            },
+            {
+                "holdingId": "G9376VDX6",
+                "name": "Vodafone Group PLC 8%",
+                "securityId": "B10003VRL4",
+                "securityType": "B",
+                "weight": 0.12094,
+                "marketValue": 1359917,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United Kingdom",
+                "countryId": "GBR",
+                "iSIN": "XS2630493570",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling"
+            },
+            {
+                "holdingId": "G65040AD2",
+                "name": "NGG Finance PLC 5.625%",
+                "securityId": "B00033HFLO",
+                "securityType": "B",
+                "weight": 0.1178,
+                "marketValue": 1324633,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United Kingdom",
+                "countryId": "GBR",
+                "iSIN": "XS0903532090",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling"
+            },
+            {
+                "holdingId": "G0809LHY8",
+                "name": "Barclays PLC 8.407%",
+                "securityId": "B1000300Z7",
+                "securityType": "B",
+                "weight": 0.11709,
+                "marketValue": 1316596,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United Kingdom",
+                "countryId": "GBR",
+                "iSIN": "XS2552367687",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling"
+            },
+            {
+                "holdingId": "G84228FQ6",
+                "name": "Standard Chartered PLC 6.301%",
+                "securityId": "B100039KZX",
+                "securityType": "B",
+                "weight": 0.11572,
+                "marketValue": 1301161,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United Kingdom",
+                "countryId": "GBR",
+                "iSIN": "USG84228FQ64",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "U0R8A1Q26",
+                "name": "Bank of America Corporation 1.776%",
+                "securityId": "B00036AA4A",
+                "securityType": "B",
+                "weight": 0.11501,
+                "marketValue": 1293239,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "XS1602547264",
+                "currencyId": "EUR",
+                "currencyName": "Euro"
+            },
+            {
+                "holdingId": "N30706MT4",
+                "name": "ENEL Finance International N.V. 1%",
+                "securityId": "B00038V6ET",
+                "securityType": "B",
+                "weight": 0.11435,
+                "marketValue": 1285815,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Italy",
+                "countryId": "ITA",
+                "iSIN": "XS2244418609",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling"
+            },
+            {
+                "holdingId": "F105CU4P3",
+                "name": "BNP Paribas SA 7.375%",
+                "securityId": "B100039FZU",
+                "securityType": "CT",
+                "weight": 0.11378,
+                "marketValue": 1279407,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "France",
+                "countryId": "FRA",
+                "iSIN": "FR001400F2H9",
+                "currencyId": "EUR",
+                "currencyName": "Euro"
+            },
+            {
+                "holdingId": "G1279MM29",
+                "name": "BP Capital Markets plc 4.25%",
+                "securityId": "B00038IPE6",
+                "securityType": "B",
+                "weight": 0.11371,
+                "marketValue": 1278620,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United Kingdom",
+                "countryId": "GBR",
+                "iSIN": "XS2193663619",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling"
+            },
+            {
+                "holdingId": "58933YAY1",
+                "name": "Merck & Co., Inc 0.75%",
+                "securityId": "B00038IDGK",
+                "securityType": "B",
+                "weight": 0.1136,
+                "marketValue": 1277332,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "US58933YAY14",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "V6703DAC8",
+                "name": "Network I2I Ltd. 3.975%",
+                "securityId": "B10000AZQZ",
+                "securityType": "B",
+                "weight": 0.1132,
+                "marketValue": 1272871,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "India",
+                "countryId": "IND",
+                "iSIN": "USV6703DAC84",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "G6S17G2E4",
+                "name": "Nationwide Building Society 6.178%",
+                "securityId": "B100034LSM",
+                "securityType": "B",
+                "weight": 0.11262,
+                "marketValue": 1266345,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United Kingdom",
+                "countryId": "GBR",
+                "iSIN": "XS2562898143",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling"
+            },
+            {
+                "holdingId": "N85023T87",
+                "name": "Telefonica Europe B V 4.375%",
+                "securityId": "B00037DXJL",
+                "securityType": "B",
+                "weight": 0.11233,
+                "marketValue": 1263103,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Spain",
+                "countryId": "ESP",
+                "iSIN": "XS1933828433",
+                "currencyId": "EUR",
+                "currencyName": "Euro"
+            },
+            {
+                "holdingId": "N93695TF6",
+                "name": "Volkswagen International Finance N.V. 3.5%",
+                "securityId": "B00038HQMN",
+                "securityType": "B",
+                "weight": 0.11105,
+                "marketValue": 1248655,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Germany",
+                "countryId": "DEU",
+                "iSIN": "XS2187689034",
+                "currencyId": "EUR",
+                "currencyName": "Euro"
+            },
+            {
+                "holdingId": "N7395N3H3",
+                "name": "Repsol International Finance B.V. 4.247%",
+                "securityId": "B00038GXZA",
+                "securityType": "B",
+                "weight": 0.10932,
+                "marketValue": 1229276,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Spain",
+                "countryId": "ESP",
+                "iSIN": "XS2186001314",
+                "currencyId": "EUR",
+                "currencyName": "Euro"
+            },
+            {
+                "holdingId": "37045XCA2",
+                "name": "General Motors Financial Company Inc 5.75%",
+                "securityId": "B00036HCMW",
+                "securityType": "P",
+                "weight": 0.10927,
+                "marketValue": 1228640,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "US37045XCA28",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "F8586SWS2",
+                "name": "Societe Generale S.A. 7.875%",
+                "securityId": "B10003AD44",
+                "securityType": "CT",
+                "weight": 0.10874,
+                "marketValue": 1222742,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "France",
+                "countryId": "FRA",
+                "iSIN": "FR001400F877",
+                "currencyId": "EUR",
+                "currencyName": "Euro"
+            },
+            {
+                "holdingId": "D1T7GBZP4",
+                "name": "Deutsche Bank AG 4%",
+                "securityId": "B1000272UZ",
+                "securityType": "CT",
+                "weight": 0.1078,
+                "marketValue": 1212179,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Germany",
+                "countryId": "DEU",
+                "iSIN": "XS2480050090",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling"
+            },
+            {
+                "holdingId": "G76311AN2",
+                "name": "Rolls-Royce PLC 5.75%",
+                "securityId": "B00038VDKY",
+                "securityType": "B",
+                "weight": 0.10583,
+                "marketValue": 1189945,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United Kingdom",
+                "countryId": "GBR",
+                "iSIN": "XS2244321787",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling"
+            },
+            {
+                "holdingId": "U6831VAA8",
+                "name": "ON Semiconductor Corp. 3.875%",
+                "securityId": "B00038OZW1",
+                "securityType": "B",
+                "weight": 0.10533,
+                "marketValue": 1184324,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "USU6831VAA80",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "N4578ELP1",
+                "name": "ING Groep N.V. 6.25%",
+                "securityId": "B10003G0MW",
+                "securityType": "CT",
+                "weight": 0.10528,
+                "marketValue": 1183861,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Netherlands",
+                "countryId": "NLD",
+                "iSIN": "XS2588986724",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling"
+            },
+            {
+                "holdingId": "92343VFS8",
+                "name": "Verizon Communications Inc. 0.85%",
+                "securityId": "B00038Y21X",
+                "securityType": "B",
+                "weight": 0.10505,
+                "marketValue": 1181253,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "US92343VFS88",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "G7S8MZAA7",
+                "name": "Phoenix Group Holdings PLC 5.625%",
+                "securityId": "B000380P2E",
+                "securityType": "CT",
+                "weight": 0.10024,
+                "marketValue": 1127155,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United Kingdom",
+                "countryId": "GBR",
+                "iSIN": "XS2106524262",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "H42097DK0",
+                "name": "UBS Group AG 4.703%",
+                "securityId": "B10002OF28",
+                "securityType": "CT",
+                "weight": 0.09979,
+                "marketValue": 1122116,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Switzerland",
+                "countryId": "CHE",
+                "iSIN": "USH42097DK09",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "G4381GAB4",
+                "name": "Heathrow Finance PLC 5.75%",
+                "securityId": "B00034JI37",
+                "securityType": "B",
+                "weight": 0.09876,
+                "marketValue": 1110480,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United Kingdom",
+                "countryId": "GBR",
+                "iSIN": "XS1120937617",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling"
+            },
+            {
+                "holdingId": "345397B28",
+                "name": "Ford Motor Credit Company LLC 3.375%",
+                "securityId": "B00038XWAM",
+                "securityType": "B",
+                "weight": 0.09874,
+                "marketValue": 1110316,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "US345397B280",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "87264ACZ6",
+                "name": "T-Mobile USA, Inc. 4.95%",
+                "securityId": "B10003EIMU",
+                "securityType": "B",
+                "weight": 0.09859,
+                "marketValue": 1108572,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "US87264ACZ66",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "61747YEC5",
+                "name": "Morgan Stanley 1.512%",
+                "securityId": "B10000YVTJ",
+                "securityType": "B",
+                "weight": 0.09569,
+                "marketValue": 1076004,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "US61747YEC57",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "G4527HHD6",
+                "name": "United Kingdom of Great Britain and Northern Ireland 1.25%",
+                "securityId": "B000367UR0",
+                "securityType": "BT",
+                "weight": 0.09504,
+                "marketValue": 1068662,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United Kingdom",
+                "countryId": "GBR",
+                "iSIN": "GB00BDRHNP05",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling"
+            },
+            {
+                "holdingId": "G5002FAQ9",
+                "name": "Jaguar Land Rover Automotive PLC 6.875%",
+                "securityId": "B00037V4AS",
+                "securityType": "B",
+                "weight": 0.09438,
+                "marketValue": 1061222,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United Kingdom",
+                "countryId": "GBR",
+                "iSIN": "XS2010037682",
+                "currencyId": "EUR",
+                "currencyName": "Euro"
+            },
+            {
+                "holdingId": "E11805B44",
+                "name": "Banco Bilbao Vizcaya Argentaria, S.A. 6%",
+                "securityId": "B00037EO3X",
+                "securityType": "CT",
+                "weight": 0.09256,
+                "marketValue": 1040744,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Spain",
+                "countryId": "ESP",
+                "iSIN": "ES0813211010",
+                "currencyId": "EUR",
+                "currencyName": "Euro"
+            },
+            {
+                "holdingId": "D6629DE84",
+                "name": "RWE AG 6.625%",
+                "securityId": "B0003546VZ",
+                "securityType": "B",
+                "weight": 0.08979,
+                "marketValue": 1009653,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Germany",
+                "countryId": "DEU",
+                "iSIN": "XS1254119750",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "T3666JJZ0",
+                "name": "Eni SpA 2.625%",
+                "securityId": "B00038U9A1",
+                "securityType": "B",
+                "weight": 0.08899,
+                "marketValue": 1000678,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Italy",
+                "countryId": "ITA",
+                "iSIN": "XS2242929532",
+                "currencyId": "EUR",
+                "currencyName": "Euro"
+            },
+            {
+                "holdingId": "931142FD0",
+                "name": "Walmart Inc 4.1%",
+                "securityId": "B10003OA8R",
+                "securityType": "B",
+                "weight": 0.08737,
+                "marketValue": 982433,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "US931142FD05",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "G15820DZ6",
+                "name": "British Telecommunications PLC 1.874%",
+                "securityId": "B0003835LQ",
+                "securityType": "B",
+                "weight": 0.08671,
+                "marketValue": 975017,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United Kingdom",
+                "countryId": "GBR",
+                "iSIN": "XS2119468572",
+                "currencyId": "EUR",
+                "currencyName": "Euro"
+            },
+            {
+                "holdingId": "05565QDU9",
+                "name": "BP Capital Markets plc 4.375%",
+                "securityId": "B00038IKE2",
+                "securityType": "B",
+                "weight": 0.08642,
+                "marketValue": 971784,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United Kingdom",
+                "countryId": "GBR",
+                "iSIN": "US05565QDU94",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "466313AM5",
+                "name": "Jabil Inc 4.25%",
+                "securityId": "B1000251B8",
+                "securityType": "B",
+                "weight": 0.08587,
+                "marketValue": 965521,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "US466313AM58",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "91324PEB4",
+                "name": "UnitedHealth Group Inc. 0.55%",
+                "securityId": "B10000JSXY",
+                "securityType": "B",
+                "weight": 0.08504,
+                "marketValue": 956229,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "US91324PEB40",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "F105CUFP1",
+                "name": "BNP Paribas SA 2.875%",
+                "securityId": "B10001W766",
+                "securityType": "CT",
+                "weight": 0.08461,
+                "marketValue": 951422,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "France",
+                "countryId": "FRA",
+                "iSIN": "FR0014008NE2",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling"
+            },
+            {
+                "holdingId": "91282CFF3",
+                "name": "United States Treasury Notes 2.75%",
+                "securityId": "B10002OEPK",
+                "securityType": "BT",
+                "weight": 0.08333,
+                "marketValue": 937039,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "US91282CFF32",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "G2727ZAG8",
+                "name": "Virgin Money UK PLC 4%",
+                "securityId": "B00037O503",
+                "securityType": "B",
+                "weight": 0.07978,
+                "marketValue": 897081,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United Kingdom",
+                "countryId": "GBR",
+                "iSIN": "XS2049149821",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling"
+            },
+            {
+                "holdingId": "02079KAC1",
+                "name": "Alphabet Inc. 1.998%",
+                "securityId": "B00035S1WL",
+                "securityType": "B",
+                "weight": 0.07965,
+                "marketValue": 895601,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "US02079KAC18",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "68389XCC7",
+                "name": "Oracle Corporation 1.65%",
+                "securityId": "B10000E0RZ",
+                "securityType": "B",
+                "weight": 0.07823,
+                "marketValue": 879666,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "US68389XCC74",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "46647PCJ3",
+                "name": "JPMorgan Chase & Co. 2.069%",
+                "securityId": "B10000KFNL",
+                "securityType": "B",
+                "weight": 0.0778,
+                "marketValue": 874858,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "US46647PCJ30",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "G6422BAA3",
+                "name": "NatWest Group PLC 5.125%",
+                "securityId": "B00038Y3MD",
+                "securityType": "CT",
+                "weight": 0.07577,
+                "marketValue": 851969,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United Kingdom",
+                "countryId": "GBR",
+                "iSIN": "XS2258827034",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling"
+            },
+            {
+                "holdingId": "H42097CL9",
+                "name": "UBS Group AG 3.875%",
+                "securityId": "B10000KW5B",
+                "securityType": "CT",
+                "weight": 0.07173,
+                "marketValue": 806568,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Switzerland",
+                "countryId": "CHE",
+                "iSIN": "USH42097CL90",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "D2553KZM3",
+                "name": "Volkswagen Financial Services N.V. 1.375%",
+                "securityId": "B100017ALK",
+                "securityType": "B",
+                "weight": 0.07075,
+                "marketValue": 795513,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Germany",
+                "countryId": "DEU",
+                "iSIN": "XS2386886803",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling"
+            },
+            {
+                "holdingId": "48128B523",
+                "name": "JPMorgan Chase & Co PRF PERPETUAL USD - Ser MM 1/400th",
+                "securityId": "F00001BBJA",
+                "securityType": "P",
+                "weight": 0.07019,
+                "marketValue": 789200,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "US48128B5232",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "B82095RW0",
+                "name": "Solvay SA 2.5%",
+                "securityId": "B00038PUG5",
+                "securityType": "B",
+                "weight": 0.06891,
+                "marketValue": 774839,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Belgium",
+                "countryId": "BEL",
+                "iSIN": "BE6324000858",
+                "currencyId": "EUR",
+                "currencyName": "Euro"
+            },
+            {
+                "holdingId": "G2018ZBH3",
+                "name": "Centrica PLC 5.25%",
+                "securityId": "B00034WR7S",
+                "securityType": "B",
+                "weight": 0.06821,
+                "marketValue": 766977,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United Kingdom",
+                "countryId": "GBR",
+                "iSIN": "XS1216019585",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling"
+            },
+            {
+                "holdingId": "G0756RAV1",
+                "name": "Bank of Ireland Group PLC 7.5%",
+                "securityId": "B00038EYAF",
+                "securityType": "CT",
+                "weight": 0.06546,
+                "marketValue": 736050,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Ireland",
+                "countryId": "IRL",
+                "iSIN": "XS2178043530",
+                "currencyId": "EUR",
+                "currencyName": "Euro"
+            },
+            {
+                "holdingId": "G6S17GHW8",
+                "name": "Nationwide Building Society 5.875%",
+                "securityId": "B00037P8WA",
+                "securityType": "CT",
+                "weight": 0.06414,
+                "marketValue": 721231,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United Kingdom",
+                "countryId": "GBR",
+                "iSIN": "XS2048709427",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling"
+            },
+            {
+                "holdingId": "06051GFP9",
+                "name": "Bank of America Corporation 3.95%",
+                "securityId": "B00034XJP4",
+                "securityType": "B",
+                "weight": 0.0566,
+                "marketValue": 636440,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "US06051GFP90",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "U04644CR6",
+                "name": "AT&T Inc 2.875%",
+                "securityId": "B000383L2Z",
+                "securityType": "P",
+                "weight": 0.04407,
+                "marketValue": 495505,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "XS2114413565",
+                "currencyId": "EUR",
+                "currencyName": "Euro"
+            },
+            {
+                "holdingId": "D17055JV3",
+                "name": "Commerzbank AG 1.75%",
+                "securityId": "B00038068I",
+                "securityType": "B",
+                "weight": 0.03056,
+                "marketValue": 343586,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Germany",
+                "countryId": "DEU",
+                "iSIN": "XS2106542165",
+                "currencyId": "GBP",
+                "currencyName": "British Pound Sterling"
+            },
+            {
+                "holdingId": "44891CBW2",
+                "name": "Hyundai Capital America 1.5%",
+                "securityId": "B00034UODR",
+                "securityType": "B",
+                "weight": 0.02864,
+                "marketValue": 321986,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "United States",
+                "countryId": "USA",
+                "iSIN": "US44891CBW29",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "5Y TREASURY NOTES USA 29/09/2023- FUT",
+                "name": "US 5 Year Note (CBT) Sept13",
+                "securityId": "",
+                "securityType": "TF",
+                "weight": 0.01698,
+                "marketValue": 190984,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "-",
+                "countryId": "",
+                "iSIN": "",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "X10001AB5",
+                "name": "Allianz SE 3.2%",
+                "securityId": "B1000167ZU",
+                "securityType": "B",
+                "weight": 0.01305,
+                "marketValue": 146773,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Germany",
+                "countryId": "DEU",
+                "iSIN": "USX10001AB51",
+                "currencyId": "USD",
+                "currencyName": "US Dollar"
+            },
+            {
+                "holdingId": "DE000C671E30",
+                "name": "Euro Bobl Future June 23",
+                "securityId": "",
+                "securityType": "TF",
+                "weight": 0.00337,
+                "marketValue": 37868,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Germany",
+                "countryId": "DEU",
+                "iSIN": "DE000C671E30",
+                "currencyId": "EUR",
+                "currencyName": "Euro"
+            }
+        ],
+        "stockOverlap": [
+            {
+                "holdingId": "DE0001030872",
+                "name": "Germany (Federal Republic Of) 0%",
+                "securityId": "B10002PPNY",
+                "securityType": "GS",
+                "performanceId": "",
+                "weight": 6.83941,
+                "marketValue": 15361626,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Germany",
+                "countryId": "DEU",
+                "globalIndustryId": "",
+                "iSIN": "DE0001030872",
+                "currencyId": "EUR",
+                "currencyName": "Euro",
+                "parentHoldings": [
+                    {
+                        "holdingId": "0",
+                        "securityId": "F000015BVI",
+                        "securityType": "FO",
+                        "holdingType": 2,
+                        "universeId": "FOGBR$$ALL",
+                        "name": "Allianz Emerging Markets SRI Bd AT H2SEK",
+                        "iSIN": "LU2185877557",
+                        "portfolioDate": "2023-05-31",
+                        "initialAmount": 5000,
+                        "marketValue": 5000,
+                        "weight": 4.88529,
+                        "currencyId": "SEK",
+                        "ongoingCharge": 1.5,
+                        "fundShareClassId": "F000015BVI",
+                        "returnM12": -3.71,
+                        "returnM36": -9.09,
+                        "contributionReturn": -23.62694,
+                        "eET_SustInvEUTaxonomy_A8": "Y",
+                        "eET_PlannedInvtsSustInvEUTaxonomy": 0.1,
+                        "eET_EUSFDRType": 8,
+                        "eET_PAI_EnergyInefficientExposureConsidered": "N",
+                        "eET_PAI_NegativeAffectConsidered": "Y",
+                        "eET_PAI_EmissionsToWaterConsidered": "Y",
+                        "eET_PAI_HazardousWasteConsidered": "Y",
+                        "eET_PAI_UNGCViolationsConsidered": "Y",
+                        "eET_PAI_SocialViolationsNumberConsidered": "Y",
+                        "eET_PAI_CarbonIntensityConsidered": "N",
+                        "eET_PAI_SocialViolationsPercentageConsidered": "Y",
+                        "userPref1": 1,
+                        "preferenceAligned": true,
+                        "weightInParent": 9.77058
+                    },
+                    {
+                        "holdingId": "1",
+                        "securityId": "F000013M7Y",
+                        "securityType": "FO",
+                        "holdingType": 2,
+                        "universeId": "FOGBR$$ALL",
+                        "name": "Allianz Emerging Markets SRI Bd A H2 EUR",
+                        "iSIN": "LU1958619352",
+                        "portfolioDate": "2023-05-31",
+                        "initialAmount": 2000,
+                        "marketValue": 2000,
+                        "weight": 1.95412,
+                        "currencyId": "EUR",
+                        "starRatingM255": 2,
+                        "morningstarRiskM255": 3,
+                        "ongoingCharge": 1.5,
+                        "fundShareClassId": "F000013M7Y",
+                        "returnM12": 2.69,
+                        "returnM36": -7.01,
+                        "contributionReturn": -3.92777,
+                        "eET_SustInvEUTaxonomy_A8": "Y",
+                        "eET_PlannedInvtsSustInvEUTaxonomy": 0.1,
+                        "eET_EUSFDRType": 8,
+                        "eET_PAI_EnergyInefficientExposureConsidered": "N",
+                        "eET_PAI_NegativeAffectConsidered": "Y",
+                        "eET_PAI_EmissionsToWaterConsidered": "Y",
+                        "eET_PAI_HazardousWasteConsidered": "Y",
+                        "eET_PAI_UNGCViolationsConsidered": "Y",
+                        "eET_PAI_SocialViolationsNumberConsidered": "Y",
+                        "eET_PAI_CarbonIntensityConsidered": "N",
+                        "eET_PAI_SocialViolationsPercentageConsidered": "Y",
+                        "userPref1": 1,
+                        "preferenceAligned": true,
+                        "weightInParent": 9.77058
+                    }
+                ],
+                "sectorKey": null,
+                "symbol": null
+            },
+            {
+                "holdingId": "105756CC2",
+                "name": "Brazil (Federative Republic) 3.875%",
+                "securityId": "B00038GWR5",
+                "securityType": "BT",
+                "performanceId": "",
+                "weight": 3.02191,
+                "marketValue": 6787368,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Brazil",
+                "countryId": "BRA",
+                "globalIndustryId": "",
+                "iSIN": "US105756CC23",
+                "currencyId": "USD",
+                "currencyName": "US Dollar",
+                "parentHoldings": [
+                    {
+                        "holdingId": "0",
+                        "securityId": "F000015BVI",
+                        "securityType": "FO",
+                        "holdingType": 2,
+                        "universeId": "FOGBR$$ALL",
+                        "name": "Allianz Emerging Markets SRI Bd AT H2SEK",
+                        "iSIN": "LU2185877557",
+                        "portfolioDate": "2023-05-31",
+                        "initialAmount": 5000,
+                        "marketValue": 5000,
+                        "weight": 2.15851,
+                        "currencyId": "SEK",
+                        "ongoingCharge": 1.5,
+                        "fundShareClassId": "F000015BVI",
+                        "returnM12": -3.71,
+                        "returnM36": -9.09,
+                        "contributionReturn": -23.62694,
+                        "eET_SustInvEUTaxonomy_A8": "Y",
+                        "eET_PlannedInvtsSustInvEUTaxonomy": 0.1,
+                        "eET_EUSFDRType": 8,
+                        "eET_PAI_EnergyInefficientExposureConsidered": "N",
+                        "eET_PAI_NegativeAffectConsidered": "Y",
+                        "eET_PAI_EmissionsToWaterConsidered": "Y",
+                        "eET_PAI_HazardousWasteConsidered": "Y",
+                        "eET_PAI_UNGCViolationsConsidered": "Y",
+                        "eET_PAI_SocialViolationsNumberConsidered": "Y",
+                        "eET_PAI_CarbonIntensityConsidered": "N",
+                        "eET_PAI_SocialViolationsPercentageConsidered": "Y",
+                        "userPref1": 1,
+                        "preferenceAligned": true,
+                        "weightInParent": 4.31702
+                    },
+                    {
+                        "holdingId": "1",
+                        "securityId": "F000013M7Y",
+                        "securityType": "FO",
+                        "holdingType": 2,
+                        "universeId": "FOGBR$$ALL",
+                        "name": "Allianz Emerging Markets SRI Bd A H2 EUR",
+                        "iSIN": "LU1958619352",
+                        "portfolioDate": "2023-05-31",
+                        "initialAmount": 2000,
+                        "marketValue": 2000,
+                        "weight": 0.8634,
+                        "currencyId": "EUR",
+                        "starRatingM255": 2,
+                        "morningstarRiskM255": 3,
+                        "ongoingCharge": 1.5,
+                        "fundShareClassId": "F000013M7Y",
+                        "returnM12": 2.69,
+                        "returnM36": -7.01,
+                        "contributionReturn": -3.92777,
+                        "eET_SustInvEUTaxonomy_A8": "Y",
+                        "eET_PlannedInvtsSustInvEUTaxonomy": 0.1,
+                        "eET_EUSFDRType": 8,
+                        "eET_PAI_EnergyInefficientExposureConsidered": "N",
+                        "eET_PAI_NegativeAffectConsidered": "Y",
+                        "eET_PAI_EmissionsToWaterConsidered": "Y",
+                        "eET_PAI_HazardousWasteConsidered": "Y",
+                        "eET_PAI_UNGCViolationsConsidered": "Y",
+                        "eET_PAI_SocialViolationsNumberConsidered": "Y",
+                        "eET_PAI_CarbonIntensityConsidered": "N",
+                        "eET_PAI_SocialViolationsPercentageConsidered": "Y",
+                        "userPref1": 1,
+                        "preferenceAligned": true,
+                        "weightInParent": 4.31702
+                    }
+                ],
+                "sectorKey": null,
+                "symbol": null
+            },
+            {
+                "holdingId": "P3579ECF2",
+                "name": "Dominican Republic 4.5%",
+                "securityId": "B0003814KN",
+                "securityType": "BT",
+                "performanceId": "",
+                "weight": 2.51424,
+                "marketValue": 5647094,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Dominican Republic",
+                "countryId": "DOM",
+                "globalIndustryId": "",
+                "iSIN": "USP3579ECF27",
+                "currencyId": "USD",
+                "currencyName": "US Dollar",
+                "parentHoldings": [
+                    {
+                        "holdingId": "0",
+                        "securityId": "F000015BVI",
+                        "securityType": "FO",
+                        "holdingType": 2,
+                        "universeId": "FOGBR$$ALL",
+                        "name": "Allianz Emerging Markets SRI Bd AT H2SEK",
+                        "iSIN": "LU2185877557",
+                        "portfolioDate": "2023-05-31",
+                        "initialAmount": 5000,
+                        "marketValue": 5000,
+                        "weight": 1.79589,
+                        "currencyId": "SEK",
+                        "ongoingCharge": 1.5,
+                        "fundShareClassId": "F000015BVI",
+                        "returnM12": -3.71,
+                        "returnM36": -9.09,
+                        "contributionReturn": -23.62694,
+                        "eET_SustInvEUTaxonomy_A8": "Y",
+                        "eET_PlannedInvtsSustInvEUTaxonomy": 0.1,
+                        "eET_EUSFDRType": 8,
+                        "eET_PAI_EnergyInefficientExposureConsidered": "N",
+                        "eET_PAI_NegativeAffectConsidered": "Y",
+                        "eET_PAI_EmissionsToWaterConsidered": "Y",
+                        "eET_PAI_HazardousWasteConsidered": "Y",
+                        "eET_PAI_UNGCViolationsConsidered": "Y",
+                        "eET_PAI_SocialViolationsNumberConsidered": "Y",
+                        "eET_PAI_CarbonIntensityConsidered": "N",
+                        "eET_PAI_SocialViolationsPercentageConsidered": "Y",
+                        "userPref1": 1,
+                        "preferenceAligned": true,
+                        "weightInParent": 3.59177
+                    },
+                    {
+                        "holdingId": "1",
+                        "securityId": "F000013M7Y",
+                        "securityType": "FO",
+                        "holdingType": 2,
+                        "universeId": "FOGBR$$ALL",
+                        "name": "Allianz Emerging Markets SRI Bd A H2 EUR",
+                        "iSIN": "LU1958619352",
+                        "portfolioDate": "2023-05-31",
+                        "initialAmount": 2000,
+                        "marketValue": 2000,
+                        "weight": 0.71835,
+                        "currencyId": "EUR",
+                        "starRatingM255": 2,
+                        "morningstarRiskM255": 3,
+                        "ongoingCharge": 1.5,
+                        "fundShareClassId": "F000013M7Y",
+                        "returnM12": 2.69,
+                        "returnM36": -7.01,
+                        "contributionReturn": -3.92777,
+                        "eET_SustInvEUTaxonomy_A8": "Y",
+                        "eET_PlannedInvtsSustInvEUTaxonomy": 0.1,
+                        "eET_EUSFDRType": 8,
+                        "eET_PAI_EnergyInefficientExposureConsidered": "N",
+                        "eET_PAI_NegativeAffectConsidered": "Y",
+                        "eET_PAI_EmissionsToWaterConsidered": "Y",
+                        "eET_PAI_HazardousWasteConsidered": "Y",
+                        "eET_PAI_UNGCViolationsConsidered": "Y",
+                        "eET_PAI_SocialViolationsNumberConsidered": "Y",
+                        "eET_PAI_CarbonIntensityConsidered": "N",
+                        "eET_PAI_SocialViolationsPercentageConsidered": "Y",
+                        "userPref1": 1,
+                        "preferenceAligned": true,
+                        "weightInParent": 3.59177
+                    }
+                ],
+                "sectorKey": null,
+                "symbol": null
+            },
+            {
+                "holdingId": "Y7177RAD7",
+                "name": "Azerbaijan (Republic of) 3.5%",
+                "securityId": "B00036GXCO",
+                "securityType": "BT",
+                "performanceId": "",
+                "weight": 2.49848,
+                "marketValue": 5611714,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Azerbaijan",
+                "countryId": "AZE",
+                "globalIndustryId": "",
+                "iSIN": "XS1678623734",
+                "currencyId": "USD",
+                "currencyName": "US Dollar",
+                "parentHoldings": [
+                    {
+                        "holdingId": "0",
+                        "securityId": "F000015BVI",
+                        "securityType": "FO",
+                        "holdingType": 2,
+                        "universeId": "FOGBR$$ALL",
+                        "name": "Allianz Emerging Markets SRI Bd AT H2SEK",
+                        "iSIN": "LU2185877557",
+                        "portfolioDate": "2023-05-31",
+                        "initialAmount": 5000,
+                        "marketValue": 5000,
+                        "weight": 1.78463,
+                        "currencyId": "SEK",
+                        "ongoingCharge": 1.5,
+                        "fundShareClassId": "F000015BVI",
+                        "returnM12": -3.71,
+                        "returnM36": -9.09,
+                        "contributionReturn": -23.62694,
+                        "eET_SustInvEUTaxonomy_A8": "Y",
+                        "eET_PlannedInvtsSustInvEUTaxonomy": 0.1,
+                        "eET_EUSFDRType": 8,
+                        "eET_PAI_EnergyInefficientExposureConsidered": "N",
+                        "eET_PAI_NegativeAffectConsidered": "Y",
+                        "eET_PAI_EmissionsToWaterConsidered": "Y",
+                        "eET_PAI_HazardousWasteConsidered": "Y",
+                        "eET_PAI_UNGCViolationsConsidered": "Y",
+                        "eET_PAI_SocialViolationsNumberConsidered": "Y",
+                        "eET_PAI_CarbonIntensityConsidered": "N",
+                        "eET_PAI_SocialViolationsPercentageConsidered": "Y",
+                        "userPref1": 1,
+                        "preferenceAligned": true,
+                        "weightInParent": 3.56926
+                    },
+                    {
+                        "holdingId": "1",
+                        "securityId": "F000013M7Y",
+                        "securityType": "FO",
+                        "holdingType": 2,
+                        "universeId": "FOGBR$$ALL",
+                        "name": "Allianz Emerging Markets SRI Bd A H2 EUR",
+                        "iSIN": "LU1958619352",
+                        "portfolioDate": "2023-05-31",
+                        "initialAmount": 2000,
+                        "marketValue": 2000,
+                        "weight": 0.71385,
+                        "currencyId": "EUR",
+                        "starRatingM255": 2,
+                        "morningstarRiskM255": 3,
+                        "ongoingCharge": 1.5,
+                        "fundShareClassId": "F000013M7Y",
+                        "returnM12": 2.69,
+                        "returnM36": -7.01,
+                        "contributionReturn": -3.92777,
+                        "eET_SustInvEUTaxonomy_A8": "Y",
+                        "eET_PlannedInvtsSustInvEUTaxonomy": 0.1,
+                        "eET_EUSFDRType": 8,
+                        "eET_PAI_EnergyInefficientExposureConsidered": "N",
+                        "eET_PAI_NegativeAffectConsidered": "Y",
+                        "eET_PAI_EmissionsToWaterConsidered": "Y",
+                        "eET_PAI_HazardousWasteConsidered": "Y",
+                        "eET_PAI_UNGCViolationsConsidered": "Y",
+                        "eET_PAI_SocialViolationsNumberConsidered": "Y",
+                        "eET_PAI_CarbonIntensityConsidered": "N",
+                        "eET_PAI_SocialViolationsPercentageConsidered": "Y",
+                        "userPref1": 1,
+                        "preferenceAligned": true,
+                        "weightInParent": 3.56926
+                    }
+                ],
+                "sectorKey": null,
+                "symbol": null
+            },
+            {
+                "holdingId": "698299BK9",
+                "name": "Panama (Republic of) 3.16%",
+                "securityId": "B00037LFSJ",
+                "securityType": "BT",
+                "performanceId": "",
+                "weight": 2.46245,
+                "marketValue": 5530790,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Panama",
+                "countryId": "PAN",
+                "globalIndustryId": "",
+                "iSIN": "US698299BK97",
+                "currencyId": "USD",
+                "currencyName": "US Dollar",
+                "parentHoldings": [
+                    {
+                        "holdingId": "0",
+                        "securityId": "F000015BVI",
+                        "securityType": "FO",
+                        "holdingType": 2,
+                        "universeId": "FOGBR$$ALL",
+                        "name": "Allianz Emerging Markets SRI Bd AT H2SEK",
+                        "iSIN": "LU2185877557",
+                        "portfolioDate": "2023-05-31",
+                        "initialAmount": 5000,
+                        "marketValue": 5000,
+                        "weight": 1.7589,
+                        "currencyId": "SEK",
+                        "ongoingCharge": 1.5,
+                        "fundShareClassId": "F000015BVI",
+                        "returnM12": -3.71,
+                        "returnM36": -9.09,
+                        "contributionReturn": -23.62694,
+                        "eET_SustInvEUTaxonomy_A8": "Y",
+                        "eET_PlannedInvtsSustInvEUTaxonomy": 0.1,
+                        "eET_EUSFDRType": 8,
+                        "eET_PAI_EnergyInefficientExposureConsidered": "N",
+                        "eET_PAI_NegativeAffectConsidered": "Y",
+                        "eET_PAI_EmissionsToWaterConsidered": "Y",
+                        "eET_PAI_HazardousWasteConsidered": "Y",
+                        "eET_PAI_UNGCViolationsConsidered": "Y",
+                        "eET_PAI_SocialViolationsNumberConsidered": "Y",
+                        "eET_PAI_CarbonIntensityConsidered": "N",
+                        "eET_PAI_SocialViolationsPercentageConsidered": "Y",
+                        "userPref1": 1,
+                        "preferenceAligned": true,
+                        "weightInParent": 3.51779
+                    },
+                    {
+                        "holdingId": "1",
+                        "securityId": "F000013M7Y",
+                        "securityType": "FO",
+                        "holdingType": 2,
+                        "universeId": "FOGBR$$ALL",
+                        "name": "Allianz Emerging Markets SRI Bd A H2 EUR",
+                        "iSIN": "LU1958619352",
+                        "portfolioDate": "2023-05-31",
+                        "initialAmount": 2000,
+                        "marketValue": 2000,
+                        "weight": 0.70356,
+                        "currencyId": "EUR",
+                        "starRatingM255": 2,
+                        "morningstarRiskM255": 3,
+                        "ongoingCharge": 1.5,
+                        "fundShareClassId": "F000013M7Y",
+                        "returnM12": 2.69,
+                        "returnM36": -7.01,
+                        "contributionReturn": -3.92777,
+                        "eET_SustInvEUTaxonomy_A8": "Y",
+                        "eET_PlannedInvtsSustInvEUTaxonomy": 0.1,
+                        "eET_EUSFDRType": 8,
+                        "eET_PAI_EnergyInefficientExposureConsidered": "N",
+                        "eET_PAI_NegativeAffectConsidered": "Y",
+                        "eET_PAI_EmissionsToWaterConsidered": "Y",
+                        "eET_PAI_HazardousWasteConsidered": "Y",
+                        "eET_PAI_UNGCViolationsConsidered": "Y",
+                        "eET_PAI_SocialViolationsNumberConsidered": "Y",
+                        "eET_PAI_CarbonIntensityConsidered": "N",
+                        "eET_PAI_SocialViolationsPercentageConsidered": "Y",
+                        "userPref1": 1,
+                        "preferenceAligned": true,
+                        "weightInParent": 3.51779
+                    }
+                ],
+                "sectorKey": null,
+                "symbol": null
+            },
+            {
+                "holdingId": "Y000WRAE8",
+                "name": "Uzbekistan (The Republic of) 3.9%",
+                "securityId": "B10000Y5YM",
+                "securityType": "BT",
+                "performanceId": "",
+                "weight": 2.43641,
+                "marketValue": 5472304,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Uzbekistan",
+                "countryId": "UZB",
+                "globalIndustryId": "",
+                "iSIN": "XS2365195978",
+                "currencyId": "USD",
+                "currencyName": "US Dollar",
+                "parentHoldings": [
+                    {
+                        "holdingId": "0",
+                        "securityId": "F000015BVI",
+                        "securityType": "FO",
+                        "holdingType": 2,
+                        "universeId": "FOGBR$$ALL",
+                        "name": "Allianz Emerging Markets SRI Bd AT H2SEK",
+                        "iSIN": "LU2185877557",
+                        "portfolioDate": "2023-05-31",
+                        "initialAmount": 5000,
+                        "marketValue": 5000,
+                        "weight": 1.7403,
+                        "currencyId": "SEK",
+                        "ongoingCharge": 1.5,
+                        "fundShareClassId": "F000015BVI",
+                        "returnM12": -3.71,
+                        "returnM36": -9.09,
+                        "contributionReturn": -23.62694,
+                        "eET_SustInvEUTaxonomy_A8": "Y",
+                        "eET_PlannedInvtsSustInvEUTaxonomy": 0.1,
+                        "eET_EUSFDRType": 8,
+                        "eET_PAI_EnergyInefficientExposureConsidered": "N",
+                        "eET_PAI_NegativeAffectConsidered": "Y",
+                        "eET_PAI_EmissionsToWaterConsidered": "Y",
+                        "eET_PAI_HazardousWasteConsidered": "Y",
+                        "eET_PAI_UNGCViolationsConsidered": "Y",
+                        "eET_PAI_SocialViolationsNumberConsidered": "Y",
+                        "eET_PAI_CarbonIntensityConsidered": "N",
+                        "eET_PAI_SocialViolationsPercentageConsidered": "Y",
+                        "userPref1": 1,
+                        "preferenceAligned": true,
+                        "weightInParent": 3.48059
+                    },
+                    {
+                        "holdingId": "1",
+                        "securityId": "F000013M7Y",
+                        "securityType": "FO",
+                        "holdingType": 2,
+                        "universeId": "FOGBR$$ALL",
+                        "name": "Allianz Emerging Markets SRI Bd A H2 EUR",
+                        "iSIN": "LU1958619352",
+                        "portfolioDate": "2023-05-31",
+                        "initialAmount": 2000,
+                        "marketValue": 2000,
+                        "weight": 0.69612,
+                        "currencyId": "EUR",
+                        "starRatingM255": 2,
+                        "morningstarRiskM255": 3,
+                        "ongoingCharge": 1.5,
+                        "fundShareClassId": "F000013M7Y",
+                        "returnM12": 2.69,
+                        "returnM36": -7.01,
+                        "contributionReturn": -3.92777,
+                        "eET_SustInvEUTaxonomy_A8": "Y",
+                        "eET_PlannedInvtsSustInvEUTaxonomy": 0.1,
+                        "eET_EUSFDRType": 8,
+                        "eET_PAI_EnergyInefficientExposureConsidered": "N",
+                        "eET_PAI_NegativeAffectConsidered": "Y",
+                        "eET_PAI_EmissionsToWaterConsidered": "Y",
+                        "eET_PAI_HazardousWasteConsidered": "Y",
+                        "eET_PAI_UNGCViolationsConsidered": "Y",
+                        "eET_PAI_SocialViolationsNumberConsidered": "Y",
+                        "eET_PAI_CarbonIntensityConsidered": "N",
+                        "eET_PAI_SocialViolationsPercentageConsidered": "Y",
+                        "userPref1": 1,
+                        "preferenceAligned": true,
+                        "weightInParent": 3.48059
+                    }
+                ],
+                "sectorKey": null,
+                "symbol": null
+            },
+            {
+                "holdingId": "P3579ECH8",
+                "name": "Dominican Republic 4.875%",
+                "securityId": "B00038SDJI",
+                "securityType": "BT",
+                "performanceId": "",
+                "weight": 2.2791,
+                "marketValue": 5118972,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Dominican Republic",
+                "countryId": "DOM",
+                "globalIndustryId": "",
+                "iSIN": "USP3579ECH82",
+                "currencyId": "USD",
+                "currencyName": "US Dollar",
+                "parentHoldings": [
+                    {
+                        "holdingId": "0",
+                        "securityId": "F000015BVI",
+                        "securityType": "FO",
+                        "holdingType": 2,
+                        "universeId": "FOGBR$$ALL",
+                        "name": "Allianz Emerging Markets SRI Bd AT H2SEK",
+                        "iSIN": "LU2185877557",
+                        "portfolioDate": "2023-05-31",
+                        "initialAmount": 5000,
+                        "marketValue": 5000,
+                        "weight": 1.62793,
+                        "currencyId": "SEK",
+                        "ongoingCharge": 1.5,
+                        "fundShareClassId": "F000015BVI",
+                        "returnM12": -3.71,
+                        "returnM36": -9.09,
+                        "contributionReturn": -23.62694,
+                        "eET_SustInvEUTaxonomy_A8": "Y",
+                        "eET_PlannedInvtsSustInvEUTaxonomy": 0.1,
+                        "eET_EUSFDRType": 8,
+                        "eET_PAI_EnergyInefficientExposureConsidered": "N",
+                        "eET_PAI_NegativeAffectConsidered": "Y",
+                        "eET_PAI_EmissionsToWaterConsidered": "Y",
+                        "eET_PAI_HazardousWasteConsidered": "Y",
+                        "eET_PAI_UNGCViolationsConsidered": "Y",
+                        "eET_PAI_SocialViolationsNumberConsidered": "Y",
+                        "eET_PAI_CarbonIntensityConsidered": "N",
+                        "eET_PAI_SocialViolationsPercentageConsidered": "Y",
+                        "userPref1": 1,
+                        "preferenceAligned": true,
+                        "weightInParent": 3.25586
+                    },
+                    {
+                        "holdingId": "1",
+                        "securityId": "F000013M7Y",
+                        "securityType": "FO",
+                        "holdingType": 2,
+                        "universeId": "FOGBR$$ALL",
+                        "name": "Allianz Emerging Markets SRI Bd A H2 EUR",
+                        "iSIN": "LU1958619352",
+                        "portfolioDate": "2023-05-31",
+                        "initialAmount": 2000,
+                        "marketValue": 2000,
+                        "weight": 0.65117,
+                        "currencyId": "EUR",
+                        "starRatingM255": 2,
+                        "morningstarRiskM255": 3,
+                        "ongoingCharge": 1.5,
+                        "fundShareClassId": "F000013M7Y",
+                        "returnM12": 2.69,
+                        "returnM36": -7.01,
+                        "contributionReturn": -3.92777,
+                        "eET_SustInvEUTaxonomy_A8": "Y",
+                        "eET_PlannedInvtsSustInvEUTaxonomy": 0.1,
+                        "eET_EUSFDRType": 8,
+                        "eET_PAI_EnergyInefficientExposureConsidered": "N",
+                        "eET_PAI_NegativeAffectConsidered": "Y",
+                        "eET_PAI_EmissionsToWaterConsidered": "Y",
+                        "eET_PAI_HazardousWasteConsidered": "Y",
+                        "eET_PAI_UNGCViolationsConsidered": "Y",
+                        "eET_PAI_SocialViolationsNumberConsidered": "Y",
+                        "eET_PAI_CarbonIntensityConsidered": "N",
+                        "eET_PAI_SocialViolationsPercentageConsidered": "Y",
+                        "userPref1": 1,
+                        "preferenceAligned": true,
+                        "weightInParent": 3.25586
+                    }
+                ],
+                "sectorKey": null,
+                "symbol": null
+            },
+            {
+                "holdingId": "X93622GL0",
+                "name": "Hungary (Republic Of) 6.75%",
+                "securityId": "B100039PN0",
+                "securityType": "BT",
+                "performanceId": "",
+                "weight": 2.27748,
+                "marketValue": 5115326,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Hungary",
+                "countryId": "HUN",
+                "globalIndustryId": "",
+                "iSIN": "XS2574267345",
+                "currencyId": "USD",
+                "currencyName": "US Dollar",
+                "parentHoldings": [
+                    {
+                        "holdingId": "0",
+                        "securityId": "F000015BVI",
+                        "securityType": "FO",
+                        "holdingType": 2,
+                        "universeId": "FOGBR$$ALL",
+                        "name": "Allianz Emerging Markets SRI Bd AT H2SEK",
+                        "iSIN": "LU2185877557",
+                        "portfolioDate": "2023-05-31",
+                        "initialAmount": 5000,
+                        "marketValue": 5000,
+                        "weight": 1.62677,
+                        "currencyId": "SEK",
+                        "ongoingCharge": 1.5,
+                        "fundShareClassId": "F000015BVI",
+                        "returnM12": -3.71,
+                        "returnM36": -9.09,
+                        "contributionReturn": -23.62694,
+                        "eET_SustInvEUTaxonomy_A8": "Y",
+                        "eET_PlannedInvtsSustInvEUTaxonomy": 0.1,
+                        "eET_EUSFDRType": 8,
+                        "eET_PAI_EnergyInefficientExposureConsidered": "N",
+                        "eET_PAI_NegativeAffectConsidered": "Y",
+                        "eET_PAI_EmissionsToWaterConsidered": "Y",
+                        "eET_PAI_HazardousWasteConsidered": "Y",
+                        "eET_PAI_UNGCViolationsConsidered": "Y",
+                        "eET_PAI_SocialViolationsNumberConsidered": "Y",
+                        "eET_PAI_CarbonIntensityConsidered": "N",
+                        "eET_PAI_SocialViolationsPercentageConsidered": "Y",
+                        "userPref1": 1,
+                        "preferenceAligned": true,
+                        "weightInParent": 3.25354
+                    },
+                    {
+                        "holdingId": "1",
+                        "securityId": "F000013M7Y",
+                        "securityType": "FO",
+                        "holdingType": 2,
+                        "universeId": "FOGBR$$ALL",
+                        "name": "Allianz Emerging Markets SRI Bd A H2 EUR",
+                        "iSIN": "LU1958619352",
+                        "portfolioDate": "2023-05-31",
+                        "initialAmount": 2000,
+                        "marketValue": 2000,
+                        "weight": 0.65071,
+                        "currencyId": "EUR",
+                        "starRatingM255": 2,
+                        "morningstarRiskM255": 3,
+                        "ongoingCharge": 1.5,
+                        "fundShareClassId": "F000013M7Y",
+                        "returnM12": 2.69,
+                        "returnM36": -7.01,
+                        "contributionReturn": -3.92777,
+                        "eET_SustInvEUTaxonomy_A8": "Y",
+                        "eET_PlannedInvtsSustInvEUTaxonomy": 0.1,
+                        "eET_EUSFDRType": 8,
+                        "eET_PAI_EnergyInefficientExposureConsidered": "N",
+                        "eET_PAI_NegativeAffectConsidered": "Y",
+                        "eET_PAI_EmissionsToWaterConsidered": "Y",
+                        "eET_PAI_HazardousWasteConsidered": "Y",
+                        "eET_PAI_UNGCViolationsConsidered": "Y",
+                        "eET_PAI_SocialViolationsNumberConsidered": "Y",
+                        "eET_PAI_CarbonIntensityConsidered": "N",
+                        "eET_PAI_SocialViolationsPercentageConsidered": "Y",
+                        "userPref1": 1,
+                        "preferenceAligned": true,
+                        "weightInParent": 3.25354
+                    }
+                ],
+                "sectorKey": null,
+                "symbol": null
+            },
+            {
+                "holdingId": "455780CQ7",
+                "name": "Indonesia (Republic of) 2.85%",
+                "securityId": "B00037YCGE",
+                "securityType": "BT",
+                "performanceId": "",
+                "weight": 2.19404,
+                "marketValue": 4927906,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Indonesia",
+                "countryId": "IDN",
+                "globalIndustryId": "",
+                "iSIN": "US455780CQ75",
+                "currencyId": "USD",
+                "currencyName": "US Dollar",
+                "parentHoldings": [
+                    {
+                        "holdingId": "0",
+                        "securityId": "F000015BVI",
+                        "securityType": "FO",
+                        "holdingType": 2,
+                        "universeId": "FOGBR$$ALL",
+                        "name": "Allianz Emerging Markets SRI Bd AT H2SEK",
+                        "iSIN": "LU2185877557",
+                        "portfolioDate": "2023-05-31",
+                        "initialAmount": 5000,
+                        "marketValue": 5000,
+                        "weight": 1.56717,
+                        "currencyId": "SEK",
+                        "ongoingCharge": 1.5,
+                        "fundShareClassId": "F000015BVI",
+                        "returnM12": -3.71,
+                        "returnM36": -9.09,
+                        "contributionReturn": -23.62694,
+                        "eET_SustInvEUTaxonomy_A8": "Y",
+                        "eET_PlannedInvtsSustInvEUTaxonomy": 0.1,
+                        "eET_EUSFDRType": 8,
+                        "eET_PAI_EnergyInefficientExposureConsidered": "N",
+                        "eET_PAI_NegativeAffectConsidered": "Y",
+                        "eET_PAI_EmissionsToWaterConsidered": "Y",
+                        "eET_PAI_HazardousWasteConsidered": "Y",
+                        "eET_PAI_UNGCViolationsConsidered": "Y",
+                        "eET_PAI_SocialViolationsNumberConsidered": "Y",
+                        "eET_PAI_CarbonIntensityConsidered": "N",
+                        "eET_PAI_SocialViolationsPercentageConsidered": "Y",
+                        "userPref1": 1,
+                        "preferenceAligned": true,
+                        "weightInParent": 3.13434
+                    },
+                    {
+                        "holdingId": "1",
+                        "securityId": "F000013M7Y",
+                        "securityType": "FO",
+                        "holdingType": 2,
+                        "universeId": "FOGBR$$ALL",
+                        "name": "Allianz Emerging Markets SRI Bd A H2 EUR",
+                        "iSIN": "LU1958619352",
+                        "portfolioDate": "2023-05-31",
+                        "initialAmount": 2000,
+                        "marketValue": 2000,
+                        "weight": 0.62687,
+                        "currencyId": "EUR",
+                        "starRatingM255": 2,
+                        "morningstarRiskM255": 3,
+                        "ongoingCharge": 1.5,
+                        "fundShareClassId": "F000013M7Y",
+                        "returnM12": 2.69,
+                        "returnM36": -7.01,
+                        "contributionReturn": -3.92777,
+                        "eET_SustInvEUTaxonomy_A8": "Y",
+                        "eET_PlannedInvtsSustInvEUTaxonomy": 0.1,
+                        "eET_EUSFDRType": 8,
+                        "eET_PAI_EnergyInefficientExposureConsidered": "N",
+                        "eET_PAI_NegativeAffectConsidered": "Y",
+                        "eET_PAI_EmissionsToWaterConsidered": "Y",
+                        "eET_PAI_HazardousWasteConsidered": "Y",
+                        "eET_PAI_UNGCViolationsConsidered": "Y",
+                        "eET_PAI_SocialViolationsNumberConsidered": "Y",
+                        "eET_PAI_CarbonIntensityConsidered": "N",
+                        "eET_PAI_SocialViolationsPercentageConsidered": "Y",
+                        "userPref1": 1,
+                        "preferenceAligned": true,
+                        "weightInParent": 3.13434
+                    }
+                ],
+                "sectorKey": null,
+                "symbol": null
+            },
+            {
+                "holdingId": "470160CB6",
+                "name": "Jamaica (Government of) 7.875%",
+                "securityId": "B000353YUB",
+                "securityType": "BT",
+                "performanceId": "",
+                "weight": 2.12076,
+                "marketValue": 4763330,
+                "sector": "-",
+                "sectorId": "",
+                "globalSectorId": "",
+                "country": "Jamaica",
+                "countryId": "JAM",
+                "globalIndustryId": "",
+                "iSIN": "US470160CB63",
+                "currencyId": "USD",
+                "currencyName": "US Dollar",
+                "parentHoldings": [
+                    {
+                        "holdingId": "0",
+                        "securityId": "F000015BVI",
+                        "securityType": "FO",
+                        "holdingType": 2,
+                        "universeId": "FOGBR$$ALL",
+                        "name": "Allianz Emerging Markets SRI Bd AT H2SEK",
+                        "iSIN": "LU2185877557",
+                        "portfolioDate": "2023-05-31",
+                        "initialAmount": 5000,
+                        "marketValue": 5000,
+                        "weight": 1.51483,
+                        "currencyId": "SEK",
+                        "ongoingCharge": 1.5,
+                        "fundShareClassId": "F000015BVI",
+                        "returnM12": -3.71,
+                        "returnM36": -9.09,
+                        "contributionReturn": -23.62694,
+                        "eET_SustInvEUTaxonomy_A8": "Y",
+                        "eET_PlannedInvtsSustInvEUTaxonomy": 0.1,
+                        "eET_EUSFDRType": 8,
+                        "eET_PAI_EnergyInefficientExposureConsidered": "N",
+                        "eET_PAI_NegativeAffectConsidered": "Y",
+                        "eET_PAI_EmissionsToWaterConsidered": "Y",
+                        "eET_PAI_HazardousWasteConsidered": "Y",
+                        "eET_PAI_UNGCViolationsConsidered": "Y",
+                        "eET_PAI_SocialViolationsNumberConsidered": "Y",
+                        "eET_PAI_CarbonIntensityConsidered": "N",
+                        "eET_PAI_SocialViolationsPercentageConsidered": "Y",
+                        "userPref1": 1,
+                        "preferenceAligned": true,
+                        "weightInParent": 3.02966
+                    },
+                    {
+                        "holdingId": "1",
+                        "securityId": "F000013M7Y",
+                        "securityType": "FO",
+                        "holdingType": 2,
+                        "universeId": "FOGBR$$ALL",
+                        "name": "Allianz Emerging Markets SRI Bd A H2 EUR",
+                        "iSIN": "LU1958619352",
+                        "portfolioDate": "2023-05-31",
+                        "initialAmount": 2000,
+                        "marketValue": 2000,
+                        "weight": 0.60593,
+                        "currencyId": "EUR",
+                        "starRatingM255": 2,
+                        "morningstarRiskM255": 3,
+                        "ongoingCharge": 1.5,
+                        "fundShareClassId": "F000013M7Y",
+                        "returnM12": 2.69,
+                        "returnM36": -7.01,
+                        "contributionReturn": -3.92777,
+                        "eET_SustInvEUTaxonomy_A8": "Y",
+                        "eET_PlannedInvtsSustInvEUTaxonomy": 0.1,
+                        "eET_EUSFDRType": 8,
+                        "eET_PAI_EnergyInefficientExposureConsidered": "N",
+                        "eET_PAI_NegativeAffectConsidered": "Y",
+                        "eET_PAI_EmissionsToWaterConsidered": "Y",
+                        "eET_PAI_HazardousWasteConsidered": "Y",
+                        "eET_PAI_UNGCViolationsConsidered": "Y",
+                        "eET_PAI_SocialViolationsNumberConsidered": "Y",
+                        "eET_PAI_CarbonIntensityConsidered": "N",
+                        "eET_PAI_SocialViolationsPercentageConsidered": "Y",
+                        "userPref1": 1,
+                        "preferenceAligned": true,
+                        "weightInParent": 3.02966
+                    }
+                ],
+                "sectorKey": null,
+                "symbol": null
+            }
+        ],
+        "preferenceAlignedPercentage": "70.0"
+    },
+    "assetAllocation": {
+        "portfolio": [
+            {
+                "key": "1",
+                "long": 19.58694,
+                "net": 19.58694,
+                "short": 0
+            },
+            {
+                "key": "2",
+                "long": 71.52405,
+                "net": 71.50021,
+                "short": 0.02385
+            },
+            {
+                "key": "3",
+                "long": 97.34989,
+                "net": 8.43902,
+                "short": 88.91087
+            },
+            {
+                "key": "4",
+                "long": 0.47382,
+                "net": 0.47382,
+                "short": 0
+            },
+            {
+                "key": "99",
+                "long": 0,
+                "net": 0.00001,
+                "short": 0
+            }
+        ],
+        "benchmark": [
+            {
+                "key": "1",
+                "long": 95.53553,
+                "net": 95.43379,
+                "short": 0.10174
+            },
+            {
+                "key": "2",
+                "long": 0.03645,
+                "net": 0.01953,
+                "short": 0.01692
+            },
+            {
+                "key": "3",
+                "long": 6.76951,
+                "net": -1.68219,
+                "short": 8.4517
+            },
+            {
+                "key": "4",
+                "long": 6.27779,
+                "net": 6.22889,
+                "short": 0.0489
+            },
+            {
+                "key": "99",
+                "long": 0,
+                "net": -0.00002,
+                "short": 0
+            }
+        ]
+    },
+    "performanceGraph": {
+        "portfolio": [
+            [
+                "2013-01-31",
+                8.38551
+            ],
+            [
+                "2013-02-28",
+                4.07197
+            ],
+            [
+                "2013-03-31",
+                3.00273
+            ],
+            [
+                "2013-04-30",
+                -0.08834
+            ],
+            [
+                "2013-05-31",
+                3.62511
+            ],
+            [
+                "2013-06-30",
+                -2.98635
+            ],
+            [
+                "2013-07-31",
+                3.69393
+            ],
+            [
+                "2013-08-31",
+                -3.39271
+            ],
+            [
+                "2013-09-30",
+                0.67996
+            ],
+            [
+                "2013-10-31",
+                4.31718
+            ],
+            [
+                "2013-11-30",
+                0.16892
+            ],
+            [
+                "2013-12-31",
+                -0.16863
+            ],
+            [
+                "2014-01-31",
+                -4.81419
+            ],
+            [
+                "2014-02-28",
+                4.34783
+            ],
+            [
+                "2014-03-31",
+                -0.77795
+            ],
+            [
+                "2014-04-30",
+                0.21284
+            ],
+            [
+                "2014-05-31",
+                1.82488
+            ],
+            [
+                "2014-06-30",
+                0.27791
+            ],
+            [
+                "2014-07-31",
+                -0.92011
+            ],
+            [
+                "2014-08-31",
+                2.16198
+            ],
+            [
+                "2014-09-30",
+                -0.14691
+            ],
+            [
+                "2014-10-31",
+                1.40516
+            ],
+            [
+                "2014-11-30",
+                3.01635
+            ],
+            [
+                "2014-12-31",
+                -1.196
+            ],
+            [
+                "2015-01-31",
+                2.30944
+            ],
+            [
+                "2015-02-28",
+                1.84412
+            ],
+            [
+                "2015-03-31",
+                2.47946
+            ],
+            [
+                "2015-04-30",
+                -0.94037
+            ],
+            [
+                "2015-05-31",
+                1.54941
+            ],
+            [
+                "2015-06-30",
+                -3.97464
+            ],
+            [
+                "2015-07-31",
+                0.62173
+            ],
+            [
+                "2015-08-31",
+                -3.32179
+            ],
+            [
+                "2015-09-30",
+                -2.86675
+            ],
+            [
+                "2015-10-31",
+                5.28827
+            ],
+            [
+                "2015-11-30",
+                1.35822
+            ],
+            [
+                "2015-12-31",
+                -0.50194
+            ],
+            [
+                "2016-01-31",
+                -4.06531
+            ],
+            [
+                "2016-02-29",
+                1.63747
+            ],
+            [
+                "2016-03-31",
+                2.17828
+            ],
+            [
+                "2016-04-30",
+                0.40314
+            ],
+            [
+                "2016-05-31",
+                1.00602
+            ],
+            [
+                "2016-06-30",
+                3.92174
+            ],
+            [
+                "2016-07-31",
+                5.19827
+            ],
+            [
+                "2016-08-31",
+                2.02771
+            ],
+            [
+                "2016-09-30",
+                0.29162
+            ],
+            [
+                "2016-10-31",
+                2.841
+            ],
+            [
+                "2016-11-30",
+                -1.50447
+            ],
+            [
+                "2016-12-31",
+                1.86546
+            ],
+            [
+                "2017-01-31",
+                1.34216
+            ],
+            [
+                "2017-02-28",
+                2.28545
+            ],
+            [
+                "2017-03-31",
+                1.15742
+            ],
+            [
+                "2017-04-30",
+                -1.17603
+            ],
+            [
+                "2017-05-31",
+                2.96424
+            ],
+            [
+                "2017-06-30",
+                0.0061
+            ],
+            [
+                "2017-07-31",
+                -1.16614
+            ],
+            [
+                "2017-08-31",
+                1.35242
+            ],
+            [
+                "2017-09-30",
+                -0.89948
+            ],
+            [
+                "2017-10-31",
+                1.43462
+            ],
+            [
+                "2017-11-30",
+                -0.28938
+            ],
+            [
+                "2017-12-31",
+                1.08754
+            ],
+            [
+                "2018-01-31",
+                -0.48072
+            ],
+            [
+                "2018-02-28",
+                -2.84303
+            ],
+            [
+                "2018-03-31",
+                -3.41547
+            ],
+            [
+                "2018-04-30",
+                1.27732
+            ],
+            [
+                "2018-05-31",
+                0.74392
+            ],
+            [
+                "2018-06-30",
+                0.26113
+            ],
+            [
+                "2018-07-31",
+                3.42534
+            ],
+            [
+                "2018-08-31",
+                0.84193
+            ],
+            [
+                "2018-09-30",
+                -0.42094
+            ],
+            [
+                "2018-10-31",
+                -1.45617
+            ],
+            [
+                "2018-11-30",
+                0.52618
+            ],
+            [
+                "2018-12-31",
+                -4.17395
+            ],
+            [
+                "2019-01-31",
+                1.82298
+            ],
+            [
+                "2019-02-28",
+                2.35182
+            ],
+            [
+                "2019-03-31",
+                2.86694
+            ],
+            [
+                "2019-04-30",
+                1.61438
+            ],
+            [
+                "2019-05-31",
+                -0.23366
+            ],
+            [
+                "2019-06-30",
+                3.56093
+            ],
+            [
+                "2019-07-31",
+                3.24569
+            ],
+            [
+                "2019-08-31",
+                -0.9194
+            ],
+            [
+                "2019-09-30",
+                -1.02766
+            ],
+            [
+                "2019-10-31",
+                -2.13062
+            ],
+            [
+                "2019-11-30",
+                0.7833
+            ],
+            [
+                "2019-12-31",
+                0.6169
+            ],
+            [
+                "2020-01-31",
+                0.49169
+            ],
+            [
+                "2020-02-29",
+                -2.76204
+            ],
+            [
+                "2020-03-31",
+                -8.93153
+            ],
+            [
+                "2020-04-30",
+                4.2159
+            ],
+            [
+                "2020-05-31",
+                5.75777
+            ],
+            [
+                "2020-06-30",
+                2.5663
+            ],
+            [
+                "2020-07-31",
+                2.21691
+            ],
+            [
+                "2020-08-31",
+                0.6413
+            ],
+            [
+                "2020-09-30",
+                -1.1314
+            ],
+            [
+                "2020-10-31",
+                -0.38876
+            ],
+            [
+                "2020-11-30",
+                5.26874
+            ],
+            [
+                "2020-12-31",
+                2.05408
+            ],
+            [
+                "2021-01-31",
+                -2.2487
+            ],
+            [
+                "2021-02-28",
+                -3.6596
+            ],
+            [
+                "2021-03-31",
+                -2.08328
+            ],
+            [
+                "2021-04-30",
+                3.86083
+            ],
+            [
+                "2021-05-31",
+                -0.04836
+            ],
+            [
+                "2021-06-30",
+                0.84132
+            ],
+            [
+                "2021-07-31",
+                -0.52417
+            ],
+            [
+                "2021-08-31",
+                1.64441
+            ],
+            [
+                "2021-09-30",
+                -1.73982
+            ],
+            [
+                "2021-10-31",
+                0.0026
+            ],
+            [
+                "2021-11-30",
+                -1.76247
+            ],
+            [
+                "2021-12-31",
+                0.07653
+            ],
+            [
+                "2022-01-31",
+                -5.45936
+            ],
+            [
+                "2022-02-28",
+                -5.12147
+            ],
+            [
+                "2022-03-31",
+                2.63108
+            ],
+            [
+                "2022-04-30",
+                -5.02543
+            ],
+            [
+                "2022-05-31",
+                -0.07159
+            ],
+            [
+                "2022-06-30",
+                -7.01846
+            ],
+            [
+                "2022-07-31",
+                3.96465
+            ],
+            [
+                "2022-08-31",
+                -0.01789
+            ],
+            [
+                "2022-09-30",
+                -6.19153
+            ],
+            [
+                "2022-10-31",
+                -0.28601
+            ],
+            [
+                "2022-11-30",
+                4.79176
+            ],
+            [
+                "2022-12-31",
+                0.8662
+            ],
+            [
+                "2023-01-31",
+                1.06
+            ],
+            [
+                "2023-02-28",
+                -0.89035
+            ],
+            [
+                "2023-03-31",
+                -0.31012
+            ],
+            [
+                "2023-04-30",
+                0.81711
+            ],
+            [
+                "2023-05-31",
+                -3.59181
+            ]
+        ],
+        "benchmark": [
+            [
+                "1972-01-31",
+                4.22415
+            ],
+            [
+                "1972-02-29",
+                3.85105
+            ],
+            [
+                "1972-03-31",
+                0.66122
+            ],
+            [
+                "1972-04-30",
+                0.9577
+            ],
+            [
+                "1972-05-31",
+                2.80863
+            ],
+            [
+                "1972-06-30",
+                5.54697
+            ],
+            [
+                "1972-07-31",
+                1.85697
+            ],
+            [
+                "1972-08-31",
+                1.35212
+            ],
+            [
+                "1972-09-30",
+                -1.73432
+            ],
+            [
+                "1972-10-31",
+                3.45345
+            ],
+            [
+                "1972-11-30",
+                3.16001
+            ],
+            [
+                "1972-12-31",
+                1.38961
+            ],
+            [
+                "1973-01-31",
+                -1.44206
+            ],
+            [
+                "1973-02-28",
+                2.81018
+            ],
+            [
+                "1973-03-31",
+                -0.24578
+            ],
+            [
+                "1973-04-30",
+                -2.64767
+            ],
+            [
+                "1973-05-31",
+                -0.23848
+            ],
+            [
+                "1973-06-30",
+                6.24646
+            ],
+            [
+                "1973-07-31",
+                5.37774
+            ],
+            [
+                "1973-08-31",
+                -5.32484
+            ],
+            [
+                "1973-09-30",
+                5.02242
+            ],
+            [
+                "1973-10-31",
+                0.83004
+            ],
+            [
+                "1973-11-30",
+                -8.84792
+            ],
+            [
+                "1973-12-31",
+                -1.97364
+            ],
+            [
+                "1974-01-31",
+                3.57312
+            ],
+            [
+                "1974-02-28",
+                0.40351
+            ],
+            [
+                "1974-03-31",
+                -2.09646
+            ],
+            [
+                "1974-04-30",
+                -0.72712
+            ],
+            [
+                "1974-05-31",
+                -5.25551
+            ],
+            [
+                "1974-06-30",
+                -3.43967
+            ],
+            [
+                "1974-07-31",
+                0.18252
+            ],
+            [
+                "1974-08-31",
+                -4.75118
+            ],
+            [
+                "1974-09-30",
+                -6.99023
+            ],
+            [
+                "1974-10-31",
+                7.51247
+            ],
+            [
+                "1974-11-30",
+                4.31745
+            ],
+            [
+                "1974-12-31",
+                0.23844
+            ],
+            [
+                "1975-01-31",
+                10.08028
+            ],
+            [
+                "1975-02-28",
+                7.11047
+            ],
+            [
+                "1975-03-31",
+                0.06214
+            ],
+            [
+                "1975-04-30",
+                5.74363
+            ],
+            [
+                "1975-05-31",
+                3.69708
+            ],
+            [
+                "1975-06-30",
+                7.50902
+            ],
+            [
+                "1975-07-31",
+                -4.28309
+            ],
+            [
+                "1975-08-31",
+                -1.06458
+            ],
+            [
+                "1975-09-30",
+                -0.16646
+            ],
+            [
+                "1975-10-31",
+                3.8577
+            ],
+            [
+                "1975-11-30",
+                3.9737
+            ],
+            [
+                "1975-12-31",
+                1.39631
+            ],
+            [
+                "1976-01-31",
+                4.95544
+            ],
+            [
+                "1976-02-29",
+                0.56301
+            ],
+            [
+                "1976-03-31",
+                7.05868
+            ],
+            [
+                "1976-04-30",
+                3.20583
+            ],
+            [
+                "1976-05-31",
+                2.4432
+            ],
+            [
+                "1976-06-30",
+                1.64526
+            ],
+            [
+                "1976-07-31",
+                -0.90777
+            ],
+            [
+                "1976-08-31",
+                -0.94692
+            ],
+            [
+                "1976-09-30",
+                10.90925
+            ],
+            [
+                "1976-10-31",
+                1.37996
+            ],
+            [
+                "1976-11-30",
+                -1.96213
+            ],
+            [
+                "1976-12-31",
+                2.46454
+            ],
+            [
+                "1977-01-31",
+                -2.98251
+            ],
+            [
+                "1977-02-28",
+                -1.64772
+            ],
+            [
+                "1977-03-31",
+                0.82631
+            ],
+            [
+                "1977-04-30",
+                2.83842
+            ],
+            [
+                "1977-05-31",
+                -0.2792
+            ],
+            [
+                "1977-06-30",
+                2.22493
+            ],
+            [
+                "1977-07-31",
+                -0.53793
+            ],
+            [
+                "1977-08-31",
+                -0.65901
+            ],
+            [
+                "1977-09-30",
+                1.15139
+            ],
+            [
+                "1977-10-31",
+                -3.90222
+            ],
+            [
+                "1977-11-30",
+                3.4814
+            ],
+            [
+                "1977-12-31",
+                -1.52669
+            ],
+            [
+                "1978-01-31",
+                -4.23126
+            ],
+            [
+                "1978-02-28",
+                3.47197
+            ],
+            [
+                "1978-03-31",
+                6.8678
+            ],
+            [
+                "1978-04-30",
+                2.46552
+            ],
+            [
+                "1978-05-31",
+                1.51543
+            ],
+            [
+                "1978-06-30",
+                0.60582
+            ],
+            [
+                "1978-07-31",
+                2.25786
+            ],
+            [
+                "1978-08-31",
+                3.85649
+            ],
+            [
+                "1978-09-30",
+                -0.58586
+            ],
+            [
+                "1978-10-31",
+                -2.90654
+            ],
+            [
+                "1978-11-30",
+                -1.50893
+            ],
+            [
+                "1978-12-31",
+                -0.31038
+            ],
+            [
+                "1979-01-31",
+                2.81632
+            ],
+            [
+                "1979-02-28",
+                -3.3616
+            ],
+            [
+                "1979-03-31",
+                0.89731
+            ],
+            [
+                "1979-04-30",
+                -1.2226
+            ],
+            [
+                "1979-05-31",
+                -2.0181
+            ],
+            [
+                "1979-06-30",
+                -1.48764
+            ],
+            [
+                "1979-07-31",
+                -1.5502
+            ],
+            [
+                "1979-08-31",
+                4.56296
+            ],
+            [
+                "1979-09-30",
+                6.68931
+            ],
+            [
+                "1979-10-31",
+                -2.69436
+            ],
+            [
+                "1979-11-30",
+                -0.4661
+            ],
+            [
+                "1979-12-31",
+                0.7112
+            ],
+            [
+                "1980-01-31",
+                1.93293
+            ],
+            [
+                "1980-02-29",
+                -0.99874
+            ],
+            [
+                "1980-03-31",
+                -8.48728
+            ],
+            [
+                "1980-04-30",
+                4.1852
+            ],
+            [
+                "1980-05-31",
+                1.5817
+            ],
+            [
+                "1980-06-30",
+                3.90357
+            ],
+            [
+                "1980-07-31",
+                3.18652
+            ],
+            [
+                "1980-08-31",
+                -0.84665
+            ],
+            [
+                "1980-09-30",
+                3.59382
+            ],
+            [
+                "1980-10-31",
+                -1.11796
+            ],
+            [
+                "1980-11-30",
+                4.24003
+            ],
+            [
+                "1980-12-31",
+                -4.12291
+            ],
+            [
+                "1981-01-31",
+                -5.35869
+            ],
+            [
+                "1981-02-28",
+                7.85328
+            ],
+            [
+                "1981-03-31",
+                1.53305
+            ],
+            [
+                "1981-04-30",
+                4.9097
+            ],
+            [
+                "1981-05-31",
+                0.48164
+            ],
+            [
+                "1981-06-30",
+                6.74557
+            ],
+            [
+                "1981-07-31",
+                2.16211
+            ],
+            [
+                "1981-08-31",
+                -0.67318
+            ],
+            [
+                "1981-09-30",
+                -2.83252
+            ],
+            [
+                "1981-10-31",
+                0.56246
+            ],
+            [
+                "1981-11-30",
+                1.17745
+            ],
+            [
+                "1981-12-31",
+                0.49873
+            ],
+            [
+                "1982-01-31",
+                -1.76542
+            ],
+            [
+                "1982-02-28",
+                -2.39842
+            ],
+            [
+                "1982-03-31",
+                0.26366
+            ],
+            [
+                "1982-04-30",
+                5.19052
+            ],
+            [
+                "1982-05-31",
+                -1.90708
+            ],
+            [
+                "1982-06-30",
+                -2.32504
+            ],
+            [
+                "1982-07-31",
+                -0.08426
+            ],
+            [
+                "1982-08-31",
+                3.9138
+            ],
+            [
+                "1982-09-30",
+                2.92892
+            ],
+            [
+                "1982-10-31",
+                4.95001
+            ],
+            [
+                "1982-11-30",
+                8.35852
+            ],
+            [
+                "1982-12-31",
+                6.56077
+            ],
+            [
+                "1983-01-31",
+                6.47682
+            ],
+            [
+                "1983-02-28",
+                3.93922
+            ],
+            [
+                "1983-03-31",
+                5.34242
+            ],
+            [
+                "1983-04-30",
+                0.58575
+            ],
+            [
+                "1983-05-31",
+                -3.59255
+            ],
+            [
+                "1983-06-30",
+                8.06753
+            ],
+            [
+                "1983-07-31",
+                0.17789
+            ],
+            [
+                "1983-08-31",
+                -1.07116
+            ],
+            [
+                "1983-09-30",
+                3.36281
+            ],
+            [
+                "1983-10-31",
+                -1.15408
+            ],
+            [
+                "1983-11-30",
+                3.70154
+            ],
+            [
+                "1983-12-31",
+                2.73935
+            ],
+            [
+                "1984-01-31",
+                4.6634
+            ],
+            [
+                "1984-02-29",
+                -4.86741
+            ],
+            [
+                "1984-03-31",
+                6.14808
+            ],
+            [
+                "1984-04-30",
+                0.30064
+            ],
+            [
+                "1984-05-31",
+                -5.41492
+            ],
+            [
+                "1984-06-30",
+                1.1061
+            ],
+            [
+                "1984-07-31",
+                -3.09088
+            ],
+            [
+                "1984-08-31",
+                8.74221
+            ],
+            [
+                "1984-09-30",
+                4.29004
+            ],
+            [
+                "1984-10-31",
+                2.43052
+            ],
+            [
+                "1984-11-30",
+                0.19279
+            ],
+            [
+                "1984-12-31",
+                3.80968
+            ],
+            [
+                "1985-01-31",
+                7.06843
+            ],
+            [
+                "1985-02-28",
+                2.00143
+            ],
+            [
+                "1985-03-31",
+                -6.8744
+            ],
+            [
+                "1985-04-30",
+                0.4808
+            ],
+            [
+                "1985-05-31",
+                1.57888
+            ],
+            [
+                "1985-06-30",
+                0.21711
+            ],
+            [
+                "1985-07-31",
+                -2.89403
+            ],
+            [
+                "1985-08-31",
+                3.20489
+            ],
+            [
+                "1985-09-30",
+                3.10026
+            ],
+            [
+                "1985-10-31",
+                5.33397
+            ],
+            [
+                "1985-11-30",
+                3.47068
+            ],
+            [
+                "1985-12-31",
+                9.91103
+            ],
+            [
+                "1986-01-31",
+                4.41382
+            ],
+            [
+                "1986-02-28",
+                6.11484
+            ],
+            [
+                "1986-03-31",
+                3.03022
+            ],
+            [
+                "1986-04-30",
+                3.96933
+            ],
+            [
+                "1986-05-31",
+                -1.5712
+            ],
+            [
+                "1986-06-30",
+                0.05165
+            ],
+            [
+                "1986-07-31",
+                4.11702
+            ],
+            [
+                "1986-08-31",
+                9.00647
+            ],
+            [
+                "1986-09-30",
+                -1.21833
+            ],
+            [
+                "1986-10-31",
+                2.32137
+            ],
+            [
+                "1986-11-30",
+                2.80728
+            ],
+            [
+                "1986-12-31",
+                -1.37988
+            ],
+            [
+                "1987-01-31",
+                2.74842
+            ],
+            [
+                "1987-02-28",
+                0.60247
+            ],
+            [
+                "1987-03-31",
+                0.35444
+            ],
+            [
+                "1987-04-30",
+                -1.52362
+            ],
+            [
+                "1987-05-31",
+                1.71631
+            ],
+            [
+                "1987-06-30",
+                3.75471
+            ],
+            [
+                "1987-07-31",
+                4.58934
+            ],
+            [
+                "1987-08-31",
+                0.80817
+            ],
+            [
+                "1987-09-30",
+                -0.14907
+            ],
+            [
+                "1987-10-31",
+                -23.71957
+            ],
+            [
+                "1987-11-30",
+                -5.1275
+            ],
+            [
+                "1987-12-31",
+                1.30604
+            ],
+            [
+                "1988-01-31",
+                1.18132
+            ],
+            [
+                "1988-02-29",
+                4.82967
+            ],
+            [
+                "1988-03-31",
+                -3.51861
+            ],
+            [
+                "1988-04-30",
+                1.49806
+            ],
+            [
+                "1988-05-31",
+                -0.19693
+            ],
+            [
+                "1988-06-30",
+                8.30354
+            ],
+            [
+                "1988-07-31",
+                -0.90511
+            ],
+            [
+                "1988-08-31",
+                -1.6721
+            ],
+            [
+                "1988-09-30",
+                2.95896
+            ],
+            [
+                "1988-10-31",
+                0.96152
+            ],
+            [
+                "1988-11-30",
+                -3.35731
+            ],
+            [
+                "1988-12-31",
+                3.55117
+            ],
+            [
+                "1989-01-31",
+                4.60387
+            ],
+            [
+                "1989-02-28",
+                0.67066
+            ],
+            [
+                "1989-03-31",
+                2.71307
+            ],
+            [
+                "1989-04-30",
+                3.60971
+            ],
+            [
+                "1989-05-31",
+                5.67265
+            ],
+            [
+                "1989-06-30",
+                2.55686
+            ],
+            [
+                "1989-07-31",
+                0.87428
+            ],
+            [
+                "1989-08-31",
+                5.37279
+            ],
+            [
+                "1989-09-30",
+                0.73727
+            ],
+            [
+                "1989-10-31",
+                -2.28518
+            ],
+            [
+                "1989-11-30",
+                5.20368
+            ],
+            [
+                "1989-12-31",
+                2.8432
+            ],
+            [
+                "1990-01-31",
+                -5.95799
+            ],
+            [
+                "1990-02-28",
+                -2.49558
+            ],
+            [
+                "1990-03-31",
+                4.35728
+            ],
+            [
+                "1990-04-30",
+                -0.47477
+            ],
+            [
+                "1990-05-31",
+                3.09798
+            ],
+            [
+                "1990-06-30",
+                -1.85255
+            ],
+            [
+                "1990-07-31",
+                -2.94634
+            ],
+            [
+                "1990-08-31",
+                -10.80234
+            ],
+            [
+                "1990-09-30",
+                -6.73618
+            ],
+            [
+                "1990-10-31",
+                1.71809
+            ],
+            [
+                "1990-11-30",
+                -0.52256
+            ],
+            [
+                "1990-12-31",
+                1.02347
+            ],
+            [
+                "1991-01-31",
+                0.10231
+            ],
+            [
+                "1991-02-28",
+                8.81128
+            ],
+            [
+                "1991-03-31",
+                4.42922
+            ],
+            [
+                "1991-04-30",
+                1.94657
+            ],
+            [
+                "1991-05-31",
+                1.67762
+            ],
+            [
+                "1991-06-30",
+                -0.46036
+            ],
+            [
+                "1991-07-31",
+                0.11911
+            ],
+            [
+                "1991-08-31",
+                0.95563
+            ],
+            [
+                "1991-09-30",
+                -1.16357
+            ],
+            [
+                "1991-10-31",
+                0.29574
+            ],
+            [
+                "1991-11-30",
+                -3.89287
+            ],
+            [
+                "1991-12-31",
+                0.70346
+            ],
+            [
+                "1992-01-31",
+                4.56546
+            ],
+            [
+                "1992-02-29",
+                1.82001
+            ],
+            [
+                "1992-03-31",
+                -2.09359
+            ],
+            [
+                "1992-04-30",
+                -0.62315
+            ],
+            [
+                "1992-05-31",
+                0.90216
+            ],
+            [
+                "1992-06-30",
+                -4.60043
+            ],
+            [
+                "1992-07-31",
+                -2.39338
+            ],
+            [
+                "1992-08-31",
+                -2.20677
+            ],
+            [
+                "1992-09-30",
+                10.24293
+            ],
+            [
+                "1992-10-31",
+                9.1473
+            ],
+            [
+                "1992-11-30",
+                3.32875
+            ],
+            [
+                "1992-12-31",
+                0.77016
+            ],
+            [
+                "1993-01-31",
+                2.85831
+            ],
+            [
+                "1993-02-28",
+                5.68462
+            ],
+            [
+                "1993-03-31",
+                -1.22317
+            ],
+            [
+                "1993-04-30",
+                -1.53151
+            ],
+            [
+                "1993-05-31",
+                3.40848
+            ],
+            [
+                "1993-06-30",
+                0.94283
+            ],
+            [
+                "1993-07-31",
+                2.4597
+            ],
+            [
+                "1993-08-31",
+                5.69533
+            ],
+            [
+                "1993-09-30",
+                -0.39979
+            ],
+            [
+                "1993-10-31",
+                3.42839
+            ],
+            [
+                "1993-11-30",
+                -2.97373
+            ],
+            [
+                "1993-12-31",
+                6.68372
+            ],
+            [
+                "1994-01-31",
+                2.8694
+            ],
+            [
+                "1994-02-28",
+                -0.09426
+            ],
+            [
+                "1994-03-31",
+                -2.46176
+            ],
+            [
+                "1994-04-30",
+                -0.33409
+            ],
+            [
+                "1994-05-31",
+                -0.55121
+            ],
+            [
+                "1994-06-30",
+                -2.94239
+            ],
+            [
+                "1994-07-31",
+                3.14506
+            ],
+            [
+                "1994-08-31",
+                2.47635
+            ],
+            [
+                "1994-09-30",
+                -4.91605
+            ],
+            [
+                "1994-10-31",
+                -1.69168
+            ],
+            [
+                "1994-11-30",
+                -0.48814
+            ],
+            [
+                "1994-12-31",
+                0.35397
+            ],
+            [
+                "1995-01-31",
+                -3.58184
+            ],
+            [
+                "1995-02-28",
+                1.50059
+            ],
+            [
+                "1995-03-31",
+                1.4067
+            ],
+            [
+                "1995-04-30",
+                3.23626
+            ],
+            [
+                "1995-05-31",
+                2.17007
+            ],
+            [
+                "1995-06-30",
+                0.88726
+            ],
+            [
+                "1995-07-31",
+                4.26857
+            ],
+            [
+                "1995-08-31",
+                0.83303
+            ],
+            [
+                "1995-09-30",
+                -0.23779
+            ],
+            [
+                "1995-10-31",
+                -1.03752
+            ],
+            [
+                "1995-11-30",
+                4.36182
+            ],
+            [
+                "1995-12-31",
+                1.08871
+            ],
+            [
+                "1996-01-31",
+                4.13603
+            ],
+            [
+                "1996-02-29",
+                0.36261
+            ],
+            [
+                "1996-03-31",
+                1.51628
+            ],
+            [
+                "1996-04-30",
+                3.62354
+            ],
+            [
+                "1996-05-31",
+                -2.0618
+            ],
+            [
+                "1996-06-30",
+                -0.25262
+            ],
+            [
+                "1996-07-31",
+                -3.37714
+            ],
+            [
+                "1996-08-31",
+                1.7132
+            ],
+            [
+                "1996-09-30",
+                1.41414
+            ],
+            [
+                "1996-10-31",
+                -3.43458
+            ],
+            [
+                "1996-11-30",
+                1.14832
+            ],
+            [
+                "1996-12-31",
+                -1.3629
+            ],
+            [
+                "1997-01-31",
+                6.50703
+            ],
+            [
+                "1997-02-28",
+                -0.38772
+            ],
+            [
+                "1997-03-31",
+                -0.68252
+            ],
+            [
+                "1997-04-30",
+                0.59356
+            ],
+            [
+                "1997-05-31",
+                5.30532
+            ],
+            [
+                "1997-06-30",
+                2.21978
+            ],
+            [
+                "1997-07-31",
+                4.77154
+            ],
+            [
+                "1997-08-31",
+                -3.83172
+            ],
+            [
+                "1997-09-30",
+                5.49875
+            ],
+            [
+                "1997-10-31",
+                -8.48551
+            ],
+            [
+                "1997-11-30",
+                0.00164
+            ],
+            [
+                "1997-12-31",
+                2.85291
+            ],
+            [
+                "1998-01-31",
+                3.23637
+            ],
+            [
+                "1998-02-28",
+                5.86895
+            ],
+            [
+                "1998-03-31",
+                2.82097
+            ],
+            [
+                "1998-04-30",
+                1.28073
+            ],
+            [
+                "1998-05-31",
+                3.56239
+            ],
+            [
+                "1998-06-30",
+                -1.40472
+            ],
+            [
+                "1998-07-31",
+                3.06204
+            ],
+            [
+                "1998-08-31",
+                -13.05225
+            ],
+            [
+                "1998-09-30",
+                -3.28605
+            ],
+            [
+                "1998-10-31",
+                7.54441
+            ],
+            [
+                "1998-11-30",
+                8.23914
+            ],
+            [
+                "1998-12-31",
+                2.65847
+            ],
+            [
+                "1999-01-31",
+                2.47436
+            ],
+            [
+                "1999-02-28",
+                -0.08257
+            ],
+            [
+                "1999-03-31",
+                2.353
+            ],
+            [
+                "1999-04-30",
+                3.47175
+            ],
+            [
+                "1999-05-31",
+                -3.20674
+            ],
+            [
+                "1999-06-30",
+                6.05173
+            ],
+            [
+                "1999-07-31",
+                -1.38219
+            ],
+            [
+                "1999-08-31",
+                1.63469
+            ],
+            [
+                "1999-09-30",
+                -3.56664
+            ],
+            [
+                "1999-10-31",
+                3.51685
+            ],
+            [
+                "1999-11-30",
+                9.40709
+            ],
+            [
+                "1999-12-31",
+                6.93383
+            ],
+            [
+                "2000-01-31",
+                -4.04642
+            ],
+            [
+                "2000-02-29",
+                6.26818
+            ],
+            [
+                "2000-03-31",
+                2.18612
+            ],
+            [
+                "2000-04-30",
+                -3.75654
+            ],
+            [
+                "2000-05-31",
+                1.4426
+            ],
+            [
+                "2000-06-30",
+                3.00499
+            ],
+            [
+                "2000-07-31",
+                -1.7489
+            ],
+            [
+                "2000-08-31",
+                5.43437
+            ],
+            [
+                "2000-09-30",
+                -6.28503
+            ],
+            [
+                "2000-10-31",
+                -2.52745
+            ],
+            [
+                "2000-11-30",
+                -2.42998
+            ],
+            [
+                "2000-12-31",
+                -2.45693
+            ],
+            [
+                "2001-01-31",
+                3.86636
+            ],
+            [
+                "2001-02-28",
+                -7.31072
+            ],
+            [
+                "2001-03-31",
+                -6.90901
+            ],
+            [
+                "2001-04-30",
+                6.02924
+            ],
+            [
+                "2001-05-31",
+                -0.85614
+            ],
+            [
+                "2001-06-30",
+                -2.89931
+            ],
+            [
+                "2001-07-31",
+                -3.14503
+            ],
+            [
+                "2001-08-31",
+                -5.25357
+            ],
+            [
+                "2001-09-30",
+                -11.65665
+            ],
+            [
+                "2001-10-31",
+                5.2959
+            ],
+            [
+                "2001-11-30",
+                7.62577
+            ],
+            [
+                "2001-12-31",
+                -0.85674
+            ],
+            [
+                "2002-01-31",
+                -1.71288
+            ],
+            [
+                "2002-02-28",
+                -0.66411
+            ],
+            [
+                "2002-03-31",
+                3.57495
+            ],
+            [
+                "2002-04-30",
+                -4.58998
+            ],
+            [
+                "2002-05-31",
+                0.0358
+            ],
+            [
+                "2002-06-30",
+                -9.28295
+            ],
+            [
+                "2002-07-31",
+                -10.28328
+            ],
+            [
+                "2002-08-31",
+                1.06481
+            ],
+            [
+                "2002-09-30",
+                -10.72935
+            ],
+            [
+                "2002-10-31",
+                6.15543
+            ],
+            [
+                "2002-11-30",
+                5.82078
+            ],
+            [
+                "2002-12-31",
+                -7.24848
+            ],
+            [
+                "2003-01-31",
+                -5.38452
+            ],
+            [
+                "2003-02-28",
+                1.79092
+            ],
+            [
+                "2003-03-31",
+                0.91027
+            ],
+            [
+                "2003-04-30",
+                6.77022
+            ],
+            [
+                "2003-05-31",
+                3.29709
+            ],
+            [
+                "2003-06-30",
+                1.56404
+            ],
+            [
+                "2003-07-31",
+                3.80533
+            ],
+            [
+                "2003-08-31",
+                4.03194
+            ],
+            [
+                "2003-09-30",
+                -2.96032
+            ],
+            [
+                "2003-10-31",
+                2.70349
+            ],
+            [
+                "2003-11-30",
+                0.92985
+            ],
+            [
+                "2003-12-31",
+                1.93848
+            ],
+            [
+                "2004-01-31",
+                0.22718
+            ],
+            [
+                "2004-02-29",
+                -0.38
+            ],
+            [
+                "2004-03-31",
+                0.02675
+            ],
+            [
+                "2004-04-30",
+                1.33071
+            ],
+            [
+                "2004-05-31",
+                -3.3831
+            ],
+            [
+                "2004-06-30",
+                2.91426
+            ],
+            [
+                "2004-07-31",
+                -4.09085
+            ],
+            [
+                "2004-08-31",
+                1.68779
+            ],
+            [
+                "2004-09-30",
+                1.87096
+            ],
+            [
+                "2004-10-31",
+                0.99048
+            ],
+            [
+                "2004-11-30",
+                1.92709
+            ],
+            [
+                "2004-12-31",
+                3.01054
+            ],
+            [
+                "2005-01-31",
+                -0.52856
+            ],
+            [
+                "2005-02-28",
+                2.03198
+            ],
+            [
+                "2005-03-31",
+                -0.91358
+            ],
+            [
+                "2005-04-30",
+                -3.88082
+            ],
+            [
+                "2005-05-31",
+                6.1118
+            ],
+            [
+                "2005-06-30",
+                2.82245
+            ],
+            [
+                "2005-07-31",
+                5.45373
+            ],
+            [
+                "2005-08-31",
+                -1.37443
+            ],
+            [
+                "2005-09-30",
+                4.31575
+            ],
+            [
+                "2005-10-31",
+                -3.80123
+            ],
+            [
+                "2005-11-30",
+                6.29924
+            ],
+            [
+                "2005-12-31",
+                3.47505
+            ],
+            [
+                "2006-01-31",
+                2.17917
+            ],
+            [
+                "2006-02-28",
+                1.45794
+            ],
+            [
+                "2006-03-31",
+                3.24179
+            ],
+            [
+                "2006-04-30",
+                -0.75486
+            ],
+            [
+                "2006-05-31",
+                -6.85248
+            ],
+            [
+                "2006-06-30",
+                0.50515
+            ],
+            [
+                "2006-07-31",
+                -0.41497
+            ],
+            [
+                "2006-08-31",
+                0.41324
+            ],
+            [
+                "2006-09-30",
+                2.53325
+            ],
+            [
+                "2006-10-31",
+                1.53585
+            ],
+            [
+                "2006-11-30",
+                0.1944
+            ],
+            [
+                "2006-12-31",
+                2.80403
+            ],
+            [
+                "2007-01-31",
+                0.52609
+            ],
+            [
+                "2007-02-28",
+                0.13849
+            ],
+            [
+                "2007-03-31",
+                1.39521
+            ],
+            [
+                "2007-04-30",
+                3.00364
+            ],
+            [
+                "2007-05-31",
+                2.95593
+            ],
+            [
+                "2007-06-30",
+                -1.40297
+            ],
+            [
+                "2007-07-31",
+                -2.53625
+            ],
+            [
+                "2007-08-31",
+                -0.86781
+            ],
+            [
+                "2007-09-30",
+                4.75674
+            ],
+            [
+                "2007-10-31",
+                1.52524
+            ],
+            [
+                "2007-11-30",
+                -3.00955
+            ],
+            [
+                "2007-12-31",
+                2.61157
+            ],
+            [
+                "2008-01-31",
+                -8.55207
+            ],
+            [
+                "2008-02-29",
+                2.25611
+            ],
+            [
+                "2008-03-31",
+                -1.59115
+            ],
+            [
+                "2008-04-30",
+                4.56724
+            ],
+            [
+                "2008-05-31",
+                1.7783
+            ],
+            [
+                "2008-06-30",
+                -7.39517
+            ],
+            [
+                "2008-07-31",
+                -2.54199
+            ],
+            [
+                "2008-08-31",
+                4.91548
+            ],
+            [
+                "2008-09-30",
+                -11.64529
+            ],
+            [
+                "2008-10-31",
+                -11.55128
+            ],
+            [
+                "2008-11-30",
+                -0.26136
+            ],
+            [
+                "2008-12-31",
+                11.96702
+            ],
+            [
+                "2009-01-31",
+                -6.97761
+            ],
+            [
+                "2009-02-28",
+                -7.10647
+            ],
+            [
+                "2009-03-31",
+                6.01718
+            ],
+            [
+                "2009-04-30",
+                6.53288
+            ],
+            [
+                "2009-05-31",
+                1.48932
+            ],
+            [
+                "2009-06-30",
+                -2.41831
+            ],
+            [
+                "2009-07-31",
+                6.61954
+            ],
+            [
+                "2009-08-31",
+                5.78106
+            ],
+            [
+                "2009-09-30",
+                6.07662
+            ],
+            [
+                "2009-10-31",
+                -3.67419
+            ],
+            [
+                "2009-11-30",
+                3.53034
+            ],
+            [
+                "2009-12-31",
+                3.16752
+            ],
+            [
+                "2010-01-31",
+                -3.55569
+            ],
+            [
+                "2010-02-28",
+                5.17119
+            ],
+            [
+                "2010-03-31",
+                6.31637
+            ],
+            [
+                "2010-04-30",
+                -0.99604
+            ],
+            [
+                "2010-05-31",
+                -5.57056
+            ],
+            [
+                "2010-06-30",
+                -4.62979
+            ],
+            [
+                "2010-07-31",
+                2.77016
+            ],
+            [
+                "2010-08-31",
+                -1.70026
+            ],
+            [
+                "2010-09-30",
+                7.33683
+            ],
+            [
+                "2010-10-31",
+                2.08852
+            ],
+            [
+                "2010-11-30",
+                -0.49696
+            ],
+            [
+                "2010-12-31",
+                6.71427
+            ],
+            [
+                "2011-01-31",
+                -1.02887
+            ],
+            [
+                "2011-02-28",
+                0.70892
+            ],
+            [
+                "2011-03-31",
+                1.86367
+            ],
+            [
+                "2011-04-30",
+                0.54692
+            ],
+            [
+                "2011-05-31",
+                -1.296
+            ],
+            [
+                "2011-06-30",
+                0.70562
+            ],
+            [
+                "2011-07-31",
+                -3.31765
+            ],
+            [
+                "2011-08-31",
+                -7.19979
+            ],
+            [
+                "2011-09-30",
+                -5.33626
+            ],
+            [
+                "2011-10-31",
+                6.88852
+            ],
+            [
+                "2011-11-30",
+                -2.48831
+            ],
+            [
+                "2011-12-31",
+                0.82519
+            ],
+            [
+                "2012-01-31",
+                3.88956
+            ],
+            [
+                "2012-02-29",
+                3.97288
+            ],
+            [
+                "2012-03-31",
+                0.23656
+            ],
+            [
+                "2012-04-30",
+                -2.62424
+            ],
+            [
+                "2012-05-31",
+                -4.44799
+            ],
+            [
+                "2012-06-30",
+                2.09312
+            ],
+            [
+                "2012-07-31",
+                1.6559
+            ],
+            [
+                "2012-08-31",
+                1.02263
+            ],
+            [
+                "2012-09-30",
+                1.31802
+            ],
+            [
+                "2012-10-31",
+                -0.24984
+            ],
+            [
+                "2012-11-30",
+                1.81189
+            ],
+            [
+                "2012-12-31",
+                0.61021
+            ],
+            [
+                "2013-01-31",
+                7.85687
+            ],
+            [
+                "2013-02-28",
+                3.38706
+            ],
+            [
+                "2013-03-31",
+                1.59961
+            ],
+            [
+                "2013-04-30",
+                0.26803
+            ],
+            [
+                "2013-05-31",
+                3.20564
+            ],
+            [
+                "2013-06-30",
+                -3.30137
+            ],
+            [
+                "2013-07-31",
+                4.92681
+            ],
+            [
+                "2013-08-31",
+                -3.77794
+            ],
+            [
+                "2013-09-30",
+                0.61997
+            ],
+            [
+                "2013-10-31",
+                4.12482
+            ],
+            [
+                "2013-11-30",
+                -0.24473
+            ],
+            [
+                "2013-12-31",
+                0.60011
+            ],
+            [
+                "2014-01-31",
+                -3.04012
+            ],
+            [
+                "2014-02-28",
+                3.13581
+            ],
+            [
+                "2014-03-31",
+                0.32883
+            ],
+            [
+                "2014-04-30",
+                -0.71212
+            ],
+            [
+                "2014-05-31",
+                2.49912
+            ],
+            [
+                "2014-06-30",
+                -0.37422
+            ],
+            [
+                "2014-07-31",
+                -0.27329
+            ],
+            [
+                "2014-08-31",
+                2.82664
+            ],
+            [
+                "2014-09-30",
+                -0.84359
+            ],
+            [
+                "2014-10-31",
+                1.03247
+            ],
+            [
+                "2014-11-30",
+                4.44211
+            ],
+            [
+                "2014-12-31",
+                -1.39068
+            ],
+            [
+                "2015-01-31",
+                2.17372
+            ],
+            [
+                "2015-02-28",
+                2.30329
+            ],
+            [
+                "2015-03-31",
+                2.48472
+            ],
+            [
+                "2015-04-30",
+                -0.42824
+            ],
+            [
+                "2015-05-31",
+                0.9293
+            ],
+            [
+                "2015-06-30",
+                -5.16383
+            ],
+            [
+                "2015-07-31",
+                1.78463
+            ],
+            [
+                "2015-08-31",
+                -4.92493
+            ],
+            [
+                "2015-09-30",
+                -2.67038
+            ],
+            [
+                "2015-10-31",
+                5.76
+            ],
+            [
+                "2015-11-30",
+                1.56869
+            ],
+            [
+                "2015-12-31",
+                0.55798
+            ],
+            [
+                "2016-01-31",
+                -3.46304
+            ],
+            [
+                "2016-02-29",
+                2.05408
+            ],
+            [
+                "2016-03-31",
+                3.55091
+            ],
+            [
+                "2016-04-30",
+                -0.55942
+            ],
+            [
+                "2016-05-31",
+                0.64432
+            ],
+            [
+                "2016-06-30",
+                6.33682
+            ],
+            [
+                "2016-07-31",
+                5.46948
+            ],
+            [
+                "2016-08-31",
+                1.54598
+            ],
+            [
+                "2016-09-30",
+                1.22746
+            ],
+            [
+                "2016-10-31",
+                4.04169
+            ],
+            [
+                "2016-11-30",
+                -1.94121
+            ],
+            [
+                "2016-12-31",
+                3.10067
+            ],
+            [
+                "2017-01-31",
+                0.96207
+            ],
+            [
+                "2017-02-28",
+                3.39127
+            ],
+            [
+                "2017-03-31",
+                0.86632
+            ],
+            [
+                "2017-04-30",
+                -1.24121
+            ],
+            [
+                "2017-05-31",
+                2.9015
+            ],
+            [
+                "2017-06-30",
+                -0.33436
+            ],
+            [
+                "2017-07-31",
+                1.05302
+            ],
+            [
+                "2017-08-31",
+                2.26514
+            ],
+            [
+                "2017-09-30",
+                -1.90297
+            ],
+            [
+                "2017-10-31",
+                2.75919
+            ],
+            [
+                "2017-11-30",
+                -0.11846
+            ],
+            [
+                "2017-12-31",
+                1.51906
+            ],
+            [
+                "2018-01-31",
+                0.21975
+            ],
+            [
+                "2018-02-28",
+                -1.10508
+            ],
+            [
+                "2018-03-31",
+                -4.156
+            ],
+            [
+                "2018-04-30",
+                3.14942
+            ],
+            [
+                "2018-05-31",
+                3.14391
+            ],
+            [
+                "2018-06-30",
+                -0.03755
+            ],
+            [
+                "2018-07-31",
+                3.21885
+            ],
+            [
+                "2018-08-31",
+                1.3627
+            ],
+            [
+                "2018-09-30",
+                -0.22844
+            ],
+            [
+                "2018-10-31",
+                -6.16774
+            ],
+            [
+                "2018-11-30",
+                1.21601
+            ],
+            [
+                "2018-12-31",
+                -6.79893
+            ],
+            [
+                "2019-01-31",
+                4.16384
+            ],
+            [
+                "2019-02-28",
+                1.74372
+            ],
+            [
+                "2019-03-31",
+                2.68603
+            ],
+            [
+                "2019-04-30",
+                3.25785
+            ],
+            [
+                "2019-05-31",
+                -2.15555
+            ],
+            [
+                "2019-06-30",
+                4.83409
+            ],
+            [
+                "2019-07-31",
+                4.2302
+            ],
+            [
+                "2019-08-31",
+                -2.20881
+            ],
+            [
+                "2019-09-30",
+                0.37908
+            ],
+            [
+                "2019-10-31",
+                -2.11654
+            ],
+            [
+                "2019-11-30",
+                2.48863
+            ],
+            [
+                "2019-12-31",
+                0.65125
+            ],
+            [
+                "2020-01-31",
+                -0.41295
+            ],
+            [
+                "2020-02-29",
+                -5.26584
+            ],
+            [
+                "2020-03-31",
+                -10.52877
+            ],
+            [
+                "2020-04-30",
+                8.30474
+            ],
+            [
+                "2020-05-31",
+                6.31663
+            ],
+            [
+                "2020-06-30",
+                3.09458
+            ],
+            [
+                "2020-07-31",
+                -0.80592
+            ],
+            [
+                "2020-08-31",
+                3.57247
+            ],
+            [
+                "2020-09-30",
+                0.28769
+            ],
+            [
+                "2020-10-31",
+                -2.88372
+            ],
+            [
+                "2020-11-30",
+                8.5612
+            ],
+            [
+                "2020-12-31",
+                1.84782
+            ],
+            [
+                "2021-01-31",
+                -0.4134
+            ],
+            [
+                "2021-02-28",
+                0.14682
+            ],
+            [
+                "2021-03-31",
+                3.70919
+            ],
+            [
+                "2021-04-30",
+                3.94158
+            ],
+            [
+                "2021-05-31",
+                -0.84259
+            ],
+            [
+                "2021-06-30",
+                3.44836
+            ],
+            [
+                "2021-07-31",
+                0.44344
+            ],
+            [
+                "2021-08-31",
+                3.14662
+            ],
+            [
+                "2021-09-30",
+                -2.2237
+            ],
+            [
+                "2021-10-31",
+                2.67564
+            ],
+            [
+                "2021-11-30",
+                0.94886
+            ],
+            [
+                "2021-12-31",
+                1.62728
+            ],
+            [
+                "2022-01-31",
+                -5.50984
+            ],
+            [
+                "2022-02-28",
+                -2.50193
+            ],
+            [
+                "2022-03-31",
+                4.05523
+            ],
+            [
+                "2022-04-30",
+                -3.26555
+            ],
+            [
+                "2022-05-31",
+                -0.86494
+            ],
+            [
+                "2022-06-30",
+                -4.82576
+            ],
+            [
+                "2022-07-31",
+                5.98191
+            ],
+            [
+                "2022-08-31",
+                0.50109
+            ],
+            [
+                "2022-09-30",
+                -5.15013
+            ],
+            [
+                "2022-10-31",
+                2.37095
+            ],
+            [
+                "2022-11-30",
+                3.74412
+            ],
+            [
+                "2022-12-31",
+                -3.31294
+            ],
+            [
+                "2023-01-31",
+                4.28419
+            ],
+            [
+                "2023-02-28",
+                -0.67479
+            ],
+            [
+                "2023-03-31",
+                0.35063
+            ],
+            [
+                "2023-04-30",
+                -0.01686
+            ],
+            [
+                "2023-05-31",
+                -0.1147
+            ]
+        ],
+        "benchmarkName": "Global Large-Cap Blend Equity"
+    },
+    "trailingReturns": {
+        "portfolio": [
+            {
+                "timePeriod": "M0",
+                "value": -2.95024
+            },
+            {
+                "timePeriod": "M1",
+                "value": -3.59181
+            },
+            {
+                "timePeriod": "M2",
+                "value": -2.80405
+            },
+            {
+                "timePeriod": "M3",
+                "value": -3.10547
+            },
+            {
+                "timePeriod": "M6",
+                "value": -2.1096
+            },
+            {
+                "timePeriod": "M12",
+                "value": -7.25936
+            },
+            {
+                "timePeriod": "M36",
+                "value": -5.16546
+            },
+            {
+                "timePeriod": "M60",
+                "value": -1.33235
+            },
+            {
+                "timePeriod": "M120",
+                "value": 2.26125
+            }
+        ],
+        "benchmark": [
+            {
+                "timePeriod": "M0",
+                "value": 3.80695
+            },
+            {
+                "timePeriod": "M1",
+                "value": -0.1147
+            },
+            {
+                "timePeriod": "M2",
+                "value": -0.13154
+            },
+            {
+                "timePeriod": "M3",
+                "value": 0.21862
+            },
+            {
+                "timePeriod": "M6",
+                "value": 0.36788
+            },
+            {
+                "timePeriod": "M12",
+                "value": 2.49286
+            },
+            {
+                "timePeriod": "M36",
+                "value": 8.14034
+            },
+            {
+                "timePeriod": "M60",
+                "value": 6.21583
+            },
+            {
+                "timePeriod": "M120",
+                "value": 8.13825
+            }
+        ]
+    },
+    "stockRegions": {
+        "portfolio": [
+            {
+                "Value": 58.58419,
+                "Id": "Americas",
+                "ExposureItem": [
+                    {
+                        "Value": 58.58419,
+                        "Id": "NorthAmerica"
+                    },
+                    {
+                        "Value": 0,
+                        "Id": "LatinAmerica"
+                    }
+                ]
+            },
+            {
+                "Value": 5.04229,
+                "Id": "GreaterAsia",
+                "ExposureItem": [
+                    {
+                        "Value": 5.04229,
+                        "Id": "Japan"
+                    },
+                    {
+                        "Value": 0,
+                        "Id": "Australia"
+                    },
+                    {
+                        "Value": 0,
+                        "Id": "AsiaDeveloped"
+                    },
+                    {
+                        "Value": 0,
+                        "Id": "AsiaEmerging"
+                    }
+                ]
+            },
+            {
+                "Value": 21.8709,
+                "Id": "GreaterEurope",
+                "ExposureItem": [
+                    {
+                        "Value": 12.62321,
+                        "Id": "UnitedKingdom"
+                    },
+                    {
+                        "Value": 9.24769,
+                        "Id": "EuropeDeveloped"
+                    },
+                    {
+                        "Value": 0,
+                        "Id": "EuropeEmerging"
+                    },
+                    {
+                        "Value": 0,
+                        "Id": "AfricaMiddleEast"
+                    }
+                ]
+            },
+            {
+                "Value": 0,
+                "Id": "NotClassified"
+            }
+        ],
+        "benchmark": [
+            {
+                "Value": 63.48283,
+                "Id": "Americas",
+                "ExposureItem": [
+                    {
+                        "Value": 63.18364,
+                        "Id": "NorthAmerica"
+                    },
+                    {
+                        "Value": 0.29919,
+                        "Id": "LatinAmerica"
+                    }
+                ]
+            },
+            {
+                "Value": 10.693010000000001,
+                "Id": "GreaterAsia",
+                "ExposureItem": [
+                    {
+                        "Value": 5.54664,
+                        "Id": "Japan"
+                    },
+                    {
+                        "Value": 1.30883,
+                        "Id": "Australia"
+                    },
+                    {
+                        "Value": 2.39879,
+                        "Id": "AsiaDeveloped"
+                    },
+                    {
+                        "Value": 1.43875,
+                        "Id": "AsiaEmerging"
+                    }
+                ]
+            },
+            {
+                "Value": 11.46574,
+                "Id": "GreaterEurope",
+                "ExposureItem": [
+                    {
+                        "Value": 5.82084,
+                        "Id": "UnitedKingdom"
+                    },
+                    {
+                        "Value": 5.6026,
+                        "Id": "EuropeDeveloped"
+                    },
+                    {
+                        "Value": 0.01157,
+                        "Id": "EuropeEmerging"
+                    },
+                    {
+                        "Value": 0.03073,
+                        "Id": "AfricaMiddleEast"
+                    }
+                ]
+            },
+            {
+                "Value": 0.49879,
+                "Id": "NotClassified"
+            }
+        ]
+    },
+    "stockStats": {
+        "portfolio": {
+            "marketCapital": 85749.03034,
+            "prospectiveEarningsYield": 21.54425,
+            "prospectiveBookValueYield": 3.79916,
+            "prospectiveCashFlowYield": 16.57989,
+            "prospectiveRevenueYield": 2.62219
+        },
+        "benchmark": {
+            "equityWeighting": 95.43379,
+            "equityWeightingLong": 95.53553,
+            "marketCapital": 146989.5816,
+            "prospectiveEarningsYield": 16.47316,
+            "prospectiveBookValueYield": 2.77691,
+            "prospectiveCashFlowYield": 10.50889,
+            "prospectiveRevenueYield": 1.76276
+        }
+    },
+    "stockSectors": {
+        "portfolio": {
+            "BasicMaterials": 2.88228,
+            "ConsumerCyclical": 3.35086,
+            "FinancialServices": 10.25464,
+            "CommunicationServices": 6.24003,
+            "Industrials": 25.72035,
+            "Technology": 21.69287,
+            "ConsumerDefensive": 11.61504,
+            "Healthcare": 18.24394
+        },
+        "benchmark": {
+            "BasicMaterials": 3.75824,
+            "ConsumerCyclical": 10.01958,
+            "FinancialServices": 14.87607,
+            "RealEstate": 1.89251,
+            "CommunicationServices": 7.09642,
+            "Energy": 3.31107,
+            "Industrials": 11.03901,
+            "Technology": 22.6319,
+            "ConsumerDefensive": 7.8725,
+            "Healthcare": 14.7166,
+            "Utilities": 2.16065
+        }
+    },
+    "fixedIncomeSectors": {
+        "portfolio": {
+            "Government": 81.69604,
+            "Corporate": 16.3147,
+            "Cash & Equivalents": 4.31312,
+            "Derivative": -2.32386,
+            "undefined": 0
+        },
+        "benchmark": {
+            "Government": 0,
+            "Corporate": 0,
+            "Cash & Equivalents": 0,
+            "Derivative": 0,
+            "undefined": 0
+        }
+    },
+    "fixedIncomeCountry": {
+        "portfolio": {
+            "type": "2",
+            "salePosition": "N",
+            "values": {
+                "99": 0.02376,
+                "aRE": 0.76244,
+                "aZE": 3.4932,
+                "bEN": 2.44543,
+                "bRA": 4.9675,
+                "cHL": 3.3252,
+                "cOL": 3.13219,
+                "cRI": 3.71251,
+                "dOM": 6.70172,
+                "eCU": 1.15533,
+                "gBR": 4.02604,
+                "gTM": 0.5996,
+                "hRV": 1.08386,
+                "hUN": 4.49193,
+                "iDN": 3.06756,
+                "iSR": 2.69097,
+                "jAM": 2.9651,
+                "jOR": 3.81709,
+                "kAZ": 0.77298,
+                "mAR": 2.02961,
+                "mEX": 5.18395,
+                "mNG": 1.54221,
+                "mYS": 0.69185,
+                "pAN": 4.83602,
+                "pER": 1.94069,
+                "pHL": 2.80281,
+                "pOL": 1.23655,
+                "rOU": 3.02507,
+                "sAU": 2.44976,
+                "sRB": 1.77308,
+                "tUR": 2.26805,
+                "uZB": 3.40642,
+                "vNM": 1.41234,
+                "zAF": 2.69425,
+                "cAN": 0.01525,
+                "bEL": 0.09635,
+                "cHE": 0.51254,
+                "dEU": 1.00784,
+                "eSP": 0.63275,
+                "fRA": 1.00129,
+                "iND": 0.3748,
+                "iRL": 0.09152,
+                "iTA": 0.28431,
+                "nLD": 0.36936,
+                "pRT": 0.17347,
+                "sWE": 0.18437,
+                "uSA": 4.72905
+            }
+        },
+        "benchmark": {
+            "type": "2",
+            "salePosition": "N",
+            "values": {
+                "99": 0.90535,
+                "aUS": 2.30453,
+                "bEL": 5.81619,
+                "cAN": 1.15226,
+                "dEU": 7.37997,
+                "eSP": 4.08779,
+                "fRA": 12.89438,
+                "gBR": 2.68861,
+                "iND": 0,
+                "iTA": 9.87654,
+                "lUX": 0.57613,
+                "nLD": 2.30453,
+                "uSA": 50.01372
+            }
+        }
+    },
+    "portfolioSrri": {
+        "type": "MonthEnd",
+        "currencyId": "GBP",
+        "endDate": "2023-05-31",
+        "sRRI": [
+            {
+                "value": 5,
+                "timePeriod": "W260",
+                "frequency": "W",
+                "endDate": "2023-06-23"
+            }
+        ]
+    }
+}

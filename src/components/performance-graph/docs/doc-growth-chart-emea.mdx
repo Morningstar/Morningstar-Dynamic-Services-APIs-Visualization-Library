@@ -24,7 +24,7 @@ import { PORTFOLIO_ANALYSIS_EMEA_URL, DATA_ACCESS_LIBRARY } from "@/external-lin
         min-height: 100%
     }
   `}
-  
+
 </style>
 
 # Performance Graph - Growth of 10k (APAC/EMEA)
@@ -36,7 +36,7 @@ import { PORTFOLIO_ANALYSIS_EMEA_URL, DATA_ACCESS_LIBRARY } from "@/external-lin
 - [Subcomponent Configuration](#subcomponent-configuration)
 
 ## Description
-The Growth of 10K performance graph is illustrates the change in value of an initial $10,000 investment in a financial asset during a given period of time.
+The Growth of 10K performance graph illustrates the change in value of an initial $10,000 investment in a financial asset over a given period of time.
 
 <Canvas withSource="open" withToolbar>
   <Story id="components-performance-graph-growth-of-10k--story-details"></Story>
@@ -110,15 +110,15 @@ window.mstarApisSdk.xray.getPerformanceGraphData({ portfolios: samplePortfolio }
 ### Request Example
 
 ```javascript dark
-https://www.emea-api.morningstar.com/ecint/v1/xray/json?languageId={{languageId}}&portfolioDataPoints={{portfolioDataPoints}}&holdingDataPoints={{holdingDataPoints}}&benchmarkDataPoints={{benchmarkDataPoints}}
+https://www.emea-api.morningstar.com/ecint/v1/xray/v2/json?outputtype=json&languageId={{languageId}}&portfolioDataPoints={{portfolioDataPoints}}&holdingDataPoints={{holdingDataPoints}}&benchmarkDataPoints={{benchmarkDataPoints}}
 
 ```
 ### Request Payload Example
 
 | Query Parameter | Description|Example |
-| :----------- | :--------| :----------- | 
+| :----------- | :--------| :----------- |
 | `languageId` | ISO culture codes. If not provided, defaults to language defined in settings. | `languageId=en-GB` |
-| `portfolioDataPoints` | Comma-separated list of portfolio data points.| `portfolioDataPoints=BenchmarkName,HistoricalPerformanceSeries` | 
+| `portfolioDataPoints` | Comma-separated list of portfolio data points.| `portfolioDataPoints=BenchmarkName,HistoricalPerformanceSeries` |
 | `holdingDataPoints` | Comma-separated list of holding data points.| `HoldingDataPoints=ShowBreakdown` |
 | `benchmarkDataPoints` | Comma-separated list of benchmark data points.| `benchmarkDataPoints=ShowBreakdown,HistoricalPerformanceSeries` |
 
@@ -127,9 +127,9 @@ https://www.emea-api.morningstar.com/ecint/v1/xray/json?languageId={{languageId}
 Data returned by the API must be transformed to a format the component understands.
 <!--
 - [API Response Data Format](#api-response-data-format)
-- [Integration Data Format](#integration-data-format) 
-- [Integration Transformation Operation](#integration-transformation-operation) 
-- [Component Transformed Data Format](#component-transformed-data-format) 
+- [Integration Data Format](#integration-data-format)
+- [Integration Transformation Operation](#integration-transformation-operation)
+- [Component Transformed Data Format](#component-transformed-data-format)
 - [Component Transformation Operation](#component-transformation-operation)
 -->
 ### API Response Data Format
@@ -177,7 +177,7 @@ Data returned by the API must be transformed to a format the component understan
                 [
                     "2012-09-30",
                     5.00531
-                ],                
+                ],
             ]
         },
     ],
@@ -201,7 +201,7 @@ Data returned by the API must be transformed to a format the component understan
                         [
                             "1972-03-31",
                             0.66122
-                        ],                        
+                        ],
                     ]
                 },
             ]

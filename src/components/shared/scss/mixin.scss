@@ -32,6 +32,23 @@
     }
 }
 
+@mixin wal-component-subtitle($darkBorder: false, $bold: true, $noBorder: false) {
+    .subtitle {
+        margin: 0;
+        h3 {
+            @include wal-heading(6, $bold);
+            padding-bottom: map.get($wal, space, '1-and-a-quarter-x');
+        }
+        @if $darkBorder {
+            @include border($wal-color-grey, bottom);
+        } @else if $noBorder {
+            border: none;
+        } @else {
+            @include border($wal-color-regular, bottom);
+        }
+    }
+}
+
 @mixin wal-group-title() {
     .group-title {
         @include border($wal-color-grey, top, 2px);

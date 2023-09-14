@@ -56,7 +56,7 @@ The component is populated with data returned by calls to the [Portfolio X-Ray A
 -->
 ### API Data Access Library
 
-The [Morningstar APIs Data Access Library](https://developer-internal-stg.morningstar.com/web-asset-library/getting-started/api-sdk) is used to fetch data from the API.
+The [Morningstar APIs Data Access Library](https://developer.morningstar.com/web-asset-library/getting-started/api-sdk) is used to fetch data from the API.
 
 ``` javascript dark
 window.mstarApisSdk.xray.getAssetAllocationBreakdown({ portfolios: samplePortfolio });

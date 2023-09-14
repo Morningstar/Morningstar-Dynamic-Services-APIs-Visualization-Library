@@ -227,10 +227,12 @@ function getPortfolioHoldingsData(xrayData) {
         });
         return currStockHolding;
     });
+    const preferenceAlignedPercentage = xrayData?.calculatedDataPoints?.[0].portfolioWeight.userPref1;
     return {
         topHoldings: portfolioHoldings,
         topUnderlyingHoldings: underlyingHoldings,
         stockOverlap: holdingOverlap,
+        preferenceAlignedPercentage
     };
 }
 
@@ -270,11 +272,19 @@ function getPortfolioHoldingsUsData(xrayData) {
     };
 }
 
-function getproductInvolvementData(esgData) {
+function getCarbonScoreData(esgData) {
     return getComponentData(
         esgData,
-        'ESG[0].sustainability.portfolio.productInvolvement',
-        'ESG[0].sustainability.benchmark.productInvolvement',
+        'portfolio.carbonScore',
+        'benchmark.carbonScore',
+    );
+}
+
+function getProductInvolvementData(esgData) {
+    return getComponentData(
+        esgData,
+        'portfolio.productInvolvement',
+        'benchmark.productInvolvement',
     );
 }
 
@@ -521,8 +531,12 @@ function getXrayData(apiData, sections, portfolio) {
                 modelData.portfolioSrri = get(xrayData, 'riskStatistics');
                 break;
             }
+            case 'carbonScore': {
+                modelData.carbonScore = getCarbonScoreData(get(esgData, 'sustainability[0]', {}));
+                break;
+            }
             case 'productInvolvement': {
-                modelData.productInvolvement = getproductInvolvementData(esgData);
+                modelData.productInvolvement = getProductInvolvementData(get(esgData, 'sustainability[0]', {}));
                 break;
             }
             case 'riskScore': {
@@ -541,8 +555,8 @@ function getXrayData(apiData, sections, portfolio) {
                 modelData.stockStats = getStockStatsData(xrayData);
                 break;
             }
-            case 'sustainability': {
-                modelData.sustainability = esgData;
+            case 'esgRisk': {
+                modelData.sustainability = get(esgData, 'ESG[0].sustainability', {});
                 break;
             }
             case 'trailingReturns': {
@@ -625,8 +639,12 @@ function getXrayUsData(apiData, componentsOptions, portfolio) {
                 modelData.portfolioHoldings = getPortfolioHoldingsUsData(portfolioHoldingsData);
                 break;
             }
+            case 'carbonScore': {
+                modelData.carbonScore = getCarbonScoreData(get(esgData, 'sustainability[0]', {}));
+                break;
+            }
             case 'productInvolvement': {
-                modelData.productInvolvement = getproductInvolvementData(esgData);
+                modelData.productInvolvement = getProductInvolvementData(get(esgData, 'sustainability[0]', {}));
                 break;
             }
             case 'riskScore': {
@@ -674,8 +692,8 @@ function getXrayUsData(apiData, componentsOptions, portfolio) {
                 );
                 break;
             }
-            case 'sustainability': {
-                modelData.sustainability = esgData;
+            case 'esgRisk': {
+                modelData.esgRisk = get(esgData, 'sustainability[0]', {});
                 break;
             }
             case 'trailingReturns': {
@@ -701,7 +719,8 @@ export default {
     getPerformanceUsData,
     getPortfolioHoldingsData,
     getPortfolioHoldingsUsData,
-    getproductInvolvementData,
+    getCarbonScoreData,
+    getProductInvolvementData,
     getStockSectorsData,
     getStockSectorsUsData,
     getStockStatsData,

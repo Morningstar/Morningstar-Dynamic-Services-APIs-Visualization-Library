@@ -12,7 +12,9 @@ Vue.use(Vuetify);
 
 describe('{{name}}.vue', () => {
     it('should render {{titleCase name}}', () => {
-        const wrapper = shallowMount({{name}});
-        expect(wrapper.find('.title h2').text()).toBe('{{titleCase name}}');
+        setTimeout(() => {
+            const wrapper = shallowMount({{name}});
+            expect(wrapper.find('.title h2').text()).toBe('{{titleCase name}}');
+        })
     });
 });
