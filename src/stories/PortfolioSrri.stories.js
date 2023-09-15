@@ -6,7 +6,7 @@ import { action } from '@storybook/addon-actions';
 import { get } from 'lodash';
 
 export default {
-    title: 'Components/PortfolioSrri',
+    title: 'Components/Portfolio SRRI',
     component: PortfolioSrri,
     argTypes: {
         modelData: Object,
@@ -37,7 +37,7 @@ const Template = (args, { argTypes, loaded }) => {
 };
 
 export const StoryDetails = Template.bind({});
-StoryDetails.storyName = 'Portfolio Srri';
+StoryDetails.storyName = 'Portfolio SRRI';
 StoryDetails.loaders = [
     async () => ({
         modelData: await window.mstarApisSdk.xray

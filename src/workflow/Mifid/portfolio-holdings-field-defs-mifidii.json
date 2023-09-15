@@ -1,0 +1,31 @@
+{
+  "topHoldings": [
+    {
+      "text": "Security Name",
+      "value": "name"
+    },
+    {
+      "text": "Aligned",
+      "value": "preferenceAligned",
+      "align": "center"
+    },
+    {
+      "text": "Exchange Code",
+      "value": "exchangeCode"
+    },
+    {
+      "text": "Sector",
+      "value": "sector"
+    },
+    {
+      "text": "Weight %",
+      "value": "weight",
+      "align": "end"
+    },
+    {
+      "text": "Contribution %(Since Inception)",
+      "value": "contributionReturn",
+      "align": "end"
+    }
+  ]
+}

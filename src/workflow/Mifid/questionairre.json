@@ -1,0 +1,237 @@
+{
+	"description": "How much of your portfolio should include financial products that meet the EU's definition of sustainable ?",
+	"buttons": [
+		{
+			"text": "See Preferences in Screener",
+			"enabled": true,
+			"value": "screener"
+		},
+		{
+			"text": "See Current Portfolio matches your Preferences",
+			"enabled": true,
+			"value": "xray"
+		}
+	],
+	"questions": [
+		{
+			"id": 1,
+			"text": "EU Taxonomy Alignment",
+			"infoText": "",
+			"componentType": "dropdown",
+			"options": ["Yes Art 8", "Yes Art 9", "No"],
+			"classes": "",
+			"defaultValue": "Yes Art 8",
+			"values": [
+				{
+					"key": "Yes Art 8",
+					"name": "EET_SustInvEUTaxonomy_A8",
+					"op": "in",
+					"value": "Y|I"
+				},
+				{
+					"key": "Yes Art 9",
+					"name": "EET_SustInvEUTaxonomy_A9",
+					"op": "in",
+					"value": "Y|I"
+				},
+				{
+				  "key": "No",
+				  "value": {}
+				}
+			  ]
+		},
+		{
+			"id": 2,
+			"text": "Minimum Portion",
+			"componentType": "slider",
+			"parentId": 1,
+			"options": {
+				"val": 0,
+				"color": "primary"
+			},
+			"value": {
+				"name": "EET_PlannedInvtsSustInvEUTaxonomy",
+				"op": "gt",
+				"value": "0"	
+			},
+			"classes": ""
+		},
+		{
+			"id": 3,
+			"text": "Optional or Exclusive",
+			"defaultValue": "Optional",
+			"parentId": 1,
+			"options": ["Optional", "Exclusive"],
+			"componentType": "dropdown",
+			"classes": ""
+		},
+		{
+			"id": 4,
+			"text": "SFDR Classification",
+			"infoText": "",
+			"componentType": "dropdown",
+			"options": ["Yes", "No"],
+			"classes": "",
+			"defaultValue": "Yes"
+		},
+		{
+			"id": 5,
+			"text": "Type",
+			"options": ["Art 6", "Art 8", "Art 9"],
+			"defaultValue": ["Art 8"],
+			"componentType": "dropdown-multi",
+			"classes": "",
+			"parentId": 4
+		},
+		{
+			"id": 6,
+			"text": "Optional or Exclusive",
+			"defaultValue": "Optional",
+			"options": ["Optional", "Exclusive"],
+			"componentType": "dropdown",
+			"classes": "",
+			"parentId": 4
+		},
+		{
+			"id": 7,
+			"text": "Principal Adverse Indicators",
+			"infoText": "",
+			"componentType": "dropdown",
+			"options": ["Yes", "No"],
+			"classes": {
+				"header": "",
+				"textHeader": "ml-md-0"
+			},
+			"defaultValue": "Yes"
+		},
+		{
+			"id": 8,
+			"text": "Optional or Exclusive",
+			"defaultValue": "Optional",
+			"options": ["Optional", "Exclusive"],
+			"componentType": "dropdown",
+			"classes": "",
+			"parentId": 7
+		},
+		{
+			"id": 9,
+			"text": "Environmental",
+			"options": ["Yes", "No"],
+			"componentType": "dropdown",
+			"classes": "",
+			"defaultValue": "Yes",
+			"parentId": 7
+		},
+		{
+			"id": 10,
+			"text": "Energy",
+			"options": ["Yes", "No"],
+			"componentType": "dropdown",
+			"defaultValue": "Yes",
+			"value": "EET_PAI_EnergyInefficientExposureConsidered",
+			"classes": {
+				"header": "ml-3",
+				"component": "ml-n3"
+			},
+			"parentId": 9
+		},
+		{
+			"id": 11,
+			"text": "Biodiversity",
+			"options": ["Yes", "No"],
+			"componentType": "dropdown",
+			"defaultValue": "Yes",
+			"value": "EET_PAI_NegativeAffectConsidered",
+			"classes": {
+				"header": "ml-3",
+				"component": "ml-n3"
+			},
+			"parentId": 9
+		},
+		{
+			"id": 12,
+			"text": "Water",
+			"options": ["Yes", "No"],
+			"componentType": "dropdown",
+			"defaultValue": "Yes",
+			"value": "EET_PAI_EmissionsToWaterConsidered",
+			"classes": {
+				"header": "ml-3",
+				"component": "ml-n3"
+			},
+			"parentId": 9
+		},
+		{
+			"id": 13,
+			"text": "Waste",
+			"options": ["Yes", "No"],
+			"componentType": "dropdown",
+			"defaultValue": "Yes",
+			"parentId": 9,
+			"value": "EET_PAI_HazardousWasteConsidered",
+			"classes": {
+				"header": "ml-3",
+				"component": "ml-n3"
+			}
+		},
+		{
+			"id": 14,
+			"text": "Corporate Social",
+			"options": ["Yes", "No"],
+			"value": "EET_PAI_UNGCViolationsConsidered",
+			"componentType": "dropdown",
+			"defaultValue": "Yes",
+			"classes": "",
+			"parentId": 7
+		},
+		{
+			"id": 15,
+			"text": "Human Rights",
+			"options": ["Yes", "No"],
+			"componentType": "dropdown",
+			"classes": "",
+			"defaultValue": "Yes",
+			"showSubQuestions": true,
+			"parentId": 7
+		},
+		{
+			"id": 16,
+			"text": "Sovereign & Supernational",
+			"options": ["Yes", "No"],
+			"defaultValue": "Yes",
+			"componentType": "dropdown",
+			"value": "EET_PAI_SocialViolationsNumberConsidered",
+			"classes": {
+				"header": "ml-3",
+				"component": "ml-n3"
+			},
+			"parentId": 15
+		},
+		{
+			"id": 17,
+			"text": "Environmental",
+			"options": ["Yes", "No"],
+			"defaultValue": "Yes",
+			"componentType": "dropdown",
+			"value": "EET_PAI_CarbonIntensityConsidered",
+			"classes": {
+				"header": "ml-3",
+				"component": "ml-n3"
+			},
+			"parentId": 15
+		},
+		{
+			"id": 18,
+			"text": "Social",
+			"options": ["Yes", "No"],
+			"defaultValue": "Yes",
+			"componentType": "dropdown",
+			"value": "EET_PAI_SocialViolationsPercentageConsidered",
+			"classes": {
+				"header": "ml-3",
+				"component": "ml-n3"
+			},
+			"parentId": 15
+		}
+	]
+}

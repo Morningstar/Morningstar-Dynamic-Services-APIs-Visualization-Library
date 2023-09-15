@@ -5,7 +5,7 @@
             <v-expansion-panels
                 v-model="expansionPanel"
                 class="pa-4">
-                <v-expansion-panel>
+                <v-expansion-panel v-if="filterDefinitions">
                     <v-expansion-panel-header>
                        <h4>Quick Filters</h4>
                     </v-expansion-panel-header>
@@ -27,7 +27,7 @@
                         </v-row>
                     </v-expansion-panel-content>
                 </v-expansion-panel>
-                <v-expansion-panel>
+                <v-expansion-panel v-if="quickFilterDefinitions">
                     <v-expansion-panel-header>
                         <h4>Custom Filters</h4>
                     </v-expansion-panel-header>
@@ -73,7 +73,7 @@
                 </v-expansion-panel>
             </v-expansion-panels>
         </v-row>
-        <v-row>
+        <v-row v-if="filterDefinitions || quickFilterDefinitions">
             <v-col class="mb-4 text-end">
                 <v-btn
                     color="secondary"
@@ -119,9 +119,9 @@ export default {
         };
     },
     mounted() {
-        const filtersData = this.modelData.filters[0];
+        const filtersData = this.modelData.filters ? this.modelData.filters[0] : null;
         this.filterDef = this.filterDefinitions;
-        this.filters = [...Object.keys(this.filterDefinitions)];
+        this.filters = this.filterDefinitions ? [...Object.keys(this.filterDefinitions)] : [];
         const dynamicFilterNames = this.getDynamicFilters(this.filterDefinitions);
         // Set Dynamic Filters data coming from API.
         dynamicFilterNames.forEach((value) => {

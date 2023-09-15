@@ -1,0 +1,14 @@
+{   
+    "carbonRiskScore": "Carbon Risk Score",
+    "carbonRiskPercentageOfPortfolioCovered": "Carbon Risk Percentage of Portfolio Covered",
+    "carbonFootprintScope1And2TonnesPerUsdMillions": "Carbon Footprint Scope 1 and 2 Tonnes per USD millions",
+    "carbonFootprintScope1And2PercentageOfPortfolioCovered": "Carbon Footprint Scope 1 and 2 Percentage of Portfolio Covered",
+    "carbonFootprintScope1And2And3TonnesPerUsdMillions": "Carbon Footprint Scope 1 and 2 and 3 Tonnes per USD millions",
+    "carbonFootprintScope1And2And3PercentageOfPortfolioCovered": "Carbon Footprint Scope 1 and 2 and 3 Percentage of Portfolio Covered",
+    "carbonIntensityScope1And2AverageValueInUsdTerms": "Carbon intensity Scope 1 and 2 Average Value in USD Terms",
+    "carbonIntensityScope1And2PercentageOfPortfolioCovered": "Carbon intensity Scope 1 and 2 Percentage of Portfolio Covered",
+    "carbonIntensityScope1And2And3AverageValueInUsdTerms": "Carbon intensity Scope 1 and 2 and 3 Average Value in USD Terms",
+    "carbonIntensityScope1And2And3PercentageOfPortfolioCovered": "Carbon intensity Scope 1 and 2 and 3 Percentage of Portfolio Covered",
+    "fossilFuelPercentageOfPortfolioCovered": "Fossil Fuel Percentage of Portfolio Covered",
+    "fossilFuelPercentageOfCoveredPortfolioInvolved": "Fossil Fuel Percentage of Covered Portfolio Involved"
+}

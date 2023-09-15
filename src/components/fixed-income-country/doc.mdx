@@ -37,7 +37,7 @@ import { PORTFOLIO_ANALYSIS_EMEA_URL, DATA_ACCESS_LIBRARY } from "@/external-lin
 
 
 ## Description
-Fixed Income country represents the percent of fixed income invest country wise.
+The Fixed Income - Country component illustrates a portfolio's fixed income exposure by country.
 
 <Canvas withSource="open" withToolbar>
   <Story id="components-fixed-income-country--story-details"></Story>
@@ -111,7 +111,7 @@ window.mstarApisSdk.getFixedIncomeCountryData({ portfolios: samplePortfolio });
 ### Request Example
 
 ```javascript dark
-https://www.emea-api.morningstar.com/ecint/v1/xray/json?languageId={{languageId}}&portfolioDataPoints={{portfolioDataPoints}}&holdingDataPoints={{holdingDataPoints}}&benchmarkDataPoints={{benchmarkDataPoints}}
+https://www.emea-api.morningstar.com/ecint/v1/xray/v2/json?outputtype=json&languageId={{languageId}}&portfolioDataPoints={{portfolioDataPoints}}&holdingDataPoints={{holdingDataPoints}}&benchmarkDataPoints={{benchmarkDataPoints}}
 
 ```
 
@@ -130,9 +130,9 @@ https://www.emea-api.morningstar.com/ecint/v1/xray/json?languageId={{languageId}
 Data returned by the API must be transformed to the format the component understands.
 <!--
 - [API Response Data Format](#api-response-data-format)
-- [Integration Data Format](#integration-data-format) 
+- [Integration Data Format](#integration-data-format)
 - [Integration Transformation Operation](#integration-transformation-operation)
-- [Component Transformed Data Format](#component-transformed-data-format) 
+- [Component Transformed Data Format](#component-transformed-data-format)
 - [Component Transformation Operation](#component-transformation-operation)
 -->
 ### API Response Data Format

@@ -1,0 +1,69 @@
+{
+    "securityList": {
+        "headers": [
+            {
+                "text": "Name",
+                "align": "start",
+                "value": "name",
+                "width": "310px",
+                "fixed": true
+            },
+            {
+                "text": "Aligned",
+                "value": "preferenceAligned",
+                "align": "center"
+            },
+            {
+                "text": "Last Close Price",
+                "value": "closePrice",
+                "align": "end"
+            },
+            {
+                "text": "Yield (%)",
+                "value": "yield_M12",
+                "align": "end"
+            },
+            {
+                "text": "Ongoing Charge (%)",
+                "value": "ongoingCharge",
+                "align": "end"
+            },
+            {
+                "text": "Morningstar Rating™",
+                "value": "starRatingM255",
+                "align": "center"
+            },
+            {
+                "text": "1 Day Return (%)",
+                "value": "gbrReturnD1",
+                "align": "end"
+            },
+            {
+                "text": "1 Week Return (%)",
+                "value": "gbrReturnW1",
+                "align": "end"
+            },
+            {
+                "text": "1 Month Return (%)",
+                "value": "gbrReturnM1",
+                "align": "end"
+            },
+            {
+                "text": "3 Months Return (%)",
+                "value": "gbrReturnM3",
+                "align": "end"
+            },
+            {
+                "text": "6 Months Return (%)",
+                "value": "gbrReturnM6",
+                "align": "end"
+            }
+        ],
+        "itemsPerPage": 10,
+        "itemsPerPageOptions": [
+            10,
+            25,
+            50
+        ]
+    }
+}

@@ -16,7 +16,7 @@ import assetMappingsAmericas from '@/components/asset-allocation/config/mapping-
 import xrayHelper from '@/components/shared/portfolio-analysis-helper';
 
 export default {
-    title: 'Tools/Xray',
+    title: 'Tools/X-Ray',
     component: Xray,
     argTypes: {
         modelData: Object,
@@ -63,7 +63,6 @@ const componentsOptions = {
             components: [
                 'riskScore',
                 'assetAllocation',
-                'sustainability',
             ],
         },
         {
@@ -89,6 +88,7 @@ const componentsOptions = {
             section: 'sustainability',
             components: [
                 'productInvolvement',
+                'carbonScore'
             ],
         },
         {
@@ -125,7 +125,7 @@ StoryDetails.loaders = [
             window.mstarApisSdk.xray.getXrayIntlData({
                 portfolios: helper.samplePortfolio,
             }),
-            window.mstarApisSdk.portfolioAnalysis.getEsgPerformanceIntlData({
+            window.mstarApisSdk.portfolioAnalysis.getSustainabilityData({
                 portfolios: helper.sampleEsgPortfolio,
             }),
             window.mstarApisSdk.portfolioAnalysis.getRiskScore({
@@ -162,7 +162,7 @@ const componentsOptionsUs = {
             components: [
                 'riskScore',
                 'assetAllocation',
-                'sustainability',
+                'esgRisk',
             ],
         },
         {
@@ -188,6 +188,7 @@ const componentsOptionsUs = {
             section: 'sustainability',
             components: [
                 'productInvolvement',
+                'carbonScore'
             ],
         },
         {
@@ -242,7 +243,7 @@ StoryDetailsUS.loaders = [
                 portfolios: helper.sampleUsPortfolio,
                 languageId: 'en-US',
             }),
-            window.mstarApisSdk.portfolioAnalysis.getEsgPerformance({
+            window.mstarApisSdk.portfolioAnalysis.getSustainabilityData({
                 portfolios: helper.sampleUsPortfolio,
                 languageId: 'en-US',
             }),

@@ -12,7 +12,9 @@ Vue.use(Vuetify);
 
 describe('PortfolioHoldings.vue', () => {
     it('should render Portfolio Holdings', () => {
+        setTimeout(() => {
         const wrapper = shallowMount(PortfolioHoldings);
         expect(wrapper.find('.title h2').text()).toBe('Portfolio Holdings');
+        });
     });
 });

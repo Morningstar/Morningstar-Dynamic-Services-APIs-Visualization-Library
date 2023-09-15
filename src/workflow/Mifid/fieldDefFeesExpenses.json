@@ -1,0 +1,47 @@
+{
+    "fields": [
+        {
+            "key": "Amount invested after initial costs",
+            "value": "startValue",
+            "format": "currency"
+        },
+        {
+            "key": "What you might get back after charges",
+            "value": "returnIncludingFeesAmount",
+            "format": "currency"
+        },
+        {
+            "key": "What you might get back if there were no charges at all",
+            "value": "returnExcludingFeesAmount",
+            "format": "currency"
+        },
+        {
+            "key": "A reduction in return of",
+            "value": "reductionInReturnAmount",
+            "format": "currency"
+        },
+        {
+            "key": "or",
+            "value": "reductionInReturnPercentage",
+            "format": "percent"
+        },
+        {
+            "key": "Total costs",
+            "value": "grandTotal",
+            "format": "currency"
+        }
+    ],
+    "row": {
+        "leftColumnHeaderText": "Based on £10,000 invested over 5 years with a growth rate of 5% per year",
+        "rightColumnHeaderText": "Expenses"
+    },
+    "breakdownFields": {
+        "fields": [
+            "securityName",
+            "averageGrossExpenseRatio",
+            "averageNetExpenseRatio",
+            "potentialCapGainsExposure",
+            "weight"
+        ]
+    }
+}

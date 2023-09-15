@@ -1,11 +1,15 @@
-{ 
-    "riskScore": [ 
-        { 
-            "portfolioName": "US demo portfolio - weight", 
-            "portfolioRiskScore": 122.52514387989147, 
-            "portfolioAlignmentScore": 24.535489481591917, 
-            "portfolioRsquared": 0.840970300308755, 
-            "isProxyUsedInRiskScore": false 
-        } 
-    ] 
+{
+    "riskScores": [
+        {
+            "portfolio": {
+                "name": "US demo portfolio - weight",
+                "riskScore": 97.14201416530976,
+                "alignmentScore": 11.765856202588854,
+                "rSquared": 0.9747255143703797,
+                "retainedWeightProxied": 0,
+                "scoringMethodUsed": "RBSA",
+                "effectiveDate": "2023-01-31"
+            }
+        }
+    ]
 }
