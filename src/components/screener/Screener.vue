@@ -8,8 +8,8 @@
         <Filters
             ref="filterRef"
             :model-data="filtersModelData"
-            :filter-definitions="fieldDefs.filters"
-            :quick-filter-definitions="fieldDefs.quickFilters"
+            :filter-definitions="getFilters"
+            :quick-filter-definitions="getQuickFilters"
             @updated-filters="updatedFilters"
             @reset-filter="resetFilter"
         />
@@ -78,6 +78,15 @@ export default {
             type: Object,
             default: () => ({}),
         },
+
+        /** Except params and sdk method name from parent component */
+        requestDetails: {
+            type: Object,
+            default: () => ({
+                params: {},
+                methodName: '',
+            }),
+        },
     },
     watch: {
         selectedFiltersValues: {
@@ -108,7 +117,16 @@ export default {
     },
     created() {
         this.fieldDefs = this.fieldDefinitions;
-        this.setSelectedFiltersValues();
+        // scroll to top in case of scroll position is changed in workflow
+        this.$vuetify.goTo(0);
+    },
+    computed: {
+        getFilters() {
+            return (this.fieldDefs.filters && Object.keys(this.fieldDefs.filters).length > 0) ? this.fieldDefs.filters : null;
+        },
+        getQuickFilters() {
+            return (this.fieldDefs.quickFilters && Object.keys(this.fieldDefs.quickFilters).length > 0) ? this.fieldDefs.quickFilters : null;
+        },
     },
     methods: {
         setFilterParams(values) {
@@ -222,17 +240,34 @@ export default {
             const defaultParams = {
                 page: params.page || 1,
                 pageSize: params.pageSize || 10,
-                sortField: params.sortField || 'name',
-                sortOrder: params.sortOrder || 'asc',
+                sortOrder: `${params.sortField ?? 'name'} ${params.sortOrder ?? 'asc'}`,
                 universeIds: 'FOGBR$$ALL|E0EXG$XLON',
                 securityDataPoints: 'secId,tenforeId,name,closePrice,yield_M12,ongoingCharge,initialPurchase,maxFrontEndLoad,starRatingM255,analystRatingScale,lowCarbonDesignation,sustainabilityRank,average12MonthCarbonRiskScore,gbrReturnD1,gbrReturnW1,gbrReturnM1,gbrReturnM3,gbrReturnM6,investmentType,holdingTypeId,universe',
                 filterValues: params.filterValues || '',
                 term: '',
             };
+
+            const methodName = this.requestDetails.methodName ? this.requestDetails.methodName : 'getIntlScreenerData';
+            const reqParams = Object.keys(this.requestDetails.params).length ? this.requestDetails.params : defaultParams;
+            if (Object.keys(this.requestDetails.params).length) {
+                reqParams.page = params.page ?? reqParams.page;
+                reqParams.pageSize = params.pageSize ?? reqParams.pageSize;
+                reqParams.sortOrder = `${params.sortField ? params.sortField : reqParams.sortField} ${params.sortOrder ?  params.sortOrder : reqParams.sortOrder}`;
+            }
+
             this.securityListData = await window
                 .mstarApisSdk
-                .screener
-                .getIntlScreenerData(JSON.stringify(defaultParams, null, 2));
+                .screener[methodName](reqParams)
+                .then((data) => {
+                    // TODO: Need to remove below code when API integration is done.
+                    data.rows.map((item) => {
+                        if (item.UserPref1) {
+                            item.preferenceAligned = true;
+                        }
+                    });
+                    this.$emit('onUpdatedTable', data);
+                    return data;
+                });
             this.loading = false;
         },
     },

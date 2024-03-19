@@ -24,6 +24,12 @@
             @update:options="updateOptions"
             @item-expanded="getSecurityReportData"
         >
+        <template v-slot:[`item.preferenceAligned`]="{ value }">
+            <div v-if="value !== '-'" class="userPreference">
+                <div role="img" title="User Preference Logo" class="userPreference__logo"></div>
+            </div>
+            <div v-else class="userPreference">{{ value }}</div>
+        </template>
         <template v-slot:[`item.starRatingM255`]="{ value }">
             <div v-if="value !== '-'" class="ratings">
                 <div
@@ -53,11 +59,18 @@
                 </v-lazy>
             </td>
         </template>
+        <template v-if="isAligned" v-slot:footer.prepend>
+            <div class="preferences d-inline-block ml-6">
+                <img src="@/assets/badge.svg" class="badge" width="12" height="15" />
+                <span>Investments aligned with my selected preferences.</span>
+            </div>
+        </template>
         </v-data-table>
     </div>
 </template>
 <script>
 import SecurityReports from '@/components/security-report/SecurityReport.vue';
+import assetAllocationMappingEmea from '@/components/asset-allocation/config/mapping-emea.json';
 
 export default {
     name: 'SecurityList',
@@ -96,11 +109,37 @@ export default {
                     {
                         components: [
                             'performanceGraph',
-                            'annualPerformance',
                             'trailingReturns',
+                            'portfolio'
                         ],
                     },
                 ],
+                props: {
+                    performanceGraph: {
+                        showTimeSeriesData: true,
+                        title: 'Growth of Investment',
+                    },
+                    trailingReturns: {
+                        height: 360,
+                        title: 'Trailing Returns (%)',
+                    },
+                    portfolio: {
+                        componentsOptions: {
+                            sections: [
+                                {
+                                    components: [
+                                        'assetAllocation',
+                                    ],
+                                },
+                            ],
+                            props: {
+                                assetAllocation: {
+                                    assetAllocationMapping: assetAllocationMappingEmea,
+                                },
+                            }
+                        },
+                    }
+                }
             },
             securityDetailsData: {},
             showSecurityLoader: true,
@@ -110,6 +149,9 @@ export default {
         };
     },
     computed: {
+        isAligned() {
+            return this.headers.filter(a => a.value === 'preferenceAligned').length > 0;
+        },
         parsedModelData() {
             const { modelData } = this;
             const { headers } = this.filterDefinitions;
@@ -117,12 +159,12 @@ export default {
 
             this.setPages(modelData);
 
-            return modelData.rows.map((data) => {
+            return modelData.rows && modelData.rows.map((data) => {
                 const result = data;
                 listValues.forEach((value) => {
                     if (!result[value] && result[value] !== 0) {
                         result[value] = '-';
-                    } else if (typeof result[value] !== 'string' && value !== 'starRatingM255') {
+                    } else if (!result[value] && typeof result[value] !== 'string' && value !== 'starRatingM255') {
                         result[value] = result[value].toFixed(2);
                     }
                 });
@@ -148,7 +190,7 @@ export default {
             if (data.value) {
                 this.securityDetailsData = {};
                 this.showSecurityLoader = true;
-                const secId = 'F0GBR050DD'; // ToDo: Actual secId API to fetch data from API will be done in ECCORECS-2766;
+                const secId = data.item.secId;
                 this.$nextTick(() => {
                     this.toggleDisableAction();
                 });
@@ -179,6 +221,15 @@ export default {
 @use '~@/components/shared/scss/mixin.scss' as mixin;
 
 .security-list {
+    .userPreference{
+        display: inline-flex;
+        margin: map.get(mixin.$wal, "space", "1-and-a-quarter-x");
+
+        &__logo {
+            @include mixin.applyIcon("@/assets/badge.svg");
+        }
+    }
+
     .ratings {
         @include mixin.wal-component-title;
         display: inline-flex;
@@ -188,12 +239,8 @@ export default {
             @include mixin.applyIcon("@/assets/star_rating.svg");
         }
     }
-    .title {
+    .title h2 {
         margin: map.get(mixin.$wal, "space", '1-and-a-quarter-x');
-        &__text {
-            font-size: map.get(mixin.$wal, space, '2-and-a-quarter-x');
-            font-weight: 500;
-        }
     }
 
     .v-data-table__expanded__row, .v-data-table__expanded__row:hover {
@@ -210,6 +257,10 @@ export default {
         button {
             pointer-events: none;
         }
+    }
+
+    .preferences * {
+        vertical-align: middle;
     }
 }
 

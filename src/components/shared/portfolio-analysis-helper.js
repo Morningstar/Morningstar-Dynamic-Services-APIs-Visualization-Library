@@ -84,6 +84,54 @@ function getAssetAllocationData(xrayData) {
     };
 }
 
+function getCorrelationMatrixData(xRayData) {
+    const correlationMatrix={};
+    const timePeriodMapping = {
+        "M12": "year1",
+        "M36": "year3",
+        "M60": "year5",
+        "M120": "year10",
+    }
+    xRayData.correlationMatrix.forEach((timePeriod) => {
+        const chartData=[];
+        timePeriod.correlationMatrixDetail.forEach((correlation, index) => {
+            correlation.correlationDetail.forEach((details) => {
+                const obj = {};
+                obj.x = index + 1;
+                obj.y = parseInt(details.id) + 1;
+                obj.value = parseFloat(details.correlation) || 0
+                chartData.push(obj);
+            });
+            correlationMatrix[timePeriodMapping[timePeriod.timePeriod]] = chartData;
+        });
+    });
+    return {
+        securities: xRayData.holdings.map(s => s.name),
+        correlationMatrix
+    };
+}
+function getCorrelationMatrixUsData(xRayData) {
+    const correlationMatrix={};
+    xRayData.correlationMatrix.forEach((timePeriod) => {
+        const chartData=[];
+        timePeriod.Correlations.forEach((correlation, index) => {
+            correlation.CorrelatedItemKey.forEach((details) => {
+                const obj = {};
+                obj.SecurityId = correlation.SecurityId,
+                obj.x = index + 1;
+                obj.y = details.CorrelatedItemKeyId;
+                obj.value = parseFloat(details.Value) || 0
+                chartData.push(obj);
+            });
+            correlationMatrix[timePeriod.TrailingTimePeriod] = chartData;
+        });
+    });
+    return {
+        securities: xRayData.securities,
+        correlationMatrix
+    };
+}
+
 function getAssetAllocationUsData(assetAllocationData, breakdown = {}) {
     const getParsedData = (reference, data = []) => {
         const assetData = get(data, reference, []);
@@ -227,10 +275,12 @@ function getPortfolioHoldingsData(xrayData) {
         });
         return currStockHolding;
     });
+    const preferenceAlignedPercentage = xrayData?.calculatedDataPoints?.[0].portfolioWeight.userPref1;
     return {
         topHoldings: portfolioHoldings,
         topUnderlyingHoldings: underlyingHoldings,
         stockOverlap: holdingOverlap,
+        preferenceAlignedPercentage
     };
 }
 
@@ -270,11 +320,19 @@ function getPortfolioHoldingsUsData(xrayData) {
     };
 }
 
-function getproductInvolvementData(esgData) {
+function getCarbonScoreData(esgData) {
     return getComponentData(
         esgData,
-        'ESG[0].sustainability.portfolio.productInvolvement',
-        'ESG[0].sustainability.benchmark.productInvolvement',
+        'portfolio.carbonScore',
+        'benchmark.carbonScore',
+    );
+}
+
+function getProductInvolvementData(esgData) {
+    return getComponentData(
+        esgData,
+        'portfolio.productInvolvement',
+        'benchmark.productInvolvement',
     );
 }
 
@@ -521,8 +579,12 @@ function getXrayData(apiData, sections, portfolio) {
                 modelData.portfolioSrri = get(xrayData, 'riskStatistics');
                 break;
             }
+            case 'carbonScore': {
+                modelData.carbonScore = getCarbonScoreData(get(esgData, 'sustainability[0]', {}));
+                break;
+            }
             case 'productInvolvement': {
-                modelData.productInvolvement = getproductInvolvementData(esgData);
+                modelData.productInvolvement = getProductInvolvementData(get(esgData, 'sustainability[0]', {}));
                 break;
             }
             case 'riskScore': {
@@ -541,8 +603,8 @@ function getXrayData(apiData, sections, portfolio) {
                 modelData.stockStats = getStockStatsData(xrayData);
                 break;
             }
-            case 'sustainability': {
-                modelData.sustainability = esgData;
+            case 'esgRisk': {
+                modelData.sustainability = get(esgData, 'ESG[0].sustainability', {});
                 break;
             }
             case 'trailingReturns': {
@@ -625,8 +687,12 @@ function getXrayUsData(apiData, componentsOptions, portfolio) {
                 modelData.portfolioHoldings = getPortfolioHoldingsUsData(portfolioHoldingsData);
                 break;
             }
+            case 'carbonScore': {
+                modelData.carbonScore = getCarbonScoreData(get(esgData, 'sustainability[0]', {}));
+                break;
+            }
             case 'productInvolvement': {
-                modelData.productInvolvement = getproductInvolvementData(esgData);
+                modelData.productInvolvement = getProductInvolvementData(get(esgData, 'sustainability[0]', {}));
                 break;
             }
             case 'riskScore': {
@@ -674,8 +740,8 @@ function getXrayUsData(apiData, componentsOptions, portfolio) {
                 );
                 break;
             }
-            case 'sustainability': {
-                modelData.sustainability = esgData;
+            case 'esgRisk': {
+                modelData.esgRisk = get(esgData, 'sustainability[0]', {});
                 break;
             }
             case 'trailingReturns': {
@@ -694,6 +760,8 @@ function getXrayUsData(apiData, componentsOptions, portfolio) {
 export default {
     getAssetAllocationData,
     getAssetAllocationUsData,
+    getCorrelationMatrixData,
+    getCorrelationMatrixUsData,
     getFixedIncomeCountryData,
     getFixedIncomeSectorsData,
     getFixedIncomeSectorsUsData,
@@ -701,7 +769,8 @@ export default {
     getPerformanceUsData,
     getPortfolioHoldingsData,
     getPortfolioHoldingsUsData,
-    getproductInvolvementData,
+    getCarbonScoreData,
+    getProductInvolvementData,
     getStockSectorsData,
     getStockSectorsUsData,
     getStockStatsData,

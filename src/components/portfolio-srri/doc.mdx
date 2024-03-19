@@ -2,7 +2,7 @@ import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
 import PortfolioSrri from "@/components/portfolio-srri/PortfolioSrri.vue";
 import { PORTFOLIO_ANALYSIS_EMEA_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
 
-<Meta title="PortfolioSrri" component={ PortfolioSrri }/>
+<Meta title="PortfolioSRRI" component={ PortfolioSrri }/>
 
 <style> {
   `
@@ -43,7 +43,7 @@ import { PORTFOLIO_ANALYSIS_EMEA_URL, DATA_ACCESS_LIBRARY } from "@/external-lin
 The Portfolio SRRI illustrates a portfolio's synthetic risk and reward indicator (SRRI) level.
 
 <Canvas withSource="open" withToolbar>
-  <Story id="components-portfoliosrri--story-details"></Story>
+  <Story id="components-portfolio-srri--story-details"></Story>
 </Canvas>
 
 ## Properties
@@ -115,14 +115,14 @@ window.mstarApisSdk.xray.getSrri({ portfolios: samplePortfolio});
 ### Request Example
 
 ```javascript dark
-https://www.emea-api.morningstar.com.morningstar.com/ecint/v1/xray/json?languageId={{languageId}}
+https://www.emea-api.morningstar.com.morningstar.com/ecint/v2/xray?languageId={{languageId}}
 
 ```
 
 ### Request Payload Example
 
 | Query Parameter | Description|Example |
-| :----------- | :--------| :----------- | 
+| :----------- | :--------| :----------- |
 | `languageId` |	ISO culture codes. If not provided, defaults to language defined in settings. |`languageId=en-GB` |
 
 

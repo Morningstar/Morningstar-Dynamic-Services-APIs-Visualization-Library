@@ -118,7 +118,7 @@ window.mstarApisSdk.xray.getPortfolioHoldingsData({ portfolios: samplePortfolio 
 Requests to the API have the following format:
 
 ```javascript dark
-https://www.emea-api.morningstar.com/ecint/v1/xray/json?languageId={{languageId}}&portfolioDataPoints={{portfolioDataPoints}}&holdingDataPoints={{holdingDataPoints}}&benchmarkDataPoints={{benchmarkDataPoints}}
+https://www.emea-api.morningstar.com/ecint/v2/xray?outputtype=json&languageId={{languageId}}&portfolioDataPoints={{portfolioDataPoints}}&holdingDataPoints={{holdingDataPoints}}&benchmarkDataPoints={{benchmarkDataPoints}}
 
 ```
 
@@ -136,9 +136,9 @@ https://www.emea-api.morningstar.com/ecint/v1/xray/json?languageId={{languageId}
 Data returned by the API must be transformed to a format the component understands.
 <!--
 - [API Response Data Format](#api-response-data-format)
-- [Integration Data Format](#integration-data-format) 
-- [Integration Transformation Operation](#integration-transformation-operation) 
-- [Component Transformed Data Format](#component-transformed-data-format) 
+- [Integration Data Format](#integration-data-format)
+- [Integration Transformation Operation](#integration-transformation-operation)
+- [Component Transformed Data Format](#component-transformed-data-format)
 - [Component Transformation Operation](#component-transformation-operation)
 -->
 
@@ -223,7 +223,7 @@ Data returned by the API must be transformed to a format the component understan
         }
     ],
     "topUnderlyingHoldings": [
-        { 
+        {
             "holdingId": "G4527HHD6",
             "name": "United Kingdom of Great Britain and Northern Ireland 1.25%",
             "securityId": "B000367UR0",

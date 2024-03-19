@@ -48,6 +48,7 @@ import FixedIncomeCountry from '@/components/fixed-income-country/FixedIncomeCou
 import FixedIncomeSectors from '@/components/fixed-income-sectors/FixedIncomeSectors.vue';
 import PortfolioHoldings from '@/components/portfolio-holdings/PortfolioHoldings.vue';
 import PortfolioSrri from '@/components/portfolio-srri/PortfolioSrri.vue';
+import CarbonScore from '@/components/carbon-score/CarbonScore.vue';
 import ProductInvolvement from '@/components/product-involvement/ProductInvolvement.vue';
 import RiskScore from '@/components/risk-score/RiskScore.vue';
 import RiskStatistics from '@/components/risk-statistics/RiskStatistics.vue';
@@ -55,7 +56,7 @@ import StockRegions from '@/components/stock-regions/StockRegions.vue';
 import StockSectors from '@/components/stock-sectors/StockSectors.vue';
 import StockStats from '@/components/stock-stats/StockStats.vue';
 import StockType from '@/components/stock-type/StockType.vue';
-import Sustainability from '@/components/sustainability/Sustainability.vue';
+import EsgRisk from '@/components/esg-risk/EsgRisk.vue';
 import TrailingReturns from '@/components/trailing-returns/TrailingReturns.vue';
 import SecurityLevelBreakdown from '@/components/security-level-breakdown/SecurityLevelBreakdown.vue';
 import mapping from '@/components/shared/portfolio/config/mapping.json';
@@ -69,6 +70,7 @@ export default {
         PortfolioHoldings,
         PortfolioSrri,
         PerformanceGraph,
+        CarbonScore,
         ProductInvolvement,
         RiskScore,
         RiskStatistics,
@@ -76,7 +78,7 @@ export default {
         StockSectors,
         StockStats,
         StockType,
-        Sustainability,
+        EsgRisk,
         TrailingReturns,
         SecurityLevelBreakdown,
     },
@@ -91,7 +93,7 @@ export default {
                         components: [
                             'riskScore',
                             'assetAllocation',
-                            'sustainability',
+                            'esgRisk',
                         ],
                     },
                     {
@@ -109,6 +111,7 @@ export default {
                         section: 'sustainability',
                         components: [
                             'productInvolvement',
+                            'carbonScore'
                         ],
                     },
                     {

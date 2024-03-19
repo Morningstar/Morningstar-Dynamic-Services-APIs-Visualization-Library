@@ -367,7 +367,7 @@ export default {
         updateMap() {
             this.stockMapSVG = document.getElementById('stockMapSVG');
             const childNode = this.stockMapSVG?.childNodes[0];
-            const childElements = childNode.children;
+            const childElements = childNode?.children;
 
             if (!childElements) return;
             for (let i = 0, len = childElements.length; i < len; i += 1) {

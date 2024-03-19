@@ -1,0 +1,3588 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import Questionnaire from "@/components/questionnaire/Questionnaire.vue";
+import Screener from "@/components/screener/Screener.vue";
+import Xray from "@/components/xray/Xray.vue";
+import { DATA_ACCESS_LIBRARY } from "@/external-links";
+import badge from "@/assets/badge.svg";
+
+<Meta title="MiFIDII" component={Questionnaire} />
+
+<style>
+	{" "}
+	{`
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+	.preferences {
+		font-size: 14px;
+	}
+	.badge,
+	.preferences {
+		vertical-align: middle;
+	}
+  `}
+</style>
+
+# Investor Preferences
+
+-   [Description](#description)
+-   [Properties](#properties)
+-   [Fetching Data](#fetching-data)
+-   [Data Transformation](#data-transformation)
+
+## Description
+
+The Investor Preferences workflow demonstrates how you can create a more personalized experience for investors by defining settings in the Screener and Portfolio Analysis X-Ray APIs to:
+
+•&nbsp;&nbsp;Create a set of filters based on an investor's preferences that you use to search Morningstar's database for matching investments.<br />
+•&nbsp;&nbsp;Use these filters to flag investments that match the investor’s preferences.
+
+These capabilities can be used to:
+
+•&nbsp;&nbsp;Assess an investor's sustainable investing preferences using a questionnaire. <br />
+•&nbsp;&nbsp;Apply a flag to securities that align with the investor’s preferences, making them easily identifiable for use in, for example, a list of results in a fund screener.<br />
+•&nbsp;&nbsp;Generate a client portfolio overview that includes an insight into the portion of the portfolio that is aligned with the investor's preferences.<br />
+
+Investor Preferences capabilities are also supported by the Security Details API.
+
+<img src={badge} class="badge" width="12" height="15" /> <span class="preferences">Investments aligned with my selected preferences.</span>
+
+<Canvas withSource="open" withToolbar>
+	<Story id="workflow-investor-preferences--story-details"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={Questionnaire} />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the [Portfolio X-Ray API](https://developer.morningstar.com/documentation/dynamic-services-apis/portfolio-analysis-apacemea/overview) and [Screener API](https://developer.morningstar.com/documentation/dynamic-services-apis/screener/overview).
+
+<!--
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request)
+- [Request Payload Example](#request-payload)
+-->
+
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+#### Screener API
+
+```javascript dark
+window.mstarApisSdk.screener.postIntlScreenerData(
+	JSON.stringify(defaultParams, null, 2)
+); // Fetch SecurityList Data
+```
+
+<details>
+  <summary><span class="summary-text">Example</span></summary>
+
+```javascript dark
+const defaultParams = {
+	page: 1,
+	pageSize: 10,
+	sortField: "name",
+	sortOrder: "asc",
+	universeIds: "FOGBR$$ALL|E0EXG$XLON",
+	securityDataPoints:
+		"secId,tenforeId,name,closePrice,yield_M12,ongoingCharge,starRatingM255,gbrReturnD1,gbrReturnW1,gbrReturnM1,gbrReturnM3,gbrReturnM6,investmentType,holdingTypeId,universe",
+	filterValues: "",
+	term: "",
+	calculatedDataPoints: {},
+};
+window.mstarApisSdk.screener.postIntlScreenerData(
+	JSON.stringify(defaultParams, null, 2)
+);
+```
+
+</details>
+&nbsp;
+
+### Request Example
+
+```javascript dark
+https://www.emea-api.morningstar.com/ecint/v1/screener // POST Request for Screener Data
+
+```
+
+### Request Payload Example
+
+| Query Parameter        | Description                                                                   | Example                                                                          |
+| :--------------------- | :---------------------------------------------------------------------------- | :------------------------------------------------------------------------------- |
+| `languageId`           | ISO culture codes. If not provided, defaults to language defined in settings. | "languageId": "en—GB"                                                         	|
+| `currencyId`           | ISO culture code. If not provided, defaults to language defined in settings.  | "currencyId": "GBP"                                                            	|
+| `universeIds`          | A pipe-delimited string of unique identifers of a universe.                   | "universeIds":"FOGBR$$ALL&#124;E0EXG$XLON"                             			|
+| `filterDataPoints`     | Comma-separated list of filter definitions to be returned.                    | "filterDataPoints":"CustomCategoryId&#124;CustomCategoryId2&#124"				|
+| `filters`              | A list of filter constraints separated by a pipe-delimited string.            | "filters":"BrandingCompanyId:EQ:BN00000JKZ&#124;Yield_M12:BTW:2:4"				|
+| `page`                 | Defines the number of output pages.                                           | "page": "1"                                                                      |
+| `pageSize`             | Defines the number of rows per page.                                          | "pageSize": "20"                                                                 |
+| `sortOrder`            | Defines the data point on which to order the results and the order direction. | "sortOrder": "name asc"                                                          |
+| `securityDataPoints`   | Comma or pipe separated list of data points to return.                        | "securityDataPoints": "SecId&#124;LegalName&#124;DomicileId&#124;"     			|
+| `calculatedDataPoints` | Object holding the list of data points to calculate and return boolean.       | `Please See Below`                                                               |
+| `term`                 | String to use to search for securities such as names, identifiers or symbols. | "term":"LINXEA"                                                                  |
+
+##### calculatedDataPoints
+
+```javascript dark
+"calculatedDataPoints": {
+		"dataPoint": [
+			{
+				"name": "userPref1",
+				"type": "bool",
+				"condition": {
+					"and": {
+						"field": [
+							{
+								"name": "EET_SustInvEUTaxonomy_A8",
+								"op": "eq",
+								"value": "8"
+							},
+							{
+								"name": "EET_PlannedInvtsSustInvEUTaxonomy",
+								"op": "eq",
+								"value": "0.5"
+							}
+						]
+					}
+				}
+			}
+		]
+	}
+```
+
+#### Xray API
+
+```javascript dark
+window.mstarApisSdk.xray.getXrayIntlData({
+	portfolios: helper.samplePortfolio,
+})
+```
+
+<details>
+  <summary><span class="summary-text">Example</span></summary>
+
+```javascript dark
+const samplePortfolio = [
+	{
+		name: "US demo portfolio - weight",
+		totalValue: 10000,
+		currency: "USD",
+		holdings: [
+			{
+				securityId: "FOUSA06OEZ",
+				weight: 30,
+			},
+			{
+				securityId: "FOUSA06IVV",
+				weight: 50,
+			},
+			{
+				securityId: "F00000T770",
+				weight: 20,
+			},
+		],
+		benchmark: {
+			type: "Standard",
+			holdings: [
+				{
+					securityId: "XIUSA0010V",
+					weight: 100,
+				},
+			],
+		},
+	},
+];
+```
+
+</details>
+
+### Request Example
+
+Requests to the API have the following format:
+
+```javascript dark
+https://www.emea-api.morningstar.com/ecint/v2/xray?outputtype=json&languageId={{languageId}}&portfolioDataPoints={{portfolioDataPoints}}&holdingDataPoints={{holdingDataPoints}}&benchmarkDataPoints={{benchmarkDataPoints}}
+```
+
+### Request Payload Example
+
+| Query Parameter | Description                                                                   | Example            |
+| :-------------- | :---------------------------------------------------------------------------- | :----------------- |
+| `languageId` |	ISO culture codes. If not provided, defaults to language defined in settings. |`languageId=en-GB` |
+| `portfolioDataPoints` |Comma-separated list of portfolio data points.|`portfolioDataPoints=StyleBox,GlobalStockSector` | 
+| `holdingDataPoints` |Comma-separated list of holding data points.|`HoldingDataPoints=ShowBreakdown` |
+| `benchmarkDataPoints` | Comma-separated list of benchmark data points.|`benchmarkDataPoints=GrowthSeries,HistoricalPerformanceSeries,ShowStatistic` |
+
+## Data Transformation
+
+### Screener
+
+Screener Data returned by the API must be transformed to a format the component understands.
+
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Component Data Format](#component-data-format)
+- [Transformation Operation](#transformation-operation)
+-->
+
+### API Response Data Format
+
+<details>
+  <summary><span class="summary-text">Security List Data</span></summary>
+
+```json dark
+{
+	"total": 68652,
+	"page": 1,
+	"pageSize": 5,
+	"rows": [
+		{
+			"secId": "F00000ZTL9",
+			"name": "1167 Act Fds ICAV Glb H IncBd D2 NOK Acc",
+			"closePrice": 76.4392,
+			"yield_M12": 0,
+			"ongoingCharge": 1.45,
+			"gbrReturnD1": 0,
+			"gbrReturnW1": -0.05,
+			"gbrReturnM1": -3.13,
+			"gbrReturnM3": -17.13,
+			"gbrReturnM6": -19.39,
+			"investmentType": "FO",
+			"holdingTypeId": 2,
+			"universe": "FOGBR$$ALL",
+			"preferenceAligned": true // Boolean return from calculatedDataPoints sent to the API
+		}
+	]
+}
+```
+
+</details>
+&nbsp;
+
+### Field Definitions
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+{
+    "securityList": {
+        "headers": [
+            {
+                "text": "Name",
+                "align": "start",
+                "value": "name",
+                "width": "310px",
+                "fixed": true
+            },
+            {
+                "text": "Aligned with Pref",
+                "value": "preferenceAligned", // Used preferenceAligned datapoint from API
+                "align": "center"
+            },
+            {
+                "text": "Last Close Price",
+                "value": "closePrice",
+                "align": "end"
+            },
+            {
+                "text": "Yield (%)",
+                "value": "yield_M12",
+                "align": "end"
+            },
+            {
+                "text": "Ongoing Charge (%)",
+                "value": "ongoingCharge",
+                "align": "end"
+            },
+            {
+                "text": "Morningstar Rating™",
+                "value": "starRatingM255",
+                "align": "center"
+            },
+            {
+                "text": "1 Day Return (%)",
+                "value": "gbrReturnD1",
+                "align": "end"
+            },
+            {
+                "text": "1 Week Return (%)",
+                "value": "gbrReturnW1",
+                "align": "end"
+            },
+            {
+                "text": "1 Month Return (%)",
+                "value": "gbrReturnM1",
+                "align": "end"
+            },
+            {
+                "text": "3 Months Return (%)",
+                "value": "gbrReturnM3",
+                "align": "end"
+            },
+            {
+                "text": "6 Months Return (%)",
+                "value": "gbrReturnM6",
+                "align": "end"
+            }
+        ],
+        "itemsPerPage": 10,
+        "itemsPerPageOptions": [
+            10,
+            25,
+            50
+        ]
+    }
+}
+
+```
+
+</details>
+&nbsp;
+
+### Xray
+
+Xray Data returned by the API must be transformed to a format the component understands.
+
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Integration Data Format](#integration-data-format)
+- [Integration Transformation Operation](#integration-transformation-operation)
+-->
+
+### API Response Data Format
+
+<details>
+  <summary><span class="summary-text">Xray Data</span></summary>
+
+```json dark
+{
+    "status": {
+        "detailedStatusMessage": "",
+        "statusCode": 200,
+        "statusDescription": ""
+    },
+    "benchmarkId": "EUCA000555",
+    "benchmarkName": "Global Large-Cap Blend Equity",
+    "holdings": [
+        {
+            "holdingId": 0,
+            "securityId": "F000015BVI",
+            "securityType": "FO",
+            "holdingType": 2,
+            "universeId": "FOGBR$$ALL",
+            "name": "Allianz Emerging Markets SRI Bd AT H2SEK",
+            "iSIN": "LU2185877557",
+            "portfolioDate": "2023-05-31",
+            "initialAmount": 5000,
+            "marketValue": 5000,
+            "weight": 50,
+            "currencyId": "SEK",
+            "ongoingCharge": 1.5,
+            "fundShareClassId": "F000015BVI",
+            "returnM12": -3.06,
+            "returnM36": -9.18,
+            "contributionReturn": -22.83842,
+            "eET_SustInvEUTaxonomy_A8": "Y",
+            "eET_PlannedInvtsSustInvEUTaxonomy": 0.1,
+            "eET_EUSFDRType": 8,
+            "eET_PAI_EnergyInefficientExposureConsidered": "N",
+            "eET_PAI_NegativeAffectConsidered": "Y",
+            "eET_PAI_EmissionsToWaterConsidered": "Y",
+            "eET_PAI_HazardousWasteConsidered": "Y",
+            "eET_PAI_UNGCViolationsConsidered": "Y",
+            "eET_PAI_SocialViolationsNumberConsidered": "Y",
+            "eET_PAI_CarbonIntensityConsidered": "N",
+            "eET_PAI_SocialViolationsPercentageConsidered": "Y",
+            "userPref1": 1
+        },
+        {
+            "holdingId": 1,
+            "securityId": "F000013M7Y",
+            "securityType": "FO",
+            "holdingType": 2,
+            "universeId": "FOGBR$$ALL",
+            "name": "Allianz Emerging Markets SRI Bd A H2 EUR",
+            "iSIN": "LU1958619352",
+            "portfolioDate": "2023-05-31",
+            "initialAmount": 2000,
+            "marketValue": 2000,
+            "weight": 20,
+            "currencyId": "EUR",
+            "starRatingM255": 2,
+            "morningstarRiskM255": 3,
+            "ongoingCharge": 1.5,
+            "fundShareClassId": "F000013M7Y",
+            "returnM12": 2.74,
+            "returnM36": -7.05,
+            "contributionReturn": -3.68268,
+            "eET_SustInvEUTaxonomy_A8": "Y",
+            "eET_PlannedInvtsSustInvEUTaxonomy": 0.1,
+            "eET_EUSFDRType": 8,
+            "eET_PAI_EnergyInefficientExposureConsidered": "N",
+            "eET_PAI_NegativeAffectConsidered": "Y",
+            "eET_PAI_EmissionsToWaterConsidered": "Y",
+            "eET_PAI_HazardousWasteConsidered": "Y",
+            "eET_PAI_UNGCViolationsConsidered": "Y",
+            "eET_PAI_SocialViolationsNumberConsidered": "Y",
+            "eET_PAI_CarbonIntensityConsidered": "N",
+            "eET_PAI_SocialViolationsPercentageConsidered": "Y",
+            "userPref1": 1
+        },
+    ],
+    "underlyHoldings": [
+        {
+            "holdingId": "DE0001030872",
+            "name": "Germany (Federal Republic Of) 0%",
+            "securityId": "B10002PPNY",
+            "securityType": "GS",
+            "weight": 6.83941,
+            "marketValue": 15361626,
+            "sector": "-",
+            "sectorId": "",
+            "globalSectorId": "",
+            "country": "Germany",
+            "countryId": "DEU",
+            "iSIN": "DE0001030872",
+            "currencyId": "EUR",
+            "currencyName": "Euro"
+        },
+        {
+            "holdingId": "594918104",
+            "name": "Microsoft Corp",
+            "securityId": "E0USA00A05",
+            "securityType": "E",
+            "weight": 1.75054,
+            "marketValue": 15785983,
+            "sector": "-",
+            "sectorId": "",
+            "globalSectorId": "311",
+            "country": "United States",
+            "countryId": "USA",
+            "iSIN": "US5949181045",
+            "currencyId": "USD",
+            "currencyName": "US Dollar",
+            "symbol": "MSFT"
+        },
+        {
+            "holdingId": "57636Q104",
+            "name": "Mastercard Inc Class A",
+            "securityId": "E0USA04HDR",
+            "securityType": "E",
+            "weight": 1.06299,
+            "marketValue": 9585825,
+            "sector": "-",
+            "sectorId": "",
+            "globalSectorId": "103",
+            "country": "United States",
+            "countryId": "USA",
+            "iSIN": "US57636Q1040",
+            "currencyId": "USD",
+            "currencyName": "US Dollar",
+            "symbol": "MA"
+        },
+        {
+            "holdingId": "N30706MT4",
+            "name": "ENEL Finance International N.V. 1%",
+            "securityId": "B00038V6ET",
+            "securityType": "B",
+            "weight": 0.11435,
+            "marketValue": 1285815,
+            "sector": "-",
+            "sectorId": "",
+            "globalSectorId": "",
+            "country": "Italy",
+            "countryId": "ITA",
+            "iSIN": "XS2244418609",
+            "currencyId": "GBP",
+            "currencyName": "British Pound Sterling"
+        }
+    ],
+    "holdingOverlap": [
+        {
+            "holdingId": "DE0001030872",
+            "name": "Germany (Federal Republic Of) 0%",
+            "securityId": "B10002PPNY",
+            "securityType": "GS",
+            "performanceId": "",
+            "weight": 6.83941,
+            "marketValue": 15361626,
+            "sector": "-",
+            "sectorId": "",
+            "globalSectorId": "",
+            "country": "Germany",
+            "countryId": "DEU",
+            "globalIndustryId": "",
+            "iSIN": "DE0001030872",
+            "currencyId": "EUR",
+            "currencyName": "Euro",
+            "parentHoldings": [
+                {
+                    "holdingId": "0",
+                    "weight": 4.88529,
+                    "weightInParent": 9.77058
+                },
+                {
+                    "holdingId": "1",
+                    "weight": 1.95412,
+                    "weightInParent": 9.77058
+                }
+            ]
+        },
+        {
+            "holdingId": "105756CC2",
+            "name": "Brazil (Federative Republic) 3.875%",
+            "securityId": "B00038GWR5",
+            "securityType": "BT",
+            "performanceId": "",
+            "weight": 3.02191,
+            "marketValue": 6787368,
+            "sector": "-",
+            "sectorId": "",
+            "globalSectorId": "",
+            "country": "Brazil",
+            "countryId": "BRA",
+            "globalIndustryId": "",
+            "iSIN": "US105756CC23",
+            "currencyId": "USD",
+            "currencyName": "US Dollar",
+            "parentHoldings": [
+                {
+                    "holdingId": "0",
+                    "weight": 2.15851,
+                    "weightInParent": 4.31702
+                },
+                {
+                    "holdingId": "1",
+                    "weight": 0.8634,
+                    "weightInParent": 4.31702
+                }
+            ]
+        },
+        {
+            "holdingId": "P3579ECF2",
+            "name": "Dominican Republic 4.5%",
+            "securityId": "B0003814KN",
+            "securityType": "BT",
+            "performanceId": "",
+            "weight": 2.51424,
+            "marketValue": 5647094,
+            "sector": "-",
+            "sectorId": "",
+            "globalSectorId": "",
+            "country": "Dominican Republic",
+            "countryId": "DOM",
+            "globalIndustryId": "",
+            "iSIN": "USP3579ECF27",
+            "currencyId": "USD",
+            "currencyName": "US Dollar",
+            "parentHoldings": [
+                {
+                    "holdingId": "0",
+                    "weight": 1.79589,
+                    "weightInParent": 3.59177
+                },
+                {
+                    "holdingId": "1",
+                    "weight": 0.71835,
+                    "weightInParent": 3.59177
+                }
+            ]
+        },
+        {
+            "holdingId": "Y7177RAD7",
+            "name": "Azerbaijan (Republic of) 3.5%",
+            "securityId": "B00036GXCO",
+            "securityType": "BT",
+            "performanceId": "",
+            "weight": 2.49848,
+            "marketValue": 5611714,
+            "sector": "-",
+            "sectorId": "",
+            "globalSectorId": "",
+            "country": "Azerbaijan",
+            "countryId": "AZE",
+            "globalIndustryId": "",
+            "iSIN": "XS1678623734",
+            "currencyId": "USD",
+            "currencyName": "US Dollar",
+            "parentHoldings": [
+                {
+                    "holdingId": "0",
+                    "weight": 1.78463,
+                    "weightInParent": 3.56926
+                },
+                {
+                    "holdingId": "1",
+                    "weight": 0.71385,
+                    "weightInParent": 3.56926
+                }
+            ]
+        }
+    ],
+    "trailingPerformance": [
+        {
+            "type": "MonthEnd",
+            "returnType": "TotalReturn",
+            "currencyId": "GBP",
+            "endDate": "2023-05-31",
+            "returns": [
+                {
+                    "timePeriod": "M0",
+                    "value": -2.95024
+                },
+                {
+                    "timePeriod": "M1",
+                    "value": -3.59181
+                },
+                {
+                    "timePeriod": "M2",
+                    "value": -2.80405
+                },
+                {
+                    "timePeriod": "M3",
+                    "value": -3.10547
+                },
+                {
+                    "timePeriod": "M6",
+                    "value": -2.1096
+                },
+                {
+                    "timePeriod": "M12",
+                    "value": -7.25936
+                },
+                {
+                    "timePeriod": "M36",
+                    "value": -5.16546
+                },
+                {
+                    "timePeriod": "M60",
+                    "value": -1.33235
+                },
+                {
+                    "timePeriod": "M120",
+                    "value": 2.24279
+                }
+            ]
+        }
+    ],
+    "riskStatistics": {
+        "type": "MonthEnd",
+        "currencyId": "GBP",
+        "endDate": "2023-05-31",
+        "sRRI": [
+            {
+                "value": 5,
+                "timePeriod": "W260",
+                "frequency": "W",
+                "endDate": "2023-06-23"
+            }
+        ]
+    },
+    "correlationMatrix": [
+        {
+            "timePeriod": "M12",
+            "endDate": "2023-05-31",
+            "correlationMatrixDetail": [
+                {
+                    "id": "0",
+                    "correlationDetail": [
+                        {
+                            "id": "0",
+                            "correlation": "1"
+                        },
+                        {
+                            "id": "1",
+                            "correlation": "0.88881"
+                        },
+                        {
+                            "id": "2",
+                            "correlation": "0.66132"
+                        },
+                        {
+                            "id": "3",
+                            "correlation": "0.78875"
+                        }
+                    ]
+                },
+                {
+                    "id": "1",
+                    "correlationDetail": [
+                        {
+                            "id": "0",
+                            "correlation": "0.88881"
+                        },
+                        {
+                            "id": "1",
+                            "correlation": "1"
+                        },
+                        {
+                            "id": "2",
+                            "correlation": "0.42784"
+                        },
+                        {
+                            "id": "3",
+                            "correlation": "0.67866"
+                        }
+                    ]
+                },
+                {
+                    "id": "2",
+                    "correlationDetail": [
+                        {
+                            "id": "0",
+                            "correlation": "0.66132"
+                        },
+                        {
+                            "id": "1",
+                            "correlation": "0.42784"
+                        },
+                        {
+                            "id": "2",
+                            "correlation": "1"
+                        },
+                        {
+                            "id": "3",
+                            "correlation": "0.8747"
+                        }
+                    ]
+                },
+                {
+                    "id": "3",
+                    "correlationDetail": [
+                        {
+                            "id": "0",
+                            "correlation": "0.78875"
+                        },
+                        {
+                            "id": "1",
+                            "correlation": "0.67866"
+                        },
+                        {
+                            "id": "2",
+                            "correlation": "0.8747"
+                        },
+                        {
+                            "id": "3",
+                            "correlation": "1"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "historicalPerformanceSeries": [
+        {
+            "returnType": "TotalReturn",
+            "timePeriod": "M1",
+            "frequency": "Monthly",
+            "startDate": "2012-12-31",
+            "returns": [
+                [
+                    "2013-01-31",
+                    8.38551
+                ],
+                [
+                    "2013-02-28",
+                    4.07197
+                ],
+                [
+                    "2013-03-31",
+                    3.00273
+                ],
+                [
+                    "2013-04-30",
+                    -0.08834
+                ],
+                [
+                    "2013-05-31",
+                    3.62511
+                ],
+                [
+                    "2013-06-30",
+                    -2.98635
+                ],
+                [
+                    "2013-07-31",
+                    3.69393
+                ],
+                [
+                    "2013-08-31",
+                    -3.39271
+                ],
+                [
+                    "2013-09-30",
+                    0.57685
+                ],
+                [
+                    "2013-10-31",
+                    4.31718
+                ],
+                [
+                    "2013-11-30",
+                    0.16892
+                ],
+                [
+                    "2013-12-31",
+                    -0.16863
+                ],
+                [
+                    "2014-01-31",
+                    -4.81419
+                ],
+                [
+                    "2014-02-28",
+                    4.34783
+                ],
+                [
+                    "2014-03-31",
+                    -0.82391
+                ],
+                [
+                    "2014-04-30",
+                    0.21284
+                ],
+                [
+                    "2014-05-31",
+                    1.82488
+                ],
+                [
+                    "2014-06-30",
+                    0.27791
+                ],
+                [
+                    "2014-07-31",
+                    -0.92011
+                ],
+                [
+                    "2014-08-31",
+                    2.16198
+                ],
+                [
+                    "2014-09-30",
+                    -0.14691
+                ],
+                [
+                    "2014-10-31",
+                    1.40516
+                ],
+                [
+                    "2014-11-30",
+                    3.01635
+                ],
+                [
+                    "2014-12-31",
+                    -1.196
+                ],
+                [
+                    "2015-01-31",
+                    2.30944
+                ],
+                [
+                    "2015-02-28",
+                    1.84412
+                ],
+                [
+                    "2015-03-31",
+                    2.44701
+                ],
+                [
+                    "2015-04-30",
+                    -0.94037
+                ],
+                [
+                    "2015-05-31",
+                    1.54941
+                ],
+                [
+                    "2015-06-30",
+                    -3.97464
+                ],
+                [
+                    "2015-07-31",
+                    0.62173
+                ],
+                [
+                    "2015-08-31",
+                    -3.32179
+                ],
+                [
+                    "2015-09-30",
+                    -2.86675
+                ],
+                [
+                    "2015-10-31",
+                    5.28827
+                ],
+                [
+                    "2015-11-30",
+                    1.35822
+                ],
+                [
+                    "2015-12-31",
+                    -0.50194
+                ],
+                [
+                    "2016-01-31",
+                    -4.06531
+                ],
+                [
+                    "2016-02-29",
+                    1.63747
+                ],
+                [
+                    "2016-03-31",
+                    2.17828
+                ],
+                [
+                    "2016-04-30",
+                    0.40314
+                ],
+                [
+                    "2016-05-31",
+                    1.00602
+                ],
+                [
+                    "2016-06-30",
+                    3.92174
+                ],
+                [
+                    "2016-07-31",
+                    5.19827
+                ],
+                [
+                    "2016-08-31",
+                    2.02771
+                ],
+                [
+                    "2016-09-30",
+                    0.29162
+                ],
+                [
+                    "2016-10-31",
+                    2.841
+                ],
+                [
+                    "2016-11-30",
+                    -1.50447
+                ],
+                [
+                    "2016-12-31",
+                    1.86546
+                ],
+                [
+                    "2017-01-31",
+                    1.34216
+                ],
+                [
+                    "2017-02-28",
+                    2.28545
+                ],
+                [
+                    "2017-03-31",
+                    1.15742
+                ],
+                [
+                    "2017-04-30",
+                    -1.17603
+                ],
+                [
+                    "2017-05-31",
+                    2.96424
+                ],
+                [
+                    "2017-06-30",
+                    0.0061
+                ],
+                [
+                    "2017-07-31",
+                    -1.16614
+                ],
+                [
+                    "2017-08-31",
+                    1.35242
+                ],
+                [
+                    "2017-09-30",
+                    -0.89948
+                ],
+                [
+                    "2017-10-31",
+                    1.43462
+                ],
+                [
+                    "2017-11-30",
+                    -0.28938
+                ],
+                [
+                    "2017-12-31",
+                    1.08754
+                ],
+                [
+                    "2018-01-31",
+                    -0.48072
+                ],
+                [
+                    "2018-02-28",
+                    -2.84303
+                ],
+                [
+                    "2018-03-31",
+                    -3.41547
+                ],
+                [
+                    "2018-04-30",
+                    1.27732
+                ],
+                [
+                    "2018-05-31",
+                    0.74392
+                ],
+                [
+                    "2018-06-30",
+                    0.26113
+                ],
+                [
+                    "2018-07-31",
+                    3.42534
+                ],
+                [
+                    "2018-08-31",
+                    0.84193
+                ],
+                [
+                    "2018-09-30",
+                    -0.42094
+                ],
+                [
+                    "2018-10-31",
+                    -1.45617
+                ],
+                [
+                    "2018-11-30",
+                    0.52618
+                ],
+                [
+                    "2018-12-31",
+                    -4.17395
+                ],
+                [
+                    "2019-01-31",
+                    1.82298
+                ],
+                [
+                    "2019-02-28",
+                    2.35182
+                ],
+                [
+                    "2019-03-31",
+                    2.86694
+                ],
+                [
+                    "2019-04-30",
+                    1.61438
+                ],
+                [
+                    "2019-05-31",
+                    -0.23366
+                ],
+                [
+                    "2019-06-30",
+                    3.56093
+                ],
+                [
+                    "2019-07-31",
+                    3.24569
+                ],
+                [
+                    "2019-08-31",
+                    -0.9194
+                ],
+                [
+                    "2019-09-30",
+                    -1.02766
+                ],
+                [
+                    "2019-10-31",
+                    -2.13062
+                ],
+                [
+                    "2019-11-30",
+                    0.7833
+                ],
+                [
+                    "2019-12-31",
+                    0.6169
+                ],
+                [
+                    "2020-01-31",
+                    0.49169
+                ],
+                [
+                    "2020-02-29",
+                    -2.76204
+                ],
+                [
+                    "2020-03-31",
+                    -8.93153
+                ],
+                [
+                    "2020-04-30",
+                    4.2159
+                ],
+                [
+                    "2020-05-31",
+                    5.75777
+                ],
+                [
+                    "2020-06-30",
+                    2.5663
+                ],
+                [
+                    "2020-07-31",
+                    2.21691
+                ],
+                [
+                    "2020-08-31",
+                    0.6413
+                ],
+                [
+                    "2020-09-30",
+                    -1.1314
+                ],
+                [
+                    "2020-10-31",
+                    -0.38876
+                ],
+                [
+                    "2020-11-30",
+                    5.26874
+                ],
+                [
+                    "2020-12-31",
+                    2.05408
+                ],
+                [
+                    "2021-01-31",
+                    -2.2487
+                ],
+                [
+                    "2021-02-28",
+                    -3.6596
+                ],
+                [
+                    "2021-03-31",
+                    -2.08328
+                ],
+                [
+                    "2021-04-30",
+                    3.86083
+                ],
+                [
+                    "2021-05-31",
+                    -0.04836
+                ],
+                [
+                    "2021-06-30",
+                    0.84132
+                ],
+                [
+                    "2021-07-31",
+                    -0.52417
+                ],
+                [
+                    "2021-08-31",
+                    1.64441
+                ],
+                [
+                    "2021-09-30",
+                    -1.73982
+                ],
+                [
+                    "2021-10-31",
+                    0.0026
+                ],
+                [
+                    "2021-11-30",
+                    -1.76247
+                ],
+                [
+                    "2021-12-31",
+                    0.07653
+                ],
+                [
+                    "2022-01-31",
+                    -5.45936
+                ],
+                [
+                    "2022-02-28",
+                    -5.12147
+                ],
+                [
+                    "2022-03-31",
+                    2.63108
+                ],
+                [
+                    "2022-04-30",
+                    -5.02543
+                ],
+                [
+                    "2022-05-31",
+                    -0.07159
+                ],
+                [
+                    "2022-06-30",
+                    -7.01846
+                ],
+                [
+                    "2022-07-31",
+                    3.96465
+                ],
+                [
+                    "2022-08-31",
+                    -0.01789
+                ],
+                [
+                    "2022-09-30",
+                    -6.19153
+                ],
+                [
+                    "2022-10-31",
+                    -0.28601
+                ],
+                [
+                    "2022-11-30",
+                    4.79176
+                ],
+                [
+                    "2022-12-31",
+                    0.8662
+                ],
+                [
+                    "2023-01-31",
+                    1.06
+                ],
+                [
+                    "2023-02-28",
+                    -0.89035
+                ],
+                [
+                    "2023-03-31",
+                    -0.31012
+                ],
+                [
+                    "2023-04-30",
+                    0.81711
+                ],
+                [
+                    "2023-05-31",
+                    -3.59181
+                ]
+            ]
+        },
+        {
+            "returnType": "TotalReturn",
+            "timePeriod": "M3",
+            "frequency": "Quarterly",
+            "startDate": "2012-12-31",
+            "returns": [
+                [
+                    "2013-03-31",
+                    16.18598
+                ],
+                [
+                    "2013-06-30",
+                    0.4417
+                ],
+                [
+                    "2013-09-30",
+                    0.75376
+                ],
+                [
+                    "2013-12-31",
+                    4.31718
+                ],
+                [
+                    "2014-03-31",
+                    -1.49402
+                ],
+                [
+                    "2014-06-30",
+                    2.32518
+                ],
+                [
+                    "2014-09-30",
+                    1.07327
+                ],
+                [
+                    "2014-12-31",
+                    3.2145
+                ],
+                [
+                    "2015-03-31",
+                    6.74584
+                ],
+                [
+                    "2015-06-30",
+                    -3.4038
+                ],
+                [
+                    "2015-09-30",
+                    -5.50946
+                ],
+                [
+                    "2015-12-31",
+                    6.18266
+                ],
+                [
+                    "2016-03-31",
+                    -0.37046
+                ],
+                [
+                    "2016-06-30",
+                    5.39039
+                ],
+                [
+                    "2016-09-30",
+                    7.64439
+                ],
+                [
+                    "2016-12-31",
+                    3.18339
+                ],
+                [
+                    "2017-03-31",
+                    4.85804
+                ],
+                [
+                    "2017-06-30",
+                    1.75955
+                ],
+                [
+                    "2017-09-30",
+                    -0.7305
+                ],
+                [
+                    "2017-12-31",
+                    2.24104
+                ],
+                [
+                    "2018-03-31",
+                    -6.6125
+                ],
+                [
+                    "2018-06-30",
+                    2.29717
+                ],
+                [
+                    "2018-09-30",
+                    3.85708
+                ],
+                [
+                    "2018-12-31",
+                    -5.07246
+                ],
+                [
+                    "2019-03-31",
+                    7.20553
+                ],
+                [
+                    "2019-06-30",
+                    4.98691
+                ],
+                [
+                    "2019-09-30",
+                    1.24519
+                ],
+                [
+                    "2019-12-31",
+                    -0.75552
+                ],
+                [
+                    "2020-03-31",
+                    -11.01147
+                ],
+                [
+                    "2020-06-30",
+                    13.04489
+                ],
+                [
+                    "2020-09-30",
+                    1.70853
+                ],
+                [
+                    "2020-12-31",
+                    7.01338
+                ],
+                [
+                    "2021-03-31",
+                    -7.78792
+                ],
+                [
+                    "2021-06-30",
+                    4.68398
+                ],
+                [
+                    "2021-09-30",
+                    -0.64755
+                ],
+                [
+                    "2021-12-31",
+                    -1.68474
+                ],
+                [
+                    "2022-03-31",
+                    -7.94118
+                ],
+                [
+                    "2022-06-30",
+                    -11.7544
+                ],
+                [
+                    "2022-09-30",
+                    -2.4898
+                ],
+                [
+                    "2022-12-31",
+                    5.39715
+                ],
+                [
+                    "2023-03-31",
+                    -0.15041
+                ]
+            ]
+        },
+        {
+            "returnType": "TotalReturn",
+            "timePeriod": "M12",
+            "frequency": "Annual",
+            "startDate": "2012-12-31",
+            "returns": [
+                [
+                    "2013-12-31",
+                    22.65489
+                ],
+                [
+                    "2014-12-31",
+                    5.15312
+                ],
+                [
+                    "2015-12-31",
+                    3.45534
+                ],
+                [
+                    "2016-12-31",
+                    16.62463
+                ],
+                [
+                    "2017-12-31",
+                    8.29739
+                ],
+                [
+                    "2018-12-31",
+                    -5.81523
+                ],
+                [
+                    "2019-12-31",
+                    13.09232
+                ],
+                [
+                    "2020-12-31",
+                    9.49152
+                ],
+                [
+                    "2021-12-31",
+                    -5.70958
+                ],
+                [
+                    "2022-12-31",
+                    -16.50944
+                ]
+            ]
+        }
+    ],
+    "bestWorstPeriods": {
+        "type": "MonthEnd",
+        "currencyId": "GBP",
+        "date": "2023-05-31",
+        "returns": [
+            {
+                "timePeriod": "M3",
+                "startDate": "2012-12-31",
+                "endDate": "2013-03-31",
+                "type": "Best",
+                "value": 16.186
+            },
+            {
+                "timePeriod": "M3",
+                "startDate": "2022-03-31",
+                "endDate": "2022-06-30",
+                "type": "Worst",
+                "value": -11.754
+            },
+            {
+                "timePeriod": "M6",
+                "startDate": "2012-12-31",
+                "endDate": "2013-06-30",
+                "type": "Best",
+                "value": 16.699
+            },
+            {
+                "timePeriod": "M6",
+                "startDate": "2021-12-31",
+                "endDate": "2022-06-30",
+                "type": "Worst",
+                "value": -18.762
+            },
+            {
+                "timePeriod": "M12",
+                "startDate": "2016-02-29",
+                "endDate": "2017-02-28",
+                "type": "Best",
+                "value": 23.984
+            },
+            {
+                "timePeriod": "M12",
+                "startDate": "2021-10-31",
+                "endDate": "2022-10-31",
+                "type": "Worst",
+                "value": -22.344
+            },
+            {
+                "timePeriod": "M36",
+                "startDate": "2014-01-31",
+                "endDate": "2017-01-31",
+                "type": "Best",
+                "value": 10.5397
+            },
+            {
+                "timePeriod": "M36",
+                "startDate": "2019-09-30",
+                "endDate": "2022-09-30",
+                "type": "Worst",
+                "value": -6.71868
+            },
+            {
+                "timePeriod": "M60",
+                "startDate": "2012-12-31",
+                "endDate": "2017-12-31",
+                "type": "Best",
+                "value": 11.00438
+            },
+            {
+                "timePeriod": "M60",
+                "startDate": "2017-10-31",
+                "endDate": "2022-10-31",
+                "type": "Worst",
+                "value": -2.62407
+            },
+            {
+                "timePeriod": "M1",
+                "startDate": "2012-12-31",
+                "endDate": "2013-01-31",
+                "type": "Best",
+                "value": 8.38551
+            },
+            {
+                "timePeriod": "M1",
+                "startDate": "2020-02-29",
+                "endDate": "2020-03-31",
+                "type": "Worst",
+                "value": -8.93153
+            }
+        ]
+    },
+    "breakdowns": {
+        "assetAllocation": [
+            {
+                "type": "MorningstarEUR3",
+                "salePosition": "N",
+                "values": {
+                    "1": 19.58694,
+                    "2": 71.50021,
+                    "3": 8.43902,
+                    "4": 0.47382,
+                    "99": 0.00001
+                }
+            },
+            {
+                "type": "MorningstarEUR3",
+                "salePosition": "L",
+                "values": {
+                    "1": 19.58694,
+                    "2": 71.52405,
+                    "3": 97.34989,
+                    "4": 0.47382,
+                    "99": 0
+                }
+            },
+            {
+                "type": "MorningstarEUR3",
+                "salePosition": "S",
+                "values": {
+                    "1": 0,
+                    "2": 0.02385,
+                    "3": 88.91087,
+                    "4": 0,
+                    "99": 0
+                }
+            }
+        ],
+        "regionalExposure": [
+            {
+                "salePosition": "N",
+                "values": {
+                    "1": 58.58419,
+                    "2": 0,
+                    "3": 0,
+                    "4": 12.62321,
+                    "5": 14.50262,
+                    "6": 9.24769,
+                    "7": 0,
+                    "8": 0,
+                    "9": 0,
+                    "10": 5.04229,
+                    "11": 0,
+                    "12": 0,
+                    "13": 0,
+                    "99": 0
+                }
+            }
+        ],
+        "globalStockSector": [
+            {
+                "salePosition": "N",
+                "values": {
+                    "99": -0.00001,
+                    "101": 2.88228,
+                    "102": 3.35086,
+                    "103": 10.25464,
+                    "205": 11.61504,
+                    "206": 18.24394,
+                    "308": 6.24003,
+                    "310": 25.72035,
+                    "311": 21.69287
+                }
+            }
+        ],
+        "countryExposure": [
+            {
+                "type": "1",
+                "salePosition": "N",
+                "values": {
+                    "99": 0.00001,
+                    "cHE": 7.78238,
+                    "dEU": 4.43985,
+                    "dNK": 1.46531,
+                    "fRA": 6.32268,
+                    "gBR": 12.62321,
+                    "jPN": 5.04229,
+                    "nLD": 3.74004,
+                    "uSA": 58.58419
+                }
+            },
+            {
+                "type": "2",
+                "salePosition": "N",
+                "values": {
+                    "99": 0.02376,
+                    "aRE": 0.76244,
+                    "aZE": 3.4932,
+                    "bEN": 2.44543,
+                    "bRA": 4.9675,
+                    "cHL": 3.3252,
+                    "cOL": 3.13219,
+                    "cRI": 3.71251,
+                    "dOM": 6.70172,
+                    "eCU": 1.15533,
+                    "gBR": 4.02604,
+                    "gTM": 0.5996,
+                    "hRV": 1.08386,
+                    "hUN": 4.49193,
+                    "iDN": 3.06756,
+                    "iSR": 2.69097,
+                    "jAM": 2.9651,
+                    "jOR": 3.81709,
+                    "kAZ": 0.77298,
+                    "mAR": 2.02961,
+                    "mEX": 5.18395,
+                    "mNG": 1.54221,
+                    "mYS": 0.69185,
+                    "pAN": 4.83602,
+                    "pER": 1.94069,
+                    "pHL": 2.80281,
+                    "pOL": 1.23655,
+                    "rOU": 3.02507,
+                    "sAU": 2.44976,
+                    "sRB": 1.77308,
+                    "tUR": 2.26805,
+                    "uZB": 3.40642,
+                    "vNM": 1.41234,
+                    "zAF": 2.69425,
+                    "cAN": 0.01525,
+                    "bEL": 0.09635,
+                    "cHE": 0.51254,
+                    "dEU": 1.00784,
+                    "eSP": 0.63275,
+                    "fRA": 1.00129,
+                    "iND": 0.3748,
+                    "iRL": 0.09152,
+                    "iTA": 0.28431,
+                    "nLD": 0.36936,
+                    "pRT": 0.17347,
+                    "sWE": 0.18437,
+                    "uSA": 4.72905
+                }
+            }
+        ],
+        "bondStyleBox": [
+            {
+                "salePosition": "N",
+                "values": {
+                    "1": 0,
+                    "2": 0,
+                    "3": 0,
+                    "4": 0,
+                    "5": 0,
+                    "6": 0,
+                    "7": 0,
+                    "8": 0,
+                    "9": 87.47322,
+                    "99": 12.52678
+                }
+            }
+        ]
+    },
+    "equityStatistics": {
+        "marketCapital": {
+            "value": 85749.03034,
+            "notClassified": "80"
+        },
+        "prospectiveEarningsYield": {
+            "value": 21.54425,
+            "notClassified": "80"
+        },
+        "prospectiveBookValueYield": {
+            "value": 3.79916,
+            "notClassified": "80"
+        },
+        "prospectiveCashFlowYield": {
+            "value": 16.57989,
+            "notClassified": "80"
+        },
+        "prospectiveRevenueYield": {
+            "value": 2.62219,
+            "notClassified": "80"
+        }
+    },
+    "bondStatistics": {
+        "effectiveDuration": {
+            "value": 7.10009,
+            "notClassified": "30"
+        },
+        "effectiveMaturity": {
+            "value": 12.23278,
+            "notClassified": "30"
+        },
+        "yieldToMaturity": {
+            "value": 5.94611,
+            "notClassified": "30"
+        },
+        "averageCreditQuality": {
+            "value": 12,
+            "notClassified": "0",
+            "code": "BB"
+        }
+    },
+    "benchmark": [
+        {
+            "trailingPerformance": [
+                {
+                    "type": "MonthEnd",
+                    "returnType": "TotalReturn",
+                    "currencyId": "GBP",
+                    "endDate": "2023-05-31",
+                    "returns": [
+                        {
+                            "timePeriod": "M0",
+                            "value": 3.80695
+                        },
+                        {
+                            "timePeriod": "M1",
+                            "value": -0.1147
+                        },
+                        {
+                            "timePeriod": "M2",
+                            "value": -0.13154
+                        },
+                        {
+                            "timePeriod": "M3",
+                            "value": 0.21862
+                        },
+                        {
+                            "timePeriod": "M6",
+                            "value": 0.36788
+                        },
+                        {
+                            "timePeriod": "M12",
+                            "value": 2.49286
+                        },
+                        {
+                            "timePeriod": "M36",
+                            "value": 8.14034
+                        },
+                        {
+                            "timePeriod": "M60",
+                            "value": 6.21583
+                        },
+                        {
+                            "timePeriod": "M120",
+                            "value": 8.13825
+                        }
+                    ]
+                }
+            ],
+            "historicalPerformanceSeries": [
+                {
+                    "returnType": "TotalReturn",
+                    "timePeriod": "M12",
+                    "frequency": "Annual",
+                    "startDate": "1971-12-31",
+                    "returns": [
+                        [
+                            "1972-12-31",
+                            31.01817
+                        ],
+                        [
+                            "1973-12-31",
+                            -1.54241
+                        ],
+                        [
+                            "1974-12-31",
+                            -7.74118
+                        ],
+                        [
+                            "1975-12-31",
+                            43.97204
+                        ],
+                        [
+                            "1976-12-31",
+                            34.62774
+                        ],
+                        [
+                            "1977-12-31",
+                            -1.29065
+                        ],
+                        [
+                            "1978-12-31",
+                            11.5428
+                        ],
+                        [
+                            "1979-12-31",
+                            2.39671
+                        ],
+                        [
+                            "1980-12-31",
+                            6.37012
+                        ],
+                        [
+                            "1981-12-31",
+                            17.57942
+                        ],
+                        [
+                            "1982-12-31",
+                            25.47286
+                        ],
+                        [
+                            "1983-12-31",
+                            31.80138
+                        ],
+                        [
+                            "1984-12-31",
+                            18.69964
+                        ],
+                        [
+                            "1985-12-31",
+                            28.76509
+                        ],
+                        [
+                            "1986-12-31",
+                            35.94291
+                        ],
+                        [
+                            "1987-12-31",
+                            -16.79011
+                        ],
+                        [
+                            "1988-12-31",
+                            13.80059
+                        ],
+                        [
+                            "1989-12-31",
+                            37.48971
+                        ],
+                        [
+                            "1990-12-31",
+                            -20.4656
+                        ],
+                        [
+                            "1991-12-31",
+                            13.81019
+                        ],
+                        [
+                            "1992-12-31",
+                            19.25306
+                        ],
+                        [
+                            "1993-12-31",
+                            27.44755
+                        ],
+                        [
+                            "1994-12-31",
+                            -4.85054
+                        ],
+                        [
+                            "1995-12-31",
+                            15.6441
+                        ],
+                        [
+                            "1996-12-31",
+                            3.13284
+                        ],
+                        [
+                            "1997-12-31",
+                            14.15852
+                        ],
+                        [
+                            "1998-12-31",
+                            20.35971
+                        ],
+                        [
+                            "1999-12-31",
+                            30.29808
+                        ],
+                        [
+                            "2000-12-31",
+                            -5.63088
+                        ],
+                        [
+                            "2001-12-31",
+                            -16.67498
+                        ],
+                        [
+                            "2002-12-31",
+                            -26.15652
+                        ],
+                        [
+                            "2003-12-31",
+                            20.54896
+                        ],
+                        [
+                            "2004-12-31",
+                            6.01051
+                        ],
+                        [
+                            "2005-12-31",
+                            21.07298
+                        ],
+                        [
+                            "2006-12-31",
+                            6.63398
+                        ],
+                        [
+                            "2007-12-31",
+                            9.14509
+                        ],
+                        [
+                            "2008-12-31",
+                            -19.06922
+                        ],
+                        [
+                            "2009-12-31",
+                            18.9705
+                        ],
+                        [
+                            "2010-12-31",
+                            13.01866
+                        ],
+                        [
+                            "2011-12-31",
+                            -9.42889
+                        ],
+                        [
+                            "2012-12-31",
+                            9.34461
+                        ],
+                        [
+                            "2013-12-31",
+                            20.34446
+                        ],
+                        [
+                            "2014-12-31",
+                            7.62371
+                        ],
+                        [
+                            "2015-12-31",
+                            3.87405
+                        ],
+                        [
+                            "2016-12-31",
+                            23.81058
+                        ],
+                        [
+                            "2017-12-31",
+                            12.64645
+                        ],
+                        [
+                            "2018-12-31",
+                            -6.65186
+                        ],
+                        [
+                            "2019-12-31",
+                            19.07989
+                        ],
+                        [
+                            "2020-12-31",
+                            10.85963
+                        ],
+                        [
+                            "2021-12-31",
+                            17.6746
+                        ],
+                        [
+                            "2022-12-31",
+                            -9.23421
+                        ]
+                    ]
+                }
+            ],
+            "breakdowns": {
+                "assetAllocation": [
+                    {
+                        "type": "MorningstarEUR3",
+                        "salePosition": "N",
+                        "values": {
+                            "1": 95.43379,
+                            "2": 0.01953,
+                            "3": -1.68219,
+                            "4": 6.22889,
+                            "99": -0.00002
+                        }
+                    },
+                    {
+                        "type": "MorningstarEUR3",
+                        "salePosition": "L",
+                        "values": {
+                            "1": 95.53553,
+                            "2": 0.03645,
+                            "3": 6.76951,
+                            "4": 6.27779,
+                            "99": 0
+                        }
+                    },
+                    {
+                        "type": "MorningstarEUR3",
+                        "salePosition": "S",
+                        "values": {
+                            "1": 0.10174,
+                            "2": 0.01692,
+                            "3": 8.4517,
+                            "4": 0.0489,
+                            "99": 0
+                        }
+                    },
+                    {
+                        "type": "Default1",
+                        "salePosition": "N",
+                        "values": {
+                            "1": 95.43379,
+                            "2": 0,
+                            "3": 0.01953,
+                            "4": 0,
+                            "5": 0.00396,
+                            "6": 0.00109,
+                            "7": -1.68219,
+                            "8": 6.22384,
+                            "99": -0.00002
+                        }
+                    },
+                    {
+                        "type": "Default1",
+                        "salePosition": "L",
+                        "values": {
+                            "1": 95.53553,
+                            "2": 0,
+                            "3": 0.03645,
+                            "4": 0,
+                            "5": 0.00396,
+                            "6": 0.00109,
+                            "7": 6.76951,
+                            "8": 6.27274,
+                            "99": 0
+                        }
+                    },
+                    {
+                        "type": "Default1",
+                        "salePosition": "S",
+                        "values": {
+                            "1": 0.10174,
+                            "2": 0,
+                            "3": 0.01692,
+                            "4": 0,
+                            "5": 0,
+                            "6": 0,
+                            "7": 8.4517,
+                            "8": 0.0489,
+                            "99": 0
+                        }
+                    }
+                ],
+                "styleBox": [
+                    {
+                        "salePosition": "N",
+                        "values": {
+                            "1": 17.97953,
+                            "2": 27.71824,
+                            "3": 32.82782,
+                            "4": 5.39098,
+                            "5": 9.57727,
+                            "6": 4.00265,
+                            "7": 0.54164,
+                            "8": 0.76985,
+                            "9": 0.37541,
+                            "99": 0.81661
+                        }
+                    }
+                ],
+                "regionalExposure": [
+                    {
+                        "salePosition": "N",
+                        "values": {
+                            "1": 63.18364,
+                            "2": 2.53431,
+                            "3": 0.29919,
+                            "4": 5.82084,
+                            "5": 11.13343,
+                            "6": 5.6026,
+                            "7": 0.01157,
+                            "8": 0.03073,
+                            "9": 0.19189,
+                            "10": 5.54664,
+                            "11": 1.30883,
+                            "12": 2.39879,
+                            "13": 1.43875,
+                            "99": 0.49879
+                        }
+                    }
+                ],
+                "globalStockSector": [
+                    {
+                        "salePosition": "N",
+                        "values": {
+                            "99": 0.62545,
+                            "101": 3.75824,
+                            "102": 10.01958,
+                            "103": 14.87607,
+                            "104": 1.89251,
+                            "205": 7.8725,
+                            "206": 14.7166,
+                            "207": 2.16065,
+                            "308": 7.09642,
+                            "309": 3.31107,
+                            "310": 11.03901,
+                            "311": 22.6319
+                        }
+                    }
+                ],
+                "countryExposure": [
+                    {
+                        "type": "1",
+                        "salePosition": "N",
+                        "values": {
+                            "99": 0.49884,
+                            "aRE": 0.0062,
+                            "aUS": 1.27318,
+                            "aUT": 0.06318,
+                            "bEL": 0.21934,
+                            "bHR": 0,
+                            "bMU": 0,
+                            "bRA": 0.21832,
+                            "cAN": 2.53431,
+                            "cHE": 3.05433,
+                            "cHL": 0.00285,
+                            "cHN": 0.92323,
+                            "cOL": 0.00073,
+                            "cRI": 0.00003,
+                            "cUW": 0.00005,
+                            "cYP": 0,
+                            "cZE": 0.00103,
+                            "dEU": 2.66771,
+                            "dNK": 1.34501,
+                            "eGY": 0.00071,
+                            "eSP": 0.76154,
+                            "fIN": 0.32704,
+                            "fRA": 4.14406,
+                            "gBR": 5.82084,
+                            "gRC": 0.00193,
+                            "hKG": 0.6343,
+                            "hUN": 0.00212,
+                            "iDN": 0.09943,
+                            "iND": 0.39724,
+                            "iRL": 0.21483,
+                            "iSL": 0.00017,
+                            "iSR": 0.17044,
+                            "iTA": 0.51943,
+                            "jEY": 0,
+                            "jPN": 5.54664,
+                            "kAZ": 0.00037,
+                            "kHM": 0.00001,
+                            "kOR": 0.64551,
+                            "kWT": 0.00187,
+                            "lIE": 0,
+                            "lUX": 0.00051,
+                            "mAC": 0.00241,
+                            "mEX": 0.07475,
+                            "mHL": 0.00003,
+                            "mLT": 0.00001,
+                            "mUS": 0,
+                            "mYS": 0.00518,
+                            "nLD": 2.16909,
+                            "nOR": 0.41123,
+                            "nZL": 0.03565,
+                            "oMN": 0,
+                            "pAK": 0.00002,
+                            "pER": 0.0013,
+                            "pHL": 0.00248,
+                            "pOL": 0.00411,
+                            "pRI": 0.00096,
+                            "pRT": 0.04474,
+                            "qAT": 0.00281,
+                            "rOU": 0.0003,
+                            "rUS": 0.00003,
+                            "sAU": 0.01056,
+                            "sGP": 0.47141,
+                            "sWE": 0.79186,
+                            "tHA": 0.01053,
+                            "tUR": 0.00396,
+                            "tWN": 0.64516,
+                            "uKR": 0.00002,
+                            "uRY": 0.00018,
+                            "uSA": 63.18364,
+                            "vGB": 0,
+                            "vNM": 0.00024,
+                            "zAF": 0.03001
+                        }
+                    },
+                    {
+                        "type": "2",
+                        "salePosition": "N",
+                        "values": {
+                            "99": 0.90535,
+                            "aUS": 2.30453,
+                            "bEL": 5.81619,
+                            "cAN": 1.15226,
+                            "dEU": 7.37997,
+                            "eSP": 4.08779,
+                            "fRA": 12.89438,
+                            "gBR": 2.68861,
+                            "iND": 0,
+                            "iTA": 9.87654,
+                            "lUX": 0.57613,
+                            "nLD": 2.30453,
+                            "uSA": 50.01372
+                        }
+                    },
+                    {
+                        "type": "3",
+                        "salePosition": "N",
+                        "values": {
+                            "99": 72.47475,
+                            "cAN": 6.06061,
+                            "fRA": 20.9596,
+                            "sGP": 0.50505
+                        }
+                    }
+                ],
+                "globalBondSector": [
+                    {
+                        "salePosition": "N",
+                        "level": "1",
+                        "values": {
+                            "10": 0,
+                            "30": 0,
+                            "50": 0,
+                            "60": 0,
+                            "99": 0
+                        }
+                    },
+                    {
+                        "salePosition": "N",
+                        "level": "2",
+                        "values": {
+                            "99": 0,
+                            "1010": 0,
+                            "1020": 0,
+                            "3020": 0,
+                            "3030": 0,
+                            "3040": 0,
+                            "5010": 0,
+                            "6010": 0,
+                            "6020": 0
+                        }
+                    },
+                    {
+                        "salePosition": "N",
+                        "level": "3",
+                        "values": {
+                            "99": 0,
+                            "101010": 0,
+                            "102010": 0,
+                            "102030": 0,
+                            "102040": 0,
+                            "302003": 0,
+                            "302010": 0,
+                            "303003": 0,
+                            "303005": 0,
+                            "303010": 0,
+                            "303012": 0,
+                            "304002": 0,
+                            "304004": 0,
+                            "304007": 0,
+                            "304009": 0,
+                            "304012": 0,
+                            "501010": 0,
+                            "501011": 0,
+                            "501012": 0,
+                            "501013": 0,
+                            "501014": 0,
+                            "501016": 0,
+                            "501019": 0,
+                            "501021": 0,
+                            "501022": 0,
+                            "501023": 0,
+                            "501024": 0,
+                            "601010": 0,
+                            "602030": 0
+                        }
+                    }
+                ],
+                "creditQuality": [
+                    {
+                        "salePosition": "N",
+                        "values": {
+                            "1": 0,
+                            "2": 9.73937,
+                            "3": 7.76406,
+                            "4": 6.6941,
+                            "5": 19.06722,
+                            "6": 0.21948,
+                            "7": 0.05487,
+                            "8": 0,
+                            "9": 56.46091,
+                            "99": 0
+                        }
+                    }
+                ],
+                "bondStyleBox": [
+                    {
+                        "salePosition": "N",
+                        "values": {
+                            "1": 0,
+                            "2": 0,
+                            "3": 0,
+                            "4": 0,
+                            "5": 0,
+                            "6": 0,
+                            "7": 0,
+                            "8": 0,
+                            "9": 0,
+                            "99": 100
+                        }
+                    }
+                ]
+            },
+            "equityStatistics": {
+                "equityWeighting": {
+                    "value": 95.43379
+                },
+                "equityWeightingLong": {
+                    "value": 95.53553
+                },
+                "marketCapital": {
+                    "value": 146989.5816
+                },
+                "prospectiveEarningsYield": {
+                    "value": 16.47316
+                },
+                "prospectiveBookValueYield": {
+                    "value": 2.77691
+                },
+                "prospectiveCashFlowYield": {
+                    "value": 10.50889
+                },
+                "prospectiveRevenueYield": {
+                    "value": 1.76276
+                }
+            },
+            "bondStatistics": {
+                "bondWeighting": {
+                    "value": 0.01953
+                },
+                "bondWeightingLong": {
+                    "value": 0.03645
+                },
+                "bondAndConvertibleWeightingLong": {
+                    "value": 0.03754
+                },
+                "bondWeightingLongRescale": {
+                    "value": 0.00034
+                },
+                "effectiveDuration": {
+                    "value": 1.01475
+                },
+                "effectiveMaturity": {
+                    "value": 4.77827
+                },
+                "averageCreditQuality": {
+                    "value": 14
+                },
+                "yieldToMaturity": {
+                    "value": 1.30992
+                },
+                "modifiedDuration": {
+                    "value": 2.56195
+                }
+            }
+        }
+    ],
+    "calculatedDataPoints": [
+        {
+            "portfolioWeight": {
+                "userPref1": "70.0"
+            }
+        }
+    ]
+}
+```
+
+</details>
+&nbsp;
+
+### Integration Data Format
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+	"portfolioName": "US demo portfolio - weight",
+	"riskScore": {
+		"riskScore": [
+			{
+				"portfolioName": "US demo portfolio - weight",
+				"portfolioRiskScore": 122.37272875931704,
+				"portfolioAlignmentScore": 26.84060796890573,
+				"portfolioRsquared": 0.8368803527643834,
+				"isProxyUsedInRiskScore": false
+			}
+		]
+	},
+	"assetAllocation": {
+		"portfolio": [
+			{
+				"key": "AC-USCASH",
+				"long": 1.025986,
+				"net": 0.978615,
+				"short": 0.047371
+			},
+			{
+				"key": "AC-USEQ",
+				"long": 18.726356,
+				"net": 18.726356,
+				"short": 0
+			},
+			{
+				"key": "AC-NUSEQ",
+				"long": 60.740787,
+				"net": 60.740787,
+				"short": 0
+			},
+			{
+				"key": "AC-ALLBOND",
+				"long": 19.391508,
+				"net": 19.391508,
+				"short": 0
+			},
+			{
+				"key": "AC-USBROAD-OTHER",
+				"long": 0.162722,
+				"net": 0.162722,
+				"short": 0
+			},
+			{
+				"key": "AC-NOTCLASSIFIED",
+				"long": 0,
+				"net": 0,
+				"short": 0
+			}
+		],
+		"benchmark": [
+			{
+				"key": "AC-USCASH",
+				"long": 0,
+				"net": 0,
+				"short": 0
+			},
+			{
+				"key": "AC-USEQ",
+				"long": 98.87554,
+				"net": 98.87554,
+				"short": 0
+			},
+			{
+				"key": "AC-NUSEQ",
+				"long": 1.12445,
+				"net": 1.12445,
+				"short": 0
+			},
+			{
+				"key": "AC-ALLBOND",
+				"long": 0,
+				"net": 0,
+				"short": 0
+			},
+			{
+				"key": "AC-USBROAD-OTHER",
+				"long": 0,
+				"net": 0,
+				"short": 0
+			},
+			{
+				"key": "AC-NOTCLASSIFIED",
+				"long": 0,
+				"net": 0,
+				"short": 0
+			}
+		],
+		"breakdownData": {
+			"assetAllocation": {
+				"Id": "ACG-USBROAD",
+				"AsOfDate": "2022-09-30T00:00:00",
+				"PortfolioAnalyzed": 100,
+				"Portfolio": [
+					{
+						"Id": "AC-USCASH",
+						"Long": 0.866457,
+						"Short": 0.074499,
+						"Net": 0.791958
+					},
+					{
+						"Id": "AC-USEQ",
+						"Long": 18.816015,
+						"Short": 0,
+						"Net": 18.816015
+					},
+					{
+						"Id": "AC-NUSEQ",
+						"Long": 60.936246,
+						"Short": 0,
+						"Net": 60.936246
+					},
+					{
+						"Id": "AC-ALLBOND",
+						"Long": 19.274978,
+						"Short": 0,
+						"Net": 19.274978
+					},
+					{
+						"Id": "AC-USBROAD-OTHER",
+						"Long": 0.180786,
+						"Short": 0,
+						"Net": 0.180786
+					},
+					{
+						"Id": "AC-NOTCLASSIFIED",
+						"Long": 0,
+						"Short": 0,
+						"Net": 0
+					}
+				],
+				"Benchmark": [
+					{
+						"Id": "AC-USCASH",
+						"Long": 0,
+						"Short": 0,
+						"Net": 0
+					},
+					{
+						"Id": "AC-USEQ",
+						"Long": 98.87554,
+						"Short": 0,
+						"Net": 98.87554
+					},
+					{
+						"Id": "AC-NUSEQ",
+						"Long": 1.12445,
+						"Short": 0,
+						"Net": 1.12445
+					},
+					{
+						"Id": "AC-ALLBOND",
+						"Long": 0,
+						"Short": 0,
+						"Net": 0
+					},
+					{
+						"Id": "AC-USBROAD-OTHER",
+						"Long": 0,
+						"Short": 0,
+						"Net": 0
+					},
+					{
+						"Id": "AC-NOTCLASSIFIED",
+						"Long": 0,
+						"Short": 0,
+						"Net": 0
+					}
+				],
+				"SecurityBreakdown": [
+					{
+						"SecurityId": "F00000T770",
+						"Analyzed": 100,
+						"NotAnalyzed": 0,
+						"AssetClass": [
+							{
+								"Id": "AC-ALLBOND",
+								"Long": 96.37489,
+								"Short": 0,
+								"Net": 96.37489
+							},
+							{
+								"Id": "AC-NUSEQ",
+								"Long": 0,
+								"Short": 0,
+								"Net": 0
+							},
+							{
+								"Id": "AC-USBROAD-OTHER",
+								"Long": 0,
+								"Short": 0,
+								"Net": 0
+							},
+							{
+								"Id": "AC-USCASH",
+								"Long": 3.62499,
+								"Short": 0,
+								"Net": 3.62499
+							},
+							{
+								"Id": "AC-USEQ",
+								"Long": 0,
+								"Short": 0,
+								"Net": 0
+							}
+						],
+						"Name": "1290 High Yield Bond A",
+						"Weight": 20
+					},
+					{
+						"SecurityId": "FOUSA06OEZ",
+						"Analyzed": 100,
+						"NotAnalyzed": 0,
+						"AssetClass": [
+							{
+								"Id": "AC-ALLBOND",
+								"Long": 0,
+								"Short": 0,
+								"Net": 0
+							},
+							{
+								"Id": "AC-NUSEQ",
+								"Long": 37.86367,
+								"Short": 0,
+								"Net": 37.86367
+							},
+							{
+								"Id": "AC-USBROAD-OTHER",
+								"Long": 0.07102,
+								"Short": 0,
+								"Net": 0.07102
+							},
+							{
+								"Id": "AC-USCASH",
+								"Long": 0.42203,
+								"Short": 0.00008,
+								"Net": 0.42195
+							},
+							{
+								"Id": "AC-USEQ",
+								"Long": 61.64335,
+								"Short": 0,
+								"Net": 61.64335
+							}
+						],
+						"Name": "iShares MSCI ACWI ETF",
+						"Weight": 30
+					},
+					{
+						"SecurityId": "FOUSA06IVV",
+						"Analyzed": 100,
+						"NotAnalyzed": 0,
+						"AssetClass": [
+							{
+								"Id": "AC-ALLBOND",
+								"Long": 0,
+								"Short": 0,
+								"Net": 0
+							},
+							{
+								"Id": "AC-NUSEQ",
+								"Long": 99.15429,
+								"Short": 0,
+								"Net": 99.15429
+							},
+							{
+								"Id": "AC-USBROAD-OTHER",
+								"Long": 0.31896,
+								"Short": 0,
+								"Net": 0.31896
+							},
+							{
+								"Id": "AC-USCASH",
+								"Long": 0.0297,
+								"Short": 0.14895,
+								"Net": -0.11925
+							},
+							{
+								"Id": "AC-USEQ",
+								"Long": 0.64602,
+								"Short": 0,
+								"Net": 0.64602
+							}
+						],
+						"Name": "Invesco FTSE RAFI Dev Mkts ex-US ETF",
+						"Weight": 50
+					}
+				]
+			},
+			"securityBreakdownData": [
+				{
+					"SecurityId": "F00000T770",
+					"Analyzed": 100,
+					"NotAnalyzed": 0,
+					"AssetClass": [
+						{
+							"Id": "AC-ALLBOND",
+							"Long": 96.37489,
+							"Short": 0,
+							"Net": 96.37489
+						},
+						{
+							"Id": "AC-NUSEQ",
+							"Long": 0,
+							"Short": 0,
+							"Net": 0
+						},
+						{
+							"Id": "AC-USBROAD-OTHER",
+							"Long": 0,
+							"Short": 0,
+							"Net": 0
+						},
+						{
+							"Id": "AC-USCASH",
+							"Long": 3.62499,
+							"Short": 0,
+							"Net": 3.62499
+						},
+						{
+							"Id": "AC-USEQ",
+							"Long": 0,
+							"Short": 0,
+							"Net": 0
+						}
+					],
+					"Name": "1290 High Yield Bond A",
+					"Weight": 20
+				},
+				{
+					"SecurityId": "FOUSA06OEZ",
+					"Analyzed": 100,
+					"NotAnalyzed": 0,
+					"AssetClass": [
+						{
+							"Id": "AC-ALLBOND",
+							"Long": 0,
+							"Short": 0,
+							"Net": 0
+						},
+						{
+							"Id": "AC-NUSEQ",
+							"Long": 37.86367,
+							"Short": 0,
+							"Net": 37.86367
+						},
+						{
+							"Id": "AC-USBROAD-OTHER",
+							"Long": 0.07102,
+							"Short": 0,
+							"Net": 0.07102
+						},
+						{
+							"Id": "AC-USCASH",
+							"Long": 0.42203,
+							"Short": 0.00008,
+							"Net": 0.42195
+						},
+						{
+							"Id": "AC-USEQ",
+							"Long": 61.64335,
+							"Short": 0,
+							"Net": 61.64335
+						}
+					],
+					"Name": "iShares MSCI ACWI ETF",
+					"Weight": 30
+				},
+				{
+					"SecurityId": "FOUSA06IVV",
+					"Analyzed": 100,
+					"NotAnalyzed": 0,
+					"AssetClass": [
+						{
+							"Id": "AC-ALLBOND",
+							"Long": 0,
+							"Short": 0,
+							"Net": 0
+						},
+						{
+							"Id": "AC-NUSEQ",
+							"Long": 99.15429,
+							"Short": 0,
+							"Net": 99.15429
+						},
+						{
+							"Id": "AC-USBROAD-OTHER",
+							"Long": 0.31896,
+							"Short": 0,
+							"Net": 0.31896
+						},
+						{
+							"Id": "AC-USCASH",
+							"Long": 0.0297,
+							"Short": 0.14895,
+							"Net": -0.11925
+						},
+						{
+							"Id": "AC-USEQ",
+							"Long": 0.64602,
+							"Short": 0,
+							"Net": 0.64602
+						}
+					],
+					"Name": "Invesco FTSE RAFI Dev Mkts ex-US ETF",
+					"Weight": 50
+				}
+			]
+		}
+	},
+	"sustainability": {
+		"ESG": [
+			{
+				"sustainability": {
+					"portfolio": {
+						"name": "US demo portfolio - weight",
+						"portfolioDate": "2022-08-31",
+						"esgRisk": {
+							"portfolioCorporateSustainabilityScore": 23.01973281048597,
+							"corporateSustainabilityRatingPercentOfEligiblePortfolioCovered": 89.78181845258491,
+							"portfolioEnvironmentalRiskScore": 5.262400742746653,
+							"portfolioSocialRiskScore": 8.531906469007124,
+							"portfolioGovernanceRiskScore": 7.009693633059448,
+							"portfolioCorporateESGRiskExposureScore": 45.044147431295215,
+							"portfolioCorporateESGManagedRiskScore": 22.024652844677114,
+							"corporatePercentOfPortfolioCoveredWithHighESGRiskScores": 14.651749021463747,
+							"corporatePercentOfPortfolioCoveredWithLowESGRiskScores": 36.83868532662791,
+							"corporatePercentOfPortfolioCoveredWithMediumESGRiskScores": 44.86253819232566,
+							"corporatePercentOfPortfolioCoveredWithNegligibleESGRiskScores": 1.5454831855803235,
+							"corporatePercentOfPortfolioCoveredWithSevereESGRiskScores": 2.1015442740023618,
+							"corporateSustainabilityRatingNumberOfSecuritiesScored": 2675,
+							"exposurePercentEligible": 99.92910396407052,
+							"exposurePercentNotEligible": 0.07089603592948235,
+							"historicalCorporateSustainabilityScore": 23.01973281048597,
+							"numberOfSecuritiesNotScoredControversy": 361,
+							"numberOfSecuritiesScoredControversy": 2646,
+							"percentOfAumCoveredControversy": 86.12325643468661,
+							"percentOfAumWithHighAndSevereControversies": 9.701549093318562,
+							"percentOfAumWithHighControversies": 8.627291197663011,
+							"percentOfAumWithLowControversies": 14.295613488675,
+							"percentOfAumWithModerateControversies": 35.592377114805714,
+							"percentOfAumWithNoControversies": 8.108232125231368,
+							"percentOfAumWithSevereControversies": 1.0742578956555515,
+							"percentOfAumWithSignificantControversies": 32.302228177969354,
+							"portfolioDateSustainabilityRating": "2022-08-31",
+							"portfolioSustainabilityRatingEligibleHoldingType": "corporate, sovereign",
+							"portfolioSustainabilityRatingPercentageOfQualifiedHoldingsCorporate": 99.92910396407052,
+							"portfolioSustainabilityRatingPercentageOfQualifiedHoldingsOther": 0.07089603592948235,
+							"portfolioSustainabilityRatingPercentageOfQualifiedHoldingsSovereign": 0,
+							"percentOfCorporateSustainabilityScoreContributionEScore": 22.86039019683808,
+							"percentOfCorporateSustainabilityScoreContributionGScore": 30.450803624733584,
+							"percentOfCorporateSustainabilityScoreContributionSScore": 37.06344699674648,
+							"percentOfCorporateSustainabilityScoreContributionUnallocatedScore": 9.627720728444533,
+							"portfolioUnallocatedESGRiskScore": 2.216275587427705,
+							"sovereignSustainabilityRatingNumberOfSecuritiesScored": 0,
+							"sustainabilityRatingCorporateContributionPercent": 100,
+							"sustainabilityRatingNumberOfSecuritiesScored": 2675,
+							"sustainabilityRatingSovereignContributionPercent": 0
+						},
+						"productInvolvement": {
+							"abortiveContraceptivesStemcell": 8.231914,
+							"animalTesting": 18.087774,
+							"controversialWeapons": 1.2045478,
+							"adultEntertainment": 0,
+							"alcohol": 1.2506819,
+							"furAndSpecialtyLeather": 0,
+							"gambling": 0.6914128,
+							"militaryContracting": 1.700992,
+							"nuclear": 1.8510603,
+							"palmOil": 0.03316412,
+							"pesticides": 0.93856007,
+							"smallArms": 0.8869012,
+							"thermalCoal": 0.8587581,
+							"tobacco": 1.1618457,
+							"gmo": 0.3248087
+						},
+						"carbonData": {
+							"percentAUMCoveredCarbon": 85,
+							"carbonRiskScore": 11.31,
+							"scope1Emissions": 5891264,
+							"scope2Emissions": 1593591.2,
+							"carbonRiskClassification": "Medium Risk",
+							"percentOfAUMWithNegligibleCarbonRisk": 12.89,
+							"percentOfAUMWithLowCarbonRisk": 47.49,
+							"percentOfAUMWithMediumCarbonRisk": 33.25,
+							"percentOfAUMWithHighCarbonRisk": 6.1,
+							"percentOfAUMWithSevereCarbonRisk": 0.28,
+							"fossilFuelInvolvement": 14.3,
+							"thermalCoalPowerGenerationInvolvement": 0.76,
+							"thermalCoalExtractionInvolvement": 0.06,
+							"oilSandsExtractionInvolvement": 4.46,
+							"carbonExposureScore": 22.3,
+							"carbonManagementScore": 58.32,
+							"carbonOperationsRisk": 5.84,
+							"carbonProductsAndServicesRisk": 3.86,
+							"carbonIntensity": 215.74,
+							"arcticOilAndGasExplorationInvolvement": 4.82,
+							"carbonSolutionsInvolvement": 9.64,
+							"oilAndGasGenerationInvolvement": 7.53,
+							"oilAndGasProductionInvolvement": 10.15,
+							"oilAndGasProductsAndServiceInvolvement": 0.21
+						}
+					},
+					"benchmark": {
+						"name": "Morningstar US Market TR USD",
+						"portfolioDate": "2022-08-31",
+						"identifier": "XIUSA0010V",
+						"identifierType": "SecurityId",
+						"securityType": "XI",
+						"esgRisk": {
+							"portfolioCorporateSustainabilityScore": 21.66,
+							"corporateSustainabilityRatingPercentOfEligiblePortfolioCovered": 99.51482,
+							"portfolioEnvironmentalRiskScore": 4.06,
+							"portfolioSocialRiskScore": 9.35,
+							"portfolioGovernanceRiskScore": 7.22,
+							"portfolioCorporateESGRiskExposureScore": 39.45623,
+							"portfolioCorporateESGManagedRiskScore": 17.79711,
+							"corporatePercentOfPortfolioCoveredWithHighESGRiskScores": 13.10503,
+							"corporatePercentOfPortfolioCoveredWithLowESGRiskScores": 44.87524,
+							"corporatePercentOfPortfolioCoveredWithMediumESGRiskScores": 39.40266,
+							"corporatePercentOfPortfolioCoveredWithNegligibleESGRiskScores": 1.54518,
+							"corporatePercentOfPortfolioCoveredWithSevereESGRiskScores": 1.07188,
+							"corporateSustainabilityRatingNumberOfSecuritiesScored": 1481,
+							"historicalCorporateSustainabilityScore": 21.77431,
+							"portfolioDateSustainabilityRating": "2022-07-29",
+							"portfolioSustainabilityRatingEligibleHoldingType": "corporate, sovereign",
+							"portfolioSustainabilityRatingPercentageOfQualifiedHoldingsCorporate": 100,
+							"portfolioSustainabilityRatingPercentageOfQualifiedHoldingsOther": 0,
+							"portfolioSustainabilityRatingPercentageOfQualifiedHoldingsSovereign": 0,
+							"percentOfCorporateSustainabilityScoreContributionEScore": 18.73558,
+							"percentOfCorporateSustainabilityScoreContributionGScore": 33.35742,
+							"percentOfCorporateSustainabilityScoreContributionSScore": 43.18233,
+							"percentOfCorporateSustainabilityScoreContributionUnallocatedScore": 4.72781,
+							"sovereignSustainabilityRatingNumberOfSecuritiesScored": 0,
+							"portfolioUnallocatedESGScore": 1.02
+						},
+						"productInvolvement": {
+							"abortiveContraceptivesStemcell": 9.45691,
+							"animalTesting": 19.40724,
+							"controversialWeapons": 1.75929,
+							"adultEntertainment": 0,
+							"alcohol": 0.18719,
+							"furAndSpecialtyLeather": 0,
+							"gambling": 0.27586,
+							"militaryContracting": 3.05104,
+							"nuclear": 2.03842,
+							"palmOil": 0,
+							"pesticides": 0.1551,
+							"smallArms": 0.93874,
+							"thermalCoal": 1.42657,
+							"tobacco": 0.61276,
+							"gmo": 0.10407
+						},
+						"carbonData": {
+							"percentAUMCoveredCarbon": 98.92,
+							"carbonRiskScore": 7.77,
+							"scope1Emissions": 4903705.5,
+							"scope2Emissions": 1778124.9,
+							"carbonRiskClassification": "Low Risk",
+							"percentOfAUMWithNegligibleCarbonRisk": 29.65,
+							"percentOfAUMWithLowCarbonRisk": 40.76,
+							"percentOfAUMWithMediumCarbonRisk": 25.69,
+							"percentOfAUMWithHighCarbonRisk": 3.7,
+							"percentOfAUMWithSevereCarbonRisk": 0.2,
+							"fossilFuelInvolvement": 8.67,
+							"thermalCoalPowerGenerationInvolvement": 1.48,
+							"thermalCoalExtractionInvolvement": 0.02,
+							"oilSandsExtractionInvolvement": 2.07,
+							"carbonExposureScore": 14.1,
+							"carbonManagementScore": 52.31,
+							"carbonOperationsRisk": 4.66,
+							"carbonProductsAndServicesRisk": 1.75,
+							"strandedAssetsRisk": 2.53,
+							"carbonIntensity": 171.21,
+							"arcticOilAndGasExplorationInvolvement": 2.07,
+							"carbonSolutionsInvolvement": 13.53,
+							"oilAndGasGenerationInvolvement": 4.21,
+							"oilAndGasProductionInvolvement": 4.55,
+							"oilAndGasProductsAndServiceInvolvement": 0.37
+						}
+					},
+					"securityBreakdown": [
+						{
+							"name": "iShares MSCI ACWI ETF",
+							"portfolioDate": "2022-08-31",
+							"identifier": "0P0000A70M",
+							"identifierType": "PerformanceId",
+							"securityType": "FE",
+							"esgRisk": {
+								"portfolioCorporateSustainabilityScore": 21.74,
+								"corporateSustainabilityRatingPercentOfEligiblePortfolioCovered": 99.50936,
+								"portfolioEnvironmentalRiskScore": 4.62,
+								"portfolioSocialRiskScore": 9.48,
+								"portfolioGovernanceRiskScore": 7.58,
+								"portfolioCorporateESGRiskExposureScore": 41.24018,
+								"portfolioCorporateESGManagedRiskScore": 19.50105,
+								"morningstarSustainabilityRating": "Below Average",
+								"corporateSustainabilityPercentRankInGlobalCategory": 70,
+								"historicalCorporateSustainabilityScoreGlobalCategoryAverage": 21.02253,
+								"historicalCorporateSustainabilityPercentRankInGlobalCategory": 72,
+								"corporatePercentOfPortfolioCoveredWithHighESGRiskScores": 12.66991,
+								"corporatePercentOfPortfolioCoveredWithLowESGRiskScores": 43.45168,
+								"corporatePercentOfPortfolioCoveredWithMediumESGRiskScores": 41.07175,
+								"corporatePercentOfPortfolioCoveredWithNegligibleESGRiskScores": 1.73557,
+								"corporatePercentOfPortfolioCoveredWithSevereESGRiskScores": 1.0711,
+								"corporateSustainabilityRatingNumberOfSecuritiesScored": 2292,
+								"historicalCorporateSustainabilityScore": 21.84772,
+								"portfolioDateSustainabilityRating": "2022-07-29",
+								"portfolioSustainabilityRatingEligibleHoldingType": "corporate, sovereign",
+								"portfolioSustainabilityRatingPercentageOfQualifiedHoldingsCorporate": 99.8804,
+								"portfolioSustainabilityRatingPercentageOfQualifiedHoldingsOther": 0.1196,
+								"portfolioSustainabilityRatingPercentageOfQualifiedHoldingsSovereign": 0,
+								"percentOfCorporateSustainabilityScoreContributionEScore": 21.25409,
+								"percentOfCorporateSustainabilityScoreContributionGScore": 34.87028,
+								"percentOfCorporateSustainabilityScoreContributionSScore": 43.60122,
+								"percentOfCorporateSustainabilityScoreContributionUnallocatedScore": 0.27731,
+								"sovereignSustainabilityRatingNumberOfSecuritiesScored": 0,
+								"portfolioSustainabilityRatingCorporateContributionPercent": 100,
+								"portfolioSustainabilityRatingSovereignContributionPercent": 0,
+								"portfolioCorporateSustainabilityRating": "Below Average",
+								"sovereignSustainabilityGlobalCategoryAverage": 14.50865,
+								"historicalSovereignSustainabilityScoreGlobalCategoryAverage": 14.41207,
+								"numberofFundsinGlobalCategoryCorporateSustainability": 7766,
+								"numberofFundsinGlobalCategorySovereignSustainability": 1387,
+								"sovereignSustainabilityBreakpoint12": 21.41,
+								"sovereignSustainabilityBreakpoint23": 13.66,
+								"sovereignSustainabilityBreakpoint34": 12.85,
+								"sovereignSustainabilityBreakpoint45": 11.89,
+								"portfolioUnallocatedESGScore": 0.06,
+								"corporateSustainabilityAbsoluteRankInGlobalCategory": 5478,
+								"historicalCorporateSustainabilityAbsoluteRankInGlobalCategory": 5602,
+								"corporateSustainabilityGlobalCategoryAverage": 20.94559
+							},
+							"productInvolvement": {
+								"abortiveContraceptivesStemcell": 10.01871,
+								"animalTesting": 19.52526,
+								"controversialWeapons": 1.58212,
+								"adultEntertainment": 0,
+								"alcohol": 1.12546,
+								"furAndSpecialtyLeather": 0,
+								"gambling": 0.2965,
+								"militaryContracting": 2.32655,
+								"nuclear": 1.81832,
+								"palmOil": 0.05765,
+								"pesticides": 0.38571,
+								"smallArms": 0.93438,
+								"thermalCoal": 1.22704,
+								"tobacco": 0.74318,
+								"gmo": 0.17155
+							},
+							"carbonData": {
+								"percentAUMCoveredCarbon": 98.93,
+								"carbonRiskScore": 8.43,
+								"scope1Emissions": 4634190.5,
+								"scope2Emissions": 1647712.9,
+								"carbonRiskClassification": "Low Risk",
+								"percentOfAUMWithNegligibleCarbonRisk": 24.23,
+								"percentOfAUMWithLowCarbonRisk": 44.97,
+								"percentOfAUMWithMediumCarbonRisk": 26.89,
+								"percentOfAUMWithHighCarbonRisk": 3.85,
+								"percentOfAUMWithSevereCarbonRisk": 0.07,
+								"fossilFuelInvolvement": 9.69,
+								"thermalCoalPowerGenerationInvolvement": 1.21,
+								"thermalCoalExtractionInvolvement": 0.07,
+								"oilSandsExtractionInvolvement": 2.54,
+								"carbonExposureScore": 16.24,
+								"carbonManagementScore": 55.27,
+								"carbonOperationsRisk": 4.86,
+								"carbonProductsAndServicesRisk": 2.14,
+								"strandedAssetsRisk": 2.63,
+								"carbonIntensity": 192.59,
+								"arcticOilAndGasExplorationInvolvement": 2.52,
+								"carbonSolutionsInvolvement": 12.37,
+								"oilAndGasGenerationInvolvement": 4.72,
+								"oilAndGasProductionInvolvement": 5.91,
+								"oilAndGasProductsAndServiceInvolvement": 0.21
+							}
+						},
+						{
+							"name": "Invesco FTSE RAFI Dev Mkts ex-US ETF",
+							"portfolioDate": "2022-08-31",
+							"identifier": "0P000090NH",
+							"identifierType": "PerformanceId",
+							"securityType": "FE",
+							"esgRisk": {
+								"portfolioCorporateSustainabilityScore": 22.55,
+								"corporateSustainabilityRatingPercentOfEligiblePortfolioCovered": 99.0674,
+								"portfolioEnvironmentalRiskScore": 6.03,
+								"portfolioSocialRiskScore": 8.89,
+								"portfolioGovernanceRiskScore": 7.55,
+								"portfolioCorporateESGRiskExposureScore": 47.75939,
+								"portfolioCorporateESGManagedRiskScore": 25.20548,
+								"morningstarSustainabilityRating": "Below Average",
+								"corporateSustainabilityPercentRankInGlobalCategory": 84,
+								"historicalCorporateSustainabilityScoreGlobalCategoryAverage": 21.02253,
+								"historicalCorporateSustainabilityPercentRankInGlobalCategory": 84,
+								"corporatePercentOfPortfolioCoveredWithHighESGRiskScores": 14.02269,
+								"corporatePercentOfPortfolioCoveredWithLowESGRiskScores": 37.53158,
+								"corporatePercentOfPortfolioCoveredWithMediumESGRiskScores": 45.82539,
+								"corporatePercentOfPortfolioCoveredWithNegligibleESGRiskScores": 1.89763,
+								"corporatePercentOfPortfolioCoveredWithSevereESGRiskScores": 0.72271,
+								"corporateSustainabilityRatingNumberOfSecuritiesScored": 1025,
+								"historicalCorporateSustainabilityScore": 22.55226,
+								"portfolioDateSustainabilityRating": "2022-07-31",
+								"portfolioSustainabilityRatingEligibleHoldingType": "corporate, sovereign",
+								"portfolioSustainabilityRatingPercentageOfQualifiedHoldingsCorporate": 99.96115,
+								"portfolioSustainabilityRatingPercentageOfQualifiedHoldingsOther": 0.03885,
+								"portfolioSustainabilityRatingPercentageOfQualifiedHoldingsSovereign": 0,
+								"percentOfCorporateSustainabilityScoreContributionEScore": 26.72471,
+								"percentOfCorporateSustainabilityScoreContributionGScore": 33.47064,
+								"percentOfCorporateSustainabilityScoreContributionSScore": 39.39778,
+								"percentOfCorporateSustainabilityScoreContributionUnallocatedScore": 0.40898,
+								"sovereignSustainabilityRatingNumberOfSecuritiesScored": 0,
+								"portfolioSustainabilityRatingCorporateContributionPercent": 100,
+								"portfolioSustainabilityRatingSovereignContributionPercent": 0,
+								"portfolioCorporateSustainabilityRating": "Below Average",
+								"sovereignSustainabilityGlobalCategoryAverage": 14.50865,
+								"historicalSovereignSustainabilityScoreGlobalCategoryAverage": 14.41207,
+								"numberofFundsinGlobalCategoryCorporateSustainability": 7766,
+								"numberofFundsinGlobalCategorySovereignSustainability": 1387,
+								"sovereignSustainabilityBreakpoint12": 21.41,
+								"sovereignSustainabilityBreakpoint23": 13.66,
+								"sovereignSustainabilityBreakpoint34": 12.85,
+								"sovereignSustainabilityBreakpoint45": 11.89,
+								"portfolioUnallocatedESGScore": 0.09,
+								"corporateSustainabilityAbsoluteRankInGlobalCategory": 6582,
+								"historicalCorporateSustainabilityAbsoluteRankInGlobalCategory": 6548,
+								"corporateSustainabilityGlobalCategoryAverage": 20.94559
+							},
+							"productInvolvement": {
+								"abortiveContraceptivesStemcell": 8.57744,
+								"animalTesting": 20.06655,
+								"controversialWeapons": 1.20509,
+								"adultEntertainment": 0,
+								"alcohol": 1.71232,
+								"furAndSpecialtyLeather": 0,
+								"gambling": 0.24505,
+								"militaryContracting": 1.38638,
+								"nuclear": 2.34388,
+								"palmOil": 0.02442,
+								"pesticides": 1.28096,
+								"smallArms": 0.91251,
+								"thermalCoal": 0.83655,
+								"tobacco": 1.52913,
+								"gmo": 0.5375
+							},
+							"carbonData": {
+								"percentAUMCoveredCarbon": 99.74,
+								"carbonRiskScore": 12.33,
+								"scope1Emissions": 6906655.5,
+								"scope2Emissions": 1646096.1,
+								"carbonRiskClassification": "Medium Risk",
+								"percentOfAUMWithNegligibleCarbonRisk": 9.17,
+								"percentOfAUMWithLowCarbonRisk": 48.9,
+								"percentOfAUMWithMediumCarbonRisk": 35.48,
+								"percentOfAUMWithHighCarbonRisk": 6.45,
+								"fossilFuelInvolvement": 19.22,
+								"thermalCoalPowerGenerationInvolvement": 0.78,
+								"thermalCoalExtractionInvolvement": 0.04,
+								"oilSandsExtractionInvolvement": 7.13,
+								"carbonExposureScore": 25.48,
+								"carbonManagementScore": 61.54,
+								"carbonOperationsRisk": 5.78,
+								"carbonProductsAndServicesRisk": 4.66,
+								"strandedAssetsRisk": 5.91,
+								"carbonIntensity": 214.69,
+								"arcticOilAndGasExplorationInvolvement": 7.79,
+								"carbonSolutionsInvolvement": 11.14,
+								"oilAndGasGenerationInvolvement": 11.57,
+								"oilAndGasProductionInvolvement": 13.53,
+								"oilAndGasProductsAndServiceInvolvement": 0.18
+							}
+						},
+						{
+							"name": "1290 High Yield Bond A",
+							"portfolioDate": "2022-08-31",
+							"identifier": "0P00012ROU",
+							"identifierType": "PerformanceId",
+							"securityType": "FO",
+							"esgRisk": {
+								"corporateSustainabilityRatingPercentOfEligiblePortfolioCovered": 48.34838,
+								"historicalCorporateSustainabilityScoreGlobalCategoryAverage": 23.61093,
+								"corporatePercentOfPortfolioCoveredWithHighESGRiskScores": 22.28773,
+								"corporatePercentOfPortfolioCoveredWithLowESGRiskScores": 21.12143,
+								"corporatePercentOfPortfolioCoveredWithMediumESGRiskScores": 44.29817,
+								"corporatePercentOfPortfolioCoveredWithNegligibleESGRiskScores": 0.1763,
+								"corporatePercentOfPortfolioCoveredWithSevereESGRiskScores": 12.11636,
+								"corporateSustainabilityRatingNumberOfSecuritiesScored": 119,
+								"portfolioDateSustainabilityRating": "2022-07-31",
+								"portfolioSustainabilityRatingEligibleHoldingType": "corporate, sovereign",
+								"portfolioSustainabilityRatingPercentageOfQualifiedHoldingsCorporate": 100,
+								"portfolioSustainabilityRatingPercentageOfQualifiedHoldingsOther": 0,
+								"portfolioSustainabilityRatingPercentageOfQualifiedHoldingsSovereign": 0,
+								"sovereignSustainabilityRatingNumberOfSecuritiesScored": 0,
+								"sovereignSustainabilityGlobalCategoryAverage": 14.42245,
+								"historicalSovereignSustainabilityScoreGlobalCategoryAverage": 14.25425,
+								"numberofFundsinGlobalCategoryCorporateSustainability": 2808,
+								"numberofFundsinGlobalCategorySovereignSustainability": 3454,
+								"sovereignSustainabilityBreakpoint12": 18.69,
+								"sovereignSustainabilityBreakpoint23": 13.55,
+								"sovereignSustainabilityBreakpoint34": 12.86,
+								"sovereignSustainabilityBreakpoint45": 12.86,
+								"corporateSustainabilityGlobalCategoryAverage": 23.2464
+							},
+							"productInvolvement": {
+								"abortiveContraceptivesStemcell": 2.43125,
+								"animalTesting": 4.36397,
+								"controversialWeapons": 0.48319,
+								"adultEntertainment": 0,
+								"alcohol": 0,
+								"furAndSpecialtyLeather": 0,
+								"gambling": 3.09855,
+								"militaryContracting": 1.72126,
+								"nuclear": 0,
+								"palmOil": 0,
+								"pesticides": 0.86923,
+								"smallArms": 0.79412,
+								"thermalCoal": 0,
+								"tobacco": 0.49933,
+								"gmo": 0
+							},
+							"carbonData": {
+								"percentAUMCoveredCarbon": 27.91,
+								"fossilFuelInvolvement": 7.64,
+								"thermalCoalPowerGenerationInvolvement": 0,
+								"thermalCoalExtractionInvolvement": 0,
+								"oilSandsExtractionInvolvement": 0,
+								"arcticOilAndGasExplorationInvolvement": 0,
+								"carbonSolutionsInvolvement": 0.44,
+								"oilAndGasGenerationInvolvement": 1.24,
+								"oilAndGasProductionInvolvement": 6.95,
+								"oilAndGasProductsAndServiceInvolvement": 0.41
+							}
+						}
+					]
+				}
+			}
+		]
+	},
+	"trailingReturns": {
+		"portfolio": [
+			{
+				"timePeriod": "YearToDate",
+				"value": -15.06
+			},
+			{
+				"timePeriod": "Month3",
+				"value": -8.28
+			},
+			{
+				"timePeriod": "Month6",
+				"value": -11.4
+			},
+			{
+				"timePeriod": "Year1",
+				"value": -13.88
+			},
+			{
+				"timePeriod": "Year3",
+				"value": 4.86
+			},
+			{
+				"timePeriod": "Year5",
+				"value": 3.42
+			},
+			{
+				"timePeriod": "Year10"
+			}
+		],
+		"benchmark": [
+			{
+				"timePeriod": "YearToDate",
+				"value": -17.19
+			},
+			{
+				"timePeriod": "Month3",
+				"value": -3.65
+			},
+			{
+				"timePeriod": "Month6"
+			},
+			{
+				"timePeriod": "Year1",
+				"value": -13.52
+			},
+			{
+				"timePeriod": "Year3",
+				"value": 11.77
+			},
+			{
+				"timePeriod": "Year5",
+				"value": 11.31
+			},
+			{
+				"timePeriod": "Year10"
+			}
+		]
+	}
+}
+```
+
+</details>
+&nbsp;
+
+### Integration Transformation Operation
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+function getXrayUsData(apiData, componentsOptions, portfolio) {
+	const modelData = {};
+	const xrayData = apiData[0]?.value || null;
+	const esgData = apiData[1]?.value || null;
+	const riskScoreData = apiData[2]?.value || null;
+	const { showBreakdown } = componentsOptions;
+	const securityReference = get(xrayData, "SecurityReference", []);
+	const portfolioSecurityReference = portfolio[0].holdings.map((holding) =>
+		getSecurityDetail(securityReference, holding.securityId)
+	);
+
+	modelData.invalidSecurities = (() =>
+		portfolioSecurityReference
+			.filter(
+				(security) =>
+					security.SecurityReferenceTypes.includes(
+						"InvalidSecurity"
+					) ||
+					security.SecurityReferenceTypes.includes("NotEntitled") ||
+					security.SecurityReferenceTypes.includes("InactiveSecurity")
+			)
+			.map((security) => security.Name))();
+
+	const breakdownDetails = {
+		portfolioSecurityReference,
+		portfolioHoldings: get(
+			xrayData,
+			"XRay[0].Holdings.PortfolioHoldings.Security",
+			[]
+		),
+		showBreakdown,
+	};
+	modelData.portfolioName = portfolio[0]?.name;
+	componentsOptions.sections.forEach((section) => {
+		section.components.forEach((component) => {
+			switch (component) {
+				case "assetAllocation": {
+					const assetAllocationData = get(
+						xrayData,
+						"XRay[0].Analysis.AssetAllocation[0]",
+						{}
+					);
+					modelData.assetAllocation = getAssetAllocationUsData(
+						assetAllocationData,
+						breakdownDetails
+					);
+					break;
+				}
+				case "feesExpenses": {
+					modelData.feesExpenses = getFeesExpensesUsData(
+						xrayData,
+						breakdownDetails
+					);
+					break;
+				}
+				case "fixedIncomeSectors": {
+					const sectorData = get(
+						xrayData,
+						"XRay[0].Analysis.FixedIncomeAnalysis.FixedIncomeSectors",
+						{}
+					);
+					modelData.fixedIncomeSectors =
+						getFixedIncomeSectorsUsData(sectorData);
+					break;
+				}
+				case "performanceGraph": {
+					const performanceGraphData = {
+						performanceData:
+							xrayData.XRay[0].Returns.InvestmentActivity,
+						securityReference: xrayData.SecurityReference,
+					};
+					modelData.performanceGraph = getPerformanceUsData(
+						performanceGraphData,
+						portfolio
+					);
+					break;
+				}
+				case "portfolioHoldings": {
+					const portfolioHoldingsData = {
+						holdings: xrayData.XRay[0].Holdings,
+						securityReference: xrayData.SecurityReference,
+					};
+					modelData.portfolioHoldings = getPortfolioHoldingsUsData(
+						portfolioHoldingsData
+					);
+					break;
+				}
+				case "productInvolvement": {
+					modelData.productInvolvement =
+						getproductInvolvementData(esgData);
+					break;
+				}
+				case "riskScore": {
+					modelData.riskScore = riskScoreData;
+					break;
+				}
+				case "riskStatistics": {
+					const riskStatisticsData = xrayData.XRay[0].Risks;
+					modelData.riskStatistics = riskStatisticsData;
+					break;
+				}
+				case "stockRegions": {
+					const stockRegionsData =
+						xrayData.XRay[0].Analysis.EquityAnalysis.WorldRegions;
+					modelData.stockRegions = getStockRegionsUsData(
+						stockRegionsData,
+						breakdownDetails
+					);
+					break;
+				}
+				case "stockSectors": {
+					const stockSectorsData =
+						xrayData.XRay[0].Analysis.EquityAnalysis.EquitySectors
+							.EquitySector[0];
+					modelData.stockSectors = getStockSectorsUsData(
+						stockSectorsData,
+						breakdownDetails
+					);
+					break;
+				}
+				case "stockStats": {
+					const stockPath = xrayData.XRay[0].Analysis;
+					const stockStatsData = {
+						priceRatios: get(
+							stockPath,
+							"EquityAnalysis.PriceRatios",
+							[]
+						),
+						profitability: get(
+							stockPath,
+							"EquityAnalysis.Profitability",
+							[]
+						),
+						equityStyle: get(
+							stockPath,
+							"InvestmentStyle.EquityStyle",
+							[]
+						),
+						equityStyleBreakdown: get(
+							stockPath,
+							"InvestmentStyle.EquityStyle.EquityStyleBreakdown",
+							[]
+						),
+					};
+					modelData.stockStats = getStockStatsUsData(
+						stockStatsData,
+						breakdownDetails
+					);
+					break;
+				}
+				case "stockType": {
+					const stockTypeData = get(
+						xrayData,
+						"XRay[0].Analysis.EquityAnalysis.EquityTypeBreakdown",
+						{}
+					);
+					modelData.stockType = getStockTypeUsData(
+						stockTypeData,
+						breakdownDetails
+					);
+					break;
+				}
+				case "sustainability": {
+					modelData.sustainability = esgData;
+					break;
+				}
+				case "trailingReturns": {
+					const trailingReturnsData =
+						xrayData.XRay[0].Returns.TrailingReturns;
+					modelData.trailingReturns =
+						getTrailingReturnsUsData(trailingReturnsData);
+					break;
+				}
+				default:
+					break;
+			}
+		});
+	});
+	return modelData;
+}
+```
+</details>
+&nbsp;

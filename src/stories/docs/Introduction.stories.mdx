@@ -1,173 +1,386 @@
-import { Meta } from '@storybook/addon-docs';
-import Code from '../assets/code-brackets.svg';
-import Colors from '../assets/colors.svg';
-import Comments from '../assets/comments.svg';
-import Direction from '../assets/direction.svg';
-import Flow from '../assets/flow.svg';
-import Plugin from '../assets/plugin.svg';
-import Repo from '../assets/repo.svg';
-import StackAlt from '../assets/stackalt.svg';
+import { Meta } from "@storybook/addon-docs";
 
-<Meta title="Morningstar/Introduction" />
-
-<style>
-  {`
-    .text-center {
-      text-align: center
-    }
-    .text-left {
-      text-align: left
-    }
-
-    .subheading {
-      --mediumdark: '#999999';
-      font-weight: 900;
-      font-size: 13px;
-      color: #999;
-      letter-spacing: 6px;
-      line-height: 24px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-      margin-top: 40px;
-    }
-
-    .link-list {
-      display: grid;
-      grid-template-columns: 1fr;
-      grid-template-rows: 1fr 1fr;
-      row-gap: 10px;
-    }
-
-    @media (min-width: 620px) {
-      .link-list {
-        row-gap: 20px;
-        column-gap: 20px;
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media all and (-ms-high-contrast:none) {
-    .link-list {
-        display: -ms-grid;
-        -ms-grid-columns: 1fr 1fr;
-        -ms-grid-rows: 1fr 1fr;
-      }
-    }
-
-    .link-item {
-      display: block;
-      padding: 20px 30px 20px 15px;
-      border: 1px solid #00000010;
-      border-radius: 5px;
-      transition: background 150ms ease-out, border 150ms ease-out, transform 150ms ease-out;
-      color: #333333;
-      display: flex;
-      align-items: flex-start;
-    }
-
-    .link-item:hover {
-      border-color: #1EA7FD50;
-      transform: translate3d(0, -3px, 0);
-      box-shadow: rgba(0, 0, 0, 0.08) 0 3px 10px 0;
-    }
-
-    .link-item:active {
-      border-color: #1EA7FD;
-      transform: translate3d(0, 0, 0);
-    }
-
-    .link-item strong {
-      font-weight: 700;
-      display: block;
-      margin-bottom: 2px;
-    }
-
-    .link-item img {
-      height: 40px;
-      width: 40px;
-      margin-right: 15px;
-      flex: none;
-    }
-
-    .link-item span {
-      font-size: 14px;
-      line-height: 20px;
-    }
-
-    .tip {
-      display: inline-block;
-      border-radius: 1em;
-      font-size: 11px;
-      line-height: 12px;
-      font-weight: 700;
-      background: #E7FDD8;
-      color: #66BF3C;
-      padding: 4px 12px;
-      margin-right: 10px;
-      vertical-align: top;
-    }
-
-    .tip-wrapper {
-      font-size: 13px;
-      line-height: 20px;
-      margin-top: 40px;
-      margin-bottom: 40px;
-    }
-
-    .tip-wrapper code {
-      font-size: 12px;
-      display: inline-block;
-    }
-  `}
-</style>
+<Meta title="Morningstar/Introduction"/>
 
 # API Visualization Library
 
-The API Visualization Library is a collection of example web components that demonstrate how data returned by Dynamic Services APIs can be rendered for use in front-end applications. The library has two sections, **Components** and **Tools**.
+- [Overview](#overview)
+- [About the Library](#about-the-library)
+- [Developing Web Components](#developing-web-components-using-storybook)
+  - [Source Code](#source-code)
+  - [Storybook Projects](#storybook-projects)
+  - [Development Tools](#development-tools)
+- [Data Access Layer](#data-access-layer)
+  - [Data Models](#data-models)
+  - [Data Transformation](#data-transformation)
+  - [Methods](#methods)
+- [Related Content](#related-content)
 
-<table  width="660px">
-  <thead>
-  <tr>
-    <th className="text-left">Section</th>
-    <th className="text-left">Description</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-    <td>Components</td>
-    <td>Individual components that showcase how a specific API capability or  data frequently-used data points can be rendered for display. Examples include Asset Allocation, Stock Regions, Stock Sectors, Trailing Returns.</td>
-  </tr>
-  <tr>
-    <td>Tools</td>
-    <td>Individual components linked together to provide a solution or tool. For example, the X-Ray tool links a number of components, including Asset Allocation, Stock Regions, and Stock Sectors, to provide a full Portfolio X-Ray tool.</td>
-  </tr>
-  </tbody>
-</table>
+## Overview
 
-Every entry in the library has two tabs, **Canvas** and **Docs**.
+The API Visualization Library is a collection of example web components, documented using [Storybook](https://storybook.js.org/), that demonstrates how data returned by our APIs can be rendered for use in frontend development. The library is intended as a resource for developers to help them get up and running quickly with their projects.
 
-<table  width="660px">
-  <thead>
-  <tr>
-    <th className="text-left">Tab</th>
-    <th className="text-left">Description</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-    <td>Canvas</td>
-    <td>Displays the rendered state of the component. You can interact with the component by making changes to the settings in the **Controls** pane.</td>
-  </tr>
-  <tr>
-    <td>Docs</td>
-    <td>Description and technical documentation including information about data transformation and data models.</td>
-  </tr>
-  </tbody>
-</table>
+This page describes:
 
-See [Developing Web Components](developer-resources/api-visualization-library/developing-web-components/overview) for general information about developing components powered by Dynamic Services APIs.
+- The structure of the API Visualization Library and the information you can find there.
+- How to set up a similar Storybook project to build component previews powered by our API services.
+- The development tools and resources we use to create components for the API Visualization Library.
+- Important information about data models and data transformation.
+
+##  About the Library
+
+The library contains:
+
+- Individual **components** that showcase how a specific API capability or frequently-used data points (for example, Asset Allocation) can be rendered for display.
+- Components linked together to provide a **solution or tool**. For example, the X-Ray tool links a number of components to provide a detailed analysis of a portfolio.
+- Components linked in a particular order to demonstrate a **workflow**.
+
+Each entry in the library has two tabs, **Canvas** and **Docs**:
+
+- The **Canvas** tab displays the rendered state of a component. You can interact with the component by making changes to the settings in the **Controls** pane.
+- The **Docs** tab contains technical documentation as a reference for developers building components powered by our APIs.
+
+## Developing Web Components Using Storybook
+
+We recommend building UIs with a component-driven process, starting with atomic components and ending with pages.
+
+### Source Code
+
+You can download source code for the Storybook and the data access layer that acts as an interface between components and the APIs they query from our GitHub repository:
+
+- [API Visualization Library Storybook](https://github.com/Morningstar/Morningstar-Dynamic-Services-APIs-Visualization-Library)
+- [Data Access Layer](https://github.com/Morningstar/Morningstar-Dynamic-Services-APIs-Data-Access-Layer)
+
+### Storybook Projects
+
+Clone the source code to your local environment.
+
+Use the following commands to set up a Storybook project and build component previews.
+
+Command|Description|
+:------|:-----
+`yarn install`|Install a project.
+`yarn storybook`|Run Storybook.
+`yarn serve`|Compile and hot reload. Used when developing individual components.
+`yarn build`|Compile and minify component for production.
+`yarn test:unit`|Run unit tests.
+`yarn lint`|Lint and fix files.
+`yarn add-component`|Generate a new component and its corresponding story.
+`yarn add-component Generic`|Generate a generic component.
+`yarn add-component Table`|Generate a table component.
+
+### Development Tools
+
+We use the following tools and resources to create components for the API Visualization Library:
+
+|Tool|Version|Description|
+|:------|:-----|:------
+|[node](https://nodejs.org/es/)|16.13.2.|Asynchronous event-driven JavaScript runtime.<br/> **Important:** This version uses npm version 8.1.2. as later versions have issues with npm.
+|[Storybook](https://storybook.js.org/docs/vue/get-started/install)|6.X|Open source tool for building UI components and pages in isolation
+|[Vuetify](https://vuetifyjs.com/en/getting-started/installation/)|2.X|UI framework built on top of Vue.js.
+|[Vue](https://vuejs.org/guide/introduction.html)|2.X|Framework for building web user interfaces.
+|[Chart](https://vue-chartjs.org/)||A wrapper for Chart.js in Vue
 
 
+## Data Access Layer
 
+Components do not call APIs directly. A data access layer acts as an interface between a component and the APIs it queries.
 
+The data access layer must be configured to handle:
 
+- [Transformation](#data-transformation) of API response data to a [data model](#data-models) a component understands.
+- [Methods](#methods) used for general settings and operations.
+
+### Data Models
+
+For consistency, we recommend defining data models that govern how the data a component exposes is structured to generate a visualization that meets use case requirements.
+
+Data models are defined and documented for each component in the API Visualization Library. They provide examples of how to structure data models that represent common data points returned by Dynamic Services APIs such as Asset Allocation, Risk Score, Stock Sectors, and so on.
+
+### Data Transformation
+
+API response data must be parsed and transformed to a data model a component understands. Transformation operations are documented for each component in the **Docs** tab.
+
+Data transformation takes place in the data access layer where a JavaScript operation transforms the API response data into the data model defined for the component.
+
+For example, requests to the Portfolio Analysis API for Asset Allocation data returns the following response:
+```json
+{
+  "status": {
+    "detailedStatusMessage": "",
+    "statusCode": 200,
+    "statusDescription": ""
+  },
+  "breakdowns": {
+    "assetAllocation": [
+      {
+        "type": "MorningstarEUR3",
+        "salePosition": "N",
+        "values": {
+          "1": 44.49892,
+          "2": 36.35144,
+          "3": 4.96041,
+          "4": 14.1892,
+          "99": 0.00002
+        }
+      },
+      {
+        "type": "MorningstarEUR3",
+        "salePosition": "L",
+        "values": {
+          "1": 44.49892,
+          "2": 36.36983,
+          "3": 5.4687,
+          "4": 14.1892,
+          "99": 0
+        }
+      },
+      {
+        "type": "MorningstarEUR3",
+        "salePosition": "S",
+        "values": {
+          "1": 0,
+          "2": 0.01838,
+          "3": 0.50829,
+          "4": 0,
+          "99": 0
+        }
+      }
+    ]
+  },
+  "benchmark": [
+    {
+      "breakdowns": {
+        "assetAllocation": [
+          {
+            "type": "MorningstarEUR3",
+            "salePosition": "N",
+            "values": {
+              "4": 100
+            }
+          },
+          {
+            "type": "MorningstarEUR3",
+            "salePosition": "L",
+            "values": {
+              "4": 100
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+&nbsp;
+
+The data access layer invokes the following JavaScript operation to transform the response data to the data model the component understands:
+
+```js
+parsedModelData() {
+      if (this.modelData && Object.keys(this.assetAllocationMapping).length !== 0) {
+          const assetAllocationRawData = this.modelData;
+          const assetObject = this.assetAllocationMapping
+              .assetAllocation[this.assetAllocationMapping.default];
+          return Object.entries(assetObject)
+              .map((itemArr) => {
+                  const number = itemArr[0];
+                  const { portfolio, benchmark } = assetAllocationRawData;
+                  return {
+                      key: itemArr[1],
+                      assetClass: itemArr[1],
+                      bmark: this.getAssetAllocationValue(number, benchmark).net,
+                      long: this.getAssetAllocationValue(number, portfolio).long,
+                      short: this.getAssetAllocationValue(number, portfolio).short,
+                      net: this.getAssetAllocationValue(number, portfolio).net,
+                  };
+              });
+      }
+      return [];
+  },
+  computedPieChartData() {
+      const labels = [];
+      const data = [];
+      this.parsedModelData.forEach((item) => {
+          labels.push(item.assetClass);
+          data.push(item.net.toFixed(2));
+      });
+      return {
+          labels,
+          datasets: [
+              {
+                  backgroundColor: this.pieChartColors,
+                  data,
+              },
+          ],
+      };
+  },
+  computedStackChartData() {
+      const labels = [];
+      const data = [
+          {
+              data: [],
+              label: 'Long',
+              borderColor: this.pieChartColors,
+              backgroundColor: this.StackChartColors,
+          },
+          {
+              data: [],
+              label: 'Net',
+              borderColor: this.pieChartColors,
+              backgroundColor: this.pieChartColors,
+          },
+          {
+              data: [],
+              label: 'Short',
+              borderColor: this.pieChartColors,
+              backgroundColor: this.StackChartColors,
+          },
+      ];
+      this.parsedModelData.forEach((item) => {
+          labels.push(item.assetClass);
+          data[0].data.push(item.long.toFixed(2));
+          data[1].data.push(item.net.toFixed(2));
+          data[2].data.push((item.short * -1).toFixed(2));
+      });
+      return {
+          labels,
+          datasets: data,
+      };
+  },
+```
+
+The resulting data model has the following format:
+
+```json
+{
+    portfolio: {
+        {
+            "key": "1",
+            "long": 42.84271,
+            "net": 42.84271,
+            "short": 0
+        },
+        {
+            "key": "2",
+            "long": 38.27963,
+            "net": 35.92852,
+            "short": 2.35111
+        },
+    },
+    benchmark: {
+        {
+            "key": "1",
+            "long": 95.8847,
+            "net": 95.73916,
+            "short": 0.14554
+        },
+        {
+            "key": "2",
+            "long": 0.03294,
+            "net": 0.00807,
+            "short": 0.02487
+        },
+    }
+}
+```
+
+### Methods
+
+General settings and operations should be handled by methods and functions configured in the data access layer. We have defined the following methods:
+
+- [initialize](#initialize)
+- [getSecurity](#getsecurity)
+- [searchSecurities](#searchsecurities)
+- [then](#then)
+- [changeEnvironment](#changeenvironment)
+
+#### initialize
+
+Sets parameters common to all API calls in a single, one-time call.
+
+Common parameter values include:
+
+- Language and currency identifiers.
+- Authentication tokens.
+- The API token expiry callback function used to set a new token when a token expires.
+
+```js
+window.mstarApisSdk.initialize({
+    currencyId: 'GBP',
+    languageId: 'en-GB',
+    token: 'your MAAS token here',
+    apiTokenExpiredCallback: function(dataAccessCallback) {
+        // code to fetch new MaaS token
+        dataAccessCallback('<error if any>', '<your new MaaS token>');
+    },
+});
+```
+
+#### getSecurity
+
+Fetches data for a security.
+
+```js
+window.mstarApisSdk.getSecurity('F0GBR050DD'); // Returns a promise
+```
+
+#### searchSecurities
+
+Fetches a list of securities that match a search string entered by a user in an autocomplete or search input field.
+
+```js
+window.mstarApisSdk.searchSecurities('abaco'); // Returns a promise
+```
+
+#### then
+
+Handles promises in JavaScript.
+
+```js
+window.mstarApisSdk.getSecurity('F0GBR050DD').then((apiResponse) => {
+    console.log('Data for the security received successfully!');
+});
+```
+
+You can also use the `await` keyword to handle promises.
+
+```js
+var securityData = await window.mstarApisSdk.getSecurity('F0GBR050DD');
+```
+
+#### changeEnvironment
+
+Sets an object as a variable, allowing it to be passed in multiple calls.
+
+For example, you want to make requests to multiple Portfolio Analysis API endpoints, passing the same portfolio in each request.
+
+You could send each request individually, passing the portfolio object each time.
+
+Alternatively, you can use the `changeEnvironment` method to set the portfolio as an environment variable for the `portfolioAnalysis` class.
+
+When making a request, environment variables are fetched from the `portfolioAnalysis` class and merged with the parameters passed in the request.
+
+```js
+window.mstarApisSdk.portfolioAnalysis.getRiskScore({
+    portfolio: //portfolio object here
+}).then(apiResponse => console.log);
+window.mstarApisSdk.portfolioAnalysis.getEsgPerformance({
+    portfolio: //portfolio object here
+}).then(apiResponse => console.log);
+
+// The following is equivalent to the code above
+
+window.mstarApisSdk.portfolioAnalysis
+    .changeEnvironment({ // Parameters set here would be used by all subsequent portfolioAnalysis methods as default parameters
+        portfolio: // portfolio object here
+    }) // returns this, allowing chaining
+    .getRiskScore()
+    .then(apiResponse => console.log);
+window.mstarApisSdk.portfolioAnalysis.getEsgPerformance().then(apiResponse => console.log);
+```
+## Related Content
+
+- [API Technical Documentation](https://developer.morningstar.com/dynamic-services-apis/documentation/dynamic-services-apis/about)
+- [Use Cases](https://developer.morningstar.com/dynamic-services-apis/use-cases/)
+- [Morningstar Service Delivery Partner Program ](https://developer.morningstar.com/dynamic-services-apis/partners/)

@@ -1,0 +1,666 @@
+{
+	"securities": [
+		"1290 Diversified Bond A (USD)",
+		"iShares MSCI ACWI ETF (USD)",
+		"Invesco FTSE RAFI Dev Mkts ex-US ETF",
+		"Aberdeen International Inc (USD)",
+		"iShares MSCI ACWI ETF (USD)",
+		"Black Diamond Group Ltd (USD)"
+	],
+	"correlationMatrix":{
+		"Year3": [
+			{
+				"SecurityId": "0P0000DZXU",
+				"x": "1",
+				"y": "1",
+				"value": 1
+			},
+			{
+				"SecurityId": "0P0000DZXU",
+				"x": "1",
+				"y": "2",
+				"value": 0.29607228
+			},
+			{
+				"SecurityId": "0P0000DZXU",
+				"x": "1",
+				"y": "3",
+				"value": 0.17232916
+			},
+			{
+				"SecurityId": "0P0000DZXU",
+				"x": "1",
+				"y": "4",
+				"value": 0.38940946
+			},
+			{
+				"SecurityId": "0P0000DZXU",
+				"x": "1",
+				"y": "5",
+				"value": 0.30768872
+			},
+			{
+				"SecurityId": "0P0000DZXU",
+				"x": "1",
+				"y": "6",
+				"value": 0.13656596
+			},
+			{
+				"SecurityId": "0P0000JIAP",
+				"x": "2",
+				"y": "1",
+				"value": 0.29607228
+			},
+			{
+				"SecurityId": "0P0000JIAP",
+				"x": "2",
+				"y": "2",
+				"value": 1
+			},
+			{
+				"SecurityId": "0P0000JIAP",
+				"x": "2",
+				"y": "3",
+				"value": -0.04401845
+			},
+			{
+				"SecurityId": "0P0000JIAP",
+				"x": "2",
+				"y": "4",
+				"value": 0.25039432
+			},
+			{
+				"SecurityId": "0P0000JIAP",
+				"x": "2",
+				"y": "5",
+				"value": 0.15332599
+			},
+			{
+				"SecurityId": "0P0000JIAP",
+				"x": "2",
+				"y": "6",
+				"value": 0.07410212
+			},
+			{
+				"SecurityId": "0P0000007E",
+				"x": "3",
+				"y": "1",
+				"value": 0.17232916
+			},
+			{
+				"SecurityId": "0P0000007E",
+				"x": "3",
+				"y": "2",
+				"value": -0.04401845
+			},
+			{
+				"SecurityId": "0P0000007E",
+				"x": "3",
+				"y": "3",
+				"value": 1
+			},
+			{
+				"SecurityId": "0P0000007E",
+				"x": "3",
+				"y": "4",
+				"value": 0.69499175
+			},
+			{
+				"SecurityId": "0P0000007E",
+				"x": "3",
+				"y": "5",
+				"value": 0.77625093
+			},
+			{
+				"SecurityId": "0P0000007E",
+				"x": "3",
+				"y": "6",
+				"value": 0.71458901
+			},
+			{
+				"SecurityId": "FOUSA06IVV",
+				"x": "4",
+				"y": "1",
+				"value": 0.38940946
+			},
+			{
+				"SecurityId": "FOUSA06IVV",
+				"x": "4",
+				"y": "2",
+				"value": 0.25039432
+			},
+			{
+				"SecurityId": "FOUSA06IVV",
+				"x": "4",
+				"y": "3",
+				"value": 0.69499175
+			},
+			{
+				"SecurityId": "FOUSA06IVV",
+				"x": "4",
+				"y": "4",
+				"value": 1
+			},
+			{
+				"SecurityId": "FOUSA06IVV",
+				"x": "4",
+				"y": "5",
+				"value": 0.89501511
+			},
+			{
+				"SecurityId": "FOUSA06IVV",
+				"x": "4",
+				"y": "6",
+				"value": 0.77454346
+			},
+			{
+				"SecurityId": "FOUSA06OEZ",
+				"x": "5",
+				"y": "1",
+				"value": 0.30768872
+			},
+			{
+				"SecurityId": "FOUSA06OEZ",
+				"x": "5",
+				"y": "2",
+				"value": 0.15332599
+			},
+			{
+				"SecurityId": "FOUSA06OEZ",
+				"x": "5",
+				"y": "3",
+				"value": 0.77625093
+			},
+			{
+				"SecurityId": "FOUSA06OEZ",
+				"x": "5",
+				"y": "4",
+				"value": 0.89501511
+			},
+			{
+				"SecurityId": "FOUSA06OEZ",
+				"x": "5",
+				"y": "5",
+				"value": 1
+			},
+			{
+				"SecurityId": "FOUSA06OEZ",
+				"x": "5",
+				"y": "6",
+				"value": 0.86000327
+			},
+			{
+				"SecurityId": "F00000T770",
+				"x": "6",
+				"y": "1",
+				"value": 0.13656596
+			},
+			{
+				"SecurityId": "F00000T770",
+				"x": "6",
+				"y": "2",
+				"value": 0.07410212
+			},
+			{
+				"SecurityId": "F00000T770",
+				"x": "6",
+				"y": "3",
+				"value": 0.71458901
+			},
+			{
+				"SecurityId": "F00000T770",
+				"x": "6",
+				"y": "4",
+				"value": 0.77454346
+			},
+			{
+				"SecurityId": "F00000T770",
+				"x": "6",
+				"y": "5",
+				"value": 0.86000327
+			},
+			{
+				"SecurityId": "F00000T770",
+				"x": "6",
+				"y": "6",
+				"value": 1
+			}
+		],
+		"Year5": [
+			{
+				"SecurityId": "0P0000DZXU",
+				"x": "1",
+				"y": "1",
+				"value": 1
+			},
+			{
+				"SecurityId": "0P0000DZXU",
+				"x": "1",
+				"y": "2",
+				"value": 0.40757458
+			},
+			{
+				"SecurityId": "0P0000DZXU",
+				"x": "1",
+				"y": "3",
+				"value": 0.26772883
+			},
+			{
+				"SecurityId": "0P0000DZXU",
+				"x": "1",
+				"y": "4",
+				"value": 0.43468514
+			},
+			{
+				"SecurityId": "0P0000DZXU",
+				"x": "1",
+				"y": "5",
+				"value": 0.40869853
+			},
+			{
+				"SecurityId": "0P0000DZXU",
+				"x": "1",
+				"y": "6",
+				"value": 0.42394346
+			},
+			{
+				"SecurityId": "0P0000JIAP",
+				"x": "2",
+				"y": "1",
+				"value": 0.40757458
+			},
+			{
+				"SecurityId": "0P0000JIAP",
+				"x": "2",
+				"y": "2",
+				"value": 1
+			},
+			{
+				"SecurityId": "0P0000JIAP",
+				"x": "2",
+				"y": "3",
+				"value": -0.00300089
+			},
+			{
+				"SecurityId": "0P0000JIAP",
+				"x": "2",
+				"y": "4",
+				"value": 0.22220599
+			},
+			{
+				"SecurityId": "0P0000JIAP",
+				"x": "2",
+				"y": "5",
+				"value": 0.19243744
+			},
+			{
+				"SecurityId": "0P0000JIAP",
+				"x": "2",
+				"y": "6",
+				"value": 0.09708888
+			},
+			{
+				"SecurityId": "0P0000007E",
+				"x": "3",
+				"y": "1",
+				"value": 0.26772883
+			},
+			{
+				"SecurityId": "0P0000007E",
+				"x": "3",
+				"y": "2",
+				"value": -0.00300089
+			},
+			{
+				"SecurityId": "0P0000007E",
+				"x": "3",
+				"y": "3",
+				"value": 1
+			},
+			{
+				"SecurityId": "0P0000007E",
+				"x": "3",
+				"y": "4",
+				"value": 0.69699001
+			},
+			{
+				"SecurityId": "0P0000007E",
+				"x": "3",
+				"y": "5",
+				"value": 0.7714571
+			},
+			{
+				"SecurityId": "0P0000007E",
+				"x": "3",
+				"y": "6",
+				"value": 0.6941816
+			},
+			{
+				"SecurityId": "FOUSA06IVV",
+				"x": "4",
+				"y": "1",
+				"value": 0.43468514
+			},
+			{
+				"SecurityId": "FOUSA06IVV",
+				"x": "4",
+				"y": "2",
+				"value": 0.22220599
+			},
+			{
+				"SecurityId": "FOUSA06IVV",
+				"x": "4",
+				"y": "3",
+				"value": 0.69699001
+			},
+			{
+				"SecurityId": "FOUSA06IVV",
+				"x": "4",
+				"y": "4",
+				"value": 1
+			},
+			{
+				"SecurityId": "FOUSA06IVV",
+				"x": "4",
+				"y": "5",
+				"value": 0.92079987
+			},
+			{
+				"SecurityId": "FOUSA06IVV",
+				"x": "4",
+				"y": "6",
+				"value": 0.777454
+			},
+			{
+				"SecurityId": "FOUSA06OEZ",
+				"x": "5",
+				"y": "1",
+				"value": 0.40869853
+			},
+			{
+				"SecurityId": "FOUSA06OEZ",
+				"x": "5",
+				"y": "2",
+				"value": 0.19243744
+			},
+			{
+				"SecurityId": "FOUSA06OEZ",
+				"x": "5",
+				"y": "3",
+				"value": 0.7714571
+			},
+			{
+				"SecurityId": "FOUSA06OEZ",
+				"x": "5",
+				"y": "4",
+				"value": 0.92079987
+			},
+			{
+				"SecurityId": "FOUSA06OEZ",
+				"x": "5",
+				"y": "5",
+				"value": 1
+			},
+			{
+				"SecurityId": "FOUSA06OEZ",
+				"x": "5",
+				"y": "6",
+				"value": 0.85724669
+			},
+			{
+				"SecurityId": "F00000T770",
+				"x": "6",
+				"y": "1",
+				"value": 0.42394346
+			},
+			{
+				"SecurityId": "F00000T770",
+				"x": "6",
+				"y": "2",
+				"value": 0.09708888
+			},
+			{
+				"SecurityId": "F00000T770",
+				"x": "6",
+				"y": "3",
+				"value": 0.6941816
+			},
+			{
+				"SecurityId": "F00000T770",
+				"x": "6",
+				"y": "4",
+				"value": 0.777454
+			},
+			{
+				"SecurityId": "F00000T770",
+				"x": "6",
+				"y": "5",
+				"value": 0.85724669
+			},
+			{
+				"SecurityId": "F00000T770",
+				"x": "6",
+				"y": "6",
+				"value": 1
+			}
+		],
+		"Year10": [
+			{
+				"SecurityId": "0P0000DZXU",
+				"x": "1",
+				"y": "1",
+				"value": 1
+			},
+			{
+				"SecurityId": "0P0000DZXU",
+				"x": "1",
+				"y": "2",
+				"value": 0.26520165
+			},
+			{
+				"SecurityId": "0P0000DZXU",
+				"x": "1",
+				"y": "3",
+				"value": 0.22785105
+			},
+			{
+				"SecurityId": "0P0000DZXU",
+				"x": "1",
+				"y": "4",
+				"value": 0.43823804
+			},
+			{
+				"SecurityId": "0P0000DZXU",
+				"x": "1",
+				"y": "5",
+				"value": 0.39196939
+			},
+			{
+				"SecurityId": "0P0000DZXU",
+				"x": "1",
+				"y": "6",
+				"value": 0
+			},
+			{
+				"SecurityId": "0P0000JIAP",
+				"x": "2",
+				"y": "1",
+				"value": 0.26520165
+			},
+			{
+				"SecurityId": "0P0000JIAP",
+				"x": "2",
+				"y": "2",
+				"value": 1
+			},
+			{
+				"SecurityId": "0P0000JIAP",
+				"x": "2",
+				"y": "3",
+				"value": -0.01312991
+			},
+			{
+				"SecurityId": "0P0000JIAP",
+				"x": "2",
+				"y": "4",
+				"value": 0.21376517
+			},
+			{
+				"SecurityId": "0P0000JIAP",
+				"x": "2",
+				"y": "5",
+				"value": 0.18879276
+			},
+			{
+				"SecurityId": "0P0000JIAP",
+				"x": "2",
+				"y": "6",
+				"value": 0
+			},
+			{
+				"SecurityId": "0P0000007E",
+				"x": "3",
+				"y": "1",
+				"value": 0.22785105
+			},
+			{
+				"SecurityId": "0P0000007E",
+				"x": "3",
+				"y": "2",
+				"value": -0.01312991
+			},
+			{
+				"SecurityId": "0P0000007E",
+				"x": "3",
+				"y": "3",
+				"value": 1
+			},
+			{
+				"SecurityId": "0P0000007E",
+				"x": "3",
+				"y": "4",
+				"value": 0.67050032
+			},
+			{
+				"SecurityId": "0P0000007E",
+				"x": "3",
+				"y": "5",
+				"value": 0.74307547
+			},
+			{
+				"SecurityId": "0P0000007E",
+				"x": "3",
+				"y": "6",
+				"value": 0
+			},
+			{
+				"SecurityId": "FOUSA06IVV",
+				"x": "4",
+				"y": "1",
+				"value": 0.43823804
+			},
+			{
+				"SecurityId": "FOUSA06IVV",
+				"x": "4",
+				"y": "2",
+				"value": 0.21376517
+			},
+			{
+				"SecurityId": "FOUSA06IVV",
+				"x": "4",
+				"y": "3",
+				"value": 0.67050032
+			},
+			{
+				"SecurityId": "FOUSA06IVV",
+				"x": "4",
+				"y": "4",
+				"value": 1
+			},
+			{
+				"SecurityId": "FOUSA06IVV",
+				"x": "4",
+				"y": "5",
+				"value": 0.92118583
+			},
+			{
+				"SecurityId": "FOUSA06IVV",
+				"x": "4",
+				"y": "6",
+				"value": 0
+			},
+			{
+				"SecurityId": "FOUSA06OEZ",
+				"x": "5",
+				"y": "1",
+				"value": 0.39196939
+			},
+			{
+				"SecurityId": "FOUSA06OEZ",
+				"x": "5",
+				"y": "2",
+				"value": 0.18879276
+			},
+			{
+				"SecurityId": "FOUSA06OEZ",
+				"x": "5",
+				"y": "3",
+				"value": 0.74307547
+			},
+			{
+				"SecurityId": "FOUSA06OEZ",
+				"x": "5",
+				"y": "4",
+				"value": 0.92118583
+			},
+			{
+				"SecurityId": "FOUSA06OEZ",
+				"x": "5",
+				"y": "5",
+				"value": 1
+			},
+			{
+				"SecurityId": "FOUSA06OEZ",
+				"x": "5",
+				"y": "6",
+				"value": 0
+			},
+			{
+				"SecurityId": "F00000T770",
+				"x": "6",
+				"y": "1",
+				"value": 0
+			},
+			{
+				"SecurityId": "F00000T770",
+				"x": "6",
+				"y": "2",
+				"value": 0
+			},
+			{
+				"SecurityId": "F00000T770",
+				"x": "6",
+				"y": "3",
+				"value": 0
+			},
+			{
+				"SecurityId": "F00000T770",
+				"x": "6",
+				"y": "4",
+				"value": 0
+			},
+			{
+				"SecurityId": "F00000T770",
+				"x": "6",
+				"y": "5",
+				"value": 0
+			},
+			{
+				"SecurityId": "F00000T770",
+				"x": "6",
+				"y": "6",
+				"value": 1
+			}
+		]
+	}
+}

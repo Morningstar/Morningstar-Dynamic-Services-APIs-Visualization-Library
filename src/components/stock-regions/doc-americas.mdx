@@ -73,34 +73,40 @@ window.mstarApisSdk.xray.getStockRegionsUsData({ portfolios: sampleUsPortfolio, 
 
 ``` javascript dark
 const sampleUsPortfolio = [
-    {
-        name: 'US demo portfolio - weight',
-        totalValue: 10000,
-        currency: 'USD',
-        holdings: [
-            {
-                securityId: 'FOUSA06OEZ',
-                weight: 30,
-            },
-            {
-                securityId: 'FOUSA06IVV',
-                weight: 50,
-            },
-            {
-                securityId: 'F00000T770',
-                weight: 20,
-            },
-        ],
-        benchmark: {
-            type: 'Standard',
-            holdings: [
+    [
+        {
+            "name": "US demo portfolio - weight",
+            "totalValue": 10000,
+            "currency": "USD",
+            "holdings": [
                 {
-                    securityId: 'XIUSA0010V',
-                    weight: 100,
+                    "securityId": "FOUSA06OEZ",
+                    "weight": 30
                 },
+                {
+                    "securityId": "FOUSA06IVV",
+                    "weight": 30
+                },
+                {
+                    "securityId": "F00000T770",
+                    "weight": 20
+                },
+                {
+                    "securityId": "0P0000JIAP",
+                    "weight": 20
+                }
             ],
-        },
-    },
+            "benchmark": {
+                "type": "Standard",
+                "holdings": [
+                    {
+                        "securityId": "XIUSA0010V",
+                        "weight": 100
+                    }
+                ]
+            }
+        }
+    ],
 ];
 
 window.mstarApisSdk.xray.getStockRegionsUsData({ portfolios: samplePortfolio, languageId: 'en-US' });

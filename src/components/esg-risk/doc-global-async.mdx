@@ -1,0 +1,1029 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import Sustainability from "@/components/esg-risk/EsgRisk.vue";
+import { PORTFOLIO_ANALYSIS_AMERICAS_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="Sustainability" component={ Sustainability }/>
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+
+</style>
+
+# ESG Risk Rating
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+- [Data Models](#data-models)
+
+
+## Description
+
+The Morningstar Portfolio Corporate and Sovereign Sustainability Scores are the asset-weighted averages of Sustainalytics' company-level and country ESG Risk Scores.
+
+The Portfolio Corporate and Sovereign Sustainability Scores are rendered on a 0-100 scale, where lower scores are better, using an asset-weighted average of all covered securities. Morningstar determines whether each eligible portfolio holding can be classified under the corporate or sovereign framework. Each holding can only contribute an ESG Risk Score or a Country Risk score, not both.
+
+To receive a Corporate Sustainability Score, at least 67% of a portfolio's corporate assets under management (long positions only) must have a company ESG Risk Rating.
+
+To receive a Sovereign Sustainability Score, at least 67% of a portfolio's sovereign assets under management (long positions only) must have a country ESG Risk Rating.
+
+<Canvas withSource="open" withToolbar height="300">
+    <Story id="components-esg-risk-rating--async-story-details"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={Sustainability}/>
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={PORTFOLIO_ANALYSIS_AMERICAS_URL} target="_blank">
+Portfolio Analysis Global API</a>.
+
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+Request header 'prefer: 'respond-async' allows to fetch the response asynchronously, which makes sure the response is
+available without timeout issues
+
+``` javascript dark
+window.mstarApisSdk.xray.getEsgRiskData({ portfolios: samplePortfolio, languageId: 'en-US', prefer: 'respond-async' });
+```
+
+
+<details>
+    <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+const samplePortfolio = [
+    {
+        Name: 'Test Portfolio1',
+        TotalValue: 10000,
+        Holdings: [
+            {
+                SecurityId: 'F00000VPDY',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000VPDZ',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000VPE0',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WK3S',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WK3Q',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WK3R',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000T76W',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000T76Y',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000T76Z',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000T76X',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000T770',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000T772',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000T773',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000T771',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000VPDQ',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000VPDR',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000VPDS',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WK3Z',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WK42',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WK47',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WK4B',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WK4F',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WK4J',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WK4N',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WK4R',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WK3V',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000T777',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000T775',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000T776',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000T774',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F000011DGV',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F000011DGU',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000H35Y',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000H35X',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000H35W',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000J8SX',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000PQ2U',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'FOUSA007RP',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'FOUSA00ABD',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'FOUSA05GYK',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'FOUSA00DEK',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'FOUSA08N2L',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'FOUSA00KJW',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'FOUSA00COA',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'FOUSA00CTW',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'FOUSA05HX7',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WRW6',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WRW5',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WRW7',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000UEIB',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000UEIA',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000UEIC',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000QSIZ',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000QSIX',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000N79H',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000N75J',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000UDFO',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000N1IS',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000XKG7',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000XKG8',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000OEUB',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000OEUC',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000OEUA',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000ZKDA',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000ZKD9',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000ZKKG',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000T6OZ',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000T6P0',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000T6P1',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000PEIU',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000PEIV',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000PEIW',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000ZF1O',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F000010IS3',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'FOUSA05KKV',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000YSY7',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000YSY8',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WQUJ',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F000010GIB',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F000010GIA',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000U3B0',
+                Type: 'FO',
+                Value: 100,
+            },
+        ],
+        Benchmark: {
+            Type: 'Standard',
+            Holdings: [
+                {
+                    SecurityId: 'XIUSA0010V',
+                    Type: 'XI',
+                    Weight: 100,
+                },
+            ],
+        },
+    },
+];
+
+window.mstarApisSdk.portfolioAnalysis.getEsgRiskData({
+    portfolios: samplePortfolio,
+    languageId: 'en-US',
+    headers: {
+        prefer: 'respond-async',
+    },
+});
+
+```
+
+</details>
+
+### Request Example
+Asynchronous API Requests has below 3 steps to get the Sustainability data Response:
+1. **Initiating Request**: Sustainability API will send back the jobId as shown in the below example. To make the request asynchronous
+   we need to pass the ‘prefer’ header in the request as shown in the example below.
+
+    ```javascript dark
+        https://www.us-api.morningstar.com/portfolio-analysis/v1/sustainability/esg-risk?langcult={{languageId}}
+    ```
+
+    #### Request Payload Example
+    | Query Parameter | Description | Example |
+    | :-------------- | :---------- | :------ |
+    | `languageId` | ISO culture codes. If not provided, defaults to the language defined in settings. | `languageId=en-US` |
+
+    | Request Header | Description | Example |
+    | :------------- | :---------- | :------ |
+    | `prefer` | Get the response in asynchronous format | `prefer=respond-async` |
+
+    #### Sample JobId API Response Data Format
+
+    ```javascript dark
+    {
+      "jobId": "efb3a071-cd29-41c6-86ce-fb1b3569b5e4",
+      "_links": [
+          {
+              "href": "www.us-api.morningstar.com/dynamic-services-apis/jobs/efb3a071-cd29-41c6-86ce-fb1b3569b5e4",
+              "rel": "self",
+              "method": "GET"
+          }
+      ]
+    }
+    ```
+2. **Pooling Status**: Once JobId is received, use below API to get the status from the S3 server in the below format.
+
+    ```javascript dark
+        https://www.us-api.morningstar.com/portfolio-analysis/dynamic-services-apis/jobs/:jobId
+    ```
+    When the *Automatically follow redirects* setting is on(it’s true by default in postman as well as in all native browsers)
+    then it automatically redirects to step 3 and returns the response with the status code 200 when the response is available.
+    Otherwise, we need to keep polling the API until we get a final response.
+
+    #### Sample response for the pending status.
+
+    ```javascript dark
+    {
+        "id": "8d616381-9be9-4a2e-85ec-3f5bf244e7c8",
+        "created": "2023-05-11T10:12:08.3246921Z",
+        "status": "pending",
+        "isComplete": false,
+        "_links": [
+            {
+                "href": "https://www.us-api.morningstar.com/jobs/8d616381-9be9-4a2e-85ec-3f5bf244e7c8",
+                "rel": "self",
+                "method": "GET"
+            }
+        ]
+    }
+    ```
+    When the *Automatically follow redirects* setting is off then it returns the status code '302 Found' and the URL
+    provided will be returned in the response header. Follow Step 3 to get final response.
+
+3. **Getting Final Response**: Make the Get request to fetch final response from S3 server.
+
+    ```javascript dark
+    https://www.us-api.morningstar.com/portfolio-analysis/v1/sustainability/:requestId
+    ```
+    *Note: RequestId in below URl is received in the step 2 APIs 'location' response header*
+
+    #### Sample final API Response Data Format
+
+    <details>
+        <summary><span class="summary-text">Code Snippet</span></summary>
+
+    ```json dark
+    {
+        "sustainability": [
+            {
+                "portfolio": {
+                    "name": "Test Portfolio1",
+                    "esgRisk": {
+                        "date": "2023-01-31",
+                        "portfolioCorporateSustainabilityScore": 22.882900752377076,
+                        "corporateSustainabilityRatingPercentOfEligiblePortfolioCovered": 90.36670967188532,
+                        "portfolioEnvironmentalRiskScore": 4.733127439526373,
+                        "portfolioSocialRiskScore": 9.563974421283557,
+                        "portfolioGovernanceRiskScore": 8.587951649022873,
+                        "portfolioCorporateEsgRiskExposureScore": 50.1214520290877,
+                        "portfolioCorporateEsgManagedRiskScore": 27.238389261384,
+                        "corporatePercentOfPortfolioCoveredWithHighEsgRiskScores": 6.780458836312889,
+                        "corporatePercentOfPortfolioCoveredWithLowEsgRiskScores": 33.4939336812511,
+                        "corporatePercentOfPortfolioCoveredWithMediumEsgRiskScores": 51.74384139964076,
+                        "corporatePercentOfPortfolioCoveredWithNegligibleEsgRiskScores": 1.3707688969243552,
+                        "corporatePercentOfPortfolioCoveredWithSevereEsgRiskScores": 6.610997185870893,
+                        "corporateSustainabilityRatingNumberOfSecuritiesScored": 62,
+                        "exposurePercentEligible": 100,
+                        "exposurePercentNotEligible": 0,
+                        "historicalCorporateSustainabilityScore": 22.882900752377076,
+                        "historicalSovereignSustainabilityScore": 13.426964473172335,
+                        "numberOfSecuritiesNotScoredControversy": 43,
+                        "numberOfSecuritiesScoredControversy": 62,
+                        "percentOfAumCoveredControversy": 90.36670967188532,
+                        "percentOfAumWithHighAndSevereControversies": 7.998929002610373,
+                        "percentOfAumWithHighControversies": 5.582265131235619,
+                        "percentOfAumWithLowControversies": 9.32486111431431,
+                        "percentOfAumWithModerateControversies": 27.476771810881036,
+                        "percentOfAumWithNoControversies": 0,
+                        "percentOfAumWithSevereControversies": 2.4166638713747535,
+                        "percentOfAumWithSignificantControversies": 55.19943807219428,
+                        "portfolioDateSustainabilityRating": "2023-01-31",
+                        "portfolioSovereignSustainabilityScore": 13.426964473172335,
+                        "portfolioSustainabilityRatingEligibleHoldingType": "corporate, sovereign",
+                        "portfolioSustainabilityRatingPercentageOfQualifiedHoldingsCorporate": 92.18753020669142,
+                        "portfolioSustainabilityRatingPercentageOfQualifiedHoldingsOther": 0,
+                        "portfolioSustainabilityRatingPercentageOfQualifiedHoldingsSovereign": 7.812469793308578,
+                        "percentOfCorporateSustainabilityScoreContributionEScore": 20.68412344547138,
+                        "percentOfCorporateSustainabilityScoreContributionGScore": 37.52999561531008,
+                        "percentOfCorporateSustainabilityScoreContributionSScore": 41.795288651461945,
+                        "percentOfCorporateSustainabilityScoreContributionUnallocatedScore": 0,
+                        "portfolioUnallocatedEsgRiskScore": 0,
+                        "sovereignPercentOfPortfolioCoveredWithHighEsgRiskScores": 0,
+                        "sovereignPercentOfPortfolioCoveredWithLowEsgRiskScores": 100,
+                        "sovereignPercentOfPortfolioCoveredWithMediumEsgRiskScores": 0,
+                        "sovereignPercentOfPortfolioCoveredWithNegligibleEsgRiskScores": 0,
+                        "sovereignPercentOfPortfolioCoveredWithSevereEsgRiskScores": 0,
+                        "sovereignSustainabilityRatingNumberOfSecuritiesScored": 2,
+                        "sovereignSustainabilityRatingPercentOfEligiblePortfolioCovered": 100,
+                        "sustainabilityRatingCorporateContributionPercent": 92.18753020669142,
+                        "sustainabilityRatingNumberOfSecuritiesScored": 64,
+                        "sustainabilityRatingSovereignContributionPercent": 7.812469793308578
+                    }
+                },
+                "benchmark": {
+                    "name": "Morningstar US Market TR USD",
+                    "identifier": "XIUSA0010V",
+                    "identifierType": "SecurityId",
+                    "securityType": "XI",
+                    "esgRisk": {
+                        "portfolioCorporateSustainabilityScore": 21.9,
+                        "corporateSustainabilityRatingPercentOfEligiblePortfolioCovered": 99.67083,
+                        "portfolioEnvironmentalRiskScore": 4.32,
+                        "portfolioSocialRiskScore": 9.3,
+                        "portfolioGovernanceRiskScore": 7.21,
+                        "portfolioCorporateEsgRiskExposureScore": 40.4303,
+                        "portfolioCorporateEsgManagedRiskScore": 18.53295,
+                        "corporatePercentOfPortfolioCoveredWithHighEsgRiskScores": 12.525,
+                        "corporatePercentOfPortfolioCoveredWithLowEsgRiskScores": 41.85472,
+                        "corporatePercentOfPortfolioCoveredWithMediumEsgRiskScores": 42.76231,
+                        "corporatePercentOfPortfolioCoveredWithNegligibleEsgRiskScores": 1.75063,
+                        "corporatePercentOfPortfolioCoveredWithSevereEsgRiskScores": 1.10734,
+                        "corporateSustainabilityRatingNumberOfSecuritiesScored": 1461,
+                        "historicalCorporateSustainabilityScore": 21.85748,
+                        "portfolioDateSustainabilityRating": "2022-12-30",
+                        "portfolioSustainabilityRatingEligibleHoldingType": "corporate, sovereign",
+                        "portfolioSustainabilityRatingPercentageOfQualifiedHoldingsCorporate": 100,
+                        "portfolioSustainabilityRatingPercentageOfQualifiedHoldingsOther": 0,
+                        "portfolioSustainabilityRatingPercentageOfQualifiedHoldingsSovereign": 0,
+                        "percentOfCorporateSustainabilityScoreContributionEScore": 19.72974,
+                        "percentOfCorporateSustainabilityScoreContributionGScore": 32.90745,
+                        "percentOfCorporateSustainabilityScoreContributionSScore": 42.47712,
+                        "percentOfCorporateSustainabilityScoreContributionUnallocatedScore": 4.88994,
+                        "sovereignSustainabilityRatingNumberOfSecuritiesScored": 0,
+                        "portfolioUnallocatedEsgScore": 1.07
+                    }
+                },
+                "securityBreakdown": [
+                    {
+                        "name": "London & Capital Glbl Bal Fxd Inc I £Inc",
+                        "identifier": "0P00013NQG",
+                        "identifierType": "PerformanceId",
+                        "securityType": "FO",
+                        "esgRisk": {
+                            "portfolioCorporateSustainabilityScore": 22.75,
+                            "corporateSustainabilityRatingPercentOfEligiblePortfolioCovered": 95.43613,
+                            "portfolioEnvironmentalRiskScore": 4.62,
+                            "portfolioSocialRiskScore": 9.6,
+                            "portfolioGovernanceRiskScore": 8.53,
+                            "portfolioCorporateEsgRiskExposureScore": 49.85916,
+                            "portfolioCorporateEsgManagedRiskScore": 27.11155,
+                            "morningstarSustainabilityRating": "Below Average",
+                            "corporateSustainabilityPercentRankInGlobalCategory": 68,
+                            "historicalCorporateSustainabilityScoreGlobalCategoryAverage": 21.61421,
+                            "historicalCorporateSustainabilityPercentRankInGlobalCategory": 73,
+                            "corporatePercentOfPortfolioCoveredWithHighEsgRiskScores": 6.81752,
+                            "corporatePercentOfPortfolioCoveredWithLowEsgRiskScores": 31.96378,
+                            "corporatePercentOfPortfolioCoveredWithMediumEsgRiskScores": 51.96355,
+                            "corporatePercentOfPortfolioCoveredWithNegligibleEsgRiskScores": 2.72161,
+                            "corporatePercentOfPortfolioCoveredWithSevereEsgRiskScores": 6.53354,
+                            "corporateSustainabilityRatingNumberOfSecuritiesScored": 64,
+                            "historicalCorporateSustainabilityScore": 23.34877,
+                            "historicalSovereignSustainabilityScore": 13.08997,
+                            "portfolioDateSustainabilityRating": "2022-12-31",
+                            "portfolioSovereignSustainabilityScore": 13.45,
+                            "portfolioSustainabilityRatingEligibleHoldingType": "corporate, sovereign",
+                            "portfolioSustainabilityRatingPercentageOfQualifiedHoldingsCorporate": 90.45343,
+                            "portfolioSustainabilityRatingPercentageOfQualifiedHoldingsOther": 0,
+                            "portfolioSustainabilityRatingPercentageOfQualifiedHoldingsSovereign": 9.54657,
+                            "percentOfCorporateSustainabilityScoreContributionEScore": 20.32348,
+                            "percentOfCorporateSustainabilityScoreContributionGScore": 37.49788,
+                            "percentOfCorporateSustainabilityScoreContributionSScore": 42.18933,
+                            "percentOfCorporateSustainabilityScoreContributionUnallocatedScore": 0,
+                            "sovereignPercentOfPortfolioCoveredWithHighEsgRiskScores": 0,
+                            "sovereignPercentOfPortfolioCoveredWithLowEsgRiskScores": 100,
+                            "sovereignPercentOfPortfolioCoveredWithMediumEsgRiskScores": 0,
+                            "sovereignPercentOfPortfolioCoveredWithNegligibleEsgRiskScores": 0,
+                            "sovereignPercentOfPortfolioCoveredWithSevereEsgRiskScores": 0,
+                            "sovereignSustainabilityRatingNumberOfSecuritiesScored": 3,
+                            "sovereignSustainabilityRatingPercentOfEligiblePortfolioCovered": 100,
+                            "portfolioSustainabilityRatingCorporateContributionPercent": 90.45343,
+                            "portfolioSustainabilityRatingSovereignContributionPercent": 9.54657,
+                            "portfolioCorporateSustainabilityRating": "Below Average",
+                            "portfolioSovereignSustainabilityRating": "Above Average",
+                            "sovereignSustainabilityPercentRankInGlobalCategory": 17,
+                            "sovereignSustainabilityAbsoluteRankInGlobalCategory": 391,
+                            "historicalSovereignSustainabilityPercentRankInGlobalCategory": 13,
+                            "historicalSovereignSustainabilityAbsoluteRankInGlobalCategory": 311,
+                            "sovereignSustainabilityGlobalCategoryAverage": 15.92096,
+                            "historicalSovereignSustainabilityScoreGlobalCategoryAverage": 15.90791,
+                            "numberOfFundsInGlobalCategoryCorporateSustainability": 1766,
+                            "numberOfFundsInGlobalCategorySovereignSustainability": 2369,
+                            "sovereignSustainabilityBreakpoint12": 21.91,
+                            "sovereignSustainabilityBreakpoint23": 16.08,
+                            "sovereignSustainabilityBreakpoint34": 13.82,
+                            "sovereignSustainabilityBreakpoint45": 12.86,
+                            "portfolioUnallocatedEsgScore": 0,
+                            "corporateSustainabilityAbsoluteRankInGlobalCategory": 1199,
+                            "historicalCorporateSustainabilityAbsoluteRankInGlobalCategory": 1286,
+                            "corporateSustainabilityGlobalCategoryAverage": 21.43134
+                        }
+                    }
+                ],
+                "metadata": {
+                    "messages": [
+                        {
+                            "type": "Warning",
+                            "message": "Invalid or unentitled holdings",
+                            "invalidHoldings": [
+                                {
+                                    "securityId": "F0GBR052QA",
+                                    "status": "Unentitled"
+                                },
+                                {
+                                    "securityId": "F000000EY1",
+                                    "status": "Unentitled"
+                                },
+                                {
+                                    "securityId": "F00000OXG7",
+                                    "status": "Unentitled"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        ],
+        "metadata": {
+            "requestId": "03956dbc-bc59-449b-a0e8-94c9d2c6f0b0"
+        }
+    }
+    ```
+    </details>
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Component Transformed Data Format](#component-transformed-data-format)
+- [Component Transformation Operation](#component-transformation-operation)
+-->
+
+### Component Transformed Data Format
+
+<details>
+    <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+{
+    "portfolio": {
+        "name": "Test Portfolio1",
+        "esgRisk": {
+            "date": "2023-01-31",
+            "portfolioCorporateSustainabilityScore": 22.882900752377076,
+            "corporateSustainabilityRatingPercentOfEligiblePortfolioCovered": 90.36670967188532,
+            "portfolioEnvironmentalRiskScore": 4.733127439526373,
+            "portfolioSocialRiskScore": 9.563974421283557,
+            "portfolioGovernanceRiskScore": 8.587951649022873,
+            "portfolioCorporateEsgRiskExposureScore": 50.1214520290877,
+            "portfolioCorporateEsgManagedRiskScore": 27.238389261384,
+            "corporatePercentOfPortfolioCoveredWithHighEsgRiskScores": 6.780458836312889,
+            "corporatePercentOfPortfolioCoveredWithLowEsgRiskScores": 33.4939336812511,
+            "corporatePercentOfPortfolioCoveredWithMediumEsgRiskScores": 51.74384139964076,
+            "corporatePercentOfPortfolioCoveredWithNegligibleEsgRiskScores": 1.3707688969243552,
+            "corporatePercentOfPortfolioCoveredWithSevereEsgRiskScores": 6.610997185870893,
+            "corporateSustainabilityRatingNumberOfSecuritiesScored": 62,
+            "exposurePercentEligible": 100,
+            "exposurePercentNotEligible": 0,
+            "historicalCorporateSustainabilityScore": 22.882900752377076,
+            "historicalSovereignSustainabilityScore": 13.426964473172335,
+            "numberOfSecuritiesNotScoredControversy": 43,
+            "numberOfSecuritiesScoredControversy": 62,
+            "percentOfAumCoveredControversy": 90.36670967188532,
+            "percentOfAumWithHighAndSevereControversies": 7.998929002610373,
+            "percentOfAumWithHighControversies": 5.582265131235619,
+            "percentOfAumWithLowControversies": 9.32486111431431,
+            "percentOfAumWithModerateControversies": 27.476771810881036,
+            "percentOfAumWithNoControversies": 0,
+            "percentOfAumWithSevereControversies": 2.4166638713747535,
+            "percentOfAumWithSignificantControversies": 55.19943807219428,
+            "portfolioDateSustainabilityRating": "2023-01-31",
+            "portfolioSovereignSustainabilityScore": 13.426964473172335,
+            "portfolioSustainabilityRatingEligibleHoldingType": "corporate, sovereign",
+            "portfolioSustainabilityRatingPercentageOfQualifiedHoldingsCorporate": 92.18753020669142,
+            "portfolioSustainabilityRatingPercentageOfQualifiedHoldingsOther": 0,
+            "portfolioSustainabilityRatingPercentageOfQualifiedHoldingsSovereign": 7.812469793308578,
+            "percentOfCorporateSustainabilityScoreContributionEScore": 20.68412344547138,
+            "percentOfCorporateSustainabilityScoreContributionGScore": 37.52999561531008,
+            "percentOfCorporateSustainabilityScoreContributionSScore": 41.795288651461945,
+            "percentOfCorporateSustainabilityScoreContributionUnallocatedScore": 0,
+            "portfolioUnallocatedEsgRiskScore": 0,
+            "sovereignPercentOfPortfolioCoveredWithHighEsgRiskScores": 0,
+            "sovereignPercentOfPortfolioCoveredWithLowEsgRiskScores": 100,
+            "sovereignPercentOfPortfolioCoveredWithMediumEsgRiskScores": 0,
+            "sovereignPercentOfPortfolioCoveredWithNegligibleEsgRiskScores": 0,
+            "sovereignPercentOfPortfolioCoveredWithSevereEsgRiskScores": 0,
+            "sovereignSustainabilityRatingNumberOfSecuritiesScored": 2,
+            "sovereignSustainabilityRatingPercentOfEligiblePortfolioCovered": 100,
+            "sustainabilityRatingCorporateContributionPercent": 92.18753020669142,
+            "sustainabilityRatingNumberOfSecuritiesScored": 64,
+            "sustainabilityRatingSovereignContributionPercent": 7.812469793308578
+        }
+    },
+    "benchmark": {
+        "name": "Morningstar US Market TR USD",
+        "identifier": "XIUSA0010V",
+        "identifierType": "SecurityId",
+        "securityType": "XI",
+        "esgRisk": {
+            "portfolioCorporateSustainabilityScore": 21.9,
+            "corporateSustainabilityRatingPercentOfEligiblePortfolioCovered": 99.67083,
+            "portfolioEnvironmentalRiskScore": 4.32,
+            "portfolioSocialRiskScore": 9.3,
+            "portfolioGovernanceRiskScore": 7.21,
+            "portfolioCorporateEsgRiskExposureScore": 40.4303,
+            "portfolioCorporateEsgManagedRiskScore": 18.53295,
+            "corporatePercentOfPortfolioCoveredWithHighEsgRiskScores": 12.525,
+            "corporatePercentOfPortfolioCoveredWithLowEsgRiskScores": 41.85472,
+            "corporatePercentOfPortfolioCoveredWithMediumEsgRiskScores": 42.76231,
+            "corporatePercentOfPortfolioCoveredWithNegligibleEsgRiskScores": 1.75063,
+            "corporatePercentOfPortfolioCoveredWithSevereEsgRiskScores": 1.10734,
+            "corporateSustainabilityRatingNumberOfSecuritiesScored": 1461,
+            "historicalCorporateSustainabilityScore": 21.85748,
+            "portfolioDateSustainabilityRating": "2022-12-30",
+            "portfolioSustainabilityRatingEligibleHoldingType": "corporate, sovereign",
+            "portfolioSustainabilityRatingPercentageOfQualifiedHoldingsCorporate": 100,
+            "portfolioSustainabilityRatingPercentageOfQualifiedHoldingsOther": 0,
+            "portfolioSustainabilityRatingPercentageOfQualifiedHoldingsSovereign": 0,
+            "percentOfCorporateSustainabilityScoreContributionEScore": 19.72974,
+            "percentOfCorporateSustainabilityScoreContributionGScore": 32.90745,
+            "percentOfCorporateSustainabilityScoreContributionSScore": 42.47712,
+            "percentOfCorporateSustainabilityScoreContributionUnallocatedScore": 4.88994,
+            "sovereignSustainabilityRatingNumberOfSecuritiesScored": 0,
+            "portfolioUnallocatedEsgScore": 1.07
+        }
+    }
+}
+```
+
+</details>
+
+### Component Transformation Operation
+
+<details>
+    <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+generateSustainabilityData(data = {}) {
+    const esgBreakdownData = {};
+    const portfolio = get(data, 'portfolio', {});
+    const benchmark = get(data, 'benchmark', {});
+    const portfolioCorporateSustainabilityScore = this.formatNumber(
+        get(portfolio, 'esgRisk.portfolioCorporateSustainabilityScore'),
+        2,
+    );
+    const portfolioSovereignSustainabilityScore = this.formatNumber(
+        get(portfolio, 'esgRisk.portfolioSovereignSustainabilityScore'),
+        2,
+    );
+    const benchmarkCorporateSustainabilityScore = this.formatNumber(
+        get(benchmark, 'esgRisk.historicalCorporateSustainabilityScore'),
+        2,
+    );
+    const benchmarkSovereignSustainabilityScore = this.formatNumber(
+        get(benchmark, 'esgRisk.historicalSovereignSustainabilityScore'),
+        2,
+    );
+    if (portfolioCorporateSustainabilityScore) {
+        this.corporate = {
+            type: 'corporate',
+            label: mappings.dataPoints.corporate,
+            portfolioName: portfolio.name,
+            benchmarkName: benchmark.name,
+            portfolioAum: this.formatNumber(
+            get(portfolio, 'esgRisk.corporateSustainabilityRatingPercentOfEligiblePortfolioCovered'),
+                2,
+            ),
+            portfolioCorporateSustainabilityScore,
+            benchmarkCorporateSustainabilityScore,
+        };
+    }
+
+    if (portfolioSovereignSustainabilityScore) {
+        this.sovereign = {
+            type: 'sovereign',
+            label: mappings.dataPoints.sovereign,
+            portfolioName: portfolio.name,
+            benchmarkName: benchmark.name,
+            portfolioAum: this.formatNumber(
+            get(portfolio, 'esgRisk.sovereignSustainabilityRatingPercentOfEligiblePortfolioCovered'),
+                2,
+            ),
+            portfolioSovereignSustainabilityScore,
+            benchmarkSovereignSustainabilityScore,
+        };
+    }
+
+    esgBreakdownData.environmentalScore = this.formatNumber(
+        get(portfolio, 'esgRisk.portfolioEnvironmentalRiskScore'),
+        2,
+    );
+    esgBreakdownData.socialScore = this.formatNumber(
+        get(portfolio, 'esgRisk.portfolioSocialRiskScore'),
+        2,
+    );
+    esgBreakdownData.governanceScore = this.formatNumber(
+        get(portfolio, 'esgRisk.portfolioGovernanceRiskScore'),
+        2,
+    );
+    esgBreakdownData.unallocatedScore = this.formatNumber(
+        get(portfolio, 'esgRisk.portfolioUnallocatedESGRiskScore'),
+        2,
+    );
+
+    this.pillarData = [];
+
+    Object.entries(esgBreakdownData).forEach((pillar) => {
+        const obj = {
+            scoreType: mappings.dataPoints[pillar[0]],
+            score: this.formatNumber(pillar[1], 2),
+        };
+        this.pillarData.push(obj);
+    });
+},
+```
+</details>
+&nbsp;
+
+
+## Data Models
+The component uses the following data models:
+<details>
+    <summary><span class="summary-text">Corporate Data</span></summary>
+
+```json dark
+{
+    "type": "corporate",
+    "label": "Corporate Sustainability Score",
+    "portfolioName": "TestPortfolio1",
+    "benchmarkName": "S&P 500 TR USD",
+    "portfolioAum": "91.08",
+    "portfolioCorporateSustainabilityScore": "21.98",
+    "benchmarkCorporateSustainabilityScore": "21.39"
+}
+```
+</details>
+&nbsp;
+
+<details>
+    <summary><span class="summary-text">Sovereign Data</span></summary>
+
+```json dark
+{
+    "type": "sovereign",
+    "label": "Sovereign Sustainability Score",
+    "portfolioName": "TestPortfolio1",
+    "benchmarkName": "S&P 500 TR USD",
+    "portfolioAum": "100.00",
+    "portfolioSovereignSustainabilityScore": "15.52",
+    "benchmarkSovereignSustainabilityScore": "20.63"
+}
+```
+</details>
+&nbsp;
+
+<details>
+    <summary><span class="summary-text">Corporate Pillars Data</span></summary>
+
+```json dark
+[
+    {
+        "scoreType": "Environmental",
+        "score": "3.39"
+    },
+    {
+        "scoreType": "Social",
+        "score": "8.04"
+    },
+    {
+        "scoreType": "Governance",
+        "score": "6.95"
+    },
+    {
+        "scoreType": "Unallocated",
+        "score": "3.59"
+    }
+]
+```
+</details>

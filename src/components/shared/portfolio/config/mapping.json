@@ -23,6 +23,9 @@
             "type": "performance-graph",
             "cols": 12
         },
+        "carbonScore": {
+            "type": "carbon-score"
+        },
         "productInvolvement": {
             "type": "product-involvement"
         },
@@ -44,8 +47,8 @@
         "stockType": {
             "type": "stock-type"
         },
-        "sustainability": {
-            "type": "sustainability",
+        "esgRisk": {
+            "type": "esg-risk",
             "cols": 12
         },
         "trailingReturns": {

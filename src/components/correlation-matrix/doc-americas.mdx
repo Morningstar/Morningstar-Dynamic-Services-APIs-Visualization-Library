@@ -1,0 +1,1565 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import CorrelationMatrix from "@/components/correlation-matrix/CorrelationMatrix.vue";
+
+import { PORTFOLIO_ANALYSIS_AMERICAS_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="CorrelationMatrix" component={CorrelationMatrix} />
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+
+</style>
+
+# Correlation Matrix (Americas)
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+
+## Description
+
+The Correlation Matrix component displays the relationship of return patterns among investments. It is based upon the correlation coefficient, a number between -1.0 and 1.0.
+A perfect negative relationship between two investments has a correlation of -1.0, whereas a perfect positive linear relationship exists with a correlation of 1.0. A correlation coefficient of 0.0 indicates no linear relationship between the investments.
+Correlation information can be valuable in assessing the diversification effect of combining an investment with other options.
+
+<Canvas withSource="open" withToolbar>
+  <Story id="components-correlation-matrix--story-details-us"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={CorrelationMatrix} />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={PORTFOLIO_ANALYSIS_AMERICAS_URL} target="_blank">Portfolio Analysis API (Americas)</a>.
+<!--
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request)
+- [Request Payload Example](#request-payload)
+-->
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.xray.getCorrelationMatrixUsData({ portfolios: samplePortfolio, languageId: 'en-US' });
+```
+<details>
+  <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+const samplePortfolio = [
+    {
+        name: 'US demo portfolio - weight',
+        totalValue: 10000,
+        currency: 'USD',
+        holdings: [
+            {
+                securityId: 'FOUSA06OEZ',
+                weight: 30,
+            },
+            {
+                securityId: 'FOUSA06IVV',
+                weight: 50,
+            },
+            {
+                securityId: 'F00000T770',
+                weight: 20,
+            },
+        ],
+        benchmark: {
+            type: 'Standard',
+            holdings: [
+                {
+                    securityId: 'XIUSA0010V',
+                    weight: 100,
+                },
+            ],
+        },
+    },
+];
+window.mstarApisSdk.xray.getCorrelationMatrixUsData({ portfolios: samplePortfolio, languageId: 'en-US' });
+```
+</details>
+&nbsp;
+
+### Request Example
+
+```javascript dark
+"https://www.us-api.morningstar.com/portfolioanalysis/v1/xray?langcult={{languageId}}"
+
+```
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- |
+| `languageId` |	ISO culture codes. If not provided, defaults to language defined in settings. |`languageId=en-US` |
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Integration Data Format](#integration-data-format)
+- [Integration Transformation Operation](#integration-transformation-operation)
+- [Component Transformed Data Format](#component-transformed-data-format)
+- [Component Transformation Operation](#component-transformation-operation)
+-->
+### API Response Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+[
+    {
+        "TrailingTimePeriod": "Year3",
+        "DataFrequency": "Monthly",
+        "StartDate": "2020-12-31T00:00:00",
+        "EndDate": "2023-12-31T00:00:00",
+        "Correlations": [
+            {
+                "Id": 1,
+                "SecurityId": "F00000T770",
+                "UseExtendedReturns": false,
+                "Type": "Security",
+                "CorrelatedItemKey": [
+                    {
+                        "CorrelatedItemKeyId": 1,
+                        "Type": "Security",
+                        "Value": 1
+                    },
+                    {
+                        "CorrelatedItemKeyId": 2,
+                        "Type": "Security",
+                        "Value": 0.07410212
+                    },
+                    {
+                        "CorrelatedItemKeyId": 3,
+                        "Type": "Security",
+                        "Value": 0.77454346
+                    },
+                    {
+                        "CorrelatedItemKeyId": 4,
+                        "Type": "Security",
+                        "Value": 0.86000327
+                    },
+                    {
+                        "CorrelatedItemKeyId": 5,
+                        "Type": "Security",
+                        "Value": 0.71458901
+                    },
+                    {
+                        "CorrelatedItemKeyId": 6,
+                        "Type": "Security",
+                        "Value": 0.13656596
+                    }
+                ]
+            },
+            {
+                "Id": 2,
+                "SecurityId": "0P0000JIAP",
+                "UseExtendedReturns": false,
+                "Type": "Security",
+                "CorrelatedItemKey": [
+                    {
+                        "CorrelatedItemKeyId": 1,
+                        "Type": "Security",
+                        "Value": 0.07410212
+                    },
+                    {
+                        "CorrelatedItemKeyId": 2,
+                        "Type": "Security",
+                        "Value": 1
+                    },
+                    {
+                        "CorrelatedItemKeyId": 3,
+                        "Type": "Security",
+                        "Value": 0.25039432
+                    },
+                    {
+                        "CorrelatedItemKeyId": 4,
+                        "Type": "Security",
+                        "Value": 0.15332599
+                    },
+                    {
+                        "CorrelatedItemKeyId": 5,
+                        "Type": "Security",
+                        "Value": -0.04401845
+                    },
+                    {
+                        "CorrelatedItemKeyId": 6,
+                        "Type": "Security",
+                        "Value": 0.29607228
+                    }
+                ]
+            },
+            {
+                "Id": 3,
+                "SecurityId": "FOUSA06IVV",
+                "UseExtendedReturns": false,
+                "Type": "Security",
+                "CorrelatedItemKey": [
+                    {
+                        "CorrelatedItemKeyId": 1,
+                        "Type": "Security",
+                        "Value": 0.77454346
+                    },
+                    {
+                        "CorrelatedItemKeyId": 2,
+                        "Type": "Security",
+                        "Value": 0.25039432
+                    },
+                    {
+                        "CorrelatedItemKeyId": 3,
+                        "Type": "Security",
+                        "Value": 1
+                    },
+                    {
+                        "CorrelatedItemKeyId": 4,
+                        "Type": "Security",
+                        "Value": 0.89501511
+                    },
+                    {
+                        "CorrelatedItemKeyId": 5,
+                        "Type": "Security",
+                        "Value": 0.69499175
+                    },
+                    {
+                        "CorrelatedItemKeyId": 6,
+                        "Type": "Security",
+                        "Value": 0.38940946
+                    }
+                ]
+            },
+            {
+                "Id": 4,
+                "SecurityId": "FOUSA06OEZ",
+                "UseExtendedReturns": false,
+                "Type": "Security",
+                "CorrelatedItemKey": [
+                    {
+                        "CorrelatedItemKeyId": 1,
+                        "Type": "Security",
+                        "Value": 0.86000327
+                    },
+                    {
+                        "CorrelatedItemKeyId": 2,
+                        "Type": "Security",
+                        "Value": 0.15332599
+                    },
+                    {
+                        "CorrelatedItemKeyId": 3,
+                        "Type": "Security",
+                        "Value": 0.89501511
+                    },
+                    {
+                        "CorrelatedItemKeyId": 4,
+                        "Type": "Security",
+                        "Value": 1
+                    },
+                    {
+                        "CorrelatedItemKeyId": 5,
+                        "Type": "Security",
+                        "Value": 0.77625093
+                    },
+                    {
+                        "CorrelatedItemKeyId": 6,
+                        "Type": "Security",
+                        "Value": 0.30768872
+                    }
+                ]
+            },
+            {
+                "Id": 5,
+                "SecurityId": "0P0000007E",
+                "UseExtendedReturns": false,
+                "Type": "Security",
+                "CorrelatedItemKey": [
+                    {
+                        "CorrelatedItemKeyId": 1,
+                        "Type": "Security",
+                        "Value": 0.71458901
+                    },
+                    {
+                        "CorrelatedItemKeyId": 2,
+                        "Type": "Security",
+                        "Value": -0.04401845
+                    },
+                    {
+                        "CorrelatedItemKeyId": 3,
+                        "Type": "Security",
+                        "Value": 0.69499175
+                    },
+                    {
+                        "CorrelatedItemKeyId": 4,
+                        "Type": "Security",
+                        "Value": 0.77625093
+                    },
+                    {
+                        "CorrelatedItemKeyId": 5,
+                        "Type": "Security",
+                        "Value": 1
+                    },
+                    {
+                        "CorrelatedItemKeyId": 6,
+                        "Type": "Security",
+                        "Value": 0.17232916
+                    }
+                ]
+            },
+            {
+                "Id": 6,
+                "SecurityId": "0P0000DZXU",
+                "UseExtendedReturns": false,
+                "Type": "Security",
+                "CorrelatedItemKey": [
+                    {
+                        "CorrelatedItemKeyId": 1,
+                        "Type": "Security",
+                        "Value": 0.13656596
+                    },
+                    {
+                        "CorrelatedItemKeyId": 2,
+                        "Type": "Security",
+                        "Value": 0.29607228
+                    },
+                    {
+                        "CorrelatedItemKeyId": 3,
+                        "Type": "Security",
+                        "Value": 0.38940946
+                    },
+                    {
+                        "CorrelatedItemKeyId": 4,
+                        "Type": "Security",
+                        "Value": 0.30768872
+                    },
+                    {
+                        "CorrelatedItemKeyId": 5,
+                        "Type": "Security",
+                        "Value": 0.17232916
+                    },
+                    {
+                        "CorrelatedItemKeyId": 6,
+                        "Type": "Security",
+                        "Value": 1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "TrailingTimePeriod": "Year5",
+        "DataFrequency": "Monthly",
+        "StartDate": "2018-12-31T00:00:00",
+        "EndDate": "2023-12-31T00:00:00",
+        "Correlations": [
+            {
+                "Id": 1,
+                "SecurityId": "F00000T770",
+                "UseExtendedReturns": false,
+                "Type": "Security",
+                "CorrelatedItemKey": [
+                    {
+                        "CorrelatedItemKeyId": 1,
+                        "Type": "Security",
+                        "Value": 1
+                    },
+                    {
+                        "CorrelatedItemKeyId": 2,
+                        "Type": "Security",
+                        "Value": 0.09708888
+                    },
+                    {
+                        "CorrelatedItemKeyId": 3,
+                        "Type": "Security",
+                        "Value": 0.777454
+                    },
+                    {
+                        "CorrelatedItemKeyId": 4,
+                        "Type": "Security",
+                        "Value": 0.85724669
+                    },
+                    {
+                        "CorrelatedItemKeyId": 5,
+                        "Type": "Security",
+                        "Value": 0.6941816
+                    },
+                    {
+                        "CorrelatedItemKeyId": 6,
+                        "Type": "Security",
+                        "Value": 0.42394346
+                    }
+                ]
+            },
+            {
+                "Id": 2,
+                "SecurityId": "0P0000JIAP",
+                "UseExtendedReturns": false,
+                "Type": "Security",
+                "CorrelatedItemKey": [
+                    {
+                        "CorrelatedItemKeyId": 1,
+                        "Type": "Security",
+                        "Value": 0.09708888
+                    },
+                    {
+                        "CorrelatedItemKeyId": 2,
+                        "Type": "Security",
+                        "Value": 1
+                    },
+                    {
+                        "CorrelatedItemKeyId": 3,
+                        "Type": "Security",
+                        "Value": 0.22220599
+                    },
+                    {
+                        "CorrelatedItemKeyId": 4,
+                        "Type": "Security",
+                        "Value": 0.19243744
+                    },
+                    {
+                        "CorrelatedItemKeyId": 5,
+                        "Type": "Security",
+                        "Value": -0.00300089
+                    },
+                    {
+                        "CorrelatedItemKeyId": 6,
+                        "Type": "Security",
+                        "Value": 0.40757458
+                    }
+                ]
+            },
+            {
+                "Id": 3,
+                "SecurityId": "FOUSA06IVV",
+                "UseExtendedReturns": false,
+                "Type": "Security",
+                "CorrelatedItemKey": [
+                    {
+                        "CorrelatedItemKeyId": 1,
+                        "Type": "Security",
+                        "Value": 0.777454
+                    },
+                    {
+                        "CorrelatedItemKeyId": 2,
+                        "Type": "Security",
+                        "Value": 0.22220599
+                    },
+                    {
+                        "CorrelatedItemKeyId": 3,
+                        "Type": "Security",
+                        "Value": 1
+                    },
+                    {
+                        "CorrelatedItemKeyId": 4,
+                        "Type": "Security",
+                        "Value": 0.92079987
+                    },
+                    {
+                        "CorrelatedItemKeyId": 5,
+                        "Type": "Security",
+                        "Value": 0.69699001
+                    },
+                    {
+                        "CorrelatedItemKeyId": 6,
+                        "Type": "Security",
+                        "Value": 0.43468514
+                    }
+                ]
+            },
+            {
+                "Id": 4,
+                "SecurityId": "FOUSA06OEZ",
+                "UseExtendedReturns": false,
+                "Type": "Security",
+                "CorrelatedItemKey": [
+                    {
+                        "CorrelatedItemKeyId": 1,
+                        "Type": "Security",
+                        "Value": 0.85724669
+                    },
+                    {
+                        "CorrelatedItemKeyId": 2,
+                        "Type": "Security",
+                        "Value": 0.19243744
+                    },
+                    {
+                        "CorrelatedItemKeyId": 3,
+                        "Type": "Security",
+                        "Value": 0.92079987
+                    },
+                    {
+                        "CorrelatedItemKeyId": 4,
+                        "Type": "Security",
+                        "Value": 1
+                    },
+                    {
+                        "CorrelatedItemKeyId": 5,
+                        "Type": "Security",
+                        "Value": 0.7714571
+                    },
+                    {
+                        "CorrelatedItemKeyId": 6,
+                        "Type": "Security",
+                        "Value": 0.40869853
+                    }
+                ]
+            },
+            {
+                "Id": 5,
+                "SecurityId": "0P0000007E",
+                "UseExtendedReturns": false,
+                "Type": "Security",
+                "CorrelatedItemKey": [
+                    {
+                        "CorrelatedItemKeyId": 1,
+                        "Type": "Security",
+                        "Value": 0.6941816
+                    },
+                    {
+                        "CorrelatedItemKeyId": 2,
+                        "Type": "Security",
+                        "Value": -0.00300089
+                    },
+                    {
+                        "CorrelatedItemKeyId": 3,
+                        "Type": "Security",
+                        "Value": 0.69699001
+                    },
+                    {
+                        "CorrelatedItemKeyId": 4,
+                        "Type": "Security",
+                        "Value": 0.7714571
+                    },
+                    {
+                        "CorrelatedItemKeyId": 5,
+                        "Type": "Security",
+                        "Value": 1
+                    },
+                    {
+                        "CorrelatedItemKeyId": 6,
+                        "Type": "Security",
+                        "Value": 0.26772883
+                    }
+                ]
+            },
+            {
+                "Id": 6,
+                "SecurityId": "0P0000DZXU",
+                "UseExtendedReturns": false,
+                "Type": "Security",
+                "CorrelatedItemKey": [
+                    {
+                        "CorrelatedItemKeyId": 1,
+                        "Type": "Security",
+                        "Value": 0.42394346
+                    },
+                    {
+                        "CorrelatedItemKeyId": 2,
+                        "Type": "Security",
+                        "Value": 0.40757458
+                    },
+                    {
+                        "CorrelatedItemKeyId": 3,
+                        "Type": "Security",
+                        "Value": 0.43468514
+                    },
+                    {
+                        "CorrelatedItemKeyId": 4,
+                        "Type": "Security",
+                        "Value": 0.40869853
+                    },
+                    {
+                        "CorrelatedItemKeyId": 5,
+                        "Type": "Security",
+                        "Value": 0.26772883
+                    },
+                    {
+                        "CorrelatedItemKeyId": 6,
+                        "Type": "Security",
+                        "Value": 1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "TrailingTimePeriod": "Year10",
+        "DataFrequency": "Monthly",
+        "StartDate": "2013-12-31T00:00:00",
+        "EndDate": "2023-12-31T00:00:00",
+        "Correlations": [
+            {
+                "Id": 1,
+                "SecurityId": "0P0000JIAP",
+                "UseExtendedReturns": false,
+                "Type": "Security",
+                "CorrelatedItemKey": [
+                    {
+                        "CorrelatedItemKeyId": 1,
+                        "Type": "Security",
+                        "Value": 1
+                    },
+                    {
+                        "CorrelatedItemKeyId": 2,
+                        "Type": "Security",
+                        "Value": 0.21376517
+                    },
+                    {
+                        "CorrelatedItemKeyId": 3,
+                        "Type": "Security",
+                        "Value": 0.18879276
+                    },
+                    {
+                        "CorrelatedItemKeyId": 4,
+                        "Type": "Security",
+                        "Value": -0.01312991
+                    },
+                    {
+                        "CorrelatedItemKeyId": 5,
+                        "Type": "Security",
+                        "Value": 0.26520165
+                    },
+                    {
+                        "CorrelatedItemKeyId": 6,
+                        "Type": "Security"
+                    }
+                ]
+            },
+            {
+                "Id": 2,
+                "SecurityId": "FOUSA06IVV",
+                "UseExtendedReturns": false,
+                "Type": "Security",
+                "CorrelatedItemKey": [
+                    {
+                        "CorrelatedItemKeyId": 1,
+                        "Type": "Security",
+                        "Value": 0.21376517
+                    },
+                    {
+                        "CorrelatedItemKeyId": 2,
+                        "Type": "Security",
+                        "Value": 1
+                    },
+                    {
+                        "CorrelatedItemKeyId": 3,
+                        "Type": "Security",
+                        "Value": 0.92118583
+                    },
+                    {
+                        "CorrelatedItemKeyId": 4,
+                        "Type": "Security",
+                        "Value": 0.67050032
+                    },
+                    {
+                        "CorrelatedItemKeyId": 5,
+                        "Type": "Security",
+                        "Value": 0.43823804
+                    },
+                    {
+                        "CorrelatedItemKeyId": 6,
+                        "Type": "Security"
+                    }
+                ]
+            },
+            {
+                "Id": 3,
+                "SecurityId": "FOUSA06OEZ",
+                "UseExtendedReturns": false,
+                "Type": "Security",
+                "CorrelatedItemKey": [
+                    {
+                        "CorrelatedItemKeyId": 1,
+                        "Type": "Security",
+                        "Value": 0.18879276
+                    },
+                    {
+                        "CorrelatedItemKeyId": 2,
+                        "Type": "Security",
+                        "Value": 0.92118583
+                    },
+                    {
+                        "CorrelatedItemKeyId": 3,
+                        "Type": "Security",
+                        "Value": 1
+                    },
+                    {
+                        "CorrelatedItemKeyId": 4,
+                        "Type": "Security",
+                        "Value": 0.74307547
+                    },
+                    {
+                        "CorrelatedItemKeyId": 5,
+                        "Type": "Security",
+                        "Value": 0.39196939
+                    },
+                    {
+                        "CorrelatedItemKeyId": 6,
+                        "Type": "Security"
+                    }
+                ]
+            },
+            {
+                "Id": 4,
+                "SecurityId": "0P0000007E",
+                "UseExtendedReturns": false,
+                "Type": "Security",
+                "CorrelatedItemKey": [
+                    {
+                        "CorrelatedItemKeyId": 1,
+                        "Type": "Security",
+                        "Value": -0.01312991
+                    },
+                    {
+                        "CorrelatedItemKeyId": 2,
+                        "Type": "Security",
+                        "Value": 0.67050032
+                    },
+                    {
+                        "CorrelatedItemKeyId": 3,
+                        "Type": "Security",
+                        "Value": 0.74307547
+                    },
+                    {
+                        "CorrelatedItemKeyId": 4,
+                        "Type": "Security",
+                        "Value": 1
+                    },
+                    {
+                        "CorrelatedItemKeyId": 5,
+                        "Type": "Security",
+                        "Value": 0.22785105
+                    },
+                    {
+                        "CorrelatedItemKeyId": 6,
+                        "Type": "Security"
+                    }
+                ]
+            },
+            {
+                "Id": 5,
+                "SecurityId": "0P0000DZXU",
+                "UseExtendedReturns": false,
+                "Type": "Security",
+                "CorrelatedItemKey": [
+                    {
+                        "CorrelatedItemKeyId": 1,
+                        "Type": "Security",
+                        "Value": 0.26520165
+                    },
+                    {
+                        "CorrelatedItemKeyId": 2,
+                        "Type": "Security",
+                        "Value": 0.43823804
+                    },
+                    {
+                        "CorrelatedItemKeyId": 3,
+                        "Type": "Security",
+                        "Value": 0.39196939
+                    },
+                    {
+                        "CorrelatedItemKeyId": 4,
+                        "Type": "Security",
+                        "Value": 0.22785105
+                    },
+                    {
+                        "CorrelatedItemKeyId": 5,
+                        "Type": "Security",
+                        "Value": 1
+                    },
+                    {
+                        "CorrelatedItemKeyId": 6,
+                        "Type": "Security"
+                    }
+                ]
+            },
+            {
+                "Id": 6,
+                "SecurityId": "F00000T770",
+                "UseExtendedReturns": true,
+                "Type": "Security",
+                "CorrelatedItemKey": [
+                    {
+                        "CorrelatedItemKeyId": 1,
+                        "Type": "Security"
+                    },
+                    {
+                        "CorrelatedItemKeyId": 2,
+                        "Type": "Security"
+                    },
+                    {
+                        "CorrelatedItemKeyId": 3,
+                        "Type": "Security"
+                    },
+                    {
+                        "CorrelatedItemKeyId": 4,
+                        "Type": "Security"
+                    },
+                    {
+                        "CorrelatedItemKeyId": 5,
+                        "Type": "Security"
+                    },
+                    {
+                        "CorrelatedItemKeyId": 6,
+                        "Type": "Security",
+                        "Value": 1
+                    }
+                ]
+            }
+        ]
+    }
+]
+```
+</details>
+&nbsp;
+
+### Integration Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "securities": [
+        "iShares MSCI ACWI ETF (USD)",
+        "Invesco FTSE RAFI Dev Mkts ex-US ETF (USD)",
+        "1290 High Yield Bond A (USD)",
+        "Aberdeen International Inc (USD)",
+        "Black Diamond Group Ltd (USD)",
+        "Agilent Technologies Inc (USD)"
+    ],
+    "correlationMatrix": {
+        "Year3": [
+            {
+                "SecurityId": "F00000T770",
+                "x": 1,
+                "y": 1,
+                "value": 1
+            },
+            {
+                "SecurityId": "F00000T770",
+                "x": 1,
+                "y": 2,
+                "value": 0.07410212
+            },
+            {
+                "SecurityId": "F00000T770",
+                "x": 1,
+                "y": 3,
+                "value": 0.77454346
+            },
+            {
+                "SecurityId": "F00000T770",
+                "x": 1,
+                "y": 4,
+                "value": 0.86000327
+            },
+            {
+                "SecurityId": "F00000T770",
+                "x": 1,
+                "y": 5,
+                "value": 0.71458901
+            },
+            {
+                "SecurityId": "F00000T770",
+                "x": 1,
+                "y": 6,
+                "value": 0.13656596
+            },
+            {
+                "SecurityId": "0P0000JIAP",
+                "x": 2,
+                "y": 1,
+                "value": 0.07410212
+            },
+            {
+                "SecurityId": "0P0000JIAP",
+                "x": 2,
+                "y": 2,
+                "value": 1
+            },
+            {
+                "SecurityId": "0P0000JIAP",
+                "x": 2,
+                "y": 3,
+                "value": 0.25039432
+            },
+            {
+                "SecurityId": "0P0000JIAP",
+                "x": 2,
+                "y": 4,
+                "value": 0.15332599
+            },
+            {
+                "SecurityId": "0P0000JIAP",
+                "x": 2,
+                "y": 5,
+                "value": -0.04401845
+            },
+            {
+                "SecurityId": "0P0000JIAP",
+                "x": 2,
+                "y": 6,
+                "value": 0.29607228
+            },
+            {
+                "SecurityId": "FOUSA06IVV",
+                "x": 3,
+                "y": 1,
+                "value": 0.77454346
+            },
+            {
+                "SecurityId": "FOUSA06IVV",
+                "x": 3,
+                "y": 2,
+                "value": 0.25039432
+            },
+            {
+                "SecurityId": "FOUSA06IVV",
+                "x": 3,
+                "y": 3,
+                "value": 1
+            },
+            {
+                "SecurityId": "FOUSA06IVV",
+                "x": 3,
+                "y": 4,
+                "value": 0.89501511
+            },
+            {
+                "SecurityId": "FOUSA06IVV",
+                "x": 3,
+                "y": 5,
+                "value": 0.69499175
+            },
+            {
+                "SecurityId": "FOUSA06IVV",
+                "x": 3,
+                "y": 6,
+                "value": 0.38940946
+            },
+            {
+                "SecurityId": "FOUSA06OEZ",
+                "x": 4,
+                "y": 1,
+                "value": 0.86000327
+            },
+            {
+                "SecurityId": "FOUSA06OEZ",
+                "x": 4,
+                "y": 2,
+                "value": 0.15332599
+            },
+            {
+                "SecurityId": "FOUSA06OEZ",
+                "x": 4,
+                "y": 3,
+                "value": 0.89501511
+            },
+            {
+                "SecurityId": "FOUSA06OEZ",
+                "x": 4,
+                "y": 4,
+                "value": 1
+            },
+            {
+                "SecurityId": "FOUSA06OEZ",
+                "x": 4,
+                "y": 5,
+                "value": 0.77625093
+            },
+            {
+                "SecurityId": "FOUSA06OEZ",
+                "x": 4,
+                "y": 6,
+                "value": 0.30768872
+            },
+            {
+                "SecurityId": "0P0000007E",
+                "x": 5,
+                "y": 1,
+                "value": 0.71458901
+            },
+            {
+                "SecurityId": "0P0000007E",
+                "x": 5,
+                "y": 2,
+                "value": -0.04401845
+            },
+            {
+                "SecurityId": "0P0000007E",
+                "x": 5,
+                "y": 3,
+                "value": 0.69499175
+            },
+            {
+                "SecurityId": "0P0000007E",
+                "x": 5,
+                "y": 4,
+                "value": 0.77625093
+            },
+            {
+                "SecurityId": "0P0000007E",
+                "x": 5,
+                "y": 5,
+                "value": 1
+            },
+            {
+                "SecurityId": "0P0000007E",
+                "x": 5,
+                "y": 6,
+                "value": 0.17232916
+            },
+            {
+                "SecurityId": "0P0000DZXU",
+                "x": 6,
+                "y": 1,
+                "value": 0.13656596
+            },
+            {
+                "SecurityId": "0P0000DZXU",
+                "x": 6,
+                "y": 2,
+                "value": 0.29607228
+            },
+            {
+                "SecurityId": "0P0000DZXU",
+                "x": 6,
+                "y": 3,
+                "value": 0.38940946
+            },
+            {
+                "SecurityId": "0P0000DZXU",
+                "x": 6,
+                "y": 4,
+                "value": 0.30768872
+            },
+            {
+                "SecurityId": "0P0000DZXU",
+                "x": 6,
+                "y": 5,
+                "value": 0.17232916
+            },
+            {
+                "SecurityId": "0P0000DZXU",
+                "x": 6,
+                "y": 6,
+                "value": 1
+            }
+        ],
+        "Year5": [
+            {
+                "SecurityId": "F00000T770",
+                "x": 1,
+                "y": 1,
+                "value": 1
+            },
+            {
+                "SecurityId": "F00000T770",
+                "x": 1,
+                "y": 2,
+                "value": 0.09708888
+            },
+            {
+                "SecurityId": "F00000T770",
+                "x": 1,
+                "y": 3,
+                "value": 0.777454
+            },
+            {
+                "SecurityId": "F00000T770",
+                "x": 1,
+                "y": 4,
+                "value": 0.85724669
+            },
+            {
+                "SecurityId": "F00000T770",
+                "x": 1,
+                "y": 5,
+                "value": 0.6941816
+            },
+            {
+                "SecurityId": "F00000T770",
+                "x": 1,
+                "y": 6,
+                "value": 0.42394346
+            },
+            {
+                "SecurityId": "0P0000JIAP",
+                "x": 2,
+                "y": 1,
+                "value": 0.09708888
+            },
+            {
+                "SecurityId": "0P0000JIAP",
+                "x": 2,
+                "y": 2,
+                "value": 1
+            },
+            {
+                "SecurityId": "0P0000JIAP",
+                "x": 2,
+                "y": 3,
+                "value": 0.22220599
+            },
+            {
+                "SecurityId": "0P0000JIAP",
+                "x": 2,
+                "y": 4,
+                "value": 0.19243744
+            },
+            {
+                "SecurityId": "0P0000JIAP",
+                "x": 2,
+                "y": 5,
+                "value": -0.00300089
+            },
+            {
+                "SecurityId": "0P0000JIAP",
+                "x": 2,
+                "y": 6,
+                "value": 0.40757458
+            },
+            {
+                "SecurityId": "FOUSA06IVV",
+                "x": 3,
+                "y": 1,
+                "value": 0.777454
+            },
+            {
+                "SecurityId": "FOUSA06IVV",
+                "x": 3,
+                "y": 2,
+                "value": 0.22220599
+            },
+            {
+                "SecurityId": "FOUSA06IVV",
+                "x": 3,
+                "y": 3,
+                "value": 1
+            },
+            {
+                "SecurityId": "FOUSA06IVV",
+                "x": 3,
+                "y": 4,
+                "value": 0.92079987
+            },
+            {
+                "SecurityId": "FOUSA06IVV",
+                "x": 3,
+                "y": 5,
+                "value": 0.69699001
+            },
+            {
+                "SecurityId": "FOUSA06IVV",
+                "x": 3,
+                "y": 6,
+                "value": 0.43468514
+            },
+            {
+                "SecurityId": "FOUSA06OEZ",
+                "x": 4,
+                "y": 1,
+                "value": 0.85724669
+            },
+            {
+                "SecurityId": "FOUSA06OEZ",
+                "x": 4,
+                "y": 2,
+                "value": 0.19243744
+            },
+            {
+                "SecurityId": "FOUSA06OEZ",
+                "x": 4,
+                "y": 3,
+                "value": 0.92079987
+            },
+            {
+                "SecurityId": "FOUSA06OEZ",
+                "x": 4,
+                "y": 4,
+                "value": 1
+            },
+            {
+                "SecurityId": "FOUSA06OEZ",
+                "x": 4,
+                "y": 5,
+                "value": 0.7714571
+            },
+            {
+                "SecurityId": "FOUSA06OEZ",
+                "x": 4,
+                "y": 6,
+                "value": 0.40869853
+            },
+            {
+                "SecurityId": "0P0000007E",
+                "x": 5,
+                "y": 1,
+                "value": 0.6941816
+            },
+            {
+                "SecurityId": "0P0000007E",
+                "x": 5,
+                "y": 2,
+                "value": -0.00300089
+            },
+            {
+                "SecurityId": "0P0000007E",
+                "x": 5,
+                "y": 3,
+                "value": 0.69699001
+            },
+            {
+                "SecurityId": "0P0000007E",
+                "x": 5,
+                "y": 4,
+                "value": 0.7714571
+            },
+            {
+                "SecurityId": "0P0000007E",
+                "x": 5,
+                "y": 5,
+                "value": 1
+            },
+            {
+                "SecurityId": "0P0000007E",
+                "x": 5,
+                "y": 6,
+                "value": 0.26772883
+            },
+            {
+                "SecurityId": "0P0000DZXU",
+                "x": 6,
+                "y": 1,
+                "value": 0.42394346
+            },
+            {
+                "SecurityId": "0P0000DZXU",
+                "x": 6,
+                "y": 2,
+                "value": 0.40757458
+            },
+            {
+                "SecurityId": "0P0000DZXU",
+                "x": 6,
+                "y": 3,
+                "value": 0.43468514
+            },
+            {
+                "SecurityId": "0P0000DZXU",
+                "x": 6,
+                "y": 4,
+                "value": 0.40869853
+            },
+            {
+                "SecurityId": "0P0000DZXU",
+                "x": 6,
+                "y": 5,
+                "value": 0.26772883
+            },
+            {
+                "SecurityId": "0P0000DZXU",
+                "x": 6,
+                "y": 6,
+                "value": 1
+            }
+        ],
+        "Year10": [
+            {
+                "SecurityId": "0P0000JIAP",
+                "x": 1,
+                "y": 1,
+                "value": 1
+            },
+            {
+                "SecurityId": "0P0000JIAP",
+                "x": 1,
+                "y": 2,
+                "value": 0.21376517
+            },
+            {
+                "SecurityId": "0P0000JIAP",
+                "x": 1,
+                "y": 3,
+                "value": 0.18879276
+            },
+            {
+                "SecurityId": "0P0000JIAP",
+                "x": 1,
+                "y": 4,
+                "value": -0.01312991
+            },
+            {
+                "SecurityId": "0P0000JIAP",
+                "x": 1,
+                "y": 5,
+                "value": 0.26520165
+            },
+            {
+                "SecurityId": "0P0000JIAP",
+                "x": 1,
+                "y": 6,
+                "value": 0
+            },
+            {
+                "SecurityId": "FOUSA06IVV",
+                "x": 2,
+                "y": 1,
+                "value": 0.21376517
+            },
+            {
+                "SecurityId": "FOUSA06IVV",
+                "x": 2,
+                "y": 2,
+                "value": 1
+            },
+            {
+                "SecurityId": "FOUSA06IVV",
+                "x": 2,
+                "y": 3,
+                "value": 0.92118583
+            },
+            {
+                "SecurityId": "FOUSA06IVV",
+                "x": 2,
+                "y": 4,
+                "value": 0.67050032
+            },
+            {
+                "SecurityId": "FOUSA06IVV",
+                "x": 2,
+                "y": 5,
+                "value": 0.43823804
+            },
+            {
+                "SecurityId": "FOUSA06IVV",
+                "x": 2,
+                "y": 6,
+                "value": 0
+            },
+            {
+                "SecurityId": "FOUSA06OEZ",
+                "x": 3,
+                "y": 1,
+                "value": 0.18879276
+            },
+            {
+                "SecurityId": "FOUSA06OEZ",
+                "x": 3,
+                "y": 2,
+                "value": 0.92118583
+            },
+            {
+                "SecurityId": "FOUSA06OEZ",
+                "x": 3,
+                "y": 3,
+                "value": 1
+            },
+            {
+                "SecurityId": "FOUSA06OEZ",
+                "x": 3,
+                "y": 4,
+                "value": 0.74307547
+            },
+            {
+                "SecurityId": "FOUSA06OEZ",
+                "x": 3,
+                "y": 5,
+                "value": 0.39196939
+            },
+            {
+                "SecurityId": "FOUSA06OEZ",
+                "x": 3,
+                "y": 6,
+                "value": 0
+            },
+            {
+                "SecurityId": "0P0000007E",
+                "x": 4,
+                "y": 1,
+                "value": -0.01312991
+            },
+            {
+                "SecurityId": "0P0000007E",
+                "x": 4,
+                "y": 2,
+                "value": 0.67050032
+            },
+            {
+                "SecurityId": "0P0000007E",
+                "x": 4,
+                "y": 3,
+                "value": 0.74307547
+            },
+            {
+                "SecurityId": "0P0000007E",
+                "x": 4,
+                "y": 4,
+                "value": 1
+            },
+            {
+                "SecurityId": "0P0000007E",
+                "x": 4,
+                "y": 5,
+                "value": 0.22785105
+            },
+            {
+                "SecurityId": "0P0000007E",
+                "x": 4,
+                "y": 6,
+                "value": 0
+            },
+            {
+                "SecurityId": "0P0000DZXU",
+                "x": 5,
+                "y": 1,
+                "value": 0.26520165
+            },
+            {
+                "SecurityId": "0P0000DZXU",
+                "x": 5,
+                "y": 2,
+                "value": 0.43823804
+            },
+            {
+                "SecurityId": "0P0000DZXU",
+                "x": 5,
+                "y": 3,
+                "value": 0.39196939
+            },
+            {
+                "SecurityId": "0P0000DZXU",
+                "x": 5,
+                "y": 4,
+                "value": 0.22785105
+            },
+            {
+                "SecurityId": "0P0000DZXU",
+                "x": 5,
+                "y": 5,
+                "value": 1
+            },
+            {
+                "SecurityId": "0P0000DZXU",
+                "x": 5,
+                "y": 6,
+                "value": 0
+            },
+            {
+                "SecurityId": "F00000T770",
+                "x": 6,
+                "y": 1,
+                "value": 0
+            },
+            {
+                "SecurityId": "F00000T770",
+                "x": 6,
+                "y": 2,
+                "value": 0
+            },
+            {
+                "SecurityId": "F00000T770",
+                "x": 6,
+                "y": 3,
+                "value": 0
+            },
+            {
+                "SecurityId": "F00000T770",
+                "x": 6,
+                "y": 4,
+                "value": 0
+            },
+            {
+                "SecurityId": "F00000T770",
+                "x": 6,
+                "y": 5,
+                "value": 0
+            },
+            {
+                "SecurityId": "F00000T770",
+                "x": 6,
+                "y": 6,
+                "value": 1
+            }
+        ]
+    }
+}
+```
+</details>
+&nbsp;
+
+### Integration Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+function getTrailingReturnsUsData(xrayData) {
+    const portfolioData = get(xrayData, 'Portfolio.TimePeriod', []);
+    const benchmarkData = get(xrayData, 'Benchmark.TimePeriod', []);
+    const portfolio = portfolioData.map((data) => ({
+        timePeriod: data.Id,
+        value: data.Value,
+    }));
+    const benchmark = benchmarkData.map((data) => ({
+        timePeriod: data.Id,
+        value: data.Value,
+    }));
+    return {
+        portfolio,
+        benchmark,
+    };
+}
+```
+</details>
+&nbsp;
+
+### Component Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+   function getCorrelationMatrixUsData(xRayData) {
+       const correlationMatrix={};
+       xRayData.correlationMatrix.forEach((timePeriod) => {
+           const chartData=[];
+           timePeriod.Correlations.forEach((correlation, index) => {
+               correlation.CorrelatedItemKey.forEach((details) => {
+                   const obj = {};
+                   obj.SecurityId = correlation.SecurityId,
+                   obj.x = index + 1;
+                   obj.y = details.CorrelatedItemKeyId;
+                   obj.value = parseFloat(details.Value) || 0
+                   chartData.push(obj);
+               });
+               correlationMatrix[timePeriod.TrailingTimePeriod] = chartData;
+           });
+       });
+       return {
+           securities: xRayData.securities,
+           correlationMatrix
+       };
+   }
+```
+</details>
+&nbsp;
