@@ -266,7 +266,7 @@ export default {
             const { graphBaseValue } = this;
             newValue = ((newValue - graphBaseValue) / graphBaseValue) * 100.0;
 
-            return `${name} : ${newValue.toFixed(2)}`;
+            return `${name} : ${newValue.toFixed(2)}%`;
         },
         tabChanged(event) {
             this.chartData = this.parseChartData(event.key);

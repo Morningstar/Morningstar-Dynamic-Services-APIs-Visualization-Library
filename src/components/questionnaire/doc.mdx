@@ -1,0 +1,143 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import { DATA_ACCESS_LIBRARY } from "@/external-links";
+import Questionnaire from "@/components/questionnaire/Questionnaire.vue";
+
+<Meta title="Questionnaire" component={ Questionnaire }/>
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+  
+</style>
+
+# Questionnaire
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+- [Data Models](#data-models)
+
+
+## Description
+The Questionnaire Component is part of Investment Preferences Workflow which helps to create a set of filters based on an investor's preferences that you use to search Morningstar's database for matching investments to assess an investor's sustainable investing preferences using a questionnaire.
+
+<Canvas withSource="open" withToolbar>
+  <Story id="components-questionnaire--story-details"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={ Questionnaire } />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the [Portfolio X-Ray API](https://developer.morningstar.com/documentation/dynamic-services-apis/portfolio-analysis-apacemea/overview).
+<!--
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request)
+- [Request Payload Example](#request-payload)
+-->
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.xray.getAssetAllocationBreakdown({ portfolios: samplePortfolio });
+```
+<details>
+  <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+const samplePortfolio = {}
+window.mstarApisSdk.{/* code to fetch api data */};
+```
+</details>
+&nbsp;
+
+### Request Example
+
+```javascript dark
+https://{base URL}.morningstar.com/ecint/v1/{API name}/json?languageId={languageId}
+
+```
+
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- | 
+| `languageId` |	ISO culture codes. If not provided, defaults to language defined in settings. |`languageId=en-GB` |
+
+
+## Data Transformation
+
+Data returned by the API must be transformed to the format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Component Data Format](#component-data-format)
+- [Transformation Operation](#transformation-operation)
+-->
+### API Response Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+    // data goes here
+```
+</details>
+&nbsp;
+
+### Component Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+    // data goes here
+```
+</details>
+&nbsp;
+
+### Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+    // Transformation code goes here
+```
+</details>
+&nbsp;
+
+## Data Models
+The component uses the following data models:
+<details>
+  <summary><span class="summary-text">Component 1</span></summary>
+
+```json dark
+    // sub components data models go here
+```
+</details>
+&nbsp;
+<details>
+  <summary><span class="summary-text">Component 2</span></summary>
+
+```json dark
+    // sub components data models go here
+```
+</details>

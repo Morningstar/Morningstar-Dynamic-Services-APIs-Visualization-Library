@@ -1,0 +1,1002 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import CarbonScore from "@/components/carbon-score/CarbonScore.vue";
+import { PORTFOLIO_ANALYSIS_AMERICAS_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="CarbonScore" component={ CarbonScore }/>
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+  
+</style>
+
+# Carbon Score
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+- [Data Models](#data-models)
+
+
+## Description
+The asset-weighted average of the carbon risk scores for the portfolio's covered, corporate holdings. The carbon risk score indicates the overall material risk a company faces from the transition to a low-carbon economy.
+A lower score is better. At least 67% of the portfolio's eligible assets must have carbon risk scores available in order for a score to be calculated. 
+
+<Canvas withSource="open" withToolbar>
+  <Story id="components-carbon-score--async-story-details"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={ CarbonScore } />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={PORTFOLIO_ANALYSIS_AMERICAS_URL} target="_blank">
+Portfolio Analysis Global API</a>.
+
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+Request header 'prefer: 'respond-async' allows to fetch the response asynchronously, which makes sure the response is
+available without timeout issues
+
+``` javascript dark
+window.mstarApisSdk.xray.getCarbonScoreData({ portfolios: samplePortfolio, languageId: 'en-US', prefer: 'respond-async' });
+```
+<details>
+  <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+const samplePortfolio = [
+    {
+        Name: 'Test Portfolio1',
+        TotalValue: 10000,
+        Holdings: [
+            {
+                SecurityId: 'F00000VPDY',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000VPDZ',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000VPE0',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WK3S',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WK3Q',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WK3R',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000T76W',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000T76Y',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000T76Z',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000T76X',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000T770',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000T772',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000T773',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000T771',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000VPDQ',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000VPDR',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000VPDS',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WK3Z',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WK42',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WK47',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WK4B',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WK4F',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WK4J',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WK4N',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WK4R',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WK3V',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000T777',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000T775',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000T776',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000T774',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F000011DGV',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F000011DGU',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000H35Y',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000H35X',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000H35W',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000J8SX',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000PQ2U',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'FOUSA007RP',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'FOUSA00ABD',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'FOUSA05GYK',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'FOUSA00DEK',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'FOUSA08N2L',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'FOUSA00KJW',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'FOUSA00COA',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'FOUSA00CTW',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'FOUSA05HX7',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WRW6',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WRW5',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WRW7',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000UEIB',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000UEIA',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000UEIC',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000QSIZ',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000QSIX',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000N79H',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000N75J',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000UDFO',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000N1IS',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000XKG7',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000XKG8',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000OEUB',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000OEUC',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000OEUA',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000ZKDA',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000ZKD9',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000ZKKG',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000T6OZ',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000T6P0',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000T6P1',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000PEIU',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000PEIV',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000PEIW',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000ZF1O',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F000010IS3',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'FOUSA05KKV',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000YSY7',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000YSY8',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000WQUJ',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F000010GIB',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F000010GIA',
+                Type: 'FO',
+                Value: 100,
+            },
+            {
+                SecurityId: 'F00000U3B0',
+                Type: 'FO',
+                Value: 100,
+            },
+        ],
+        Benchmark: {
+            Type: 'Standard',
+            Holdings: [
+                {
+                    SecurityId: 'XIUSA0010V',
+                    Type: 'XI',
+                    Weight: 100,
+                },
+            ],
+        },
+    },
+];
+
+window.mstarApisSdk.portfolioAnalysis.getcarbonScoreData({
+    portfolios: samplePortfolio,
+    languageId: 'en-US',
+    headers: {
+        prefer: 'respond-async',
+    },
+});
+
+```
+</details>
+
+### Request Example
+Asynchronous API Requests has below 3 steps to get the Sustainability data Response:
+1. **Initiating Request**: Sustainability API will send back the jobId as shown in the below example. To make the request asynchronous
+   we need to pass the ‘prefer’ header in the request as shown in the example below.
+
+    ```javascript dark
+        https://www.us-api.morningstar.com/portfolio-analysis/v1/sustainability/carbon-score?langcult={{languageId}}
+    ```
+
+    ### Request Payload Example
+    | Query Parameter | Description | Example |
+    | :-------------- | :---------- | :------ |
+    | `languageId` | ISO culture codes. If not provided, defaults to the language defined in settings. | `languageId=en-US` |
+
+    | Request Header | Description | Example |
+    | :------------- | :---------- | :------ |
+    | `prefer` | Get the response in asynchronous format | `prefer=respond-async` |
+
+    #### Sample JobId API Response Data Format
+
+    ```javascript dark
+    {
+      "jobId": "efb3a071-cd29-41c6-86ce-fb1b3569b5e4",
+      "_links": [
+          {
+              "href": "www.us-api.morningstar.com/dynamic-services-apis/jobs/efb3a071-cd29-41c6-86ce-fb1b3569b5e4",
+              "rel": "self",
+              "method": "GET"
+          }
+      ]
+    }
+    ```
+2. **Pooling Status**: Once JobId is received, use below API to get the status from the S3 server in the below format.
+
+    ```javascript dark
+        https://www.us-api.morningstar.com/portfolio-analysis/dynamic-services-apis/jobs/:jobId
+    ```
+    When the *Automatically follow redirects* setting is on(it’s true by default in postman as well as in all native browsers)
+    then it automatically redirects to step 3 and returns the response with the status code 200 when the response is available.
+    Otherwise, we need to keep polling the API until we get a final response.
+
+    #### Sample response for the pending status.
+
+    ```javascript dark
+    {
+        "id": "8d616381-9be9-4a2e-85ec-3f5bf244e7c8",
+        "created": "2023-05-11T10:12:08.3246921Z",
+        "status": "pending",
+        "isComplete": false,
+        "_links": [
+            {
+                "href": "https://www.us-api.morningstar.com/jobs/8d616381-9be9-4a2e-85ec-3f5bf244e7c8",
+                "rel": "self",
+                "method": "GET"
+            }
+        ]
+    }
+    ```
+    When the *Automatically follow redirects* setting is off then it returns the status code '302 Found' and the URL
+    provided will be returned in the response header. Follow Step 3 to get final response.
+
+3. **Getting Final Response**: Make the Get request to fetch final response from S3 server.
+
+    ```javascript dark
+    https://www.us-api.morningstar.com/portfolio-analysis/v1/sustainability/:requestId
+    ```
+    *Note: RequestId in below URl is received in the step 2 APIs 'location' response header*
+
+    #### Sample final API Response Data Format
+
+    <details>
+        <summary><span class="summary-text">Code Snippet</span></summary>
+
+    ```json dark
+    {
+            "sustainability": [
+        {
+            "portfolio": {
+                "name": "Test Portfolio1",
+                "carbonScore": {
+                    "date": "2023-05-31",
+                    "carbonRiskScore": 9.36331,
+                    "carbonRiskPercentageOfPortfolioCovered": 64.19894,
+                    "carbonRiskLevelClassification": "Low Risk",
+                    "carbonRiskPercentageOfCoveredPortfolioWithNegligibleCarbonRiskScores": 17.59519,
+                    "carbonRiskPercentageOfCoveredPortfolioWithLowCarbonRiskScores": 44.89535,
+                    "carbonRiskPercentageOfCoveredPortfolioWithMediumCarbonRiskScores": 33.33032,
+                    "carbonRiskPercentageOfCoveredPortfolioWithHighCarbonRiskScores": 3.82639,
+                    "carbonRiskPercentageOfCoveredPortfolioWithSevereCarbonRiskScores": 0.35274,
+                    "carbonRiskExposureScore": 16.70248,
+                    "carbonRiskOperationsRiskScore": 5.04098,
+                    "carbonRiskProductsAndServicesRiskScore": 0.80454,
+                    "carbonStrandedAssetsExposureScore": 79.16836,
+                    "historicalCarbonRiskScore": 9.36331,
+                    "historicalCarbonRiskLevelClassification": "Low Risk",
+                    "lowCarbonDesignation": "False",
+                    "carbonStrandedAssetsExposurePercentageOfPortfolioCovered": 0.9629,
+                    "carbonFootprintScope1And2TonnesPerUsdMillions": 61.45328,
+                    "carbonFootprintScope1And2PercentageOfPortfolioCovered": 54.59251,
+                    "carbonFootprintScope1And2And3TonnesPerUsdMillions": 550.8992,
+                    "carbonFootprintScope1And2And3PercentageOfPortfolioCovered": 54.53375,
+                    "carbonIntensityScope1And2PercentageOfPortfolioCovered": 66.05995,
+                    "carbonIntensityScope1And2And3AverageValueInUsdTerms": 953.13381,
+                    "carbonIntensityScope1And2And3PercentageOfPortfolioCovered": 64.93562,
+                    "arcticOilAndGasExplorationPercentageOfPortfolioCovered": 66.79881,
+                    "carbonSolutionsPercentageOfPortfolioCovered": 64.10722,
+                    "historicalFossilFuelPercentageOfCoveredPortfolioInvolved": 8.0773,
+                    "fossilFuelPercentageOfPortfolioCovered": 64.59341,
+                    "oilAndGasProductionPercentageOfPortfolioCovered": 66.79881,
+                    "oilAndGasPowerGenerationPercentageOfPortfolioCovered": 66.79881,
+                    "oilAndGasProductsAndServicesPercentageOfPortfolioCovered": 66.79881,
+                    "oilSandsExtractionPercentageOfPortfolioCovered": 66.79881,
+                    "shaleEnergyExtractionPercentageOfCoveredPortfolioInvolved": 1.74249,
+                    "shaleEnergyExtractionPercentageOfPortfolioCovered": 66.79881,
+                    "thermalCoalExtractionPercentageOfPortfolioCovered": 66.79881,
+                    "thermalCoalPowerGenerationPercentageOfPortfolioCovered": 66.79881,
+                    "carbonRiskManagedRiskScore": 7.33925,
+                    "fossilFuelPercentageOfCoveredPortfolioInvolved": 8.0773,
+                    "thermalCoalPowerGenerationPercentageOfCoveredPortfolioInvolved": 3.02422,
+                    "thermalCoalExtractionPercentageOfCoveredPortfolioInvolved": 0.55622,
+                    "oilSandsExtractionPercentageOfCoveredPortfolioInvolved": 0.96042,
+                    "arcticOilAndGasExplorationPercentageOfCoveredPortfolioInvolved": 0.88611,
+                    "carbonSolutionsPercentageOfCoveredPortfolioInvolved": 9.00199,
+                    "oilAndGasPowerGenerationPercentageOfCoveredPortfolioInvolved": 4.29282,
+                    "oilAndGasProductionPercentageOfCoveredPortfolioInvolved": 6.68589,
+                    "oilAndGasProductsAndServicesPercentageOfCoveredPortfolioInvolved": 12.30823,
+                    "carbonIntensityScope1And2AverageValueInUsdTerms": 163.43113
+                }
+            },
+            "benchmark": {
+                "name": "Morningstar US Market TR USD",
+                "identifier": "XIUSA0010V",
+                "identifierType": "SecurityId",
+                "securityType": "XI",
+                "carbonScore": {
+                    "date": "2023-03-31",
+                    "carbonRiskScore": 8.11,
+                    "carbonRiskPercentageOfPortfolioCovered": 98.69094,
+                    "carbonRiskLevelClassification": "Low Risk",
+                    "carbonRiskPercentageOfCoveredPortfolioWithNegligibleCarbonRiskScores": 20.08165,
+                    "carbonRiskPercentageOfCoveredPortfolioWithLowCarbonRiskScores": 53.36606,
+                    "carbonRiskPercentageOfCoveredPortfolioWithMediumCarbonRiskScores": 20.87264,
+                    "carbonRiskPercentageOfCoveredPortfolioWithHighCarbonRiskScores": 5.17963,
+                    "carbonRiskPercentageOfCoveredPortfolioWithSevereCarbonRiskScores": 0.50003,
+                    "carbonRiskExposureScore": 14.93,
+                    "carbonRiskOperationsRiskScore": 4.76,
+                    "carbonRiskProductsAndServicesRiskScore": 0.76,
+                    "carbonStrandedAssetsExposureScore": 76.51,
+                    "historicalCarbonRiskScore": 8.15472,
+                    "historicalCarbonRiskLevelClassification": "Low Risk",
+                    "lowCarbonDesignation": "0",
+                    "carbonStrandedAssetsExposurePercentageOfPortfolioCovered": 3.01773,
+                    "carbonFootprintScope1And2TonnesPerUsdMillions": 37.25,
+                    "carbonFootprintScope1And2PercentageOfPortfolioCovered": 93.24561,
+                    "carbonFootprintScope1And2And3TonnesPerUsdMillions": 326.06,
+                    "carbonFootprintScope1And2And3PercentageOfPortfolioCovered": 93.44802,
+                    "carbonIntensityScope1And2PercentageOfPortfolioCovered": 97.8373,
+                    "carbonIntensityScope1And2And3AverageValueInUsdTerms": 875.96902,
+                    "carbonIntensityScope1And2And3PercentageOfPortfolioCovered": 98.17274,
+                    "arcticOilAndGasExplorationPercentageOfPortfolioCovered": 99.17357,
+                    "carbonSolutionsPercentageOfPortfolioCovered": 98.52659,
+                    "historicalFossilFuelPercentageOfCoveredPortfolioInvolved": 8.1853,
+                    "fossilFuelPercentageOfPortfolioCovered": 96.66453,
+                    "oilAndGasProductionPercentageOfPortfolioCovered": 99.17357,
+                    "oilAndGasPowerGenerationPercentageOfPortfolioCovered": 99.17357,
+                    "oilAndGasProductsAndServicesPercentageOfPortfolioCovered": 99.17357,
+                    "oilSandsExtractionPercentageOfPortfolioCovered": 99.17357,
+                    "shaleEnergyExtractionPercentageOfCoveredPortfolioInvolved": 3.26898,
+                    "shaleEnergyExtractionPercentageOfPortfolioCovered": 99.17357,
+                    "thermalCoalExtractionPercentageOfPortfolioCovered": 99.17357,
+                    "thermalCoalPowerGenerationPercentageOfPortfolioCovered": 99.17357,
+                    "carbonRiskManagedRiskScore": 6.82,
+                    "fossilFuelPercentageOfCoveredPortfolioInvolved": 7.34188,
+                    "thermalCoalPowerGenerationPercentageOfCoveredPortfolioInvolved": 3.3302,
+                    "thermalCoalExtractionPercentageOfCoveredPortfolioInvolved": 0.03856,
+                    "oilSandsExtractionPercentageOfCoveredPortfolioInvolved": 2.21159,
+                    "arcticOilAndGasExplorationPercentageOfCoveredPortfolioInvolved": 2.21159,
+                    "carbonSolutionsPercentageOfCoveredPortfolioInvolved": 15.12536,
+                    "oilAndGasPowerGenerationPercentageOfCoveredPortfolioInvolved": 4.04154,
+                    "oilAndGasProductionPercentageOfCoveredPortfolioInvolved": 8.03929,
+                    "oilAndGasProductsAndServicesPercentageOfCoveredPortfolioInvolved": 22.28312,
+                    "carbonIntensityScope1And2AverageValueInUsdTerms": 123.0245
+                }
+            },
+            "securityBreakdown": [
+                {
+                    "name": "1290 Diversified Bond A",
+                    "identifier": "0P00015V9A",
+                    "identifierType": "PerformanceId",
+                    "securityType": "FO",
+                    "carbonScore": {
+                        "date": "2023-03-31",
+                        "carbonRiskScore": 5.21,
+                        "carbonRiskPercentageOfPortfolioCovered": 83.2759,
+                        "carbonRiskLevelClassification": "Low Risk",
+                        "carbonRiskPercentageOfCoveredPortfolioWithNegligibleCarbonRiskScores": 77.67455,
+                        "carbonRiskPercentageOfCoveredPortfolioWithLowCarbonRiskScores": 10.61177,
+                        "carbonRiskPercentageOfCoveredPortfolioWithMediumCarbonRiskScores": 5.56222,
+                        "carbonRiskPercentageOfCoveredPortfolioWithHighCarbonRiskScores": 1.7697,
+                        "carbonRiskPercentageOfCoveredPortfolioWithSevereCarbonRiskScores": 4.38177,
+                        "carbonRiskExposureScore": 20.48,
+                        "carbonRiskOperationsRiskScore": 2.4,
+                        "carbonRiskProductsAndServicesRiskScore": 0.38,
+                        "carbonStrandedAssetsExposureScore": 78.96,
+                        "historicalCarbonRiskScore": 11.34928,
+                        "historicalCarbonRiskLevelClassification": "Low Risk",
+                        "lowCarbonDesignation": "0",
+                        "carbonStrandedAssetsExposurePercentageOfPortfolioCovered": 0.84124,
+                        "carbonFootprintScope1And2TonnesPerUsdMillions": 47.47,
+                        "carbonFootprintScope1And2PercentageOfPortfolioCovered": 4.16301,
+                        "carbonFootprintScope1And2And3TonnesPerUsdMillions": 333.82,
+                        "carbonFootprintScope1And2And3PercentageOfPortfolioCovered": 4.16301,
+                        "carbonIntensityScope1And2PercentageOfPortfolioCovered": 20.25201,
+                        "carbonIntensityScope1And2And3AverageValueInUsdTerms": 267.48881,
+                        "carbonIntensityScope1And2And3PercentageOfPortfolioCovered": 20.25201,
+                        "arcticOilAndGasExplorationPercentageOfPortfolioCovered": 20.25201,
+                        "carbonSolutionsPercentageOfPortfolioCovered": 19.19857,
+                        "historicalFossilFuelPercentageOfCoveredPortfolioInvolved": 10.59521,
+                        "fossilFuelPercentageOfPortfolioCovered": 19.0201,
+                        "oilAndGasProductionPercentageOfPortfolioCovered": 20.25201,
+                        "oilAndGasPowerGenerationPercentageOfPortfolioCovered": 20.25201,
+                        "oilAndGasProductsAndServicesPercentageOfPortfolioCovered": 20.25201,
+                        "oilSandsExtractionPercentageOfPortfolioCovered": 20.25201,
+                        "shaleEnergyExtractionPercentageOfCoveredPortfolioInvolved": 4.92358,
+                        "shaleEnergyExtractionPercentageOfPortfolioCovered": 20.25201,
+                        "thermalCoalExtractionPercentageOfPortfolioCovered": 20.25201,
+                        "thermalCoalPowerGenerationPercentageOfPortfolioCovered": 20.25201,
+                        "carbonRiskManagedRiskScore": 15.27,
+                        "fossilFuelPercentageOfCoveredPortfolioInvolved": 8.45146,
+                        "thermalCoalPowerGenerationPercentageOfCoveredPortfolioInvolved": 0,
+                        "thermalCoalExtractionPercentageOfCoveredPortfolioInvolved": 0.88124,
+                        "oilSandsExtractionPercentageOfCoveredPortfolioInvolved": 0,
+                        "arcticOilAndGasExplorationPercentageOfCoveredPortfolioInvolved": 0,
+                        "carbonSolutionsPercentageOfCoveredPortfolioInvolved": 0,
+                        "oilAndGasPowerGenerationPercentageOfCoveredPortfolioInvolved": 3.78352,
+                        "oilAndGasProductionPercentageOfCoveredPortfolioInvolved": 8.7071,
+                        "oilAndGasProductsAndServicesPercentageOfCoveredPortfolioInvolved": 1.81205,
+                        "carbonIntensityScope1And2AverageValueInUsdTerms": 62.48241
+                    }
+                },
+                {
+                    "name": "1290 Diversified Bond I",
+                    "identifier": "0P00015V9B",
+                    "identifierType": "PerformanceId",
+                    "securityType": "FO",
+                    "carbonScore": {
+                        "date": "2023-03-31",
+                        "carbonRiskScore": 5.21,
+                        "carbonRiskPercentageOfPortfolioCovered": 83.2759,
+                        "carbonRiskLevelClassification": "Low Risk",
+                        "carbonRiskPercentageOfCoveredPortfolioWithNegligibleCarbonRiskScores": 77.67455,
+                        "carbonRiskPercentageOfCoveredPortfolioWithLowCarbonRiskScores": 10.61177,
+                        "carbonRiskPercentageOfCoveredPortfolioWithMediumCarbonRiskScores": 5.56222,
+                        "carbonRiskPercentageOfCoveredPortfolioWithHighCarbonRiskScores": 1.7697,
+                        "carbonRiskPercentageOfCoveredPortfolioWithSevereCarbonRiskScores": 4.38177,
+                        "carbonRiskExposureScore": 20.48,
+                        "carbonRiskOperationsRiskScore": 2.4,
+                        "carbonRiskProductsAndServicesRiskScore": 0.38,
+                        "carbonStrandedAssetsExposureScore": 78.96,
+                        "historicalCarbonRiskScore": 11.34928,
+                        "historicalCarbonRiskLevelClassification": "Low Risk",
+                        "lowCarbonDesignation": "0",
+                        "carbonStrandedAssetsExposurePercentageOfPortfolioCovered": 0.84124,
+                        "carbonFootprintScope1And2TonnesPerUsdMillions": 47.47,
+                        "carbonFootprintScope1And2PercentageOfPortfolioCovered": 4.16301,
+                        "carbonFootprintScope1And2And3TonnesPerUsdMillions": 333.82,
+                        "carbonFootprintScope1And2And3PercentageOfPortfolioCovered": 4.16301,
+                        "carbonIntensityScope1And2PercentageOfPortfolioCovered": 20.25201,
+                        "carbonIntensityScope1And2And3AverageValueInUsdTerms": 267.48881,
+                        "carbonIntensityScope1And2And3PercentageOfPortfolioCovered": 20.25201,
+                        "arcticOilAndGasExplorationPercentageOfPortfolioCovered": 20.25201,
+                        "carbonSolutionsPercentageOfPortfolioCovered": 19.19857,
+                        "historicalFossilFuelPercentageOfCoveredPortfolioInvolved": 10.59521,
+                        "fossilFuelPercentageOfPortfolioCovered": 19.0201,
+                        "oilAndGasProductionPercentageOfPortfolioCovered": 20.25201,
+                        "oilAndGasPowerGenerationPercentageOfPortfolioCovered": 20.25201,
+                        "oilAndGasProductsAndServicesPercentageOfPortfolioCovered": 20.25201,
+                        "oilSandsExtractionPercentageOfPortfolioCovered": 20.25201,
+                        "shaleEnergyExtractionPercentageOfCoveredPortfolioInvolved": 4.92358,
+                        "shaleEnergyExtractionPercentageOfPortfolioCovered": 20.25201,
+                        "thermalCoalExtractionPercentageOfPortfolioCovered": 20.25201,
+                        "thermalCoalPowerGenerationPercentageOfPortfolioCovered": 20.25201,
+                        "carbonRiskManagedRiskScore": 15.27,
+                        "fossilFuelPercentageOfCoveredPortfolioInvolved": 8.45146,
+                        "thermalCoalPowerGenerationPercentageOfCoveredPortfolioInvolved": 0,
+                        "thermalCoalExtractionPercentageOfCoveredPortfolioInvolved": 0.88124,
+                        "oilSandsExtractionPercentageOfCoveredPortfolioInvolved": 0,
+                        "arcticOilAndGasExplorationPercentageOfCoveredPortfolioInvolved": 0,
+                        "carbonSolutionsPercentageOfCoveredPortfolioInvolved": 0,
+                        "oilAndGasPowerGenerationPercentageOfCoveredPortfolioInvolved": 3.78352,
+                        "oilAndGasProductionPercentageOfCoveredPortfolioInvolved": 8.7071,
+                        "oilAndGasProductsAndServicesPercentageOfCoveredPortfolioInvolved": 1.81205,
+                        "carbonIntensityScope1And2AverageValueInUsdTerms": 62.48241
+                    }
+                },
+                {
+                    "name": "1290 Diversified Bond R",
+                    "identifier": "0P00015V9C",
+                    "identifierType": "PerformanceId",
+                    "securityType": "FO",
+                    "carbonScore": {
+                        "date": "2023-03-31",
+                        "carbonRiskScore": 5.21,
+                        "carbonRiskPercentageOfPortfolioCovered": 83.2759,
+                        "carbonRiskLevelClassification": "Low Risk",
+                        "carbonRiskPercentageOfCoveredPortfolioWithNegligibleCarbonRiskScores": 77.67455,
+                        "carbonRiskPercentageOfCoveredPortfolioWithLowCarbonRiskScores": 10.61177,
+                        "carbonRiskPercentageOfCoveredPortfolioWithMediumCarbonRiskScores": 5.56222,
+                        "carbonRiskPercentageOfCoveredPortfolioWithHighCarbonRiskScores": 1.7697,
+                        "carbonRiskPercentageOfCoveredPortfolioWithSevereCarbonRiskScores": 4.38177,
+                        "carbonRiskExposureScore": 20.48,
+                        "carbonRiskOperationsRiskScore": 2.4,
+                        "carbonRiskProductsAndServicesRiskScore": 0.38,
+                        "carbonStrandedAssetsExposureScore": 78.96,
+                        "historicalCarbonRiskScore": 11.34928,
+                        "historicalCarbonRiskLevelClassification": "Low Risk",
+                        "lowCarbonDesignation": "0",
+                        "carbonStrandedAssetsExposurePercentageOfPortfolioCovered": 0.84124,
+                        "carbonFootprintScope1And2TonnesPerUsdMillions": 47.47,
+                        "carbonFootprintScope1And2PercentageOfPortfolioCovered": 4.16301,
+                        "carbonFootprintScope1And2And3TonnesPerUsdMillions": 333.82,
+                        "carbonFootprintScope1And2And3PercentageOfPortfolioCovered": 4.16301,
+                        "carbonIntensityScope1And2PercentageOfPortfolioCovered": 20.25201,
+                        "carbonIntensityScope1And2And3AverageValueInUsdTerms": 267.48881,
+                        "carbonIntensityScope1And2And3PercentageOfPortfolioCovered": 20.25201,
+                        "arcticOilAndGasExplorationPercentageOfPortfolioCovered": 20.25201,
+                        "carbonSolutionsPercentageOfPortfolioCovered": 19.19857,
+                       "historicalFossilFuelPercentageOfCoveredPortfolioInvolved": 10.59521,
+                        "fossilFuelPercentageOfPortfolioCovered": 19.0201,
+                        "oilAndGasProductionPercentageOfPortfolioCovered": 20.25201,
+                        "oilAndGasPowerGenerationPercentageOfPortfolioCovered": 20.25201,
+                        "oilAndGasProductsAndServicesPercentageOfPortfolioCovered": 20.25201,
+                        "oilSandsExtractionPercentageOfPortfolioCovered": 20.25201,
+                        "shaleEnergyExtractionPercentageOfCoveredPortfolioInvolved": 4.92358,
+                        "shaleEnergyExtractionPercentageOfPortfolioCovered": 20.25201,
+                        "thermalCoalExtractionPercentageOfPortfolioCovered": 20.25201,
+                        "thermalCoalPowerGenerationPercentageOfPortfolioCovered": 20.25201,
+                        "carbonRiskManagedRiskScore": 15.27,
+                        "fossilFuelPercentageOfCoveredPortfolioInvolved": 8.45146,
+                        "thermalCoalPowerGenerationPercentageOfCoveredPortfolioInvolved": 0,
+                        "thermalCoalExtractionPercentageOfCoveredPortfolioInvolved": 0.88124,
+                        "oilSandsExtractionPercentageOfCoveredPortfolioInvolved": 0,
+                        "arcticOilAndGasExplorationPercentageOfCoveredPortfolioInvolved": 0,
+                        "carbonSolutionsPercentageOfCoveredPortfolioInvolved": 0,
+                        "oilAndGasPowerGenerationPercentageOfCoveredPortfolioInvolved": 3.78352,
+                        "oilAndGasProductionPercentageOfCoveredPortfolioInvolved": 8.7071,
+                        "oilAndGasProductsAndServicesPercentageOfCoveredPortfolioInvolved": 1.81205,
+                        "carbonIntensityScope1And2AverageValueInUsdTerms": 62.48241
+                    }
+                }
+              ],
+        }
+            ]
+    "metadata": {
+        "requestId": "8e3629c0-d26b-425e-9596-5391ced96465"
+    }
+  }
+    ```
+    </details>
+## Data Transformation
+
+Data returned by the API must be transformed to the format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Component Transformed Data Format](#component-transformed-data-format)
+- [Component Transformation Operation](#component-transformation-operation)
+-->
+
+### Component Transformed Data Format
+
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "portfolio": {
+        "date": "2023-05-31",
+        "carbonRiskScore": 10.17268,
+        "carbonRiskPercentageOfPortfolioCovered": 84.56575,
+        "carbonRiskLevelClassification": "Medium Risk",
+        "carbonRiskPercentageOfCoveredPortfolioWithNegligibleCarbonRiskScores": 10.46469,
+        "carbonRiskPercentageOfCoveredPortfolioWithLowCarbonRiskScores": 53.01051,
+        "carbonRiskPercentageOfCoveredPortfolioWithMediumCarbonRiskScores": 29.50153,
+        "carbonRiskPercentageOfCoveredPortfolioWithHighCarbonRiskScores": 6.60135,
+        "carbonRiskPercentageOfCoveredPortfolioWithSevereCarbonRiskScores": 0.42192,
+        "carbonRiskExposureScore": 21.47307,
+        "carbonRiskOperationsRiskScore": 5.44855,
+        "carbonRiskProductsAndServicesRiskScore": 1.95735,
+        "carbonStrandedAssetsExposureScore": 70.23348,
+        "historicalCarbonRiskScore": 10.17268,
+        "historicalCarbonRiskLevelClassification": "Medium Risk",
+        "lowCarbonDesignation": "False",
+        "carbonStrandedAssetsExposurePercentageOfPortfolioCovered": 4.62669,
+        "carbonFootprintScope1And2TonnesPerUsdMillions": 110.34228,
+        "carbonFootprintScope1And2PercentageOfPortfolioCovered": 73.84146,
+        "carbonFootprintScope1And2And3TonnesPerUsdMillions": 855.50373,
+        "carbonFootprintScope1And2And3PercentageOfPortfolioCovered": 73.8272,
+        "carbonIntensityScope1And2PercentageOfPortfolioCovered": 84.20385,
+        "carbonIntensityScope1And2And3AverageValueInUsdTerms": 1114.55836,
+        "carbonIntensityScope1And2And3PercentageOfPortfolioCovered": 84.02672,
+        "arcticOilAndGasExplorationPercentageOfPortfolioCovered": 85.15153,
+        "carbonSolutionsPercentageOfPortfolioCovered": 84.59273,
+        "historicalFossilFuelPercentageOfCoveredPortfolioInvolved": 15.45745,
+        "fossilFuelPercentageOfPortfolioCovered": 84.9197,
+        "oilAndGasProductionPercentageOfPortfolioCovered": 85.15153,
+        "oilAndGasPowerGenerationPercentageOfPortfolioCovered": 85.15153,
+        "oilAndGasProductsAndServicesPercentageOfPortfolioCovered": 85.15153,
+        "oilSandsExtractionPercentageOfPortfolioCovered": 85.15153,
+        "shaleEnergyExtractionPercentageOfCoveredPortfolioInvolved": 6.11892,
+        "shaleEnergyExtractionPercentageOfPortfolioCovered": 85.15153,
+        "thermalCoalExtractionPercentageOfPortfolioCovered": 85.15153,
+        "thermalCoalPowerGenerationPercentageOfPortfolioCovered": 85.15153,
+        "carbonRiskManagedRiskScore": 11.30043,
+        "fossilFuelPercentageOfCoveredPortfolioInvolved": 15.45745,
+        "thermalCoalPowerGenerationPercentageOfCoveredPortfolioInvolved": 4.00005,
+        "thermalCoalExtractionPercentageOfCoveredPortfolioInvolved": 2.40106,
+        "oilSandsExtractionPercentageOfCoveredPortfolioInvolved": 4.13598,
+        "arcticOilAndGasExplorationPercentageOfCoveredPortfolioInvolved": 4.57218,
+        "carbonSolutionsPercentageOfCoveredPortfolioInvolved": 12.05435,
+        "oilAndGasPowerGenerationPercentageOfCoveredPortfolioInvolved": 8.4937,
+        "oilAndGasProductionPercentageOfCoveredPortfolioInvolved": 12.27627,
+        "oilAndGasProductsAndServicesPercentageOfCoveredPortfolioInvolved": 13.60068,
+        "carbonIntensityScope1And2AverageValueInUsdTerms": 173.78179
+    },
+    "benchmark": {
+        "date": "2023-03-31",
+        "carbonRiskScore": 8.11,
+        "carbonRiskPercentageOfPortfolioCovered": 98.69094,
+        "carbonRiskLevelClassification": "Low Risk",
+        "carbonRiskPercentageOfCoveredPortfolioWithNegligibleCarbonRiskScores": 20.08165,
+        "carbonRiskPercentageOfCoveredPortfolioWithLowCarbonRiskScores": 53.36606,
+        "carbonRiskPercentageOfCoveredPortfolioWithMediumCarbonRiskScores": 20.87264,
+        "carbonRiskPercentageOfCoveredPortfolioWithHighCarbonRiskScores": 5.17963,
+        "carbonRiskPercentageOfCoveredPortfolioWithSevereCarbonRiskScores": 0.50003,
+        "carbonRiskExposureScore": 14.93,
+        "carbonRiskOperationsRiskScore": 4.76,
+        "carbonRiskProductsAndServicesRiskScore": 0.76,
+        "carbonStrandedAssetsExposureScore": 76.51,
+        "historicalCarbonRiskScore": 8.15472,
+        "historicalCarbonRiskLevelClassification": "Low Risk",
+        "lowCarbonDesignation": "0",
+        "carbonStrandedAssetsExposurePercentageOfPortfolioCovered": 3.01773,
+        "carbonFootprintScope1And2TonnesPerUsdMillions": 37.25,
+        "carbonFootprintScope1And2PercentageOfPortfolioCovered": 93.24561,
+        "carbonFootprintScope1And2And3TonnesPerUsdMillions": 326.06,
+        "carbonFootprintScope1And2And3PercentageOfPortfolioCovered": 93.44802,
+        "carbonIntensityScope1And2PercentageOfPortfolioCovered": 97.8373,
+        "carbonIntensityScope1And2And3AverageValueInUsdTerms": 875.96902,
+        "carbonIntensityScope1And2And3PercentageOfPortfolioCovered": 98.17274,
+        "arcticOilAndGasExplorationPercentageOfPortfolioCovered": 99.17357,
+        "carbonSolutionsPercentageOfPortfolioCovered": 98.52659,
+        "historicalFossilFuelPercentageOfCoveredPortfolioInvolved": 8.1853,
+        "fossilFuelPercentageOfPortfolioCovered": 96.66453,
+        "oilAndGasProductionPercentageOfPortfolioCovered": 99.17357,
+        "oilAndGasPowerGenerationPercentageOfPortfolioCovered": 99.17357,
+        "oilAndGasProductsAndServicesPercentageOfPortfolioCovered": 99.17357,
+        "oilSandsExtractionPercentageOfPortfolioCovered": 99.17357,
+        "shaleEnergyExtractionPercentageOfCoveredPortfolioInvolved": 3.26898,
+        "shaleEnergyExtractionPercentageOfPortfolioCovered": 99.17357,
+        "thermalCoalExtractionPercentageOfPortfolioCovered": 99.17357,
+        "thermalCoalPowerGenerationPercentageOfPortfolioCovered": 99.17357,
+        "carbonRiskManagedRiskScore": 6.82,
+        "fossilFuelPercentageOfCoveredPortfolioInvolved": 7.34188,
+        "thermalCoalPowerGenerationPercentageOfCoveredPortfolioInvolved": 3.3302,
+        "thermalCoalExtractionPercentageOfCoveredPortfolioInvolved": 0.03856,
+        "oilSandsExtractionPercentageOfCoveredPortfolioInvolved": 2.21159,
+        "arcticOilAndGasExplorationPercentageOfCoveredPortfolioInvolved": 2.21159,
+        "carbonSolutionsPercentageOfCoveredPortfolioInvolved": 15.12536,
+        "oilAndGasPowerGenerationPercentageOfCoveredPortfolioInvolved": 4.04154,
+        "oilAndGasProductionPercentageOfCoveredPortfolioInvolved": 8.03929,
+        "oilAndGasProductsAndServicesPercentageOfCoveredPortfolioInvolved": 22.28312,
+        "carbonIntensityScope1And2AverageValueInUsdTerms": 123.0245
+    }
+}
+```
+</details>
+&nbsp;
+
+### Component Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+        parsedModelData() {
+            const { modelData } = this;
+            const carbonScoreData = modelData;
+            const keys = Object.keys(dataPoints);
+            return keys.map((key) => {
+                const dataPoint = key;
+                return {
+                    key: dataPoints[dataPoint],
+                    portfolio: this.formatNumber(get(carbonScoreData.portfolio, `${dataPoint}`, null)),
+                    benchmark: this.formatNumber(get(carbonScoreData.benchmark, `${dataPoint}`, null)),
+                };
+            });
+        },
+```
+</details>
+&nbsp;

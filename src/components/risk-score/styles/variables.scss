@@ -1,0 +1,31 @@
+@use "sass:math";
+
+$dial-container-size: 300px;
+$dial-outer-background-size: 252px;
+$dial-outer-ring-diameter: 232px;
+$dial-inner-ring-diameter: 146px;
+$dial-annulus-radius-difference: 20px;
+$dial-circle-text-diameter: 146px;
+$dial-circle-text-size: $dial-circle-text-diameter * 0.5;
+$dial-range-numbers-width: 66px;
+$dial-inner-ring-diameter: 97px;
+
+$color-dial-background: #000000;
+$color-dial-grey-background: #808080;
+
+$dial-range-start: 0;
+$dial-range-end: 100;
+
+$dial-min-position-in-degrees: 0;
+$dial-max-position-in-degrees: 295;
+
+$dial-per-unit-position-change-in-degrees: $dial-max-position-in-degrees / $dial-range-end;
+
+$number-of-sectors: 3; // each sector being 90deg
+
+$max-score-per-sector: $dial-range-end / $number-of-sectors;
+
+$units-per-sector: 100; // x-axis or y-axis position ranges from 0-100
+
+$increment-per-unit-per-sector: $units-per-sector / $max-score-per-sector;
+

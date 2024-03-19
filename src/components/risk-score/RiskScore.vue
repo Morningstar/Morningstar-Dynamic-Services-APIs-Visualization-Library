@@ -1,81 +1,200 @@
 <template>
-    <div class="risk-score">
+    <div>
         <v-row v-if="showHeader">
-                <v-col cols="12" class="title">
-                    <h2>Risk Score</h2>
+            <v-col cols="12" class="title">
+                <h2>Portfolio Risk Score</h2>
             </v-col>
         </v-row>
-        <v-row v-if="!parsedModelData" class="text-center">
-            <v-col>No Data Available</v-col>
-        </v-row>
-        <v-row v-else>
+        <v-row v-if="riskScore" class="risk-score">
             <v-col sm="6" md="6" lg="6">
-                <div class="risk-score__chart">
-                    <div ref="chart" :id="`risk-score-${chartId}`"></div>
-                    <!-- tooltip -->
-                    <v-menu v-if="showAlertTooltip" offset-y z-index="10" max-width="250px"
-                        right top nudge-top="5" class="risk-score__tooltip">
-                        <template v-slot:activator="{ on, attrs }">
-                            <v-btn v-bind="attrs" v-on="on" type="button" icon color="#000"
-                                outlined x-small class="warning-btn"
-                                aria-label="Off scale information">&#33;</v-btn>
-                        </template>
-                        <v-card color="#f5c400">
-                            <v-card-text>
-                                This Portfolio Risk Score is above the average of
-                                100%-equity portfolios benchmarked by Morningstar.</v-card-text>
-                        </v-card>
-                    </v-menu>
+                <div class="risk-score-dial" :style="cssVars">
+                    <div class="dial-container">
+                        <div class="risk-text-container">
+                            <svg width="300" height="300" xmlns="http://www.w3.org/2000/svg">
+                            <path id="curve" d="M 50 255 Q 15 220 15 180" fill="transparent" />
+                            <path id="curve2" d="M 35 70 Q 70 20 120 20" fill="transparent" />
+                            <path id="curve3" d="M 220 35 Q 280 60 280 180" fill="transparent" />
+                            <path id="curve4" d="M 280 200 Q 265 250 210 280" fill="transparent" />
+                            <text class="risk-text">
+                                <textPath xlink:href="#curve">Conservative</textPath>
+                            </text>
+                            <text class="risk-text">
+                                <textPath xlink:href="#curve2">Moderate</textPath>
+                            </text>
+                            <text class="risk-text">
+                                <textPath xlink:href="#curve3">Aggressive</textPath>
+                            </text>
+                            <text class="risk-text">
+                                <textPath xlink:href="#curve4">Very Aggressive</textPath>
+                            </text>
+                            </svg>
+                        </div>
+                        <div class="dial-background">
+                            <div class="fade-area"></div>
+                        </div>
+                        <div class="score-dial-container">
+                            <div v-if="isExtremeRisk" class="extreme-risk-container">
+                                <svg
+                                    width="232"
+                                    height="232"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <defs>
+                                        <clipPath id="medium-extreme">
+                                            <path
+                                                d="M 190,224 C 183,228 176,232 168,234 L 160,214 C
+                                                168,212 170,210 178,205 L 188,224 Z"
+                                            />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                                <div class="extreme-risk"></div>
+                                <div class="extreme-risk-marker-container">
+                                    <div class="extreme-risk-marker"></div>
+                                </div>
+                            </div>
+
+                            <div class="dial-circle">
+                                <svg
+                                    width="234"
+                                    height="232"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <defs>
+                                        <clipPath id="outline">
+                                            <path
+                                                d="M61.1414 203.351C57.7804 208.718 50.6663 210.395
+                                                45.6527 206.526C29.1017 193.756 16.2942 176.671
+                                                8.71034 157.06C-0.254749 133.877 -1.43573 108.416
+                                                5.34494 84.5058C12.1256 60.5956 26.5015 39.5277
+                                                46.3114 24.4694C66.1212 9.41113 90.2945 1.17627
+                                                115.197 1.0028C140.1 0.829326 164.386 8.72663
+                                                184.405 23.5075C204.423 38.2883 219.093 59.1538
+                                                226.207 82.9673C233.322 106.781 232.497 132.255
+                                                223.857 155.561C216.549 175.276 203.981 192.538
+                                                187.611 205.537C182.652 209.475 175.515 207.898
+                                                172.079 202.579C168.634 197.244 170.229 190.177
+                                                175.101 186.103C187.313 175.888 196.711 162.635
+                                                202.286 147.599C209.198 128.954 209.857 108.575
+                                                204.166 89.5238C198.474 70.4731 186.739 53.7806
+                                                170.724 41.956C154.709 30.1313 135.28 23.8135
+                                                115.358 23.9522C95.4356 24.091 76.097 30.6789
+                                                60.2491 42.7255C44.4012 54.7721 32.9005 71.6264
+                                                27.476 90.7547C22.0514 109.883 22.9962 130.251
+                                                30.1683 148.798C35.9526 163.755 45.5353 176.876
+                                                57.8902 186.92C62.8176 190.926 64.5117 197.969
+                                                61.1414 203.351Z"
+                                                fill="white"
+                                            />
+                                        </clipPath>
+                                    </defs>
+                                    <path
+                                        d="M61.1414 203.351C57.7804 208.718 50.6663 210.395 45.6527
+                                        206.526C29.1017 193.756 16.2942 176.671 8.71034
+                                        157.06C-0.254749 133.877 -1.43573 108.416 5.34494
+                                        84.5058C12.1256 60.5956 26.5015 39.5277 46.3114
+                                        24.4694C66.1212 9.41113 90.2945 1.17627 115.197 1.0028C140.1
+                                        0.829326 164.386 8.72663 184.405 23.5075C204.423 38.2883
+                                        219.093 59.1538 226.207 82.9673C233.322 106.781 232.497
+                                        132.255 223.857 155.561C216.549 175.276 203.981 192.538
+                                        187.611 205.537C182.652 209.475 175.515 207.898 172.079
+                                        202.579C168.634 197.244 170.229 190.177 175.101
+                                        186.103C187.313 175.888 196.711 162.635 202.286
+                                        147.599C209.198 128.954 209.857 108.575 204.166
+                                        89.5238C198.474 70.4731 186.739 53.7806 170.724
+                                        41.956C154.709 30.1313 135.28 23.8135 115.358
+                                        23.9522C95.4356 24.091 76.097 30.6789 60.2491
+                                        42.7255C44.4012 54.7721 32.9005 71.6264 27.476
+                                        90.7547C22.0514 109.883 22.9962 130.251 30.1683
+                                        148.798C35.9526 163.755 45.5353 176.876 57.8902
+                                        186.92C62.8176 190.926 64.5117 197.969 61.1414 203.351Z"
+                                        fill="transparent"
+                                        stroke="#999999"
+                                        stroke-width="2"
+                                    />
+                                </svg>
+                            </div>
+                            <div class="dial-circle-inner"></div>
+                            <div
+                                v-for="x in segments"
+                                :key="x"
+                                class="dial-marker-container"
+                                :class="`risk-score-${x}`"
+                            >
+                                <div class="marker"></div>
+                            </div>
+                            <div
+                                v-if="isExtremeRisk"
+                                class="dial-pointer-container"
+                                :class="`risk-score-extreme-animated`"
+                            >
+                                <div
+                                    class="dial-needle"
+                                    :class="{
+                                        'outside-comfort': true,
+                                    }"
+                                ></div>
+                            </div>
+                            <div
+                                v-if="!isExtremeRisk"
+                                class="dial-pointer-container"
+                                :class="`risk-score-${
+                                    riskScore <= 100 ? riskScore : 100
+                                }-animated`"
+                            >
+                                <div
+                                    class="dial-needle"
+                                    :class="{
+                                        'outside-comfort': true,
+                                    }"
+                                ></div>
+                            </div>
+                            <div
+                                class="dial-circle-pointer-text"
+                                :class="{
+                                    [`incrementing-score-${
+                                        riskScore <= 100 ? riskScore : 100
+                                    }-animated`]: true,
+                                }"
+                            >
+                                <span v-if="riskScore <= 100" style="color: #333333">{{
+                                    riskScore
+                                }}</span>
+                                <span v-if="riskScore > 100" style="color: #ed4a04">
+                                    {{ getExtremeRisk }}
+                                    <div class="extreme-plus">+</div>
+                                </span>
+                            </div>
+                            <div class="dial-range-container">
+                                <div class="minimum-score">0</div>
+                                <div v-if="!isExtremeRisk" class="maximum-score">100</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </v-col>
-            <v-col sm="6" md="6" lg="6">
-                <h3 class="risk-score__legend-header">
-                    <v-subheader>Profile Benchmarks</v-subheader>
-                    <!-- Popover -->
-                    <v-menu offset-y z-index="10" max-width="250px" left
-                        class="risk-score__popover">
-                        <template v-slot:activator="{ on, attrs }">
-                            <button v-bind="attrs" v-on="on" type="button"
-                                aria-label="Profile Benchmarks Informational">&#9432;</button>
-                        </template>
-                        <v-card color="#fff">
-                            <v-card-text>
-                                <p>The Profile Benchmarks are aligned to
-                                Morningstar's Target Allocation Indexes,
-                                and their scores reflect the equity exposure of each index.</p>
-                                <p>The indexes represent the holdings and asset mixes of all
-                                fixedallocation funds, from conservative to aggressive,
-                                available in your local market.</p></v-card-text>
-                        </v-card>
-                    </v-menu>
-                </h3>
-                <v-list flat class="risk-score__legends">
-                    <v-list-item
-                        v-for="(item, i) in computedLegendsData"
-                        :key="i"
-                        class="risk-score__legends-item">
-                        <v-list-item-title v-text="item.name"></v-list-item-title>
-                            {{ item.value }}
-                        <v-divider></v-divider>
-                    </v-list-item>
-                </v-list>
+            <v-col sm="6" md="6" lg="6" class="risk-score__table">
+                <risk-score-table
+                    :risk-score="riskScore"
+                ></risk-score-table>
             </v-col>
+        </v-row>
+        <v-row v-else class="text-center">
+            <v-col>No Data Available</v-col>
         </v-row>
     </div>
 </template>
 
 <script>
-import legendsData from '@/components/risk-score/config/profile-benchmarks.json';
-import Service from './gauge-chart-service';
+import RiskScoreTable from './RiskScoreTable.vue';
 
 export default {
     name: 'risk-score',
+    components: {
+        RiskScoreTable,
+    },
     props: {
-        /** Add unique ID */
-        chartId: {
-            type: String,
-            default: 'gauge-chart',
-        },
         /** Accepts the response object returned from API Data Access Library. */
         modelData: {
             type: [Object],
@@ -88,185 +207,46 @@ export default {
     },
     data() {
         return {
-            chartSettings: {
-                arrowPoints: [-31, 31, -17, 28, -28, 17],
-                baseColor: '#000000',
-                benchmarkHoverArcWidth: 16,
-                defaultModColors: {
-                    0: '#ddcde9',
-                    100: '#9741DB',
-                },
-                enableHoverAnimation: true,
-                gaugeAnimation: {
-                    arrowEaseNormal: 'in-out',
-                    arrowEaseOutOfRange: 'bounce',
-                    comfortEase: 'in-out',
-                    enableComfortFadeIn: true,
-                },
-                gaugeStartAngle: -135,
-                gaugeEndAngle: 135,
-                innerCircleOuterRadius: 33,
-                innerRadius: 52,
-                markerColor: 'rgba(0, 0, 0, 0.62)',
-                markerTextLetterWidth: 6,
-                maxValue: 150,
-                minValue: 0,
-                modColors: {
-                    comfort: '#4975B9',
-                    nearComfort: '#C6D2E4',
-                    baseColor: '#E5E5E5',
-                },
-                offScaleColor: '#f5c400',
-                offScaleMarkerWidth: 6,
-                onLightGray: {
-                    modColors: {
-                        comfort: '#3062AE',
-                        nearComfort: '#A3B9DD',
-                        baseColor: '#CCCCCC',
-                    },
-                    markerColor: 'rgba(0, 0, 0, 0.76)',
-                },
-                outerRadius: 68,
-                size: 160,
-                transitionMs: {
-                    default: 500,
-                    comfortAnimationDelay: 0,
-                    comfortArc: 500,
-                    nearComfortArc: 500,
-                    markerText: 400,
-                    markerTextAppearsIn: 500,
-                    markerTextDisappearsIn: 200,
-                    warningIconAnimationOffsetDelay: 1.2,
-                },
-            },
-            gaugeType: 'default',
-            legends: ['ultraConservative', 'conservative', 'moderateConservative', 'moderate', 'moderateAggressive', 'aggressive', 'ultraAggressive'],
-            legendsData,
+            rangeLow: 0,
+            rangeHi: 0,
+            segments: [25, 49, 80],
         };
     },
     computed: {
-        computedLegendsData() {
-            const legendData = {};
-            const legendNames = this.legends;
-
-            if (legendNames && legendNames.length > 0) {
-                legendNames.forEach((legend) => {
-                    if (this.legendsData[legend]) {
-                        legendData[legend] = this.legendsData[legend];
-                    }
-                });
-            }
-
-            return legendsData;
+        riskScore() {
+            const portfolioRiskScore = this.modelData && Object.prototype.hasOwnProperty.call(this.modelData, 'riskScores')
+                ? this.modelData?.riskScores[0]?.portfolio?.riskScore
+                : null;
+            return portfolioRiskScore === null || portfolioRiskScore === undefined
+                ? null
+                : Math.round(portfolioRiskScore);
         },
-        parsedModelData() {
-            const portfolioRiskScore = this.modelData
-                ? this.modelData?.riskScore[0]?.portfolioRiskScore : null;
-            return (portfolioRiskScore === null || portfolioRiskScore === undefined)
-                ? null : Math.round(portfolioRiskScore);
+        isExtremeRisk() {
+            return this.riskScore > 100;
         },
-        showAlertTooltip() {
-            return this.parsedModelData > this.chartSettings.maxValue;
+        cssVars() {
+            return {
+                '--range-deg': this.computeRangePos,
+                '--range-deg2': this.computeRangePos2,
+            };
         },
-    },
-    mounted() {
-        const data = {
-            riskScore: this.parsedModelData,
-            comfortRanges: null,
-        };
-        if (this.$refs.chart && this.parsedModelData) {
-            Service.initChart(this, this.chartSettings, this.chartId);
-            Service.update(data);
-        }
+        computeRangePos() {
+            const pos = (this.rangeLow + (this.rangeHi - this.rangeLow) / 2) / 100.0;
+            const deg = 295 * pos - 147.5;
+            return `${deg}deg`;
+        },
+        computeRangePos2() {
+            const pos = (this.rangeLow + (this.rangeHi - this.rangeLow) / 2) / 100.0;
+            const deg = 295 * pos - 147.5;
+            return `${-deg}deg`;
+        },
+        getExtremeRisk() {
+            return (this.riskScore > 100 && this.riskScore <= 200) ? 100 : 200;
+        },
     },
 };
 </script>
 <style lang="scss">
-    @use "sass:map";
-    @use '~@/components/shared/scss/mixin.scss' as mixin;
-    .risk-score {
-        @media only screen and (min-width: 768px) {
-            &__chart {
-                margin-top: 70px;
-            }
-        }
-        @include mixin.wal-component-title;
-        &__chart {
-            transform: scale(1.35);
-            text-align: center;
-            position: relative;
-            .warning-btn.v-btn {
-                position: absolute;
-                top: calc(100% - 33px);
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background-color: #f5c400;
-            }
-        }
-
-        .v-menu__content {
-            background: mixin.$wal-color-white;
-        }
-
-        &__legends-item.v-list-item {
-            padding: map.get(mixin.$wal, 'space', '1-and-a-half-x');
-            min-height: 0;
-            font-size: map.get(mixin.$wal, 'font-size', 's');
-            @include mixin.border(mixin.$wal-color-light-grey-1, bottom, 1px, solid);
-
-            .v-list-item__title {
-                font-size: map.get(mixin.$wal, 'font-size', 's');
-                color: mixin.$wal-color-black;
-            }
-
-            &:last-child {
-                border-bottom: none;
-            }
-        }
-
-        &__legend-header  {
-            display: inline-flex;
-            .v-subheader {
-                height: map.get(mixin.$wal, 'space', '1-and-a-quarter-x');
-                padding-right: map.get(mixin.$wal, 'space', 'half-x');
-                padding-left: map.get(mixin.$wal, 'space', '1-and-a-quarter-x');
-            }
-
-            button {
-                margin-top: map.get(mixin.$wal, 'space', '1-and-a-quarter-x') * -1;
-                outline: 0;
-            }
-        }
-
-        &__popover {
-            background: mixin.$wal-color-white;
-        }
-
-        .gauge-chart-value {
-            font-size: map.get(mixin.$wal, 'space', '3-and-a-half-x');
-            fill: mixin.$wal-color-black;
-            font-weight: 200;
-        }
-
-        .gauge-chart-max-value, .gauge-chart-min-value {
-            font-size: map.get(mixin.$wal, 'font-size', 's');
-            fill: mixin.$wal-color-black;
-        }
-
-        .marker-text-value {
-            fill: mixin.$wal-color-black;
-            font-size: map.get(mixin.$wal, 'space', '1-and-a-quarter-x');
-            font-weight: 400;
-            letter-spacing: -0.5px;
-            opacity: 0;
-        }
-
-        .tick-hover-area {
-            cursor: pointer;
-        }
-
-        .tick-group--hovered .tick {
-            stroke: rgba(0, 0, 0, 1) !important;
-        }
-    }
+@import "./styles/variables";
+@import "./styles/risk-score.scss";
 </style>

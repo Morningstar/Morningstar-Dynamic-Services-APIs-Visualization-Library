@@ -13,6 +13,6 @@ Vue.use(Vuetify);
 describe('RiskScore.vue', () => {
     it('should render Risk Score', () => {
         const wrapper = shallowMount(RiskScore);
-        expect(wrapper.find('.title h2').text()).toBe('Risk Score');
+        expect(wrapper.find('.title h2').text()).toBe('Portfolio Risk Score');
     });
 });

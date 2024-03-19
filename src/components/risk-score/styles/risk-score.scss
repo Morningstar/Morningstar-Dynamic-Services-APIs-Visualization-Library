@@ -1,0 +1,321 @@
+@use "sass:math";
+@use "sass:map";
+@use '~@/components/shared/scss/mixin.scss' as mixin;
+
+.risk-score {
+    text-align: center;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: var(--dial-width);
+    height: var(--dial-height);
+
+    @include mixin.wal-component-title;
+
+    /* ================ for disk dial pointer animation ==================*/
+    @for $risk-score from 0 through 100 {
+        .risk-score-#{$risk-score} {
+            transform: rotate((($dial-per-unit-position-change-in-degrees * $risk-score) - ($dial-max-position-in-degrees * 0.5)) * 1deg);
+        }
+
+        .risk-score-#{$risk-score}-animated {
+            animation-name: risk-score-#{$risk-score}-animation;
+            animation-duration: 1s;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+            animation-timing-function: cubic-bezier(0, 1.44, 1, 0.8);
+        }
+
+        @keyframes risk-score-#{$risk-score}-animation {
+            0% {
+                transform: rotate(-135deg);
+            }
+            100% {
+                transform: rotate((($dial-per-unit-position-change-in-degrees * $risk-score) - ($dial-max-position-in-degrees * 0.5)) * 1deg);
+            }
+        }
+    }
+
+    .risk-score-extreme {
+        transform: rotate(180deg);
+    }
+
+    @keyframes risk-score-extreme-animation {
+        0% {
+            transform: rotate(-135deg);
+        }
+        100% {
+            transform: rotate(150deg);
+        }
+    }
+
+    .risk-score-extreme-animated {
+        animation-name: risk-score-extreme-animation;
+        animation-duration: 1s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+        animation-timing-function: cubic-bezier(0, 1.44, 1, 0.8);
+    }
+
+    .risk-score-title {
+        h2 {
+            margin-top: 100px;
+        }
+    }
+
+    .dial-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .risk-text-container {
+            .risk-text {
+                font-style: normal;
+                font-weight: 400;
+                font-size: map.get(mixin.$wal, 'font-size', 's');
+                line-height: map.get(mixin.$wal, 'font-size', 'l');
+                letter-spacing: 0.25px;
+                /* identical to box height, or 129% */
+                text-align: center;
+
+                /* Generic Neutrals/Neutral 37 */
+                fill: $color-dial-grey-background;
+            }
+        }
+        .dial-background {
+            position: absolute;
+            display: flex;
+            width: $dial-outer-background-size;
+            height: $dial-outer-background-size;
+            background: #E5E5E5;
+            border-radius: 50%;
+
+            .fade-area {
+                position: absolute;
+                display: flex;
+                width: $dial-outer-background-size;
+                height: $dial-outer-background-size;
+                border-radius: 50%;
+                background: conic-gradient(from 180deg at 50% 50%, mixin.$wal-color-white -17.38deg, mixin.$wal-color-white 17.01deg, rgba(255, 255, 255, 0) 90deg, rgba(255, 255, 255, 0) 268.13deg, mixin.$wal-color-white 342.62deg, mixin.$wal-color-white 377.01deg);
+            }
+        }
+
+        /* ====================== Risk Score only version of dial (medium) =================== */
+
+        .score-dial-container {
+            position: absolute;
+            display: flex;
+            width: $dial-outer-ring-diameter + 2;
+            height: $dial-outer-ring-diameter;
+            justify-content: center;
+            align-items: center;
+            z-index: 0;
+
+            .dial-circle {
+                position: absolute;
+                display: flex;
+                width: $dial-outer-ring-diameter + 1;
+                height: $dial-outer-ring-diameter;
+                border-radius: 50%;
+                justify-content: center;
+                align-items: center;
+                background: conic-gradient(from 180deg at 50% 50%, #B2204C -39.68deg, #3C5B9A 45.14deg, #8A4089 180deg, #B2204C 320.32deg, #3C5B9A 405.14deg);
+                clip-path: url(#outline);
+            }
+
+            .dial-circle-error-state {
+                position: absolute;
+                display: flex;
+                width: $dial-outer-ring-diameter + 1;
+                height: $dial-outer-ring-diameter;
+                border-radius: 50%;
+                justify-content: center;
+                align-items: center;
+                background: conic-gradient(from 180deg at 50% 50%, mixin.$wal-color-white -39.68deg, mixin.$wal-color-white 45.14deg, mixin.$wal-color-white 180deg, mixin.$wal-color-white 320.32deg, mixin.$wal-color-white 405.14deg);
+                clip-path: url(#outline);
+            }
+
+            .dial-marker-container {
+                position: absolute;
+                height: $dial-outer-background-size;
+                display: flex;
+                flex-direction: column;
+
+                .marker {
+                    width: 3px;
+                    height: $dial-annulus-radius-difference + 32;
+                    background: mixin.$wal-color-white;
+                }
+            }
+        
+            .dial-circle-inner {
+                position: absolute;
+                display: flex;
+                height: $dial-circle-text-diameter;
+                width: $dial-circle-text-diameter;
+                border-radius: 100%;
+                border-style: solid;
+                border-width: 1px;
+                border-color: mixin.$wal-color-black;
+                justify-content: center;
+                align-items: center;
+                background: mixin.$wal-color-white;
+                clip-path: circle(50% at 50% 50%);
+            }
+
+            .dial-circle-error-inner {
+                position: absolute;
+                display: flex;
+                width: $dial-inner-ring-diameter;
+                height: $dial-inner-ring-diameter;
+                border-radius: 100%;
+                border-style: solid;
+                border-width: 1px;
+                border-color: #999999;
+                justify-content: center;
+                align-items: center;
+                background: mixin.$wal-color-white;
+            }
+
+            .dial-pointer-container {
+                z-index: 1;
+                position: absolute;
+                display: flex;
+                height: $dial-circle-text-diameter + 28px;
+                width: map.get(mixin.$wal, 'space', '3-and-a-half-x');
+                justify-content: center;
+                align-items: flex-start;
+                transform: rotate(-135deg);
+
+                .dial-needle {
+                    display: flex;
+                    flex-direction: column;
+                    height: 15px;
+                    width: map.get(mixin.$wal, 'space', '3-and-a-half-x');
+                    background: $color-dial-background;
+                    clip-path: polygon(0 100%, 50% 0, 100% 100%);
+                }
+            }
+
+            .dial-circle-pointer-text {
+                position: absolute;
+                display: flex;
+                height: 146;
+                width: 146;
+                border-radius: 50%;
+                justify-content: center;
+                align-items: center;
+                background: mixin.$wal-color-white;
+
+                span {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 64px;
+                    line-height: 59px;
+
+                    .extreme-plus {
+                        padding-bottom: 18px;
+                        font-size: 36px;
+                        color: #ED4A04;
+                    }
+                }
+            }
+                
+            .dial-range-container {
+                position: absolute;
+                display: flex;
+                height: $dial-outer-ring-diameter;
+                width: $dial-inner-ring-diameter;
+                justify-content: center;
+                align-items: center;
+                background: transparent;
+                font-style: normal;
+                font-weight: 700;
+                font-size: map.get(mixin.$wal, 'font-size', 'xs');
+                line-height: 12px;
+
+                .minimum-score {
+                    position: absolute;
+                    display: flex;
+                    height: $dial-outer-ring-diameter - 21px;
+                    width: 88px;
+                    justify-content: flex-start;
+                    align-items: end;
+                    color: $color-dial-grey-background;
+                }
+
+                .maximum-score {
+                    position: absolute;
+                    display: flex;
+                    height: $dial-outer-ring-diameter - 21px;
+                    width: 88px;
+                    justify-content: flex-end;
+                    align-items: end;
+                    color: $color-dial-grey-background;
+                }
+
+                .dial-circle-error-icon {
+                    position: absolute;
+                    height: 14px;
+                    width: 14px;
+                    left: 65px;
+                    right: 118px;
+                    top: 225px;
+                    bottom: 13px;
+                    background-color: #ff0000;
+                    border-radius: 50%;
+                }
+            }
+
+            .extreme-risk-container {
+                position: absolute;
+                width: $dial-outer-ring-diameter + 24;
+                height: $dial-outer-ring-diameter + 24;
+                display: flex;
+                border-radius: 50%;
+                transform: rotate(-5deg);
+                justify-content: center;
+                align-items: center;
+                clip-path: url(#medium-extreme);
+
+
+                .extreme-risk {
+                    position: absolute;
+                    width: map.get(mixin.$wal, 'space', '2-and-a-half-x');
+                    height: $dial-outer-ring-diameter + 22;
+                    background: blue;
+                    background: linear-gradient(270deg, rgba(237, 74, 4, 0.7) 0%, rgba(237, 74, 4, 0) 100%);
+                    transform: rotate(-27deg);
+                }
+
+                .extreme-risk-marker-container {
+                    position: absolute;
+                    height: $dial-outer-background-size;
+                    display: flex;
+                    flex-direction: column;
+                    transform: rotate(154deg);
+
+                    .extreme-risk-marker {
+                        position: absolute;
+                        width: 3px;
+                        height: $dial-annulus-radius-difference + 32;
+                        background: mixin.$wal-color-white;
+                        background: #F17945;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.risk-score__table {
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+

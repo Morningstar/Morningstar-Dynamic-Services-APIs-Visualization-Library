@@ -10,7 +10,6 @@ export default {
     argTypes: {
         modelData: Object,
         showHeader: Boolean,
-        chartId: String,
     },
     parameters: {
         docs: {
@@ -32,8 +31,7 @@ const Template = (args, { argTypes, loaded }) => {
         props: Object.keys(argTypes),
         components: { RiskScore },
         template: `<risk-score :model-data='${JSON.stringify(response.modelData)}'
-                                  :showHeader='showHeader'
-                                  chart-id="${loaded.modelData ? 'gauge' : args.chartId}"/>`,
+                                :showHeader='showHeader'/>`,
     };
 };
 
@@ -51,5 +49,4 @@ StoryDetails.loaders = [
 StoryDetails.args = {
     modelData: sampleRiskScoreData,
     showHeader: true,
-    chartId: 'docs',
 };

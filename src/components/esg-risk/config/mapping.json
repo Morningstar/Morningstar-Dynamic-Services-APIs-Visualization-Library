@@ -1,0 +1,10 @@
+{
+    "dataPoints":{
+        "corporate": "Corporate Sustainability Score",
+        "sovereign": "Sovereign Sustainability Score",
+        "environmentalScore": "Environmental",
+        "socialScore": "Social",
+        "governanceScore": "Governance",
+        "unallocatedScore": "Unallocated"
+    }
+}
