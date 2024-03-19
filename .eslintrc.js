@@ -11,6 +11,7 @@ module.exports = {
     rules: {
         indent: ['error', 4],
         'linebreak-style': 0,
+        'max_line_length': 150,
         'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
         'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     },
