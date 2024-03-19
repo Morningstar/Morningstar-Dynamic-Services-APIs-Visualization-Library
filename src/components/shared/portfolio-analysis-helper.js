@@ -84,6 +84,54 @@ function getAssetAllocationData(xrayData) {
     };
 }
 
+function getCorrelationMatrixData(xRayData) {
+    const correlationMatrix={};
+    const timePeriodMapping = {
+        "M12": "year1",
+        "M36": "year3",
+        "M60": "year5",
+        "M120": "year10",
+    }
+    xRayData.correlationMatrix.forEach((timePeriod) => {
+        const chartData=[];
+        timePeriod.correlationMatrixDetail.forEach((correlation, index) => {
+            correlation.correlationDetail.forEach((details) => {
+                const obj = {};
+                obj.x = index + 1;
+                obj.y = parseInt(details.id) + 1;
+                obj.value = parseFloat(details.correlation) || 0
+                chartData.push(obj);
+            });
+            correlationMatrix[timePeriodMapping[timePeriod.timePeriod]] = chartData;
+        });
+    });
+    return {
+        securities: xRayData.holdings.map(s => s.name),
+        correlationMatrix
+    };
+}
+function getCorrelationMatrixUsData(xRayData) {
+    const correlationMatrix={};
+    xRayData.correlationMatrix.forEach((timePeriod) => {
+        const chartData=[];
+        timePeriod.Correlations.forEach((correlation, index) => {
+            correlation.CorrelatedItemKey.forEach((details) => {
+                const obj = {};
+                obj.SecurityId = correlation.SecurityId,
+                obj.x = index + 1;
+                obj.y = details.CorrelatedItemKeyId;
+                obj.value = parseFloat(details.Value) || 0
+                chartData.push(obj);
+            });
+            correlationMatrix[timePeriod.TrailingTimePeriod] = chartData;
+        });
+    });
+    return {
+        securities: xRayData.securities,
+        correlationMatrix
+    };
+}
+
 function getAssetAllocationUsData(assetAllocationData, breakdown = {}) {
     const getParsedData = (reference, data = []) => {
         const assetData = get(data, reference, []);
@@ -712,6 +760,8 @@ function getXrayUsData(apiData, componentsOptions, portfolio) {
 export default {
     getAssetAllocationData,
     getAssetAllocationUsData,
+    getCorrelationMatrixData,
+    getCorrelationMatrixUsData,
     getFixedIncomeCountryData,
     getFixedIncomeSectorsData,
     getFixedIncomeSectorsUsData,

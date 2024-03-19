@@ -84,10 +84,14 @@ const sampleUsPortfolio = [
             },
             {
                 securityId: 'FOUSA06IVV',
-                weight: 50,
+                weight: 30,
             },
             {
                 securityId: 'F00000T770',
+                weight: 20,
+            },
+            {
+                securityId: '0P0000JIAP',
                 weight: 20,
             },
         ],

@@ -116,7 +116,7 @@ export default {
                 ],
                 props: {
                     performanceGraph: {
-                        showTimeSeriesData: false,
+                        showTimeSeriesData: true,
                         title: 'Growth of Investment',
                     },
                     trailingReturns: {

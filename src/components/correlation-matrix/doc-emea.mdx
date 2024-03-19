@@ -1,0 +1,881 @@
+import { Canvas, Meta, Story, ArgsTable } from "@storybook/addon-docs";
+import CorrelationMatrix from "@/components/correlation-matrix/CorrelationMatrix.vue";
+
+import { PORTFOLIO_ANALYSIS_AMERICAS_URL, DATA_ACCESS_LIBRARY } from "@/external-links";
+
+<Meta title="CorrelationMatrix" component={CorrelationMatrix} />
+
+<style> {
+  `
+    details {
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      background: #3c3c3c;
+    }
+    summary {
+      font-family: "Nunito Sans","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+      cursor: pointer;
+    }
+    .summary-text {
+      padding-left: 5px;
+      font-size: 15px;
+    }
+    .v-application--wrap {
+        min-height: 100%
+    }
+  `}
+
+</style>
+
+# Correlation Matrix (APAC/EMEA)
+
+- [Description](#description)
+- [Properties](#properties)
+- [Fetching Data](#fetching-data)
+- [Data Transformation](#data-transformation)
+
+## Description
+
+The Correlation Matrix component displays the relationship of return patterns among investments. It is based upon the correlation coefficient, a number between -1.0 and 1.0.
+A perfect negative relationship between two investments has a correlation of -1.0, whereas a perfect positive linear relationship exists with a correlation of 1.0. A correlation coefficient of 0.0 indicates no linear relationship between the investments.
+Correlation information can be valuable in assessing the diversification effect of combining an investment with other options.
+
+<Canvas withSource="open" withToolbar>
+  <Story id="components-correlation-matrix--story-details"></Story>
+</Canvas>
+
+## Properties
+
+<ArgsTable of={CorrelationMatrix} />
+
+## Fetching Data
+
+The component is populated with data returned by calls to the <a href={PORTFOLIO_ANALYSIS_AMERICAS_URL} target="_blank">Portfolio Analysis API (APAC/EMEA)</a>.
+<!--
+- [API Data Access Library](#api-data-access-library)
+- [Request Example](#request)
+- [Request Payload Example](#request-payload)
+-->
+### API Data Access Library
+
+The <a href={DATA_ACCESS_LIBRARY} target="_blank">API Data Access Library</a> is used to fetch data from the API.
+
+``` javascript dark
+window.mstarApisSdk.xray.getCorrelationMatrixData({ portfolios: samplePortfolio, languageId: 'en-GB' });
+```
+<details>
+  <summary><span class="summary-text">Example</span></summary>
+
+``` javascript dark
+const samplePortfolio = [
+    {
+        "type": 3,
+        "benchmarkId": "EUCA000555",
+        "currencyId": "GBP",
+        "holdings": [
+            {
+                "identifier": "F0GBR052QA",
+                "identifierType": "MSID",
+                "amount": 5000
+            },
+            {
+                "identifier": "F000000EY1",
+                "identifierType": "MSID",
+                "amount": 2000
+            },
+            {
+                "identifier": "F00000OXG7",
+                "identifierType": "MSID",
+                "amount": 2000
+            },
+            {
+                "identifier": "F00000TWNO",
+                "identifierType": "MSID",
+                "amount": 1000
+            }
+        ],
+        "calculatedDataPoints": [],
+        "name": "UK demo portfolio"
+    },
+];
+window.mstarApisSdk.xray.getCorrelationMatrixData({ portfolios: samplePortfolio, languageId: 'en-GB' });
+```
+</details>
+&nbsp;
+
+### Request Example
+
+```javascript dark
+"https://www.emea-api.morningstar.com/ecint/v2/xray?outputtype=json&languageId={{languageId}}&portfolioDataPoints={{portfolioDataPoints}}&holdingDataPoints={{holdingDataPoints}}&benchmarkDataPoints={{benchmarkDataPoints}}"
+
+```
+### Request Payload Example
+
+| Query Parameter | Description|Example |
+| :----------- | :--------| :----------- |
+| `languageId` | ISO culture codes. If not provided, defaults to language defined in settings. |`languageId=en-GB` |
+| `portfolioDataPoints` |Comma-separated list of portfolio data points.|`portfolioDataPoints=AssetAllocationMorningstarEUR3` |
+| `holdingDataPoints` |Comma-separated list of holding data points.|`HoldingDataPoints=` |
+| `benchmarkDataPoints` | Comma-separated list of benchmark data points.|`benchmarkDataPoints=ShowBreakdown` |
+
+## Data Transformation
+
+Data returned by the API must be transformed to a format the component understands.
+<!--
+- [API Response Data Format](#api-response-data-format)
+- [Integration Data Format](#integration-data-format)
+- [Integration Transformation Operation](#integration-transformation-operation)
+- [Component Transformed Data Format](#component-transformed-data-format)
+- [Component Transformation Operation](#component-transformation-operation)
+-->
+### API Response Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+[
+    {
+        "timePeriod": "M12",
+        "endDate": "2023-12-31",
+        "correlationMatrixDetail": [
+            {
+                "id": "0",
+                "correlationDetail": [
+                    {
+                        "id": "0",
+                        "correlation": "1"
+                    },
+                    {
+                        "id": "1",
+                        "correlation": "-0.07487"
+                    },
+                    {
+                        "id": "2",
+                        "correlation": "0.71369"
+                    },
+                    {
+                        "id": "3",
+                        "correlation": "0.73071"
+                    }
+                ]
+            },
+            {
+                "id": "1",
+                "correlationDetail": [
+                    {
+                        "id": "0",
+                        "correlation": "-0.07487"
+                    },
+                    {
+                        "id": "1",
+                        "correlation": "1"
+                    },
+                    {
+                        "id": "2",
+                        "correlation": "0.04081"
+                    },
+                    {
+                        "id": "3",
+                        "correlation": "0.05649"
+                    }
+                ]
+            },
+            {
+                "id": "2",
+                "correlationDetail": [
+                    {
+                        "id": "0",
+                        "correlation": "0.71369"
+                    },
+                    {
+                        "id": "1",
+                        "correlation": "0.04081"
+                    },
+                    {
+                        "id": "2",
+                        "correlation": "1"
+                    },
+                    {
+                        "id": "3",
+                        "correlation": "0.78643"
+                    }
+                ]
+            },
+            {
+                "id": "3",
+                "correlationDetail": [
+                    {
+                        "id": "0",
+                        "correlation": "0.73071"
+                    },
+                    {
+                        "id": "1",
+                        "correlation": "0.05649"
+                    },
+                    {
+                        "id": "2",
+                        "correlation": "0.78643"
+                    },
+                    {
+                        "id": "3",
+                        "correlation": "1"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "timePeriod": "M36",
+        "endDate": "2023-12-31",
+        "correlationMatrixDetail": [
+            {
+                "id": "0",
+                "correlationDetail": [
+                    {
+                        "id": "0",
+                        "correlation": "1"
+                    },
+                    {
+                        "id": "1",
+                        "correlation": "0.1715"
+                    },
+                    {
+                        "id": "2",
+                        "correlation": "0.41017"
+                    },
+                    {
+                        "id": "3",
+                        "correlation": "0.5419"
+                    }
+                ]
+            },
+            {
+                "id": "1",
+                "correlationDetail": [
+                    {
+                        "id": "0",
+                        "correlation": "0.1715"
+                    },
+                    {
+                        "id": "1",
+                        "correlation": "1"
+                    },
+                    {
+                        "id": "2",
+                        "correlation": "-0.14667"
+                    },
+                    {
+                        "id": "3",
+                        "correlation": "-0.02214"
+                    }
+                ]
+            },
+            {
+                "id": "2",
+                "correlationDetail": [
+                    {
+                        "id": "0",
+                        "correlation": "0.41017"
+                    },
+                    {
+                        "id": "1",
+                        "correlation": "-0.14667"
+                    },
+                    {
+                        "id": "2",
+                        "correlation": "1"
+                    },
+                    {
+                        "id": "3",
+                        "correlation": "0.73722"
+                    }
+                ]
+            },
+            {
+                "id": "3",
+                "correlationDetail": [
+                    {
+                        "id": "0",
+                        "correlation": "0.5419"
+                    },
+                    {
+                        "id": "1",
+                        "correlation": "-0.02214"
+                    },
+                    {
+                        "id": "2",
+                        "correlation": "0.73722"
+                    },
+                    {
+                        "id": "3",
+                        "correlation": "1"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "timePeriod": "M60",
+        "endDate": "2023-12-31",
+        "correlationMatrixDetail": [
+            {
+                "id": "0",
+                "correlationDetail": [
+                    {
+                        "id": "0"
+                    },
+                    {
+                        "id": "1"
+                    },
+                    {
+                        "id": "2"
+                    },
+                    {
+                        "id": "3"
+                    }
+                ]
+            },
+            {
+                "id": "1",
+                "correlationDetail": [
+                    {
+                        "id": "0"
+                    },
+                    {
+                        "id": "1"
+                    },
+                    {
+                        "id": "2"
+                    },
+                    {
+                        "id": "3"
+                    }
+                ]
+            },
+            {
+                "id": "2",
+                "correlationDetail": [
+                    {
+                        "id": "0"
+                    },
+                    {
+                        "id": "1"
+                    },
+                    {
+                        "id": "2"
+                    },
+                    {
+                        "id": "3"
+                    }
+                ]
+            },
+            {
+                "id": "3",
+                "correlationDetail": [
+                    {
+                        "id": "0"
+                    },
+                    {
+                        "id": "1"
+                    },
+                    {
+                        "id": "2"
+                    },
+                    {
+                        "id": "3"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "timePeriod": "M120",
+        "endDate": "2023-12-31",
+        "correlationMatrixDetail": [
+            {
+                "id": "0",
+                "correlationDetail": [
+                    {
+                        "id": "0"
+                    },
+                    {
+                        "id": "1"
+                    },
+                    {
+                        "id": "2"
+                    },
+                    {
+                        "id": "3"
+                    }
+                ]
+            },
+            {
+                "id": "1",
+                "correlationDetail": [
+                    {
+                        "id": "0"
+                    },
+                    {
+                        "id": "1"
+                    },
+                    {
+                        "id": "2"
+                    },
+                    {
+                        "id": "3"
+                    }
+                ]
+            },
+            {
+                "id": "2",
+                "correlationDetail": [
+                    {
+                        "id": "0"
+                    },
+                    {
+                        "id": "1"
+                    },
+                    {
+                        "id": "2"
+                    },
+                    {
+                        "id": "3"
+                    }
+                ]
+            },
+            {
+                "id": "3",
+                "correlationDetail": [
+                    {
+                        "id": "0"
+                    },
+                    {
+                        "id": "1"
+                    },
+                    {
+                        "id": "2"
+                    },
+                    {
+                        "id": "3"
+                    }
+                ]
+            }
+        ]
+    }
+]
+```
+</details>
+&nbsp;
+
+### Integration Data Format
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```json dark
+{
+    "securities": [
+        "BlackRock Income and Growth Ord",
+        "Baronsmead Second Venture Trust Ord",
+        "BlackRock Dev Mkts Sust Eq Fund UK D Inc",
+        "London & Capital Global Bond I GBP Inc"
+    ],
+    "correlationMatrix": {
+        "year1": [
+            {
+                "x": 1,
+                "y": 1,
+                "value": 1
+            },
+            {
+                "x": 1,
+                "y": 2,
+                "value": -0.07487
+            },
+            {
+                "x": 1,
+                "y": 3,
+                "value": 0.71369
+            },
+            {
+                "x": 1,
+                "y": 4,
+                "value": 0.73071
+            },
+            {
+                "x": 2,
+                "y": 1,
+                "value": -0.07487
+            },
+            {
+                "x": 2,
+                "y": 2,
+                "value": 1
+            },
+            {
+                "x": 2,
+                "y": 3,
+                "value": 0.04081
+            },
+            {
+                "x": 2,
+                "y": 4,
+                "value": 0.05649
+            },
+            {
+                "x": 3,
+                "y": 1,
+                "value": 0.71369
+            },
+            {
+                "x": 3,
+                "y": 2,
+                "value": 0.04081
+            },
+            {
+                "x": 3,
+                "y": 3,
+                "value": 1
+            },
+            {
+                "x": 3,
+                "y": 4,
+                "value": 0.78643
+            },
+            {
+                "x": 4,
+                "y": 1,
+                "value": 0.73071
+            },
+            {
+                "x": 4,
+                "y": 2,
+                "value": 0.05649
+            },
+            {
+                "x": 4,
+                "y": 3,
+                "value": 0.78643
+            },
+            {
+                "x": 4,
+                "y": 4,
+                "value": 1
+            }
+        ],
+        "year3": [
+            {
+                "x": 1,
+                "y": 1,
+                "value": 1
+            },
+            {
+                "x": 1,
+                "y": 2,
+                "value": 0.1715
+            },
+            {
+                "x": 1,
+                "y": 3,
+                "value": 0.41017
+            },
+            {
+                "x": 1,
+                "y": 4,
+                "value": 0.5419
+            },
+            {
+                "x": 2,
+                "y": 1,
+                "value": 0.1715
+            },
+            {
+                "x": 2,
+                "y": 2,
+                "value": 1
+            },
+            {
+                "x": 2,
+                "y": 3,
+                "value": -0.14667
+            },
+            {
+                "x": 2,
+                "y": 4,
+                "value": -0.02214
+            },
+            {
+                "x": 3,
+                "y": 1,
+                "value": 0.41017
+            },
+            {
+                "x": 3,
+                "y": 2,
+                "value": -0.14667
+            },
+            {
+                "x": 3,
+                "y": 3,
+                "value": 1
+            },
+            {
+                "x": 3,
+                "y": 4,
+                "value": 0.73722
+            },
+            {
+                "x": 4,
+                "y": 1,
+                "value": 0.5419
+            },
+            {
+                "x": 4,
+                "y": 2,
+                "value": -0.02214
+            },
+            {
+                "x": 4,
+                "y": 3,
+                "value": 0.73722
+            },
+            {
+                "x": 4,
+                "y": 4,
+                "value": 1
+            }
+        ],
+        "year5": [
+            {
+                "x": 1,
+                "y": 1,
+                "value": 0
+            },
+            {
+                "x": 1,
+                "y": 2,
+                "value": 0
+            },
+            {
+                "x": 1,
+                "y": 3,
+                "value": 0
+            },
+            {
+                "x": 1,
+                "y": 4,
+                "value": 0
+            },
+            {
+                "x": 2,
+                "y": 1,
+                "value": 0
+            },
+            {
+                "x": 2,
+                "y": 2,
+                "value": 0
+            },
+            {
+                "x": 2,
+                "y": 3,
+                "value": 0
+            },
+            {
+                "x": 2,
+                "y": 4,
+                "value": 0
+            },
+            {
+                "x": 3,
+                "y": 1,
+                "value": 0
+            },
+            {
+                "x": 3,
+                "y": 2,
+                "value": 0
+            },
+            {
+                "x": 3,
+                "y": 3,
+                "value": 0
+            },
+            {
+                "x": 3,
+                "y": 4,
+                "value": 0
+            },
+            {
+                "x": 4,
+                "y": 1,
+                "value": 0
+            },
+            {
+                "x": 4,
+                "y": 2,
+                "value": 0
+            },
+            {
+                "x": 4,
+                "y": 3,
+                "value": 0
+            },
+            {
+                "x": 4,
+                "y": 4,
+                "value": 0
+            }
+        ],
+        "year10": [
+            {
+                "x": 1,
+                "y": 1,
+                "value": 0
+            },
+            {
+                "x": 1,
+                "y": 2,
+                "value": 0
+            },
+            {
+                "x": 1,
+                "y": 3,
+                "value": 0
+            },
+            {
+                "x": 1,
+                "y": 4,
+                "value": 0
+            },
+            {
+                "x": 2,
+                "y": 1,
+                "value": 0
+            },
+            {
+                "x": 2,
+                "y": 2,
+                "value": 0
+            },
+            {
+                "x": 2,
+                "y": 3,
+                "value": 0
+            },
+            {
+                "x": 2,
+                "y": 4,
+                "value": 0
+            },
+            {
+                "x": 3,
+                "y": 1,
+                "value": 0
+            },
+            {
+                "x": 3,
+                "y": 2,
+                "value": 0
+            },
+            {
+                "x": 3,
+                "y": 3,
+                "value": 0
+            },
+            {
+                "x": 3,
+                "y": 4,
+                "value": 0
+            },
+            {
+                "x": 4,
+                "y": 1,
+                "value": 0
+            },
+            {
+                "x": 4,
+                "y": 2,
+                "value": 0
+            },
+            {
+                "x": 4,
+                "y": 3,
+                "value": 0
+            },
+            {
+                "x": 4,
+                "y": 4,
+                "value": 0
+            }
+        ]
+    }
+}
+```
+</details>
+&nbsp;
+
+### Integration Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+function getCorrelationMatrixData(xRayData) {
+    const correlationMatrix={};
+    const timePeriodMapping = {
+        "M12": "year1",
+        "M36": "year3",
+        "M60": "year5",
+        "M120": "year10",
+    }
+    xRayData.correlationMatrix.forEach((timePeriod) => {
+        const chartData=[];
+        timePeriod.correlationMatrixDetail.forEach((correlation, index) => {
+            correlation.correlationDetail.forEach((details) => {
+                const obj = {};
+                obj.x = index + 1;
+                obj.y = parseInt(details.id) + 1;
+                obj.value = parseFloat(details.correlation) || 0
+                chartData.push(obj);
+            });
+            correlationMatrix[timePeriodMapping[timePeriod.timePeriod]] = chartData;
+        });
+    });
+    return {
+        securities: xRayData.holdings.map(s => s.name),
+        correlationMatrix
+    };
+}
+```
+</details>
+&nbsp;
+
+### Component Transformation Operation
+<details>
+  <summary><span class="summary-text">Code Snippet</span></summary>
+
+```javascript dark
+   function getCorrelationMatrixData(xRayData) {
+       const correlationMatrix={};
+       xRayData.correlationMatrix.forEach((timePeriod) => {
+           const chartData=[];
+           timePeriod.Correlations.forEach((correlation, index) => {
+               correlation.CorrelatedItemKey.forEach((details) => {
+                   const obj = {};
+                   obj.SecurityId = correlation.SecurityId,
+                   obj.x = index + 1;
+                   obj.y = details.CorrelatedItemKeyId;
+                   obj.value = parseFloat(details.Value) || 0
+                   chartData.push(obj);
+               });
+               correlationMatrix[timePeriod.TrailingTimePeriod] = chartData;
+           });
+       });
+       return {
+           securities: xRayData.securities,
+           correlationMatrix
+       };
+   }
+```
+</details>
+&nbsp;
